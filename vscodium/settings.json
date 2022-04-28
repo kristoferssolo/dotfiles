@@ -67,12 +67,51 @@
 	"workbench.iconTheme": "material-icon-theme",
 	"json.schemas": [],
 	"workbench.enableExperiments": false,
-	"workbench.colorTheme": "Sweet Dracula",
 	"editor.fontFamily": "JetBrainsMono NF",
 	"markdown.extension.print.theme": "dark",
 	"editor.fontLigatures": true,
 	"editor.formatOnSave": true,
 	"code-runner.saveFileBeforeRun": true,
 	"code-runner.saveAllFilesBeforeRun": true,
-	"task.saveBeforeRun": "prompt"
+	"task.saveBeforeRun": "prompt",
+	"tabnine.experimentalAutoImports": true,
+	"editor.tokenColorCustomizations": {
+		"textMateRules": [
+			{
+				"name": "One Dark italic",
+				"scope": [
+					"comment",
+					"entity.other.attribute-name",
+					"keyword",
+					"markup.underline.link",
+					"storage.modifier",
+					"storage.type",
+					"string.url",
+					"variable.language.super",
+					"variable.language.this"
+				],
+				"settings": {
+					"fontStyle": "italic"
+				}
+			},
+			{
+				"name": "One Dark italic reset",
+				"scope": [
+					"keyword.operator",
+					"keyword.other.type",
+					"storage.modifier.import",
+					"storage.modifier.package",
+					"storage.type.built-in",
+					"storage.type.function.arrow",
+					"storage.type.generic",
+					"storage.type.java",
+					"storage.type.primitive"
+				],
+				"settings": {
+					"fontStyle": ""
+				}
+			}
+		]
+	},
+	"workbench.colorTheme": "Sweet Dracula"
 }
