@@ -1,48 +1,78 @@
 {
-    "tabnine.experimentalAutoImports": true,
-    "editor.tokenColorCustomizations": {
-        "textMateRules": [
-            {
-                "name": "One Dark italic",
-                "scope": [
-                    "comment",
-                    "entity.other.attribute-name",
-                    "keyword",
-                    "markup.underline.link",
-                    "storage.modifier",
-                    "storage.type",
-                    "string.url",
-                    "variable.language.super",
-                    "variable.language.this"
-                ],
-                "settings": {
-                    "fontStyle": "italic"
-                }
-            },
-            {
-                "name": "One Dark italic reset",
-                "scope": [
-                    "keyword.operator",
-                    "keyword.other.type",
-                    "storage.modifier.import",
-                    "storage.modifier.package",
-                    "storage.type.built-in",
-                    "storage.type.function.arrow",
-                    "storage.type.generic",
-                    "storage.type.java",
-                    "storage.type.primitive"
-                ],
-                "settings": {
-                    "fontStyle": ""
-                }
-            }
-        ]
-    },
-    "workbench.colorTheme": "Sweet Dracula",
-    "workbench.iconTheme": "material-icon-theme",
-    "kite.showWelcomeNotificationOnStartup": false,
-    "bracketPairColorizer.depreciation-notice": false,
-    "editor.fontFamily": "'JetBrainsMono NF'",
-    "workbench.enableExperiments": false,
-    "editor.language.brackets": false
+	"kite.showWelcomeNotificationOnStartup": false,
+	"editor.suggestSelection": "first",
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	"explorer.confirmDelete": false,
+	"git.enableSmartCommit": true,
+	"git.confirmSync": false,
+	"terminal.explorerKind": "external",
+	"terminal.integrated.cursorStyle": "line",
+	"security.workspace.trust.untrustedFiles": "open",
+	"explorer.confirmDragAndDrop": false,
+
+	"python.formatting.provider": "yapf",
+	"python.formatting.yapfArgs": [
+		"--style",
+		"{USE_TABS: true, INDENT_WIDTH: 4, COLUMN_LIMIT: 150, DEDENT_CLOSING_BRACKETS: true}"
+	],
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.python",
+		"editor.insertSpaces": false,
+		"editor.formatOnSave": true,
+	},
+	"editor.insertSpaces": false,
+	"python.terminal.executeInFileDir": true,
+	"editor.detectIndentation": false,
+	"editor.guides.indentation": false,
+	"prettier.useTabs": true,
+	"workbench.startupEditor": "none",
+	"terminal.external.linuxExec": "alacritty",
+	"terminal.integrated.fontFamily": "JetBrainsMono NF",
+	"terminal.integrated.defaultProfile.linux": "zsh",
+	"cSpell.userWords": [
+		"blit",
+		"Cagulis",
+		"Cena",
+		"cenu",
+		"dirnx",
+		"dirny",
+		"grafiki",
+		"Istabu",
+		"Izvietošanas",
+		"korelacija",
+		"Kristiāns",
+		"Kristofers",
+		"Kvadratūra",
+		"pathlib",
+		"pygame",
+		"roboto",
+		"Sērija",
+		"Stāvs",
+		"xlabel",
+		"xticks",
+		"ylabel"
+	],
+	"bracketPairColorizer.depreciation-notice": false,
+	"gitlens.advanced.messages": {
+		"suppressLineUncommittedWarning": true
+	},
+	"vsicons.dontShowNewVersionMessage": true,
+	"indentRainbow.excludedLanguages": [
+		"plaintext",
+		"django-txt"
+	],
+	"[markdown]": {
+		"editor.defaultFormatter": "yzhang.markdown-all-in-one"
+	},
+	"workbench.iconTheme": "material-icon-theme",
+	"json.schemas": [],
+	"workbench.enableExperiments": false,
+	"workbench.colorTheme": "Sweet Dracula",
+	"editor.fontFamily": "JetBrainsMono NF",
+	"markdown.extension.print.theme": "dark",
+	"editor.fontLigatures": true,
+	"editor.formatOnSave": true,
+	"code-runner.saveFileBeforeRun": true,
+	"code-runner.saveAllFilesBeforeRun": true,
+	"task.saveBeforeRun": "prompt"
 }
