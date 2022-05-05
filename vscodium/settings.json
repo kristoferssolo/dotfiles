@@ -18,7 +18,7 @@
 	"[python]": {
 		"editor.defaultFormatter": "ms-python.python",
 		"editor.insertSpaces": false,
-		"editor.formatOnSave": true,
+		"editor.formatOnSave": true
 	},
 	"editor.insertSpaces": false,
 	"python.terminal.executeInFileDir": true,
@@ -57,10 +57,7 @@
 		"suppressLineUncommittedWarning": true
 	},
 	"vsicons.dontShowNewVersionMessage": true,
-	"indentRainbow.excludedLanguages": [
-		"plaintext",
-		"django-txt"
-	],
+	"indentRainbow.excludedLanguages": ["plaintext", "django-txt"],
 	"[markdown]": {
 		"editor.defaultFormatter": "yzhang.markdown-all-in-one"
 	},

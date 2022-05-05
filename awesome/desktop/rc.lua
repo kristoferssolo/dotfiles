@@ -235,7 +235,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),	
+            wibox.widget.systray(),
       		cpu_widget(),
             ram_widget(),
             net_speed_widget(),
@@ -253,7 +253,7 @@ awful.screen.connect_for_each_screen(function(s)
               --widget_type = 'arc',
               --mixer_cmd = 'pulsemixer',
       			--},
-            logout_menu_widget(),       
+            logout_menu_widget(),
             mytextclock,
       			s.mylayoutbox,
 		    },
@@ -552,7 +552,7 @@ awful.rules.rules = {
     { rule_any = {type = { "normal", "dialog" }
       }, properties = { titlebars_enabled = false }
     },
-	
+
 	{
 	  rule_any = {
 		class = { "discord", "telegram-desktop", "TelegramDesktop" }
@@ -564,7 +564,7 @@ awful.rules.rules = {
 		class = { "firefox" }
 	  }, properties = { screen = 1, tag = "7" }
 	},
-	
+
 	{
 	  rule_any = {
 		class = { "spotify", "Spotify" },
@@ -572,11 +572,6 @@ awful.rules.rules = {
 	  }, properties = { screen = 2, tag = "9" }
 	},
 
-    {
-	  rule_any = {
-		name = { "Apex Legends" }
-	  }, properties = { screen = 1, tag = "5", fullscreen = true }
-	},
 }
 
 -- {{{ Signals
@@ -653,10 +648,10 @@ awful.spawn.with_shell("xinput --set-prop 'COOLERMASTER CM310' 'libinput Accel S
 --awful.spawn.with_shell("xrandr --output DP-0 --mode 1920x1080 --output HDMI-0 --mode 1920x1080 --right-of DP-0")
 --awful.spawn.with_shell("xrandr --output DP-0 --mode 1920x1080 --output HDMI-0 --mode 1920x1080 --left-of DP-0")
 awful.spawn.with_shell("dropbox")
-awful.spawn.with_shell("discord")
 awful.spawn.with_shell("telegram-desktop")
 awful.spawn.with_shell("flameshot")
---awful.spawn.with_shell("discord-development")
+awful.spawn.with_shell("discord")
+-- awful.spawn.with_shell("discord-development")
 --awful.spawn.with_shell("xrandr --output HDMI-0 --off")
 awful.spawn.with_shell("setxkbmap lv")
 
