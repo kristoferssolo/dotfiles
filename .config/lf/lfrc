@@ -11,7 +11,7 @@ set cleaner "~/.config/lf/cleaner"
 
 # Set Wallpapper
 cmd setwallpaper ${{
-	cp "$f" ~/.config/wallpapper.png && feh --bg-scale --no-fehbg "$f"
+	cp "$f" ~/.local/share/wallpaper.png && feh --bg-scale --no-fehbg "$f"
 }}
 
 
@@ -92,7 +92,6 @@ map gp cd ~/Pictures
 map gc cd ~/.config
 map gr cd ~/repos
 map gv cd ~/Videos
-# map gs cd ~/.local/bin
-map gs cd /media/HardDrive/Pyhton/School/
-map gh cd /media/HardDrive/
-
+map gs cd ~/repos/Pyhton/School
+map go cd ~/Documents
+map gl cd ~/.local
