@@ -628,10 +628,9 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Autostart Applications
 awful.spawn.with_shell("picom --experimental-backends")
-awful.spawn.with_shell("feh --bg-scale --no-fehbg ~/.config/wallpapper.png")
 awful.spawn.with_shell("libinput-gestures-setup start")
 --awful.spawn.with_shell("xrandr --output DisplayPort-0 --mode 1920x1080 --same-as EDp")
 awful.spawn.with_shell("dropbox")
 awful.spawn.with_shell("flameshot")
-awful.spawn.with_shell(" /usr/bin/pipewire & /usr/bin/pipewire-pulse & /usr/bin/pipewire-media-session")
+-- awful.spawn.with_shell(" /usr/bin/pipewire & /usr/bin/pipewire-pulse & /usr/bin/pipewire-media-session")
 awful.spawn.with_shell("setxkbmap lv")
