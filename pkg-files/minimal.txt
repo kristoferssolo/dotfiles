@@ -2,6 +2,7 @@ fastfetch
 lf
 nsxiv
 vim-plug
+spaceship-prompt
 zsh-fast-syntax-highlighting
 alacritty
 awesome
