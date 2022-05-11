@@ -16,6 +16,7 @@ imagemagick
 poppler
 python-pip
 sx
+ueberzug
 unrar
 unzip
 wkhtmltopdf

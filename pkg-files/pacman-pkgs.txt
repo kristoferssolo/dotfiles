@@ -36,6 +36,7 @@ chafa
 dhcpcd
 discord
 dnsmasq
+doas
 docx2txt
 dust
 efibootmgr
@@ -105,7 +106,6 @@ seahorse
 skim
 speedtest-cli
 steam
-sudo
 sx
 telegram-desktop
 texlive-bibtexextra
@@ -136,6 +136,7 @@ ttf-droid
 ttf-hack
 ttf-ibm-plex
 ttf-liberation
+ueberzug
 unrar
 unzip
 v4l2loopback-dkms
