@@ -1,7 +1,20 @@
-# Kristofers Solo config files
-## Dependencies
-* [omnipause](https://github.com/mel00010/OmniPause)
-* [pulsemixer](https://github.com/GeorgeFilipkin/pulsemixer)
-* [Image preview for lf](https://github.com/cirala/lfimg)
+# The Solorice (Kristofers Solo dotfiles)
 
+- Very useful scripts are in `~/.local/bin/`
+- Settings for:
+	- vim/nvim (text editor)
+	- zsh (shell)
+	- lf (file manager)
+	- nsxiv (image/gif viewer)
+	- mpv (video player)
+- I try to minimize what's directly in `~` so:
+	- All configs that can be in `~/.config/` are.
+	- Some environmental variables have been set in `~/.zprofile` to move configs into `~/.config/`
+
+
+## Credits
+- [lfimg by cirala](https://github.com/cirala/lfimg)
+- [omnipause by mel00010](https://github.com/mel00010/OmniPause)
+- [pulsemixer by GeorgeFilipkin](https://github.com/GeorgeFilipkin/pulsemixer)
+- [awesome-wm-widgets by streetturtle](https://github.com/streetturtle/awesome-wm-widgets)
 
