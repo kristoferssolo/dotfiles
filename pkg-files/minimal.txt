@@ -23,7 +23,6 @@ zsh
 zsh-autosuggestions
 zsh-history-substring-search
 
---AUR--
 epub-thumbnailer-git
 fastfetch
 lf
