@@ -13,6 +13,7 @@ feh
 ffmpegthumbnailer
 firefox
 imagemagick
+opendoas
 poppler
 pulsemixer
 python-pip

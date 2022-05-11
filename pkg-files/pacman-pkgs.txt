@@ -84,6 +84,7 @@ odt2txt
 okular
 openbsd-netcat
 opendesktop-fonts
+opendoas
 os-prober
 perl-font-ttf
 pipewire-alsa
