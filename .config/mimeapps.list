@@ -1,0 +1,26 @@
+[Default Applications]
+
+# xdg-open will use these settings to determine how to open filetypes.
+# These .desktop entries can also be seen and changed in ~/.local/share/applications/
+
+text/html=vivaldi-stable.desktop;
+text/py=text.desktop;
+x-scheme-handler/http=vivaldi-stable.desktop;
+x-scheme-handler/https=vivaldi-stable.desktop;
+x-scheme-handler/about=vivaldi-stable.desktop;
+x-scheme-handler/unknown=vivaldi-stable.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-1IQ1J1.desktop;
+x-scheme-handler/kite=kite-copilot.desktop;
+x-scheme-handler/msteams=teams.desktop;
+application/pdf=okularApplication_pdf.desktop;org.pwmt.zathura.desktop;
+image/x-canon-cr2=img.desktop;
+image/jpeg=img.desktop;
+image/jpg=img.desktop;
+image/png=img.desktop;
+image/gif=img.desktop;
+video/ts=video.desktop;
+video/mp4=video.desktop;
+video/mpv=video.desktop;
+
+[Added Associations]
+
