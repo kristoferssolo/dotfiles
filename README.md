@@ -15,6 +15,3 @@
 ## Credits
 - [lfimg by cirala](https://github.com/cirala/lfimg)
 - [omnipause by mel00010](https://github.com/mel00010/OmniPause)
-- [pulsemixer by GeorgeFilipkin](https://github.com/GeorgeFilipkin/pulsemixer)
-- [awesome-wm-widgets by streetturtle](https://github.com/streetturtle/awesome-wm-widgets)
-
