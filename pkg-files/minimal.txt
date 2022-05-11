@@ -14,6 +14,7 @@ ffmpegthumbnailer
 firefox
 imagemagick
 poppler
+pulsemixer
 python-pip
 sx
 ueberzug
