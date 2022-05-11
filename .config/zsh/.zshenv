@@ -34,4 +34,3 @@ export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
-# PATH=$PATH:/home/$USER/.local/bin
