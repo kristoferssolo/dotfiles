@@ -33,5 +33,5 @@ export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 
 # Adds `~/.local/bin` to $PATH
-# export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
-PATH=$PATH:/home/$USER/.local/bin
+export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
+# PATH=$PATH:/home/$USER/.local/bin
