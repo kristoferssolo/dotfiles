@@ -45,7 +45,7 @@ WORDCHARS=${WORDCHARS//\/[&.;]}								# Don't consider certain part of the word
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh 2>/dev/null
 zmodload zsh/terminfo
-eval "$(lua ~/.config/zsh/z.lua --init zsh)"
+eval "$(lua ~/.config/zlua/z.lua --init zsh)"
 
 # Keybindings
 bindkey -e
