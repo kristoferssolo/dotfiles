@@ -107,7 +107,6 @@ skim
 speedtest-cli
 steam
 sx
-telegram-desktop
 texlive-bibtexextra
 texlive-core
 texlive-fontsextra

@@ -18,6 +18,7 @@ picom-ibhagwan-git
 spacefm
 spaceship-prompt
 spotify
+telegram-desktop-bin
 tuxedo-control-center-bin
 unimatrix-git
 vifmimg-git
