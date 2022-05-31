@@ -73,7 +73,6 @@ map <enter> shell
 map <enter> open
 map <c-f> $lf -remote "send $id select '$(sk)'"
 map <f-2> rename
-map <f-5> reload
 map <c-n> push :mkdir<space>
 map DD delete
 map dd cut

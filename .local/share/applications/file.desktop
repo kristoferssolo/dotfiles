@@ -1,1 +1,4 @@
-file.desktop
+[Desktop Entry]
+Type=Application
+Name=File Manager
+Exec=/usr/local/bin/st -e lfrun %u

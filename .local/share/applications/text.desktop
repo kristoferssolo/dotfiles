@@ -1,1 +1,4 @@
-text.desktop
+[Desktop Entry]
+Type=Application
+Name=Text editor
+Exec=/usr/local/bin/alacritty -e nvim %u
