@@ -286,8 +286,7 @@ globalkeys = gears.table.join(
   awful.key( {}, "#123", function () awful.spawn.with_shell("pulsemixer --change-volume +5") end ), -- increase volume
   awful.key( {}, "#122", function () awful.spawn.with_shell("pulsemixer --change-volume -5") end ), -- decrease volume
   awful.key( {}, "#121", function () awful.spawn.with_shell("pulsemixer --toggle-mute") end ), -- mute
-
-  awful.key( {}, "#172", function () awful.spawn.with_shell("omnipause toggle") end ), -- play/pause
+	awful.key( {}, "#172", function () awful.spawn.with_shell("playerctl play-pause") end ), -- play/pause
 
   awful.key( { "Control" }, "#107", function () awful.spawn.with_shell("flameshot gui") end,
               {description="take region screenshot", group="launcher"}), -- take region screenshot

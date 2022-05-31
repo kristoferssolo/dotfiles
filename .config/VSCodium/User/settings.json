@@ -9,7 +9,6 @@
 	"terminal.integrated.cursorStyle": "line",
 	"security.workspace.trust.untrustedFiles": "open",
 	"explorer.confirmDragAndDrop": false,
-
 	"python.formatting.provider": "yapf",
 	"python.formatting.yapfArgs": [
 		"--style",
@@ -61,7 +60,6 @@
 	"[markdown]": {
 		"editor.defaultFormatter": "yzhang.markdown-all-in-one"
 	},
-	"workbench.iconTheme": "material-icon-theme",
 	"json.schemas": [],
 	"workbench.enableExperiments": false,
 	"editor.fontFamily": "JetBrainsMono NF",
@@ -110,5 +108,6 @@
 			}
 		]
 	},
-	"workbench.colorTheme": "Sweet Dracula"
+	"workbench.colorTheme": "Dracula Soft",
+	"workbench.iconTheme": "material-icon-theme"
 }

@@ -14,4 +14,3 @@
 
 ## Credits
 - [lfimg by cirala](https://github.com/cirala/lfimg)
-- [omnipause by mel00010](https://github.com/mel00010/OmniPause)

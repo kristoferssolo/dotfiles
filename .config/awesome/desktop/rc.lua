@@ -272,13 +272,13 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
 
-	awful.key( {}, "Pause",	function ()	awful.spawn.with_shell("omnipause toggle") end,
+	awful.key( {}, "Pause",	function ()	awful.spawn.with_shell("playerctl play-pause") end,
 		{description="pause/play", group="media controls"}),
 
-	awful.key( {}, "#117", function () awful.spawn.with_shell("omnipause next") end,
+	awful.key( {}, "#117", function () awful.spawn.with_shell("playerctl next") end,
 		{description="play next", group="media controls"}),
 
-	awful.key( {}, "#112", function () awful.spawn.with_shell("omnipause previous") end,
+	awful.key( {}, "#112", function () awful.spawn.with_shell("playerctl previous") end,
 		{description="play previous", group="media controls"}),
 
 	--awful.key( {}, "#123", function () volume_widget:inc(5) end ), -- increase volume
@@ -289,10 +289,10 @@ globalkeys = gears.table.join(
   awful.key( {}, "#123", function () awful.spawn.with_shell("pulsemixer --change-volume +5") end ), -- increase volume
   awful.key( {}, "#122", function () awful.spawn.with_shell("pulsemixer --change-volume -5") end ), -- decrease volume
   awful.key( {}, "#121", function () awful.spawn.with_shell("pulsemixer --toggle-mute") end ), -- mute
-	awful.key( {}, "#171", function () awful.spawn.with_shell("omnipause next") end ), -- play next
-	awful.key( {}, "#173", function () awful.spawn.with_shell("omnipause previous") end ), -- play previous
-	awful.key( {}, "#174", function () awful.spawn.with_shell("omnipause stop") end ), -- stop
-	awful.key( {}, "#172", function () awful.spawn.with_shell("omnipause toggle") end ), -- play/pause
+	awful.key( {}, "#171", function () awful.spawn.with_shell("playerctl next") end ), -- play next
+	awful.key( {}, "#173", function () awful.spawn.with_shell("playerctl previous") end ), -- play previous
+	awful.key( {}, "#174", function () awful.spawn.with_shell("playerctl stop") end ), -- stop
+	awful.key( {}, "#172", function () awful.spawn.with_shell("playerctl play-pause") end ), -- play/pause
 
 	awful.key( { "Control" }, "#107", function () awful.spawn.with_shell("flameshot gui") end,
               {description="take region screenshot", group="launcher"}), -- take region screenshot
