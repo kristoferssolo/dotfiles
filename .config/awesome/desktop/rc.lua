@@ -272,7 +272,7 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
 
-	awful.key( {}, "Pause",	function ()	awful.spawn.with_shell("playerctl play-pause") end,
+	awful.key( {}, "Pause",	function ()	awful.spawn.with_shell("playerctl -a play-pause") end,
 		{description="pause/play", group="media controls"}),
 
 	awful.key( {}, "#117", function () awful.spawn.with_shell("playerctl next") end,
@@ -291,8 +291,8 @@ globalkeys = gears.table.join(
   awful.key( {}, "#121", function () awful.spawn.with_shell("pulsemixer --toggle-mute") end ), -- mute
 	awful.key( {}, "#171", function () awful.spawn.with_shell("playerctl next") end ), -- play next
 	awful.key( {}, "#173", function () awful.spawn.with_shell("playerctl previous") end ), -- play previous
-	awful.key( {}, "#174", function () awful.spawn.with_shell("playerctl stop") end ), -- stop
-	awful.key( {}, "#172", function () awful.spawn.with_shell("playerctl play-pause") end ), -- play/pause
+	awful.key( {}, "#174", function () awful.spawn.with_shell("playerctl -a stop") end ), -- stop
+	awful.key( {}, "#172", function () awful.spawn.with_shell("playerctl -a play-pause") end ), -- play/pause
 
 	awful.key( { "Control" }, "#107", function () awful.spawn.with_shell("flameshot gui") end,
               {description="take region screenshot", group="launcher"}), -- take region screenshot
