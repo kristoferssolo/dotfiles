@@ -1,4 +1,4 @@
-#! /usr/bin/env lua
+#!/usr/bin/env lua
 --=====================================================================
 --
 -- z.lua - a cd command that learns, by skywind 2018-2022
@@ -90,8 +90,8 @@
 local modname = 'z'
 local MM = {}
 _G[modname] = MM
-package.loaded[modname] = MM  --return modname
-setmetatable(MM, {__index = _G})
+package.loaded[modname] = MM --return modname
+setmetatable(MM, { __index = _G })
 
 if _ENV ~= nil then
 	_ENV[modname] = MM
@@ -166,7 +166,7 @@ function string:startswith(text)
 end
 
 function string:endswith(text)
-	return text == "" or self:sub(-#text) == text
+	return text == "" or self:sub(- #text) == text
 end
 
 function string:lstrip()
@@ -215,7 +215,6 @@ function string:join(parts)
 	return text
 end
 
-
 -----------------------------------------------------------------------
 -- table size
 -----------------------------------------------------------------------
@@ -226,23 +225,21 @@ function table.length(T)
 	return count
 end
 
-
 -----------------------------------------------------------------------
 -- print table
 -----------------------------------------------------------------------
 function dump(o)
 	if type(o) == 'table' then
 		local s = '{ '
-		for k,v in pairs(o) do
-			if type(k) ~= 'number' then k = '"'..k..'"' end
-			s = s .. '['..k..'] = ' .. dump(v) .. ','
+		for k, v in pairs(o) do
+			if type(k) ~= 'number' then k = '"' .. k .. '"' end
+			s = s .. '[' .. k .. '] = ' .. dump(v) .. ','
 		end
 		return s .. '} '
 	else
 		return tostring(o)
 	end
 end
-
 
 -----------------------------------------------------------------------
 -- print table
@@ -254,10 +251,10 @@ function printT(table, level)
 		level = level or 1
 		local indent = ""
 		for i = 1, level do
-			indent = indent.."  "
+			indent = indent .. "  "
 		end
 		if key ~= "" then
-			print(indent..key.." ".."=".." ".."{")
+			print(indent .. key .. " " .. "=" .. " " .. "{")
 		else
 			print(indent .. "{")
 		end
@@ -268,7 +265,7 @@ function printT(table, level)
 				key = k
 				func(v, level + 1)
 			else
-				local content = string.format("%s%s = %s", indent .. "  ",tostring(k), tostring(v))
+				local content = string.format("%s%s = %s", indent .. "  ", tostring(k), tostring(v))
 				print(content)
 			end
 		end
@@ -276,7 +273,6 @@ function printT(table, level)
 	end
 	func(table, level)
 end
-
 
 -----------------------------------------------------------------------
 -- invoke command and retrive output
@@ -290,7 +286,6 @@ function os.call(command)
 	fp:close()
 	return line
 end
-
 
 -----------------------------------------------------------------------
 -- write log
@@ -308,16 +303,15 @@ function os.log(text)
 	fp:close()
 end
 
-
 -----------------------------------------------------------------------
 -- ffi optimize (luajit has builtin ffi module)
 -----------------------------------------------------------------------
 os.native = {}
-os.native.status, os.native.ffi =  pcall(require, "ffi")
+os.native.status, os.native.ffi = pcall(require, "ffi")
 if os.native.status then
 	local ffi = os.native.ffi
 	if windows then
-		ffi.cdef[[
+		ffi.cdef [[
 		int GetFullPathNameA(const char *name, uint32_t size, char *out, char **name);
 		int ReplaceFileA(const char *dstname, const char *srcname, void *, uint32_t, void *, void *);
 		uint32_t GetTickCount(void);
@@ -335,24 +329,30 @@ if os.native.status then
 			local hr = kernel32.GetFullPathNameA(name, 4096, buffer, nil)
 			return (hr > 0) and ffi.string(buffer, hr) or nil
 		end
+
 		function os.native.ReplaceFile(replaced, replacement)
 			local hr = kernel32.ReplaceFileA(replaced, replacement, nil, 2, nil, nil)
 			return (hr ~= 0) and true or false
 		end
+
 		function os.native.GetTickCount()
 			return kernel32.GetTickCount()
 		end
+
 		function os.native.GetFileAttributes(name)
 			return kernel32.GetFileAttributesA(name)
 		end
+
 		function os.native.GetLongPathName(name)
 			local hr = kernel32.GetLongPathNameA(name, buffer, 4096)
 			return (hr ~= 0) and ffi.string(buffer, hr) or nil
 		end
+
 		function os.native.GetShortPathName(name)
 			local hr = kernel32.GetShortPathNameA(name, buffer, 4096)
 			return (hr ~= 0) and ffi.string(buffer, hr) or nil
 		end
+
 		function os.native.GetRealPathName(name)
 			local short = os.native.GetShortPathName(name)
 			if short then
@@ -360,10 +360,12 @@ if os.native.status then
 			end
 			return nil
 		end
+
 		function os.native.exists(name)
 			local attr = os.native.GetFileAttributes(name)
 			return attr ~= INVALID_FILE_ATTRIBUTES
 		end
+
 		function os.native.isdir(name)
 			local attr = os.native.GetFileAttributes(name)
 			local isdir = FILE_ATTRIBUTE_DIRECTORY
@@ -372,13 +374,14 @@ if os.native.status then
 			end
 			return (attr % (2 * isdir)) >= isdir
 		end
+
 		function os.native.getcwd()
 			local hr = kernel32.GetCurrentDirectoryA(4096, buffer)
 			if hr <= 0 then return nil end
 			return ffi.string(buffer, hr)
 		end
 	else
-		ffi.cdef[[
+		ffi.cdef [[
 		typedef struct { long tv_sec; long tv_usec; } timeval;
 		int gettimeofday(timeval *tv, void *tz);
 		int access(const char *name, int mode);
@@ -393,13 +396,16 @@ if os.native.status then
 			local usec = tonumber(timeval[0].tv_usec)
 			return sec + (usec * 0.000001)
 		end
+
 		function os.native.access(name, mode)
 			return ffi.C.access(name, mode)
 		end
+
 		function os.native.realpath(name)
 			local path = ffi.C.realpath(name, buffer)
 			return (path ~= nil) and ffi.string(buffer) or nil
 		end
+
 		function os.native.getcwd()
 			local hr = ffi.C.getcwd(buffer, 4099)
 			return hr ~= nil and ffi.string(buffer) or nil
@@ -412,6 +418,7 @@ if os.native.status then
 			return math.floor(os.native.gettimeofday() * 1000)
 		end
 	end
+
 	os.native.init = true
 end
 
@@ -446,7 +453,6 @@ function os.pwd()
 	end
 end
 
-
 -----------------------------------------------------------------------
 -- which executable
 -----------------------------------------------------------------------
@@ -464,7 +470,7 @@ function os.path.which(exename)
 				return name
 			end
 		else
-			for _, ext in pairs({'.exe', '.cmd', '.bat'}) do
+			for _, ext in pairs({ '.exe', '.cmd', '.bat' }) do
 				local name = path .. '\\' .. exename .. ext
 				if path == '.' then
 					name = exename .. ext
@@ -478,7 +484,6 @@ function os.path.which(exename)
 	return nil
 end
 
-
 -----------------------------------------------------------------------
 -- absolute path (simulated)
 -----------------------------------------------------------------------
@@ -486,7 +491,6 @@ function os.path.absolute(path)
 	local pwd = os.pwd()
 	return os.path.normpath(os.path.join(pwd, path))
 end
-
 
 -----------------------------------------------------------------------
 -- absolute path (system call, can fall back to os.path.absolute)
@@ -527,7 +531,7 @@ function os.path.abspath(path)
 				return test
 			end
 		end
-		for _, python in pairs({'python3', 'python2', 'python'}) do
+		for _, python in pairs({ 'python3', 'python2', 'python' }) do
 			local s = 'sys.stdout.write(os.path.abspath(sys.argv[1]))'
 			local s = '-c "import os, sys;' .. s .. '" \'' .. path .. '\''
 			local s = python .. ' ' .. s
@@ -542,7 +546,6 @@ function os.path.abspath(path)
 	end
 	return os.path.absolute(path)
 end
-
 
 -----------------------------------------------------------------------
 -- dir exists
@@ -570,7 +573,6 @@ function os.path.isdir(pathname)
 	return os.path.exists(name)
 end
 
-
 -----------------------------------------------------------------------
 -- file or path exists
 -----------------------------------------------------------------------
@@ -586,7 +588,7 @@ function os.path.exists(name)
 		if code == 13 or code == 17 then
 			return true
 		elseif code == 30 then
-			local f = io.open(name,"r")
+			local f = io.open(name, "r")
 			if f ~= nil then
 				io.close(f)
 				return true
@@ -602,7 +604,6 @@ function os.path.exists(name)
 	end
 	return true
 end
-
 
 -----------------------------------------------------------------------
 -- is absolute path
@@ -624,7 +625,6 @@ function os.path.isabs(path)
 	return false
 end
 
-
 -----------------------------------------------------------------------
 -- normalize path
 -----------------------------------------------------------------------
@@ -637,7 +637,6 @@ function os.path.norm(pathname)
 	end
 	return pathname
 end
-
 
 -----------------------------------------------------------------------
 -- normalize . and ..
@@ -682,7 +681,6 @@ function os.path.normpath(path)
 	if windows then path = path:gsub('/', '\\') end
 	return path == '' and '.' or path
 end
-
 
 -----------------------------------------------------------------------
 -- join two path
@@ -744,7 +742,6 @@ function os.path.join(path1, path2)
 	end
 end
 
-
 -----------------------------------------------------------------------
 -- split
 -----------------------------------------------------------------------
@@ -797,7 +794,6 @@ function os.path.split(path)
 	return head, tail
 end
 
-
 -----------------------------------------------------------------------
 -- check subdir
 -----------------------------------------------------------------------
@@ -818,7 +814,6 @@ function os.path.subdir(basename, subname)
 	return false
 end
 
-
 -----------------------------------------------------------------------
 -- check single name element
 -----------------------------------------------------------------------
@@ -833,7 +828,6 @@ function os.path.single(path)
 	end
 	return true
 end
-
 
 -----------------------------------------------------------------------
 -- expand user home
@@ -862,13 +856,11 @@ function os.path.expand(pathname)
 	return pathname
 end
 
-
 -----------------------------------------------------------------------
 -- search executable
 -----------------------------------------------------------------------
 function os.path.search(name)
 end
-
 
 -----------------------------------------------------------------------
 -- get lua executable
@@ -892,7 +884,6 @@ function os.interpreter()
 	return os.path.abspath(lua)
 end
 
-
 -----------------------------------------------------------------------
 -- get script name
 -----------------------------------------------------------------------
@@ -907,7 +898,6 @@ function os.scriptname()
 	end
 	return os.path.abspath(script)
 end
-
 
 -----------------------------------------------------------------------
 -- get environ
@@ -942,7 +932,6 @@ function os.environ(name, default)
 		return value:sep(',')
 	end
 end
-
 
 -----------------------------------------------------------------------
 -- parse option
@@ -985,7 +974,6 @@ function os.getopt(argv)
 	return options, args
 end
 
-
 -----------------------------------------------------------------------
 -- generate random seed
 -----------------------------------------------------------------------
@@ -1022,7 +1010,6 @@ function math.random_init()
 	math.randomseed(number)
 end
 
-
 -----------------------------------------------------------------------
 -- math random string
 -----------------------------------------------------------------------
@@ -1042,7 +1029,6 @@ function math.random_string(N)
 	return text
 end
 
-
 -----------------------------------------------------------------------
 -- returns true for path is insensitive
 -----------------------------------------------------------------------
@@ -1058,7 +1044,6 @@ function path_case_insensitive()
 	end
 	return false
 end
-
 
 -----------------------------------------------------------------------
 -- load and split data
@@ -1093,7 +1078,6 @@ function data_load(filename)
 	fp:close()
 	return M
 end
-
 
 -----------------------------------------------------------------------
 -- save data
@@ -1151,7 +1135,6 @@ function data_save(filename, M)
 	return true
 end
 
-
 -----------------------------------------------------------------------
 -- filter out bad dirname
 -----------------------------------------------------------------------
@@ -1167,7 +1150,6 @@ function data_filter(M)
 	end
 	return N
 end
-
 
 -----------------------------------------------------------------------
 -- insert item
@@ -1224,14 +1206,12 @@ function data_insert(M, filename)
 	return M
 end
 
-
 -----------------------------------------------------------------------
 -- change database
 -----------------------------------------------------------------------
 function data_file_set(name)
 	DATA_FILE = name
 end
-
 
 -----------------------------------------------------------------------
 -- change pattern
@@ -1250,7 +1230,6 @@ function case_insensitive_pattern(pattern)
 	end)
 	return p
 end
-
 
 -----------------------------------------------------------------------
 -- pathmatch
@@ -1286,7 +1265,6 @@ function path_match(pathname, patterns, matchlast)
 	return true
 end
 
-
 -----------------------------------------------------------------------
 -- select matched pathnames
 -----------------------------------------------------------------------
@@ -1310,7 +1288,6 @@ function data_select(M, patterns, matchlast)
 	return N
 end
 
-
 -----------------------------------------------------------------------
 -- update frecent
 -----------------------------------------------------------------------
@@ -1332,7 +1309,6 @@ function data_update_frecent(M)
 	end
 	return M
 end
-
 
 -----------------------------------------------------------------------
 -- add path
@@ -1403,7 +1379,6 @@ function z_add(path)
 	return true
 end
 
-
 -----------------------------------------------------------------------
 -- remove path
 -----------------------------------------------------------------------
@@ -1447,7 +1422,6 @@ function z_remove(path)
 	data_save(DATA_FILE, X)
 end
 
-
 -----------------------------------------------------------------------
 -- match method: frecent, rank, time
 -----------------------------------------------------------------------
@@ -1480,7 +1454,7 @@ function z_match(patterns, method, subdir)
 			item.score = item.frecent
 		end
 	end
-	table.sort(M, function (a, b) return a.score > b.score end)
+	table.sort(M, function(a, b) return a.score > b.score end)
 	local pwd = (PWD == nil or PWD == '') and os.getenv('PWD') or PWD
 	if pwd == nil or pwd == '' then
 		pwd = os.pwd()
@@ -1510,7 +1484,6 @@ function z_match(patterns, method, subdir)
 	end
 	return M
 end
-
 
 -----------------------------------------------------------------------
 -- pretty print
@@ -1574,7 +1547,6 @@ function z_print(M, weight, number)
 	end
 end
 
-
 -----------------------------------------------------------------------
 -- calculate jump dir
 -----------------------------------------------------------------------
@@ -1611,7 +1583,7 @@ function z_cd(patterns)
 		return M[1].name
 	end
 	if os.environ('_ZL_INT_SORT', false) then
-		table.sort(M, function (a, b) return a.name < b.name end)
+		table.sort(M, function(a, b) return a.name < b.name end)
 	end
 	local retval = nil
 	if Z_INTERACTIVE == 1 then
@@ -1637,7 +1609,7 @@ function z_cd(patterns)
 		local cmd = '--nth 2.. --reverse --inline-info --tac '
 		local flag = os.environ('_ZL_FZF_FLAG', '')
 		flag = (flag == '' or flag == nil) and '+s -e' or flag
-		cmd = ((fzf == '') and 'fzf' or fzf)  .. ' ' .. cmd .. ' ' .. flag
+		cmd = ((fzf == '') and 'fzf' or fzf) .. ' ' .. cmd .. ' ' .. flag
 		if not windows then
 			tmpname = os.tmpname()
 			local height = os.environ('_ZL_FZF_HEIGHT', '35%')
@@ -1667,7 +1639,6 @@ function z_cd(patterns)
 	return (retval ~= '' and retval or nil)
 end
 
-
 -----------------------------------------------------------------------
 -- purge invalid paths
 -----------------------------------------------------------------------
@@ -1682,7 +1653,6 @@ function z_purge()
 	data_save(DATA_FILE, N)
 	return x, y
 end
-
 
 -----------------------------------------------------------------------
 -- find_vcs_root
@@ -1705,7 +1675,6 @@ function find_vcs_root(path)
 	end
 	return nil
 end
-
 
 -----------------------------------------------------------------------
 -- cd to parent directories which contains keyword
@@ -1775,7 +1744,6 @@ function cd_backward(args, options, pwd)
 	end
 end
 
-
 -----------------------------------------------------------------------
 -- cd minus: "z -", "z --", "z -2"
 -----------------------------------------------------------------------
@@ -1801,7 +1769,6 @@ function cd_minus(args, options)
 	return nil
 end
 
-
 -----------------------------------------------------------------------
 -- cd breadcrumbs: z -b -i, z -b -I
 -----------------------------------------------------------------------
@@ -1814,11 +1781,11 @@ function cd_breadcrumbs(pwd, interactive)
 	local fullname = os.environ('_ZL_FULL_PATH', false)
 	while true do
 		local head, name = os.path.split(path)
-		if head == path  then		-- reached root
-			table.insert(elements, {head, head})
+		if head == path then -- reached root
+			table.insert(elements, { head, head })
 			break
 		elseif name ~= '' then
-			table.insert(elements, {name, path})
+			table.insert(elements, { name, path })
 		else
 			break
 		end
@@ -1885,7 +1852,6 @@ function cd_breadcrumbs(pwd, interactive)
 	end
 	return elements[index][2]
 end
-
 
 -----------------------------------------------------------------------
 -- main entry
@@ -1963,7 +1929,7 @@ function main(argv)
 		elseif opts.fish then
 			z_fish_init(opts)
 		elseif opts.powershell then
-		       z_windows_init(opts)
+			z_windows_init(opts)
 		else
 			z_shell_init(opts)
 		end
@@ -1976,8 +1942,8 @@ function main(argv)
 		end
 	elseif options['--complete'] then
 		local line = args[1] and args[1] or ''
-		local head = line:sub(Z_CMD:len()+1):gsub('^%s+', '')
-		local M = z_match({head}, Z_METHOD, Z_SUBDIR)
+		local head = line:sub(Z_CMD:len() + 1):gsub('^%s+', '')
+		local M = z_match({ head }, Z_METHOD, Z_SUBDIR)
 		for _, item in pairs(M) do
 			print(item.name)
 		end
@@ -1986,7 +1952,6 @@ function main(argv)
 	end
 	return true
 end
-
 
 -----------------------------------------------------------------------
 -- initialize from environment variable
@@ -2060,7 +2025,6 @@ function z_init()
 	end
 end
 
-
 -----------------------------------------------------------------------
 -- initialize clink hooks
 -----------------------------------------------------------------------
@@ -2078,21 +2042,22 @@ function z_clink_init()
 		end
 		z_add(clink.get_cwd())
 	end
+
 	clink.prompt.register_filter(z_add_to_database, _zl_clink_prompt_priority)
 	function z_match_completion(word)
-		local M = z_match({word}, Z_METHOD, Z_SUBDIR)
+		local M = z_match({ word }, Z_METHOD, Z_SUBDIR)
 		for _, item in pairs(M) do
 			clink.add_match(item.name)
 		end
 		return {}
 	end
+
 	local z_parser = clink.arg.new_parser()
 	z_parser:set_arguments({ z_match_completion })
 	z_parser:set_flags("-c", "-r", "-i", "--cd", "-e", "-b", "--add", "-x", "--purge",
 		"--init", "-l", "-s", "--complete", "--help", "-h")
 	clink.arg.register_parser("z", z_parser)
 end
-
 
 -----------------------------------------------------------------------
 -- shell scripts
@@ -2168,9 +2133,9 @@ esac
 
 local script_init_bash_once = [[
 _zlua_precmd() {
-    [ "$_ZL_PREVIOUS_PWD" = "$PWD" ] && return
-    _ZL_PREVIOUS_PWD="$PWD"
-    (_zlua --add "$PWD" 2> /dev/null &)
+		[ "$_ZL_PREVIOUS_PWD" = "$PWD" ] && return
+		_ZL_PREVIOUS_PWD="$PWD"
+		(_zlua --add "$PWD" 2> /dev/null &)
 }
 case "$PROMPT_COMMAND" in
 	*_zlua_precmd*) ;;
@@ -2187,9 +2152,9 @@ esac
 
 local script_init_posix_once = [[
 _zlua_precmd() {
-    [ "$_ZL_PREVIOUS_PWD" = "$PWD" ] && return
-    _ZL_PREVIOUS_PWD="$PWD"
-    (_zlua --add "$PWD" 2> /dev/null &)
+		[ "$_ZL_PREVIOUS_PWD" = "$PWD" ] && return
+		_ZL_PREVIOUS_PWD="$PWD"
+		(_zlua --add "$PWD" 2> /dev/null &)
 }
 case "$PS1" in
 	*_zlua_precmd*) ;;
@@ -2343,7 +2308,6 @@ function z_shell_init(opts)
 	end
 end
 
-
 -----------------------------------------------------------------------
 -- Fish shell init
 -----------------------------------------------------------------------
@@ -2467,7 +2431,6 @@ function z_fish_init(opts)
 		print('set -x _ZL_NO_CHECK 1')
 	end
 end
-
 
 -----------------------------------------------------------------------
 -- windows .cmd script
@@ -2694,7 +2657,6 @@ function z_windows_init(opts)
 	end
 end
 
-
 -----------------------------------------------------------------------
 -- help
 -----------------------------------------------------------------------
@@ -2713,7 +2675,6 @@ function z_help()
 	print(cmd .. '-b foo    # cd to the parent directory starting with foo')
 end
 
-
 -----------------------------------------------------------------------
 -- LFS optimize
 -----------------------------------------------------------------------
@@ -2726,10 +2687,10 @@ if os.lfs.enable ~= nil then
 		os.lfs.status, os.lfs.pkg = pcall(require, 'lfs')
 		if os.lfs.status then
 			local lfs = os.lfs.pkg
-			os.path.exists = function (name)
+			os.path.exists = function(name)
 				return lfs.attributes(name) and true or false
 			end
-			os.path.isdir = function (name)
+			os.path.isdir = function(name)
 				local mode = lfs.attributes(name)
 				if not mode then
 					return false
