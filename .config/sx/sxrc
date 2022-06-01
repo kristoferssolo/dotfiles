@@ -1,7 +1,12 @@
-runsvdir ~/.runit/runsvdir &
 /usr/bin/pipewire &
 /usr/bin/pipewire-pulse &
-/usr/bin/pipewire-media-session &
+/usr/bin/wireplumber &
 /usr/bin/numlockx on &
+spotify &
+/usr/bin/discord &
+/usr/bin/telegram-desktop &
+/usr/bin/dropbox &
+/usr/bin/flameshot &
+/usr/bin/xinput --set-prop 'COOLERMASTER CM310' 'libinput Accel Speed' -.7 &
 
 exec dbus-launch --sh-syntax --exit-with-session awesome

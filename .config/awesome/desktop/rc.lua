@@ -642,17 +642,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Autostart Applications
 awful.spawn.with_shell("picom --experimental-backends")
---awful.spawn.with_shell("picom")
--- awful.spawn.with_shell("feh --bg-scale --no-fehbg ~/.local/share/wallpaper.png")
-awful.spawn.with_shell("xinput --set-prop 'COOLERMASTER CM310' 'libinput Accel Speed' -.7")
---awful.spawn.with_shell("xrandr --output DP-0 --mode 1920x1080 --output HDMI-0 --mode 1920x1080 --right-of DP-0")
---awful.spawn.with_shell("xrandr --output DP-0 --mode 1920x1080 --output HDMI-0 --mode 1920x1080 --left-of DP-0")
-awful.spawn.with_shell("dropbox")
-awful.spawn.with_shell("telegram-desktop")
-awful.spawn.with_shell("flameshot")
-awful.spawn.with_shell("discord")
-awful.spawn.with_shell("spotify")
--- awful.spawn.with_shell("discord-development")
---awful.spawn.with_shell("xrandr --output HDMI-0 --off")
 awful.spawn.with_shell("setxkbmap lv")
 
