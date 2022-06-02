@@ -30,6 +30,32 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+-- OpenWeather API
+-- !Create file ~/.config/awesome/weather and paste API from OpenWeather, latitude and longitude, each on separate lines
+local weather_file = '/home/kristofers/.config/awesome/weather' -- absolute path to `weather` file
+-- see if the file exists
+local function file_exists(file)
+	local f = io.open(file, "rb")
+	if f then f:close() end
+	return f ~= nil
+end
+
+-- get all lines from a file, returns an empty
+-- list/table if the file does not exist
+local function lines_from(file)
+	if not file_exists(file) then return {} end
+	local lines = {}
+	for line in io.lines(file) do
+		lines[#lines + 1] = line
+	end
+	return lines
+end
+
+local weather_output = lines_from(weather_file)
+local API = weather_output[1]
+local latitude = tonumber(weather_output[2])
+local longitude = tonumber(weather_output[3])
+
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -255,8 +281,8 @@ awful.screen.connect_for_each_screen(function(s)
 				tooltip = true,
 			},
 			weather_widget({
-				api_key = '3bc28ba1ee6eeaf28af31d9d948aecd1',
-				coordinates = { 56.86140361300421, 24.386173343039193 },
+				api_key = API,
+				coordinates = { latitude, longitude },
 				show_hourly_forecst = true,
 				show_daily_forecast = true,
 			}),
@@ -573,8 +599,8 @@ client.connect_signal("manage", function(c)
 	-- if not awesome.startup then awful.client.setslave(c) end
 
 	if awesome.startup
-			and not c.size_hints.user_position
-			and not c.size_hints.program_position then
+		and not c.size_hints.user_position
+		and not c.size_hints.program_position then
 		-- Prevent clients from being unreachable after screen count changes.
 		awful.placement.no_offscreen(c)
 	end

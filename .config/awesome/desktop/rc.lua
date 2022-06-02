@@ -2,9 +2,8 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
--- Awesome Wm Widgets
+-- AwesomeWM Widgets
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
@@ -28,6 +27,32 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+
+-- OpenWeather API
+-- !Create file ~/.config/awesome/weather and paste API from OpenWeather, latitude and longitude, each on separate lines
+local weather_file = '/home/kristofers/.config/awesome/weather' -- absolute path to `weather` file
+-- see if the file exists
+local function file_exists(file)
+	local f = io.open(file, "rb")
+	if f then f:close() end
+	return f ~= nil
+end
+
+-- get all lines from a file, returns an empty
+-- list/table if the file does not exist
+local function lines_from(file)
+	if not file_exists(file) then return {} end
+	local lines = {}
+	for line in io.lines(file) do
+		lines[#lines + 1] = line
+	end
+	return lines
+end
+
+local weather_output = lines_from(weather_file)
+local API = weather_output[1]
+local latitude = tonumber(weather_output[2])
+local longitude = tonumber(weather_output[3])
 
 
 -- {{{ Error handling
@@ -244,8 +269,8 @@ awful.screen.connect_for_each_screen(function(s)
 				max_lenght = -1,
 			}),
 			weather_widget({
-				api_key = '3bc28ba1ee6eeaf28af31d9d948aecd1',
-				coordinates = { 56.861415323546815, 24.386162623793343 },
+				api_key = API,
+				coordinates = { latitude, longitude },
 				show_daily_forecast = true,
 			}),
 			--volume_widget{
@@ -273,6 +298,9 @@ globalkeys = gears.table.join(
 
 	awful.key({}, "Pause", function() awful.spawn.with_shell("playerctl -a play-pause") end,
 		{ description = "pause/play", group = "media controls" }),
+
+	awful.key({ "Control" }, "Pause", function() awful.spawn.with_shell("playerctl -a pause") end,
+		{ description = "pause all", group = "media controls" }),
 
 	awful.key({}, "#117", function() awful.spawn.with_shell("playerctl next") end,
 		{ description = "play next", group = "media controls" }),
@@ -581,8 +609,8 @@ client.connect_signal("manage", function(c)
 	-- if not awesome.startup then awful.client.setslave(c) end
 
 	if awesome.startup
-			and not c.size_hints.user_position
-			and not c.size_hints.program_position then
+		and not c.size_hints.user_position
+		and not c.size_hints.program_position then
 		-- Prevent clients from being unreachable after screen count changes.
 		awful.placement.no_offscreen(c)
 	end
