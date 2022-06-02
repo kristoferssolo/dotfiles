@@ -552,6 +552,12 @@ awful.rules.rules = {
 			class = { "Thunderbird", "discord", "telegram-desktop", "TelegramDesktop" }
 		}, properties = { screen = 1, tag = "8" }
 	},
+  {
+    rule_any = {
+      class = { "spotify", "Spotify", "corectrl" },
+      name = { "Spotify", "CoreCtrl" }
+    }, properties = { screen = 1, tag = "9" }
+  },
 
 	-- Set Firefox to always map on the tag named "2" on screen 1.
 	-- { rule = { class = "Firefox" },
