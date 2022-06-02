@@ -2,11 +2,8 @@
 /usr/bin/pipewire-pulse &
 /usr/bin/wireplumber &
 /usr/bin/numlockx on &
-spotify &
-/usr/bin/discord &
-/usr/bin/telegram-desktop &
 /usr/bin/dropbox &
 /usr/bin/flameshot &
-/usr/bin/xinput --set-prop 'COOLERMASTER CM310' 'libinput Accel Speed' -.7 &
+/usr/bin/corectrl &
 
 exec dbus-launch --sh-syntax --exit-with-session awesome
