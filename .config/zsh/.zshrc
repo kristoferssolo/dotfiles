@@ -117,29 +117,30 @@ bindkey -M vicmd '^e' edit-command-line
 bindkey -M visual '^[[P' vi-delete
 
 # Aliases
+alias airpods='bluetoothctl connect C8:B1:CD:E0:14:4F'
+alias battery='acpi'
+alias code='vscodium'
 alias cp='cp -iv' # Confirm before overwriting something
-alias mv='mv -iv'
-alias rm='rm -vI'
-alias mkdir='mkdir -pv'
 alias df='df -h'     # Human-readable sizes
+alias diff='diff --color=auto'
+alias dv='doasedit'
 alias free='free -m' # Show sizes in MB
 alias gitu='git add . && git commit && git push'
-alias ls='exa -a --icons --group-directories-first'
+alias grep='grep --color=auto'
+alias grep='rg'
+alias ip='ip -color=auto'
 alias lf='lfrun'
-alias v='nvim'
-alias dv='doasedit'
+alias ls='exa -a --icons --group-directories-first'
 alias matrix='unimatrix -s 95'
+alias mkdir='mkdir -pv'
+alias mv='mv -iv'
+alias nsxiv='nsxiv -a'
 alias pman='doas pacman'
-alias battery='acpi'
-alias airpods='bluetoothctl connect C8:B1:CD:E0:14:4F'
+alias py='python'
+alias rm='rm -vI'
+alias v='nvim'
 alias weather='curl wttr.in/'
 alias ww='nvim ~/vimwiki/index.wiki'
-alias py='python'
-alias grep='grep --color=auto'
-alias diff='diff --color=auto'
-alias ip='ip -color=auto'
-alias grep='rg'
-alias code='vscodium'
 
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
 
