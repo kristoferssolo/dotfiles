@@ -141,6 +141,7 @@ alias rm='rm -vI'
 alias v='nvim'
 alias weather='curl wttr.in/'
 alias ww='nvim ~/vimwiki/index.wiki'
+alias zzz='doas zzz'
 
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
 
