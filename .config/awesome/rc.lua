@@ -286,7 +286,7 @@ awful.screen.connect_for_each_screen(function(s)
 				show_hourly_forecst = true,
 				show_daily_forecast = true,
 			}),
-			logout_menu_widget(),
+			-- logout_menu_widget(),
 			mytextclock,
 			s.mylayoutbox,
 		},
