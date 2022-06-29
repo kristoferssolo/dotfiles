@@ -12,7 +12,7 @@
 	"python.formatting.provider": "yapf",
 	"python.formatting.yapfArgs": [
 		"--style",
-		"{USE_TABS: true, INDENT_WIDTH: 4, COLUMN_LIMIT: 150, DEDENT_CLOSING_BRACKETS: true}"
+		"{USE_TABS: true, INDENT_WIDTH: 4, COLUMN_LIMIT: 200, DEDENT_CLOSING_BRACKETS: true}"
 	],
 	"[python]": {
 		"editor.defaultFormatter": "ms-python.python",
@@ -46,6 +46,8 @@
 		"Kristofers",
 		"Kvadratūra",
 		"lfimg",
+		"lighsaber",
+		"lightsaber",
 		"nsxiv",
 		"nvim",
 		"pathlib",
@@ -120,5 +122,17 @@
 	},
 	"workbench.colorTheme": "Dracula Soft",
 	"workbench.iconTheme": "material-icon-theme",
-	"Lua.telemetry.enable": true
+	"Lua.telemetry.enable": true,
+	"emmet.showSuggestionsAsSnippets": true,
+	"emmet.triggerExpansionOnTab": true,
+	"emmet.includeLanguages": {
+		"django-html": "html"
+	},
+	"editor.linkedEditing": true,
+	"[css]": {
+		"editor.defaultFormatter": "vscode.css-language-features"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
 }
