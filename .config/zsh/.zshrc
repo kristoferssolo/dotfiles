@@ -140,6 +140,7 @@ alias py='python'
 alias rm='rm -vI'
 alias v='nvim'
 alias weather='curl wttr.in/'
+alias wget=wget --hsts-file="{$XDG_DATA_HOME:-$HOME/.local/share}/wget-hsts"
 alias ww='nvim ~/vimwiki/index.wiki'
 alias zzz='doas zzz'
 
