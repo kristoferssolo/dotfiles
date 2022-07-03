@@ -9,11 +9,6 @@
 	"terminal.integrated.cursorStyle": "line",
 	"security.workspace.trust.untrustedFiles": "open",
 	"explorer.confirmDragAndDrop": false,
-	"python.formatting.provider": "yapf",
-	"python.formatting.yapfArgs": [
-		"--style",
-		"{USE_TABS: true, INDENT_WIDTH: 4, COLUMN_LIMIT: 200, DEDENT_CLOSING_BRACKETS: true}"
-	],
 	"[python]": {
 		"editor.defaultFormatter": "ms-python.python",
 		"editor.insertSpaces": false,
