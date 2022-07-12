@@ -35,6 +35,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'Mofiqul/dracula.nvim'
@@ -49,7 +50,7 @@ Plug 'preservim/nerdtree'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'tomasiser/vim-code-dark'
+Plug 'sbdchd/neoformat'
 Plug 'vimwiki/vimwiki'
 
 call plug#end()
@@ -97,6 +98,7 @@ nnoremap S :%s//gI<Left><Left><Left>
 
 
 lua << END
+require('gitsigns').setup()
 require('Comment').setup()
 require('lualine').setup {
 	options = {
@@ -148,8 +150,8 @@ cmp.setup {
 		end,
 	},
 	mapping = {
-		['<TAB>'] = cmp.mapping.select_prev_item(),
-		['<S_TAB>'] = cmp.mapping.select_next_item(),
+		['<S_TAB>'] = cmp.mapping.select_prev_item(),
+		['<TAB>'] = cmp.mapping.select_next_item(),
 		['<C-d>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		['<C-Space>'] = cmp.mapping.complete(),
@@ -320,3 +322,11 @@ map gw :Bclose<cr>
 " run current script with python3 by CTRL+R in command and insert mode
 autocmd FileType python map <buffer> <C-r> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 autocmd FileType python imap <buffer> <C-r> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType rust map <buffer> <C-r> :w<CR>:exec '!cargo run'<CR>
+autocmd FileType rust imap <buffer> <C-r> :w<CR>:exec '!cargo run'<CR>
+
+
+" Prettier configuration
+let g:neoformat_enabled_python = ['autopep8']
+let g:neoformat_try_node_exe = 1
+autocmd BufWritePre,InsertLeave *.{py,rs,html,css,md,lua} Neoformat
