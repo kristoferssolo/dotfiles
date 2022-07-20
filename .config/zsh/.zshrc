@@ -3,8 +3,7 @@ fastfetch
 # pfetch
 
 # Options
-# setopt correct												  # Auto correct mistakes
-setopt extendedglob       # Extended globaling. Allows using regular expressions with *
+# setopt correct												  # Auto correct mistakes setopt extendedglob       # Extended globaling. Allows using regular expressions with *
 setopt nocaseglob         # Case insensative globbing
 setopt numericglobsort    # Sort filenames numeracally when it makse sense
 setopt nobeep             # No beep
@@ -115,6 +114,8 @@ bindkey '^e' edit-command-line
 bindkey -M vicmd '^[[P' vi-delete-char
 bindkey -M vicmd '^e' edit-command-line
 bindkey -M visual '^[[P' vi-delete
+
+bindkey -s '^v' '^unvim .\n'
 
 # Aliases
 alias airpods='bluetoothctl connect C8:B1:CD:E0:14:4F'
