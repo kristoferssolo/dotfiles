@@ -375,8 +375,8 @@ globalkeys = gears.table.join(
 		{ description = "reload awesome", group = "awesome" }),
 	--    awful.key({ modkey, "Control"   }, "q", awesome.quit,
 	--              {description = "quit awesome", group = "awesome"}),
-	awful.key({ modkey, }, "v", function() awful.spawn("vivaldi-stable") end,
-		{ description = "open vivaldi", group = "launcher" }),
+	awful.key({ modkey, }, "b", function() awful.spawn("firefox") end,
+		{ description = "open firefox", group = "launcher" }),
 	awful.key({ modkey, }, "n", function() awful.spawn("spacefm") end,
 		{ description = "open spacefm", group = "launcher" }),
 
@@ -582,14 +582,8 @@ awful.rules.rules = {
 
 	{
 		rule_any = {
-			class = { "discord", "telegram-desktop", "TelegramDesktop" }
+			class = { "discord", "TelegramDesktop", "Ripcord" }
 		}, properties = { screen = 2, tag = "8" }
-	},
-
-	{
-		rule_any = {
-			class = { "firefox" }
-		}, properties = { screen = 1, tag = "7" }
 	},
 
 	{

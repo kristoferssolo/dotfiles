@@ -1,26 +1,38 @@
 [Default Applications]
-
-# xdg-open will use these settings to determine how to open filetypes.
-# These .desktop entries can also be seen and changed in ~/.local/share/applications/
-
-text/html=vivaldi-stable.desktop;
+text/html=firefox.desktop;
 text/py=text.desktop;
-x-scheme-handler/http=vivaldi-stable.desktop;
-x-scheme-handler/https=vivaldi-stable.desktop;
-x-scheme-handler/about=vivaldi-stable.desktop;
-x-scheme-handler/unknown=vivaldi-stable.desktop;
-x-scheme-handler/tg=userapp-Telegram Desktop-1IQ1J1.desktop;
-x-scheme-handler/kite=kite-copilot.desktop;
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+x-scheme-handler/about=firefox.desktop;
+x-scheme-handler/unknown=firefox.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-M1D2M1.desktop
 x-scheme-handler/msteams=teams.desktop;
-application/pdf=okularApplication_pdf.desktop;org.pwmt.zathura.desktop;
+application/pdf=pdf.desktop;
 image/x-canon-cr2=img.desktop;
 image/jpeg=img.desktop;
 image/jpg=img.desktop;
 image/png=img.desktop;
 image/gif=img.desktop;
-video/ts=video.desktop;
-video/mp4=video.desktop;
-video/mpv=video.desktop;
+image/heic=img.desktop
+image/heif=img.desktop;
+video/ts=mpv.desktop;
+video/mp4=mpv.desktop;
+video/mpeg=mpv.desktop;
+video/mpv=mpv.desktop;
+audio/mpeg=mpv.desktop;
+application/octet-stream=mpv.desktop
+inode/directory=spacefm.desktop
+text/plain=nvim.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-6X6NN1.desktop
+message/rfc822=userapp-Thunderbird-6X6NN1.desktop
+x-scheme-handler/mid=userapp-Thunderbird-6X6NN1.desktop
+image/svg+xml=org.inkscape.Inkscape.desktop;
 
 [Added Associations]
-
+x-scheme-handler/tg=userapp-Telegram Desktop-M1D2M1.desktop;
+text/plain=nvim.desktop;
+image/heif=nsxiv.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-6X6NN1.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-6X6NN1.desktop;
+video/mpeg=mpv.desktop;
+image/svg+xml=org.inkscape.Inkscape.desktop;
