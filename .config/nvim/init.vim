@@ -29,7 +29,6 @@ call plug#begin()
 
 Plug 'andweeb/presence.nvim'
 Plug 'ap/vim-css-color'
-Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -39,7 +38,6 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'Mofiqul/dracula.nvim'
-Plug 'neovim/nvim-lspconfig'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'numToStr/Comment.nvim'
 Plug 'nvim-lualine/lualine.nvim'
@@ -52,6 +50,14 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'sbdchd/neoformat'
 Plug 'vimwiki/vimwiki'
+" cmp
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 
 call plug#end()
 
@@ -94,12 +100,33 @@ nmap <a-j> :m +1<CR>
 nmap <a-down> :m +1<CR>
 
 " Alias replace all to S
-nnoremap S :%s//gI<Left><Left><Left>
+" nnoremap S :%s//gI<Left><Left><Left>
+nnoremap S :%s//<Left>
 
+" run current script with python3 by CTRL+R in command and insert mode
+autocmd FileType python map <buffer> <C-r> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <C-r> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType rust map <buffer> <C-r> :w<CR>:exec '!cargo run'<CR>
+autocmd FileType rust imap <buffer> <C-r> :w<CR>:exec '!cargo run'<CR>
+
+" Prettier configuration
+let g:neoformat_enabled_python = ['autopep8']
+let g:neoformat_try_node_exe = 1
+autocmd BufWritePre,InsertLeave *.{py,rs,html,css,md,lua} Neoformat
 
 lua << END
 require('gitsigns').setup()
 require('Comment').setup()
+require("nvim-lsp-installer").setup({
+	automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+	ui = {
+		icons = {
+			server_installed = "✓",
+			server_pending = "➜",
+			server_uninstalled = "✗"
+		}
+	}
+})
 require('lualine').setup {
 	options = {
 		icons_enabled = true,
@@ -131,202 +158,136 @@ require('lualine').setup {
 }
 END
 
-lua << EOF
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
-
--- luasnip setup
-local luasnip = require 'luasnip'
-
--- nvim-cmp setup
-local cmp = require 'cmp'
-cmp.setup {
-	completion = {
-		autocomplete = false
-	},
-	snippet = {
-		expand = function(args)
-			require('luasnip').lsp_expand(args.body)
-		end,
-	},
-	mapping = {
-		['<S_TAB>'] = cmp.mapping.select_prev_item(),
-		['<TAB>'] = cmp.mapping.select_next_item(),
-		['<C-d>'] = cmp.mapping.scroll_docs(-4),
-		['<C-f>'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<C-e>'] = cmp.mapping.close(),
-		['<CR>'] = cmp.mapping.confirm {
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		},
-		['<Tab>'] = function(fallback)
-			if vim.fn.pumvisible() == 1 then
-				vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
-			elseif luasnip.expand_or_jumpable() then
-				vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
-			else
-				fallback()
-			end
-		end,
-		['<S-Tab>'] = function(fallback)
-			if vim.fn.pumvisible() == 1 then
-				vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
-			elseif luasnip.jumpable(-1) then
-				vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
-			else
-				fallback()
-			end
-		end,
-	},
-	sources = {
-		{ name = 'nvim_lsp' },
-		{ name = 'luasnip' },
-	},
-}
-EOF
-
-
-
-
-lua << EOF
-local nvim_lsp = require('lspconfig')
+" LSP configs
+lua << END
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-
-	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-	local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
 	-- Enable completion triggered by <c-x><c-o>
-	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
 	-- Mappings.
-	local opts = { noremap=true, silent=true }
-
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-	buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-	buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-	buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-	buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-	buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-	buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-	buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-	buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-	buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-	buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-	buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-	buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-	buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-	buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-	buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-	buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
+	local bufopts = { noremap=true, silent=true, buffer=bufnr }
+	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+	vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+	vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+	vim.keymap.set('n', '<space>wl', function()
+	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end, bufopts)
+	vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer' }
-for _, lsp in ipairs(servers) do
-	nvim_lsp[lsp].setup {
-		on_attach = on_attach,
-		flags = {
-			debounce_text_changes = 150,
-		}
-	}
-end
+local lsp_flags = {
+	-- This is the default in Nvim 0.7+
+	debounce_text_changes = 150,
+}
+END
+
+
+" cmp configs
+set completeopt=menu,menuone,noselect
+
+lua <<EOF
+-- Setup nvim-cmp.
+local cmp = require'cmp'
+
+cmp.setup({
+snippet = {
+	-- REQUIRED - you must specify a snippet engine
+	expand = function(args)
+	vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+	-- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+	-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+	-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+	end,
+},
+window = {
+	-- completion = cmp.config.window.bordered(),
+	-- documentation = cmp.config.window.bordered(),
+},
+mapping = cmp.mapping.preset.insert({
+	['<C-b>'] = cmp.mapping.scroll_docs(-4),
+	['<C-f>'] = cmp.mapping.scroll_docs(4),
+	['<C-Space>'] = cmp.mapping.complete(),
+	['<C-e>'] = cmp.mapping.abort(),
+	['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+}),
+sources = cmp.config.sources({
+	{ name = 'nvim_lsp' },
+	{ name = 'vsnip' }, -- For vsnip users.
+	-- { name = 'luasnip' }, -- For luasnip users.
+	-- { name = 'ultisnips' }, -- For ultisnips users.
+	-- { name = 'snippy' }, -- For snippy users.
+}, {
+	{ name = 'buffer' },
+    })
+})
+
+-- Set configuration for specific filetype.
+cmp.setup.filetype('gitcommit', {
+sources = cmp.config.sources({
+	{ name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+}, {
+    { name = 'buffer' },
+    })
+})
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+mapping = cmp.mapping.preset.cmdline(),
+sources = {
+	{ name = 'buffer' }
+}
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+mapping = cmp.mapping.preset.cmdline(),
+sources = cmp.config.sources({
+	{ name = 'path' }
+}, {
+	{ name = 'cmdline' }
+})
+})
+
+-- Setup lspconfig.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+require('lspconfig')['pyright'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+require('lspconfig')['rust_analyzer'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
+    -- Server-specific settings...
+    settings = {
+      ["rust-analyzer"] = {}
+    }
+}
+require('lspconfig')['bashls'].setup{}
+require('lspconfig')['cssls'].setup{}
+require('lspconfig')['emmet_ls'].setup{}
+require('lspconfig')['ltex'].setup{}
+require('lspconfig')['marksman'].setup{}
+require('lspconfig')['taplo'].setup{}
+require('lspconfig')['vimls'].setup{}
+require('lspconfig')['yamlls'].setup{}
 EOF
-
-
-
-" Delete buffer while keeping window layout (don't close buffer's windows).
-" Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
-if v:version < 700 || exists('loaded_bclose') || &cp
-	finish
-endif
-let loaded_bclose = 1
-if !exists('bclose_multiple')
-	let bclose_multiple = 1
-endif
-
-" Display an error message.
-function! s:Warn(msg)
-	echohl ErrorMsg
-	echomsg a:msg
-	echohl NONE
-endfunction
-
-" Command ':Bclose' executes ':bd' to delete buffer in current window.
-" The window will show the alternate buffer (Ctrl-^) if it exists,
-" or the previous buffer (:bp), or a blank buffer if no previous.
-" Command ':Bclose!' is the same, but executes ':bd!' (discard changes).
-" An optional argument can specify which buffer to close (name or number).
-function! s:Bclose(bang, buffer)
-	if empty(a:buffer)
-		let btarget = bufnr('%')
-	elseif a:buffer =~ '^\d\+$'
-		let btarget = bufnr(str2nr(a:buffer))
-	else
-		let btarget = bufnr(a:buffer)
-	endif
-	if btarget < 0
-		call s:Warn('No matching buffer for '.a:buffer)
-		return
-	endif
-	if empty(a:bang) && getbufvar(btarget, '&modified')
-		call s:Warn('No write since last change for buffer '.btarget.' (use :Bclose!)')
-		return
-	endif
-	" Numbers of windows that view target buffer which we will delete.
-	let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
-	if !g:bclose_multiple && len(wnums) > 1
-		call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
-		return
-	endif
-	let wcurrent = winnr()
-	for w in wnums
-		execute w.'wincmd w'
-		let prevbuf = bufnr('#')
-		if prevbuf > 0 && buflisted(prevbuf) && prevbuf != btarget
-			buffer #
-		else
-			bprevious
-		endif
-		if btarget == bufnr('%')
-			" Numbers of listed buffers which are not the target to be deleted.
-			let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != btarget')
-			" Listed, not target, and not displayed.
-			let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
-			" Take the first buffer, if any (could be more intelligent).
-			let bjump = (bhidden + blisted + [-1])[0]
-			if bjump > 0
-				execute 'buffer '.bjump
-			else
-				execute 'enew'.a:bang
-			endif
-		endif
-	endfor
-	execute 'bdelete'.a:bang.' '.btarget
-	execute wcurrent.'wincmd w'
-endfunction
-command! -bang -complete=buffer -nargs=? Bclose call <SID>Bclose(<q-bang>, <q-args>)
-nnoremap <silent> <Leader>bd :Bclose<CR>
-
-
-map gn :bn<cr>
-map gp :bp<cr>
-map gw :Bclose<cr>
-
-" run current script with python3 by CTRL+R in command and insert mode
-autocmd FileType python map <buffer> <C-r> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType python imap <buffer> <C-r> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-autocmd FileType rust map <buffer> <C-r> :w<CR>:exec '!cargo run'<CR>
-autocmd FileType rust imap <buffer> <C-r> :w<CR>:exec '!cargo run'<CR>
-
-
-" Prettier configuration
-let g:neoformat_enabled_python = ['autopep8']
-let g:neoformat_try_node_exe = 1
-autocmd BufWritePre,InsertLeave *.{py,rs,html,css,md,lua} Neoformat
