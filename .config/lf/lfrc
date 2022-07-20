@@ -62,7 +62,7 @@ map '"'
 map d
 map c
 map p
-#map c $vscodium "$f"
+map c $vscodium "$f"
 
 map au unarchive
 
