@@ -42,7 +42,8 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'numToStr/Comment.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'preservim/nerdtree'
 Plug 'rafi/awesome-vim-colorschemes'
@@ -69,6 +70,7 @@ highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b
 highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b
 
 nnoremap <C-t> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
 " Verticaly center document when entering insert mode
 autocmd InsertEnter * norm zz
@@ -114,6 +116,12 @@ let g:neoformat_enabled_python = ['autopep8']
 let g:neoformat_try_node_exe = 1
 autocmd BufWritePre,InsertLeave *.{py,rs,html,css,md,lua} Neoformat
 
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files hidden=true<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 lua << END
 require('gitsigns').setup()
 require('Comment').setup()
@@ -156,6 +164,22 @@ require('lualine').setup {
 	tabline = {},
 	extensions = {}
 }
+require('telescope').setup{
+    defaults = {
+        vimgrep_arguments = {
+            'rg',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            '--no-ignore', -- **This is the added flag**
+            '--hidden' -- **Also this flag. The combination of the two is the same as `-uu`**
+        }
+    }
+}
+-- To get fzf loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+require('telescope').load_extension('fzf')
 END
 
 " LSP configs
@@ -290,4 +314,17 @@ require('lspconfig')['marksman'].setup{}
 require('lspconfig')['taplo'].setup{}
 require('lspconfig')['vimls'].setup{}
 require('lspconfig')['yamlls'].setup{}
+EOF
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
 EOF
