@@ -115,7 +115,7 @@ bindkey -M vicmd '^[[P' vi-delete-char
 bindkey -M vicmd '^e' edit-command-line
 bindkey -M visual '^[[P' vi-delete
 
-bindkey -s '^v' '^unvim .\n'
+bindkey -s '^n' '^unvim .\n'
 
 # Aliases
 alias airpods='bluetoothctl connect C8:B1:CD:E0:14:4F'
