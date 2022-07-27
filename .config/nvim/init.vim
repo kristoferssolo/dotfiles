@@ -128,6 +128,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 lua << END
 require('gitsigns').setup()
 require('Comment').setup()
+require 'colorizer'.setup()
 require("nvim-lsp-installer").setup({
 	automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
 	ui = {

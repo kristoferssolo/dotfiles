@@ -573,17 +573,21 @@ awful.rules.rules = {
 	}, properties = { titlebars_enabled = false }
 	},
 
+    {
+        rule_any = {
+            class = { "tuxedo-control-center", "corectrl" }
+        }, properties = { screen = 1, tag = "7" }
+    },
 	{
 		rule_any = {
 			class = { "Thunderbird", "discord", "ripcord", "TelegramDesktop" }
 		}, properties = { screen = 1, tag = "8" }
 	},
-  {
-    rule_any = {
-      class = { "spotify", "Spotify", "corectrl" },
-      name = { "Spotify", "CoreCtrl" }
-    }, properties = { screen = 1, tag = "9" }
-  },
+    {
+        rule_any = {
+            class = { "spotify", "Spotify" },
+        }, properties = { screen = 1, tag = "9" }
+    },
 
 	-- Set Firefox to always map on the tag named "2" on screen 1.
 	-- { rule = { class = "Firefox" },
