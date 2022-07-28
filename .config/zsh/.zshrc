@@ -2,6 +2,8 @@
 fastfetch
 # pfetch
 
+# unix
+
 # Options
 # setopt correct												  # Auto correct mistakes setopt extendedglob       # Extended globaling. Allows using regular expressions with *
 setopt nocaseglob         # Case insensative globbing
@@ -141,7 +143,6 @@ alias py='python'
 alias rm='rm -vI'
 alias v='nvim'
 alias weather='curl wttr.in/'
-alias wget='wget --hsts-file="{$XDG_DATA_HOME:-$HOME/.local/share}/wget-hsts"'
 alias ww='nvim ~/vimwiki/index.wiki'
 alias zzz='doas zzz'
 alias day='redshift -PO 6500'
