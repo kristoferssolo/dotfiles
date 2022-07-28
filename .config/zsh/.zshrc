@@ -144,8 +144,8 @@ alias weather='curl wttr.in/'
 alias wget='wget --hsts-file="{$XDG_DATA_HOME:-$HOME/.local/share}/wget-hsts"'
 alias ww='nvim ~/vimwiki/index.wiki'
 alias zzz='doas zzz'
-alias day='redshift -PO 5700'
-alias night='redshift -PO 3600'
+alias day='redshift -PO 6500'
+alias night='redshift -PO 4500'
 
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
 
