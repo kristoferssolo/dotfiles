@@ -66,7 +66,6 @@ return packer.startup(function(use)
 
 	-- Vimwiki
 	use("vimwiki/vimwiki")
-	use("jbyuki/carrot.nvim")
 
 	-- Colorschemes
 	use("Mofiqul/dracula.nvim")

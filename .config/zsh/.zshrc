@@ -33,10 +33,12 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots) # Include hidden files
 
-HISTFILE=~/.config/zsh/.zshistory
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=1000000
+SAVEHIST=1000000
+HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/history"
 WORDCHARS=${WORDCHARS//\/[&.;]/} # Don't consider certain part of the word
+
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
 
 # theme/plugins
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
@@ -118,35 +120,6 @@ bindkey -M vicmd '^e' edit-command-line
 bindkey -M visual '^[[P' vi-delete
 
 bindkey -s '^n' '^unvim .\n'
-
-# Aliases
-alias airpods='bluetoothctl connect C8:B1:CD:E0:14:4F'
-alias battery='acpi'
-alias code='vscodium'
-alias cp='cp -iv' # Confirm before overwriting something
-alias df='df -h'     # Human-readable sizes
-alias diff='diff --color=auto'
-alias dv='doasedit'
-alias free='free -m' # Show sizes in MB
-alias gitu='git add . && git commit && git push'
-alias grep='grep --color=auto'
-alias grep='rg'
-alias ip='ip -color=auto'
-alias lf='lfrun'
-alias ls='exa -a --icons --group-directories-first'
-alias matrix='unimatrix -s 95'
-alias mkdir='mkdir -pv'
-alias mv='mv -iv'
-alias nsxiv='nsxiv -a'
-alias pman='doas pacman'
-alias py='python'
-alias rm='rm -vI'
-alias v='nvim'
-alias weather='curl wttr.in/'
-alias ww='nvim ~/vimwiki/index.wiki'
-alias zzz='doas zzz'
-alias day='redshift -PO 6500'
-alias night='redshift -PO 4500'
 
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
 

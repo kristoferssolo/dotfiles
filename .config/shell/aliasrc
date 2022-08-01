@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# Use neovim for vim if present
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
+# Use $XINITRC variable of file exists
+[ -f "$XINITRC" ] && alias startx="startx $XINITRC"
+
+# doas not required for some system commands
+for command in mount umount sv pacman updatedb su shutdown poweroff reboot zzz systemctl ; do
+    alias $command="doas $command"
+done; unset command
+
+# Vervosity and settings that you pretty much just always are going to wand
+alias \
+    cp="cp -iv" \
+    mv="mv -iv" \
+    rm="rm -vI" \
+    bc="bc -ql" \
+    mkdir="mkdir -pv" \
+    df="df -h" \
+    nsxiv="nsxiv -a"
+
+# Colorize commands when possible
+alias \
+    ls="exa -a --icons --group-directories-first" \
+    grep="rg --color=auto" \
+    diff="diff --color=auto" \
+    ip="ip -color=auto"
+
+# These common commands ate just too long! Abbriviate them
+alias \
+    g="git" \
+    ga="git add" \
+    gc="git commit" \
+    gp="git push" \
+    e="$EDITOR" \
+    v="$EDITOR" \
+    battery="acpi" \
+    code="vscodium" \
+    dv="doasedit" \
+    matrix="unimatrix -s 95" \
+    py="python" \
+    airpods="bluetoothctl connect C8:B1:CD:E0:14:4F" \
+    lf="lfrun" \
+    weather="curl wttr.in/" \
+    ww="$EDITOR ~/vimwiki/index.wiki" \
+    day="redshift -PO 6500" \
+    night="redshift -PO 4500"

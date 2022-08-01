@@ -19,8 +19,8 @@ vim.cmd([[
 
     augroup _markdown
         autocmd!
-        autocmd FileType markdown setlocal wrap
-        autocmd FileType markdown setlocal spell
+        autocmd FileType markdown,vimwiki setlocal wrap
+        autocmd FileType markdown,vimwiki setlocal spell
     augroup end
 
     augroup _auto_resize
@@ -40,6 +40,7 @@ vim.cmd([[
 
     augroup _run
         autocmd!
+        autocmd FileType python imap <buffer> <C-b> <esc><cmd>w<CR><cmd>exec '!python3' shellescape(@%, 1)<CR>
         autocmd FileType python map <buffer> <C-b> <cmd>w<CR><cmd>exec '!python3' shellescape(@%, 1)<CR>
         autocmd FileType rust imap <buffer> <C-b> <esc><cmd>w<CR><cmd>exec '!cargo run'<CR>
         autocmd FileType rust map <buffer> <C-b> <cmd>w<CR><cmd>exec '!cargo run'<CR>
