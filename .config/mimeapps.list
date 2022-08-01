@@ -1,10 +1,9 @@
 [Default Applications]
-text/html=firefox.desktop;
+text/html=text.desktop;
 text/py=text.desktop;
 x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
 x-scheme-handler/about=firefox.desktop;
-x-scheme-handler/unknown=firefox.desktop;
 x-scheme-handler/tg=userapp-Telegram Desktop-M1D2M1.desktop
 x-scheme-handler/msteams=teams.desktop;
 application/pdf=pdf.desktop;
@@ -22,7 +21,7 @@ video/mpv=mpv.desktop;
 audio/mpeg=mpv.desktop;
 application/octet-stream=mpv.desktop
 inode/directory=spacefm.desktop
-text/plain=nvim.desktop;
+text/plain=text.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird-6X6NN1.desktop
 message/rfc822=userapp-Thunderbird-6X6NN1.desktop
 x-scheme-handler/mid=userapp-Thunderbird-6X6NN1.desktop
@@ -31,8 +30,8 @@ application/vnd.openxmlformats-officedocument.wordprocessingml.document=onlyoffi
 
 [Added Associations]
 x-scheme-handler/tg=userapp-Telegram Desktop-M1D2M1.desktop;
-text/plain=nvim.desktop;
-image/heif=nsxiv.desktop;
+text/plain=text.desktop;
+image/heif=img.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird-6X6NN1.desktop;
 x-scheme-handler/mid=userapp-Thunderbird-6X6NN1.desktop;
 video/mpeg=mpv.desktop;

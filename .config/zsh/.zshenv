@@ -3,8 +3,6 @@ typeset -U PATH path
 # Disable files
 export LESSHISTFILE=-
 
-export $(dbus-launch)
-
 # Default Apps
 export EDITOR="nvim"
 export VISUAL="nvim"

@@ -404,8 +404,8 @@ globalkeys = gears.table.join(
 	--    awful.key({ modkey, "Control"   }, "q", awesome.quit,
 	--              {description = "quit awesome", group = "awesome"}),
 	awful.key({ modkey }, "b", function()
-		awful.spawn("firefox")
-	end, { description = "open firefox", group = "launcher" }),
+		awful.spawn("librewolf")
+	end, { description = "open librewolf", group = "launcher" }),
 	awful.key({ modkey }, "n", function()
 		awful.spawn("spacefm")
 	end, { description = "open spacefm", group = "launcher" }),
