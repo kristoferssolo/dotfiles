@@ -186,8 +186,8 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: "#1d1f21"
-    foreground: "#c5c8c6"
+    background: '#1d1f21'
+    foreground: '#c5c8c6'
 
     # Bright and dim foreground colors
     #
@@ -195,8 +195,8 @@ colors:
     # present. If the bright foreground color is not set, or
     # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
     # color will be used.
-    dim_foreground: "#828482"
-    bright_foreground: "#eaeaea"
+    dim_foreground: '#828482'
+    bright_foreground: '#eaeaea'
 
   # Cursor colors
   #
@@ -232,8 +232,8 @@ colors:
     #     background: '#000000'
 
     bar:
-      background: "#282828"
-      foreground: "#EBEBE9"
+      background: '#282828'
+      foreground: '#EBEBE9'
 
   # Keyboard regex hints
   hints:
@@ -242,16 +242,16 @@ colors:
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     start:
-      foreground: "#1d1f21"
-      background: "#e9ff5e"
+      foreground: '#1d1f21'
+      background: '#e9ff5e'
 
     # All characters after the first one in the hint label
     #
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     end:
-      foreground: "#e9ff5e"
-      background: "#1d1f21"
+      foreground: '#e9ff5e'
+      background: '#1d1f21'
 
   # Line indicator
   #
@@ -275,39 +275,39 @@ colors:
 
   # Normal colors
   normal:
-    black: "#313539"
-    red: "#b02626"
-    green: "#40a62f"
-    yellow: "#f1e635"
-    blue: "#314ad0"
-    magenta: "#b30ad0"
-    cyan: "#32d0fc"
-    white: "#acadb1"
+    black: '#313539'
+    red: '#b02626'
+    green: '#40a62f'
+    yellow: '#f1e635'
+    blue: '#314ad0'
+    magenta: '#b30ad0'
+    cyan: '#32d0fc'
+    white: '#acadb1'
 
   # Bright colors
   bright:
-    black: "#717174"
-    red: "#b02626"
-    green: "#40a62f"
-    yellow: "#f1e635"
-    blue: "#314ad0"
-    magenta: "#b30ad0"
-    cyan: "#32d0fc"
-    white: "#acadb1"
+    black: '#717174'
+    red: '#b02626'
+    green: '#40a62f'
+    yellow: '#f1e635'
+    blue: '#314ad0'
+    magenta: '#b30ad0'
+    cyan: '#32d0fc'
+    white: '#acadb1'
 
   # Dim colors
   #
   # If the dim colors are not set, they will be calculated automatically based
   # on the `normal` colors.
   dim:
-    black: "#676f78"
-    red: "#b55454"
-    green: "#78a670"
-    yellow: "#faf380"
-    blue: "#707fd0"
-    magenta: "#c583d0"
-    cyan: "#8adaf1"
-    white: "#e0e3e7"
+    black: '#676f78'
+    red: '#b55454'
+    green: '#78a670'
+    yellow: '#faf380'
+    blue: '#707fd0'
+    magenta: '#c583d0'
+    cyan: '#8adaf1'
+    white: '#e0e3e7'
 
   # Indexed Colors
   #
