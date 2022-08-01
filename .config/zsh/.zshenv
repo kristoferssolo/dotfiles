@@ -40,6 +40,7 @@ export MBSYNCRC="${XDG_CONFIG_HOME:-$HOME/.config}/mbsync/config"
 export NOTMUCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/notmuch-config"
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/password-store"
 export RUSTUP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/rustup"
+export STARSHIP_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/starship/starship.toml"
 export TMUX_TMPDIR="$XDG_RUNTIME_DIR"
 export UNISON="${XDG_DATA_HOME:-$HOME/.local/share}/unison"
 export WEECHAT_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/weechat"
@@ -54,4 +55,3 @@ export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
-
