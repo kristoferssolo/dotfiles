@@ -7,7 +7,7 @@ g.maplocalleader = " "
 local options = {
 	backup = false, -- creates a backup file
 	clipboard = "unnamedplus", -- allows neovim to access the system clipboard
-	cmdheight = 2, -- more space in the neovim command line for displaying messages
+	cmdheight = 1, -- more space in the neovim command line for displaying messages
 	completeopt = { "menu", "menuone", "noselect" }, -- mostly just for cmp
 	conceallevel = 0, -- so that `` is visible in markdown files
 	fileencoding = "utf-8", -- the encoding written to a file
@@ -21,7 +21,7 @@ local options = {
 	smartindent = true, -- make indenting smarter again
 	splitbelow = true, -- force all horizontal splits to go below current window
 	splitright = true, -- force all vertical splits to go to the right of current window
-	swapfile = true, -- creates a swapfile
+	swapfile = false, -- creates a swapfile
 	termguicolors = true, -- set term gui colors (most terminals support this)
 	timeoutlen = 100, -- time to wait for a mapped sequence to complete (in milliseconds)
 	undofile = true, -- enable persistent undo
@@ -34,9 +34,9 @@ local options = {
 	cursorcolumn = true, -- highlight the current column
 	number = true, -- set numbered lines
 	relativenumber = true, -- set relative numbered lines
-	numberwidth = 4, -- set number column width to 4 {default 4}
+	numberwidth = 2, -- set number column width to 2 {default 4}
 	signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
-	wrap = false, -- display lines as one long line
+	wrap = true, -- display lines as one long line
 	scrolloff = 8, -- is one of my fav
 	sidescrolloff = 8,
 	--wildmode = 'longest,list,full',
@@ -46,9 +46,6 @@ local options = {
 for k, v in pairs(options) do
 	vim.opt[k] = v
 end
-
-vim.cmd([[highlight CursorLine ctermbg=Yellow cterm=bold guibg=#2b2b2b]])
-vim.cmd([[highlight CursorColumn ctermbg=Yellow cterm=bold guibg=#2b2b2b]])
 
 g.dracula_transparent_bg = true
 g.dracula_italic_comment = true

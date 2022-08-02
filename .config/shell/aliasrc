@@ -46,4 +46,5 @@ alias \
     weather="curl wttr.in/" \
     ww="$EDITOR ~/vimwiki/index.wiki" \
     day="redshift -PO 6500" \
-    night="redshift -PO 4500"
+    night="redshift -PO 4500" \
+    z="zathura"

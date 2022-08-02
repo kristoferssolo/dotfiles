@@ -44,7 +44,6 @@ WORDCHARS=${WORDCHARS//\/[&.;]/} # Don't consider certain part of the word
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh 2>/dev/null
 zmodload zsh/terminfo
-eval "$(lua ~/.config/zlua/z.lua --init zsh)"
 
 # Keybindings
 bindkey -e
@@ -119,7 +118,7 @@ bindkey -M vicmd '^[[P' vi-delete-char
 bindkey -M vicmd '^e' edit-command-line
 bindkey -M visual '^[[P' vi-delete
 
-bindkey -s '^n' '^uv .\n'
+bindkey -s '^n' '^uv\n'
 
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
 
