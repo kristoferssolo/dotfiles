@@ -1,8 +1,5 @@
-# Flex on ubuntu users
-fastfetch
-# pfetch
-
-# unix
+# Import and execute startup file
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/startup" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/startup"
 
 # Options
 # setopt correct												  # Auto correct mistakes setopt extendedglob       # Extended globaling. Allows using regular expressions with *
