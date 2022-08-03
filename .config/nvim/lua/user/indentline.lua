@@ -18,8 +18,8 @@ g.indent_blankline_filetype_exclude = {
 }
 g.indentLine_enabled = 1
 -- g.indent_blankline_char = '│'
-g.indent_blankline_char = "▏"
--- g.indent_blankline_char = '▎'
+-- g.indent_blankline_char = "▏"
+g.indent_blankline_char = "▎"
 g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level = true
 g.indent_blankline_use_treesitter = true
@@ -49,25 +49,28 @@ g.indent_blankline_context_patterns = {
 -- HACK: work-around for https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
 vim.wo.colorcolumn = "99999"
 
-cmd([[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]])
+cmd([[highlight IndentBlanklineIndent1 guifg=#C678DD gui=nocombine]])
 cmd([[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]])
 cmd([[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]])
 cmd([[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]])
 cmd([[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]])
-cmd([[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]])
+cmd([[highlight IndentBlanklineIndent6 guifg=#E06C75 gui=nocombine]])
 opt.list = true
 opt.listchars:append("space:⋅")
 -- opt.listchars:append 'space:'
 opt.listchars:append("eol:↴")
 
 indent_blankline.setup({
-	-- show_end_of_line = true,
-	-- space_char_blankline = ' ',
+	show_end_of_line = true,
+	space_char_blankline = " ",
 	show_current_context = true,
-	-- show_current_context_start = true,
-	-- char_highlight_list = {
-	--   'IndentBlanklineIndent1',
-	--   'IndentBlanklineIndent2',
-	--   'IndentBlanklineIndent3',
-	-- },
+	show_current_context_start = true,
+	char_highlight_list = {
+		"IndentBlanklineIndent1",
+		"IndentBlanklineIndent2",
+		"IndentBlanklineIndent3",
+		"IndentBlanklineIndent4",
+		"IndentBlanklineIndent5",
+		"IndentBlanklineIndent6",
+	},
 })

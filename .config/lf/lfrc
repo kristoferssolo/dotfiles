@@ -6,6 +6,7 @@ set icons true
 set ignorecase true
 set previewer "~/.config/lf/preview"
 set cleaner "~/.config/lf/cleaner"
+set scrolloff 8
 
 # Custom Functions
 
@@ -62,7 +63,6 @@ map '"'
 map d
 map c
 map p
-map c $vscodium "$f"
 
 map au unarchive
 
@@ -74,7 +74,7 @@ map <enter> open
 map <c-f> $lf -remote "send $id select '$(sk)'"
 map <f-2> rename
 map <c-n> push :mkdir<space>
-map DD delete
+map D delete
 map dd cut
 map mv moveto
 map cp copyto
@@ -83,6 +83,8 @@ map mf push :mkfile<space>
 map md push :mkdir<space>
 map <c-l> clear
 map bg setwallpaper
+map c $vscodium "$f"
+map e $nvim "$f"
 
 
 # Movement

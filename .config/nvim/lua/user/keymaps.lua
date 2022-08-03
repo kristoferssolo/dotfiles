@@ -69,4 +69,4 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Shortcutting --
 -- Substitute
-keymap("n", "C-f", ":%s//<Left>", {})
+keymap("n", "S", ":%s//<Left>", {})
