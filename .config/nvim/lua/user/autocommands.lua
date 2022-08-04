@@ -2,13 +2,16 @@ vim.cmd([[
     augroup _general_settings
         autocmd!
         autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR>
-        autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Visual', timeout = 200})
+        autocmd TextYankPost * silent!lua require("vim.highlight").on_yank({higroup = "Visual", timeout = 200})
         autocmd BufWinEnter * :set formatoptions-=cro
         autocmd FileType qf set nobuflisted
+        " Remove following whitespaces
         autocmd BufWritePre * %s/\s\+$//e
+        " Center cursor on insert mode
         autocmd InsertEnter * norm zz
         highlight CursorLine ctermbg=White cterm=bold guibg=#222222
         highlight CursorColumn ctermbg=White cterm=bold guibg=#222222
+        let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
     augroup end
 
     augroup _git
@@ -40,9 +43,9 @@ vim.cmd([[
 
     augroup _run
         autocmd!
-        autocmd FileType python imap <buffer> <C-b> <esc><cmd>w<CR><cmd>exec '!python3' shellescape(@%, 1)<CR>
-        autocmd FileType python map <buffer> <C-b> <cmd>w<CR><cmd>exec '!python3' shellescape(@%, 1)<CR>
-        autocmd FileType rust imap <buffer> <C-b> <esc><cmd>w<CR><cmd>exec '!cargo run'<CR>
-        autocmd FileType rust map <buffer> <C-b> <cmd>w<CR><cmd>exec '!cargo run'<CR>
+        autocmd FileType python imap <buffer> <C-b> <esc><cmd>w<CR><cmd>exec "!python3" shellescape(@%, 1)<CR>
+        autocmd FileType python map <buffer> <C-b> <cmd>w<CR><cmd>exec "!python3" shellescape(@%, 1)<CR>
+        autocmd FileType rust imap <buffer> <C-b> <esc><cmd>w<CR><cmd>exec "!cargo run"<CR>
+        autocmd FileType rust map <buffer> <C-b> <cmd>w<CR><cmd>exec "!cargo run"<CR>
     augroup end
 ]])

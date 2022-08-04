@@ -85,8 +85,6 @@ local mappings = {
 		"Buffers",
 	},
 	["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
-	["w"] = { "<cmd>w!<CR>", "Save" },
-	["q"] = { "<cmd>q!<CR>", "Quit" },
 	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	["f"] = {
@@ -190,6 +188,18 @@ local mappings = {
 		l = { "<cmd>setlocal spell spelllang=lv_LV<CR>", "Enable Lavian spellchecker" },
 		I = { "<cmd>setlocal autoindent<CR>", "Enable autoindent" },
 		i = { "<cmd>setlocal noautoindent<CR>", "Disable autoindent" },
+	},
+	w = {
+		name = "Vimwiki",
+		w = "<Plug>VimwikiIndex",
+		t = "<Plug>VimwikiTabIndex",
+		s = "<Plug>VimwikiUISelect",
+		i = "<Plug>VimwikiDiaryIndex",
+		h = "<Plug>Vimwiki2HTML",
+		H = "<Plug>Vimwiki2HTMLBrowse",
+		n = "<Plug>VimwikiGoto",
+		d = "<Plug>VimwikiDeleteFile",
+		r = "<Plug>VimwikiRenameFile",
 	},
 }
 

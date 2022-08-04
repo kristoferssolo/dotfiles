@@ -26,8 +26,8 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 
 -- Resize with arrows
-keymap("n", "<C-Down>", "<cmd>resize +2<CR>", opts)
-keymap("n", "<C-Up>", "<cmd>resize -2<CR>", opts)
+keymap("n", "<C-Down>", "<cmd>resize -2<CR>", opts)
+keymap("n", "<C-Up>", "<cmd>resize +2<CR>", opts)
 keymap("n", "<C-Left>", "<cmd>vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", "<cmd>vertical resize +2<CR>", opts)
 

@@ -45,7 +45,7 @@ alias \
     airpods="bluetoothctl connect C8:B1:CD:E0:14:4F" \
     lf="lfrun" \
     weather="curl wttr.in/" \
-    ww="$EDITOR ~/vimwiki/index.wiki" \
+    ww="$EDITOR ~/vimwiki/index.md" \
     day="redshift -PO 6500" \
     night="redshift -PO 4500" \
     z="zathura"
