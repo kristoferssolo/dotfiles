@@ -1,14 +1,17 @@
+#!/bin/zsh
 typeset -U PATH path
 
 # Disable files
 export LESSHISTFILE=-
+
+export $(dbus-launch)
 
 # Default Apps
 export EDITOR="nvim"
 export VISUAL="nvim"
 export READER="zathura"
 export TERMINAL="alacritty"
-export BROWSER="firefox"
+export BROWSER="librewolf"
 export VIDEO="mpv"
 export IMAGE="nsxiv"
 export WM="awesome"

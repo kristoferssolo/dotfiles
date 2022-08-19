@@ -1,1 +1,1 @@
-.config/zsh/.zshenv
+.config/shell/env

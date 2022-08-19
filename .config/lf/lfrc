@@ -90,6 +90,7 @@ map e $nvim "$f"
 # Movement
 map gd cd ~/Downloads
 map gD cd ~/Dropbox
+map gn cd ~/Nextcloud
 map gp cd ~/Pictures
 map gc cd ~/.config
 map gr cd ~/repos

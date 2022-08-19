@@ -635,7 +635,7 @@ awful.rules.rules = {
 	},
 	{
 		rule_any = {
-			class = { "spotify", "Spotify" },
+			class = { "Spotify" },
 		},
 		properties = { screen = 1, tag = "9" },
 	},

@@ -2,24 +2,24 @@
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/startup" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/startup"
 
 # Options
-# setopt correct												  # Auto correct mistakes setopt extendedglob       # Extended globaling. Allows using regular expressions with *
-setopt nocaseglob         # Case insensative globbing
-setopt numericglobsort    # Sort filenames numeracally when it makse sense
-setopt nobeep             # No beep
-setopt appendhistory      # Immediately append history instead of overwriting
-setopt histignorealldups  # If a new command is a duplicate, remove older one
-setopt autocd             # If only directory path is entered, cd there
-setopt inc_append_history # Save commands are addded to the history immediately
-setopt histignorespace    # Don't save commands that start with space
+setopt correct              # Auto correct mistakes setopt extendedglob       # Extended globaling. Allows using regular expressions with *
+setopt nocaseglob           # Case insensative globbing
+setopt numericglobsort      # Sort filenames numeracally when it makse sense
+setopt nobeep               # No beep
+setopt appendhistory        # Immediately append history instead of overwriting
+setopt histignorealldups    # If a new command is a duplicate, remove older one
+setopt autocd               # If only directory path is entered, cd there
+setopt inc_append_history   # Save commands are addded to the history immediately
+setopt histignorespace      # Don't save commands that start with space
 
 autoload -U select-word-style
 
 # Themeing
 autoload -U colors && colors
 
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'	# Case sensetive TAB completions
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"		# Colored completion (different colors fr dirs/files/etc)
-zstyle ':completion:*' rehash true												# Automaticly find new executables in path
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # Case sensetive TAB completions
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # Colored completion (different colors fr dirs/files/etc)
+zstyle ':completion:*' rehash true                          # Automaticly find new executables in path
 # Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on

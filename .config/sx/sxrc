@@ -1,8 +1,11 @@
-/usr/bin/pipewire &
-/usr/bin/pipewire-pulse &
-/usr/bin/wireplumber &
-/usr/bin/numlockx on &
-/usr/bin/flameshot &
-/usr/bin/corectrl &
+#!/bin/sh
+
+autostart="pipewire pipewire-pulse wireplumber flameshot"
+
+for program in $autostart; do
+    pidof -s "$program" || "$program" &
+done >/dev/null 2>&1
+
+numlockx on &
 
 exec dbus-launch --sh-syntax --exit-with-session awesome

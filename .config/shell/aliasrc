@@ -35,6 +35,8 @@ alias \
     gc="git commit" \
     gP="git push" \
     gp="git pull" \
+    gs="git status" \
+    gd="git diff" \
     e="$EDITOR" \
     v="$EDITOR" \
     battery="acpi" \
