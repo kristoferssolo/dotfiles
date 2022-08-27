@@ -15,6 +15,7 @@ configs.setup({
 	},
 	autotag = {
 		enable = true,
+		filetypes = { "html", "htmldjango", "xml" },
 	},
 	indent = { enable = true, disable = { "yaml" } },
 	rainbow = {

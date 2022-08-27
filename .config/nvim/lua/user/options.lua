@@ -47,10 +47,9 @@ for k, v in pairs(options) do
 	vim.opt[k] = v
 end
 
-g.dracula_transparent_bg = true
-g.dracula_italic_comment = true
-g.dracula_show_end_of_buffer = true
-
 vim.opt_local.suffixesadd:prepend(".lua")
 vim.opt_local.suffixesadd:prepend("init.lua")
 vim.opt_local.path:prepend(vim.fn.stdpath("config") .. "/lua")
+
+g.user_emmet_mode = "n"
+g.user_emmet_leader_key = ","

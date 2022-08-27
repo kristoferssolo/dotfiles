@@ -88,7 +88,7 @@ local mappings = {
 	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	["f"] = {
-		"<cmd>lua require('telescope.builtin').find_files({hidden=true}, require('telescope.themes').get_dropdown{previewer = false})<CR>",
+		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<CR>",
 		"Find files",
 	},
 	["F"] = { "<cmd>Telescope live_grep theme=ivy<CR>", "Find Text" },
@@ -133,6 +133,7 @@ local mappings = {
 		-- 	"<cmd>Telescope lsp_document_diagnostics<CR>",
 		-- 	"Document Diagnostics",
 		-- },
+
 		w = {
 			"<cmd>Telescope diagnostics<CR>",
 			"Workspace Diagnostics",
@@ -157,6 +158,7 @@ local mappings = {
 			"Workspace Symbols",
 		},
 	},
+
 	s = {
 		name = "Search",
 		b = { "<cmd>Telescope git_branches<CR>", "Checkout branch" },
@@ -179,6 +181,7 @@ local mappings = {
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<CR>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<CR>", "Vertical" },
 	},
+
 	S = {
 		name = "Settings",
 		c = { "<cmd>setlocal formatoptions-=cro<CR>", "Disable autocomment" },
@@ -189,17 +192,18 @@ local mappings = {
 		I = { "<cmd>setlocal autoindent<CR>", "Enable autoindent" },
 		i = { "<cmd>setlocal noautoindent<CR>", "Disable autoindent" },
 	},
+
 	w = {
 		name = "Vimwiki",
-		w = "<Plug>VimwikiIndex",
-		t = "<Plug>VimwikiTabIndex",
-		s = "<Plug>VimwikiUISelect",
-		i = "<Plug>VimwikiDiaryIndex",
-		h = "<Plug>Vimwiki2HTML",
-		H = "<Plug>Vimwiki2HTMLBrowse",
-		n = "<Plug>VimwikiGoto",
-		d = "<Plug>VimwikiDeleteFile",
-		r = "<Plug>VimwikiRenameFile",
+		w = { "<Plug>VimwikiIndex", "Open index file" },
+		t = { "<Plug>VimwikiTabIndex", "Open index file in new tab" },
+		s = { "<Plug>VimwikiUISelect", "Diplay list of wikis" },
+		i = { "<Plug>VimwikiDiaryIndex", "Open diary index" },
+		h = { "<Plug>Vimwiki2HTML", "Convert file to HTML" },
+		H = { "<Plug>Vimwiki2HTMLBrowse", "Convert file to HTML and open in browser" },
+		n = { "<Plug>VimwikiGoto", "Goto link provided by an argument" },
+		d = { "<Plug>VimwikiDeleteFile", "Rename file" },
+		r = { "<Plug>VimwikiRenameFile", "Delete file" },
 	},
 }
 
