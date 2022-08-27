@@ -7,9 +7,8 @@ local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batterya
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
-local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+local spotify_shell = require("awesome-wm-widgets.spotify-shell.spotify-shell")
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
-local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
@@ -26,6 +25,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -97,41 +97,41 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "mytheme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty"
-editor = os.getenv("EDITOR") or "nvim"
-editor_cmd = terminal .. " -e " .. editor
+local terminal = "alacritty"
+local editor = os.getenv("EDITOR") or "nvim"
+local editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+local modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
 	awful.layout.suit.tile,
-	awful.layout.suit.spiral.dwindle,
-	awful.layout.suit.spiral,
-	--awful.layout.suit.floating,
-	--awful.layout.suit.tile.left,
-	--awful.layout.suit.tile.bottom,
-	--awful.layout.suit.tile.top,
+	awful.layout.suit.tile.left,
 	awful.layout.suit.fair,
-	--awful.layout.suit.fair.horizontal,
-	--awful.layout.suit.max,
-	--awful.layout.suit.max.fullscreen,
-	--awful.layout.suit.magnifier,
-	--awful.layout.suit.corner.nw,
-	--awful.layout.suit.corner.ne,
-	--awful.layout.suit.corner.sw,
-	--awful.layout.suit.corner.se,
+	awful.layout.suit.fair.horizontal,
+	awful.layout.suit.tile.top,
+	awful.layout.suit.tile.bottom,
+	--[[ awful.layout.suit.spiral.dwindle, ]]
+	--[[ awful.layout.suit.spiral, ]]
+	--[[ awful.layout.suit.floating, ]]
+	--[[ awful.layout.suit.max, ]]
+	--[[ awful.layout.suit.max.fullscreen, ]]
+	--[[ awful.layout.suit.magnifier, ]]
+	--[[ awful.layout.suit.corner.nw, ]]
+	--[[ awful.layout.suit.corner.ne, ]]
+	--[[ awful.layout.suit.corner.sw, ]]
+	--[[ awful.layout.suit.corner.se, ]]
 }
 -- }}}
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
-myawesomemenu = {
+local myawesomemenu = {
 	{
 		"hotkeys",
 		function()
@@ -149,10 +149,10 @@ myawesomemenu = {
 	},
 }
 
-mymainmenu =
+local mymainmenu =
 	awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon }, { "open terminal", terminal } } })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
+-- local mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon, menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -163,12 +163,13 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+local mytextclock = wibox.widget.textclock(" %d.%m.%Y, %H:%M:%S, %j ", 1)
+
 local cw = calendar_widget({
 	theme = "nord",
 	placement = "top_right",
-	previous_month_button = 4,
-	next_month_button = 5,
+	previous_month_button = 1,
+	next_month_button = 3,
 })
 
 mytextclock:connect_signal("button::press", function(_, _, _, button)
@@ -295,6 +296,9 @@ awful.screen.connect_for_each_screen(function(s)
 			ram_widget(),
 			net_speed_widget(),
 			spotify_widget({
+				font = "JetBrainsMono NF 10",
+				play_icon = "/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg",
+				pause_icon = "/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg",
 				dim_when_paused = true,
 				dim_opacity = 0.5,
 				max_lenght = -1,
@@ -334,7 +338,7 @@ root.buttons(gears.table.join(
 -- }}}
 
 -- {{{ Key bindings
-globalkeys = gears.table.join(
+local globalkeys = gears.table.join(
 
 	awful.key({}, "#233", function()
 		brightness_widget:inc()
@@ -353,6 +357,14 @@ globalkeys = gears.table.join(
 		awful.spawn.with_shell("pulsemixer --toggle-mute")
 	end), -- mute
 	awful.key({}, "#172", function()
+		awful.spawn.with_shell("sp play")
+	end), -- play/pause
+
+	awful.key({ modkey }, "d", function()
+		spotify_shell.launch()
+	end, { description = "spotify shell", group = "media controls" }),
+
+	awful.key({ "Control" }, "#172", function()
 		awful.spawn.with_shell("playerctl -a play-pause")
 	end), -- play/pause
 
@@ -466,7 +478,7 @@ globalkeys = gears.table.join(
 	end, { description = "show the menubar", group = "launcher" })
 )
 
-clientkeys = gears.table.join(
+local clientkeys = gears.table.join(
 	awful.key({ modkey }, "f", function(c)
 		c.fullscreen = not c.fullscreen
 		c:raise()
@@ -551,7 +563,7 @@ for i = 1, 9 do
 	)
 end
 
-clientbuttons = gears.table.join(
+local clientbuttons = gears.table.join(
 	awful.button({}, 1, function(c)
 		c:emit_signal("request::activate", "mouse_click", { raise = true })
 	end),
@@ -559,7 +571,7 @@ clientbuttons = gears.table.join(
 		c:emit_signal("request::activate", "mouse_click", { raise = true })
 		awful.mouse.client.move(c)
 	end),
-	awful.button({ modkey }, 3, function(c)
+	awful.button({ modkey, "Control" }, 1, function(c)
 		c:emit_signal("request::activate", "mouse_click", { raise = true })
 		awful.mouse.client.resize(c)
 	end)
@@ -581,9 +593,9 @@ awful.rules.rules = {
 			focus = awful.client.focus.filter,
 			raise = true,
 			keys = clientkeys,
-			-- buttons = clientbuttons,
+			buttons = clientbuttons,
 			screen = awful.screen.preferred,
-			--placement = awful.placement.no_overlap+awful.placement.no_offscreen
+			placement = awful.placement.no_overlap + awful.placement.no_offscreen,
 		},
 	},
 
@@ -602,6 +614,7 @@ awful.rules.rules = {
 				"Wpa_gui",
 				"veromix",
 				"xtightvncviewer",
+				"Nsxiv",
 			},
 
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -615,30 +628,22 @@ awful.rules.rules = {
 				"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
 			},
 		},
-		properties = { floating = true, beautiful.useless },
+		properties = { floating = true, placement = awful.placement.centered, beautiful.useless },
 	},
 
 	-- Add titlebars to normal clients and dialogs
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
 
 	{
-		rule_any = {
-			class = { "tuxedo-control-center", "corectrl" },
-		},
+		rule_any = { class = { "tuxedo-control-center", "corectrl" } },
 		properties = { screen = 1, tag = "7" },
 	},
 	{
-		rule_any = {
-			class = { "Thunderbird", "discord", "ripcord", "TelegramDesktop" },
-		},
+		rule_any = { class = { "Thunderbird", "discord", "ripcord", "TelegramDesktop" } },
 		properties = { screen = 1, tag = "8" },
 	},
-	{
-		rule_any = {
-			class = { "Spotify" },
-		},
-		properties = { screen = 1, tag = "9" },
-	},
+	{ rule_any = { class = { "Spotify" } }, properties = { screen = 1, tag = "9" } },
+	{ rule_any = { class = { "mpv" } }, properties = { fullscreen = true } },
 
 	-- Set Firefox to always map on the tag named "2" on screen 1.
 	-- { rule = { class = "Firefox" },

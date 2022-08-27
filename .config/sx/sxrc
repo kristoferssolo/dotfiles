@@ -7,5 +7,6 @@ for program in $autostart; do
 done >/dev/null 2>&1
 
 numlockx on &
+xrdb -load $XDG_CONFIG_HOME/X11/xresources &
 
 exec dbus-launch --sh-syntax --exit-with-session awesome
