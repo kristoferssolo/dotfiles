@@ -186,8 +186,8 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: '#1d1f21'
-    foreground: '#c5c8c6'
+    background: "#282a36"
+    foreground: "#f8f8f2"
 
     # Bright and dim foreground colors
     #
@@ -195,8 +195,8 @@ colors:
     # present. If the bright foreground color is not set, or
     # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
     # color will be used.
-    dim_foreground: '#828482'
-    bright_foreground: '#eaeaea'
+    dim_foreground: "#828482"
+    bright_foreground: "#ffffff"
 
   # Cursor colors
   #
@@ -224,16 +224,16 @@ colors:
   search:
     # Allowed values are CellForeground/CellBackground, whichq reference the
     # affected cell, or hexadecimal colors like #ff00ff.
-    # matches:
-    #     foreground: '#000000'
-    #     background: '#ffffff'
-    # focused_match:
-    #     foreground: '#ffffff'
-    #     background: '#000000'
+    matches:
+        foreground: '#44475a'
+        background: '#50fa7b'
+    focused_match:
+        foreground: '#44475a'
+        background: '#ffb86c'
 
     bar:
-      background: '#282828'
-      foreground: '#EBEBE9'
+      background: "#282a36"
+      foreground: "#f8f8f2"
 
   # Keyboard regex hints
   hints:
@@ -242,16 +242,16 @@ colors:
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     start:
-      foreground: '#1d1f21'
-      background: '#e9ff5e'
+      foreground: "#282a36"
+      background: "#f1fa8c"
 
     # All characters after the first one in the hint label
     #
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     end:
-      foreground: '#e9ff5e'
-      background: '#1d1f21'
+      foreground: "#f1fa8c"
+      background: "#282a36"
 
   # Line indicator
   #
@@ -275,39 +275,39 @@ colors:
 
   # Normal colors
   normal:
-    black: '#313539'
-    red: '#b02626'
-    green: '#40a62f'
-    yellow: '#f1e635'
-    blue: '#314ad0'
-    magenta: '#b30ad0'
-    cyan: '#32d0fc'
-    white: '#acadb1'
+    black: '#21222c'
+    red: '#ff5555'
+    green: '#50fa7b'
+    yellow: '#f1fa8c'
+    blue: '#bd93f9'
+    magenta: '#ff79c6'
+    cyan: '#8be9fd'
+    white: '#f8f8f2'
 
   # Bright colors
   bright:
-    black: '#717174'
-    red: '#b02626'
-    green: '#40a62f'
-    yellow: '#f1e635'
-    blue: '#314ad0'
-    magenta: '#b30ad0'
-    cyan: '#32d0fc'
-    white: '#acadb1'
+    black: '#6272a4'
+    red: '#ff6e6e'
+    green: '#69ff94'
+    yellow: '#ffffa5'
+    blue: '#d6acff'
+    magenta: '#ff92df'
+    cyan: '#a4ffff'
+    white: '#ffffff'
 
   # Dim colors
   #
   # If the dim colors are not set, they will be calculated automatically based
   # on the `normal` colors.
-  dim:
-    black: '#676f78'
-    red: '#b55454'
-    green: '#78a670'
-    yellow: '#faf380'
-    blue: '#707fd0'
-    magenta: '#c583d0'
-    cyan: '#8adaf1'
-    white: '#e0e3e7'
+  # dim:
+  #   black: "#676f78"
+  #   red: "#b55454"
+  #   green: "#78a670"
+  #   yellow: "#faf380"
+  #   blue: "#707fd0"
+  #   magenta: "#c583d0"
+  #   cyan: "#8adaf1"
+    # white: "#e0e3e7"
 
   # Indexed Colors
   #
@@ -871,6 +871,3 @@ key_bindings:
 
 # Print all received window events.
 #print_events: false
-
-import:
-  - ~/.config/alacritty/dracula.yml

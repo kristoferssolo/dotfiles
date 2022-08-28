@@ -4,13 +4,15 @@ pcall(require, "luarocks.loader")
 
 -- Awesome Wm Widgets
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
-local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
-local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
-local spotify_shell = require("awesome-wm-widgets.spotify-shell.spotify-shell")
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+local spotify_shell = require("awesome-wm-widgets.spotify-shell.spotify-shell")
+local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 
 -- Standard awesome library
@@ -32,7 +34,7 @@ require("awful.hotkeys_popup.keys")
 
 -- OpenWeather API
 -- !Create file ~/.config/awesome/weather and paste API from OpenWeather, latitude and longitude, each on separate lines
-local weather_file = "/home/kristofers/.config/awesome/weather" -- absolute path to `weather` file
+local WEATHER_FILE = os.getenv("HOME") .. "/.config/awesome/weather"
 -- see if the file exists
 local function file_exists(file)
 	local f = io.open(file, "rb")
@@ -55,7 +57,7 @@ local function lines_from(file)
 	return lines
 end
 
-local weather_output = lines_from(weather_file)
+local weather_output = lines_from(WEATHER_FILE)
 local API = weather_output[1]
 local latitude = tonumber(weather_output[2])
 local longitude = tonumber(weather_output[3])
@@ -116,16 +118,16 @@ awful.layout.layouts = {
 	awful.layout.suit.fair.horizontal,
 	awful.layout.suit.tile.top,
 	awful.layout.suit.tile.bottom,
-	--[[ awful.layout.suit.spiral.dwindle, ]]
-	--[[ awful.layout.suit.spiral, ]]
-	--[[ awful.layout.suit.floating, ]]
-	--[[ awful.layout.suit.max, ]]
-	--[[ awful.layout.suit.max.fullscreen, ]]
-	--[[ awful.layout.suit.magnifier, ]]
-	--[[ awful.layout.suit.corner.nw, ]]
-	--[[ awful.layout.suit.corner.ne, ]]
-	--[[ awful.layout.suit.corner.sw, ]]
-	--[[ awful.layout.suit.corner.se, ]]
+	-- awful.layout.suit.spiral.dwindle,
+	-- awful.layout.suit.spiral,
+	-- awful.layout.suit.floating,
+	-- awful.layout.suit.max,
+	-- awful.layout.suit.max.fullscreen,
+	-- awful.layout.suit.magnifier,
+	-- awful.layout.suit.corner.nw,
+	-- awful.layout.suit.corner.ne,
+	-- awful.layout.suit.corner.sw,
+	-- awful.layout.suit.corner.se,
 }
 -- }}}
 
@@ -292,26 +294,92 @@ awful.screen.connect_for_each_screen(function(s)
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			wibox.widget.systray(),
-			cpu_widget(),
-			ram_widget(),
+			cpu_widget({
+				width = 50,
+				step_width = 2,
+				step_spacing = 0,
+				color = beautiful.fg_nromal,
+				enable_kill_button = true,
+				process_info_max_length = -1,
+				timeout = 1,
+			}),
+			ram_widget({
+				color_used = beautiful.bg_urgent,
+				color_free = beautiful.fg_normal,
+				color_buf = beautiful.border_color_active,
+				widget_height = 25,
+				widget_width = 25,
+				widget_show_buf = false,
+				timeout = 1,
+			}),
 			net_speed_widget(),
 			spotify_widget({
-				font = "JetBrainsMono NF 10",
 				play_icon = "/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg",
 				pause_icon = "/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg",
+				font = "JetBrainsMono NF 10",
 				dim_when_paused = true,
 				dim_opacity = 0.5,
-				max_lenght = -1,
+				max_length = -1,
+				show_tooltip = true,
+				timeout = 1,
 			}),
 			batteryarc_widget({
+				font = "JetBrainsMono NF 10",
+				arc_thickness = 2,
 				show_current_level = true,
 				size = 32,
+				timeout = 1,
+				main_color = beautiful.fg_color,
+				bg_color = "#ffffff11",
+				low_level_color = "#e53935",
+				medium_level_color = "#c0ca33",
+				charging_color = "#43a047",
+				warning_mdg_title = "Huston, we have a problem",
+				warning_msg_text = "Battery is dying",
+				warning_msg_possition = "top_right",
+				enable_battery_warning = true,
+				show_notification_mode = "on_hover",
+				Notification_position = "top_right",
 			}),
 			brightness_widget({
+				type = "arc",
 				program = "brightnessctl",
-				step = 5,
+				step = 1,
 				base = 60,
+				font = "JetBrainsMono NF 10",
 				tooltip = true,
+				timeout = 1,
+				tooltip = true,
+				percentage = true,
+			}),
+			volume_widget({
+				mixer_cmd = "pulsemixer",
+				step = 1,
+				widget_type = "arc",
+				device = "pulse",
+				thickness = 2,
+				main_color = beautiful.fg_normal,
+				bg_color = "#ffffff11",
+				mute_color = "#4b4b4bff",
+				size = 18,
+			}),
+			logout_menu_widget({
+				font = "JetBrainsMono NF 10",
+				onlogout = function()
+					awful.spawn.with_shell("loginctl kill-session self")
+				end,
+				onlock = function()
+					awful.spawn.with_shell("xlock -mode random -duration 10")
+				end,
+				onreboot = function()
+					awful.spawn.with_shell("systemctl reboot")
+				end,
+				onsuspend = function()
+					awful.spawn.with_shell("systemctl suspend")
+				end,
+				onpoweroff = function()
+					awful.spawn.with_shell("systemctl poweroff")
+				end,
 			}),
 			weather_widget({
 				api_key = API,
@@ -319,7 +387,6 @@ awful.screen.connect_for_each_screen(function(s)
 				show_hourly_forecst = true,
 				show_daily_forecast = true,
 			}),
-			-- logout_menu_widget(),
 			mytextclock,
 			s.mylayoutbox,
 		},
@@ -341,21 +408,22 @@ root.buttons(gears.table.join(
 local globalkeys = gears.table.join(
 
 	awful.key({}, "#233", function()
-		brightness_widget:inc()
+		brightness_widget:inc(5)
 	end), -- increase brightness
 	awful.key({}, "#232", function()
-		brightness_widget:dec()
+		brightness_widget:dec(5)
 	end), -- decrease brightness
 
 	awful.key({}, "#123", function()
-		awful.spawn.with_shell("pulsemixer --change-volume +5")
+		volume_widget:inc(5)
 	end), -- increase volume
 	awful.key({}, "#122", function()
-		awful.spawn.with_shell("pulsemixer --change-volume -5")
+		volume_widget:dec(5)
 	end), -- decrease volume
 	awful.key({}, "#121", function()
-		awful.spawn.with_shell("pulsemixer --toggle-mute")
+		volume_widget:toggle()
 	end), -- mute
+
 	awful.key({}, "#172", function()
 		awful.spawn.with_shell("sp play")
 	end), -- play/pause
@@ -447,17 +515,13 @@ local globalkeys = gears.table.join(
 		awful.layout.inc(-1)
 	end, { description = "select previous", group = "layout" }),
 
-	-- awful.key({ modkey, "Control" }, "n",
-	--           function ()
-	--               local c = awful.client.restore()
-	--               -- Focus restored client
-	--               if c then
-	--                 c:emit_signal(
-	--                     "request::activate", "key.unminimize", {raise = true}
-	--                 )
-	--               end
-	--           end,
-	--           {description = "restore minimized", group = "client"}),
+	-- awful.key({ modkey, "Control" }, "n", function()
+	-- 	local c = awful.client.restore()
+	-- 	-- Focus restored client
+	-- 	if c then
+	-- 		c:emit_signal("request::activate", "key.unminimize", { raise = true })
+	-- 	end
+	-- end, { description = "restore minimized", group = "client" }),
 
 	-- Prompt
 	awful.key({ modkey }, "r", function()
@@ -501,11 +565,11 @@ local clientkeys = gears.table.join(
 	awful.key({ modkey }, "t", function(c)
 		c.ontop = not c.ontop
 	end, { description = "toggle keep on top", group = "client" }),
-	awful.key({ modkey }, "n", function(c)
-		-- The client currently has the input focus, so it cannot be
-		-- minimized, since minimized clients can't have the focus.
-		c.minimized = true
-	end, { description = "minimize", group = "client" }),
+	-- awful.key({ modkey }, "n", function(c)
+	-- 	-- The client currently has the input focus, so it cannot be
+	-- 	-- minimized, since minimized clients can't have the focus.
+	-- 	c.minimized = true
+	-- end, { description = "minimize", group = "client" }),
 	awful.key({ modkey }, "m", function(c)
 		c.maximized = not c.maximized
 		c:raise()
