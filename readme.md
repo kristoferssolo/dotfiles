@@ -9,7 +9,7 @@
   - mpv (video player)
 - I try to minimize what's directly in `~` so:
   - All configs that can be in `~/.config/` are.
-  - Some environmental variables have been set in `~/.zprofile` to move configs into `~/.config/`
+  - Some environmental variables have been set in `~/.zshenv` to move configs into `~/.config/`
 
 ## Credits
 
