@@ -4,15 +4,15 @@ pcall(require, "luarocks.loader")
 
 -- Awesome Wm Widgets
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
-local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
-local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
+local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
+local spotify_shell = require("awesome-wm-widgets.spotify-shell.spotify-shell")
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
-local spotify_shell = require("awesome-wm-widgets.spotify-shell.spotify-shell")
-local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
-local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 
 -- Standard awesome library
@@ -323,23 +323,36 @@ awful.screen.connect_for_each_screen(function(s)
 				show_tooltip = true,
 				timeout = 1,
 			}),
+			weather_widget({
+				coordinates = { latitude, longitude },
+				api_key = API,
+				font_name = "JetBrainsMono NF 10",
+				both_units_widget = false,
+				units = "metric",
+				show_hourly_forecase = true,
+				time_format_12h = false,
+				show_daily_forecast = true,
+				icon_pack_name = "weather-underground-icon",
+				icons_extension = ".png",
+				timeout = 120,
+			}),
 			batteryarc_widget({
-				font = "JetBrainsMono NF 10",
+				--font = "JetBrainsMono NF 10",
 				arc_thickness = 2,
 				show_current_level = true,
 				size = 32,
 				timeout = 1,
-				main_color = beautiful.fg_color,
+				main_color = beautiful.fg_normal,
 				bg_color = "#ffffff11",
 				low_level_color = "#e53935",
 				medium_level_color = "#c0ca33",
 				charging_color = "#43a047",
-				warning_mdg_title = "Huston, we have a problem",
+				warning_msg_title = "Huston, we have a problem",
 				warning_msg_text = "Battery is dying",
-				warning_msg_possition = "top_right",
+				warning_msg_position = "top_right",
 				enable_battery_warning = true,
-				show_notification_mode = "on_hover",
-				Notification_position = "top_right",
+				show_battery_mode = "on_hover",
+				notification_position = "top_right",
 			}),
 			brightness_widget({
 				type = "arc",
@@ -347,10 +360,9 @@ awful.screen.connect_for_each_screen(function(s)
 				step = 1,
 				base = 60,
 				font = "JetBrainsMono NF 10",
-				tooltip = true,
 				timeout = 1,
 				tooltip = true,
-				percentage = true,
+				percentage = false,
 			}),
 			volume_widget({
 				mixer_cmd = "pulsemixer",
@@ -381,12 +393,6 @@ awful.screen.connect_for_each_screen(function(s)
 					awful.spawn.with_shell("systemctl poweroff")
 				end,
 			}),
-			weather_widget({
-				api_key = API,
-				coordinates = { latitude, longitude },
-				show_hourly_forecst = true,
-				show_daily_forecast = true,
-			}),
 			mytextclock,
 			s.mylayoutbox,
 		},
@@ -415,13 +421,13 @@ local globalkeys = gears.table.join(
 	end), -- decrease brightness
 
 	awful.key({}, "#123", function()
-		volume_widget:inc(5)
+		awful.spawn.with_shell("pulsemixer --change-volume +2")
 	end), -- increase volume
 	awful.key({}, "#122", function()
-		volume_widget:dec(5)
+		awful.spawn.with_shell("pulsemixer --change-volume -2")
 	end), -- decrease volume
 	awful.key({}, "#121", function()
-		volume_widget:toggle()
+		awful.spawn.with_shell("pulsemixer --toggle-mute")
 	end), -- mute
 
 	awful.key({}, "#172", function()
@@ -679,6 +685,7 @@ awful.rules.rules = {
 				"veromix",
 				"xtightvncviewer",
 				"Nsxiv",
+				"Galculator",
 			},
 
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -708,6 +715,7 @@ awful.rules.rules = {
 	},
 	{ rule_any = { class = { "Spotify" } }, properties = { screen = 1, tag = "9" } },
 	{ rule_any = { class = { "mpv" } }, properties = { fullscreen = true } },
+	{ rule_any = { class = { "steam_289070" } }, properties = { floating = true, fullscreen = true } },
 
 	-- Set Firefox to always map on the tag named "2" on screen 1.
 	-- { rule = { class = "Firefox" },

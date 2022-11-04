@@ -1,5 +1,4 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
-
 # Import additional configuration files
 #
 # Imports are loaded in order, skipping all missing files, with the importing
@@ -98,7 +97,8 @@ window:
   #
   # Override the variant of the GTK theme. Commonly supported values are `dark`
   # and `light`. Set this to `None` to use the default theme variant.
-  gtk_theme_variant: dark
+  # gtk_theme_variant: dark
+  decorations_theme_variant: dark
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -177,7 +177,7 @@ font:
   #
   # Thin strokes are suitable for retina displays, but for non-retina screens
   # it is recommended to set `use_thin_strokes` to `false`.
-  use_thin_strokes: false
+  # use_thin_strokes: false
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -186,8 +186,8 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: "#282a36"
-    foreground: "#f8f8f2"
+    background: '#282a36'
+    foreground: '#f8f8f2'
 
     # Bright and dim foreground colors
     #
@@ -195,8 +195,8 @@ colors:
     # present. If the bright foreground color is not set, or
     # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
     # color will be used.
-    dim_foreground: "#828482"
-    bright_foreground: "#ffffff"
+    dim_foreground: '#828482'
+    bright_foreground: '#ffffff'
 
   # Cursor colors
   #
@@ -225,15 +225,15 @@ colors:
     # Allowed values are CellForeground/CellBackground, whichq reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     matches:
-        foreground: '#44475a'
-        background: '#50fa7b'
+      foreground: '#44475a'
+      background: '#50fa7b'
     focused_match:
-        foreground: '#44475a'
-        background: '#ffb86c'
+      foreground: '#44475a'
+      background: '#ffb86c'
 
-    bar:
-      background: "#282a36"
-      foreground: "#f8f8f2"
+    footer_bar:
+      background: '#282a36'
+      foreground: '#f8f8f2'
 
   # Keyboard regex hints
   hints:
@@ -242,16 +242,16 @@ colors:
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     start:
-      foreground: "#282a36"
-      background: "#f1fa8c"
+      foreground: '#282a36'
+      background: '#f1fa8c'
 
     # All characters after the first one in the hint label
     #
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     end:
-      foreground: "#f1fa8c"
-      background: "#282a36"
+      foreground: '#f1fa8c'
+      background: '#282a36'
 
   # Line indicator
   #
@@ -307,7 +307,7 @@ colors:
   #   blue: "#707fd0"
   #   magenta: "#c583d0"
   #   cyan: "#8adaf1"
-    # white: "#e0e3e7"
+  # white: "#e0e3e7"
 
   # Indexed Colors
   #
