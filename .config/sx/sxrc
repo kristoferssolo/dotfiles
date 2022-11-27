@@ -1,12 +1,15 @@
 #!/bin/sh
 
-autostart="pipewire pipewire-pulse wireplumber flameshot"
+autostart="pipewire pipewire-pulse wireplumber telegram-desktop flameshot spotify discord nextcloud"
 
 for program in $autostart; do
     pidof -s "$program" || "$program" &
 done >/dev/null 2>&1
 
 numlockx on &
-xrdb -load $XDG_CONFIG_HOME/X11/xresources &
+xinput --set-prop 'COOLERMASTER CM310' 'libinput Accel Speed' -.9 &
+xrandr --output DisplayPort-0 --mode 1920x1080 --rate 75 --output HDMI-A-0 --mode 1920x1080 --rate 60 --left-of DisplayPort-0 &
+xrdb -load "$XDG_CONFIG_HOME/X11/xresources" &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 exec dbus-launch --sh-syntax --exit-with-session awesome

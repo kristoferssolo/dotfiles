@@ -1,100 +1,142 @@
+#!/bin/sh
 # Basic Settings
-# set ratios 1:2:3
-set hidden true
+set cleaner ~/.config/lf/cleaner
 set drawbox true
+set hidden true
 set icons true
+set ifs "\n"
 set ignorecase true
-set previewer "~/.config/lf/preview"
-set cleaner "~/.config/lf/cleaner"
+set info size
+set period 1
+set previewer ~/.config/lf/preview
+set ratios 1:2:3
 set scrolloff 8
+set shellopts '-eu'
 
 # Custom Functions
 
-# Set Wallpapper
-cmd setwallpaper ${{
-	cp "$f" ~/.local/share/wallpaper.png && feh --bg-scale --no-fehbg "$f"
-}}
+# cmds/functions
 
 
 # Archive bindings
 cmd unarchive ${{
-	case "$f" in
-			*.zip) unzip "$f" ;;
-			*.tar.gz) tar -xzvf "$f" ;;
-			*.tar.bz2) tar -xjvf "$f" ;;
-			*.tar) tar -xvf "$f" ;;
-			*) echo "Unsupported format" ;;
-	esac
+        case "$f" in
+            *.zip) unzip "$f" ;;
+            *.tar.gz) tar -xzvf "$f" ;;
+            *.tar.bz2) tar -xjvf "$f" ;;
+            *.tar) tar -xvf "$f" ;;
+            *) echo "Unsupported format" ;
+        esac
 }}
 
-# cmds/functions
-cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
-cmd mkfile $touch "$(echo $* | tr ' ' '\ ')"
 
 cmd moveto ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	clear; echo "Move to where?"
-	dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | sk | sed 's|~|$HOME|')" &&
-	for x in $fx; do
-		eval mv -iv \"$x\" \"$dest\"
-	done &&
-	notify-send "File(s) moved." "File(s) moved to $dest."
+        clear; tput cup $(($(tput lines)/3)); tput bold
+        set -f
+        clear; echo "Move to where?"
+        dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
+        for x in $fx; do
+            eval mv -iv \"$x\" \"$dest\"
+        done &&
+        notify-send "File(s) moved." "File(s) moved to $dest."
 }}
 
 cmd copyto ${{
-	clear; tput cup $(($(tput lines)/3)); tput bold
-	set -f
-	clear; echo "Copy to where?"
-	dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | sk | sed 's|~|$HOME|')" &&
-	for x in $fx; do
-		eval cp -ivr \"$x\" \"$dest\"
-	done &&
-	notify-send "File(s) copied." "File(s) copies to $dest."
+        clear; tput cup $(($(tput lines)/3)); tput bold
+        set -f
+        clear; echo "Copy to where?"
+        dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
+        for x in $fx; do
+            eval cp -ivr \"$x\" \"$dest\"
+        done &&
+        notify-send "File(s) copied." "File(s) copies to $dest."
 }}
+
+cmd open ${{
+        case $(file --mime-type "$(readlink -f $f)" -b) in
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) localc $fx ;;
+            image/vnd.djvu|application/pdf|application/octet-stream|application/postscript) setsid -f zathura $fx >/dev/null 2>&1 ;;
+            text/*|application/json|inode/x-empty) $EDITOR $fx ;;
+            image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
+            image/svg+xml) display -- $f ;;
+            image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" |
+                setsid -f sxiv -aio 2>/dev/null | while read -r file; do
+                    [ -z "$file" ] && continue
+                    lf -remote "send select \"$file\""
+                    lf -remote "send toggle"
+                done &
+                ;;
+            audio/*) mpv --audio-display=no $f ;;
+            video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
+            application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
+            application/pgp-encrypted) $EDITOR $fx ;;
+            *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done ;;
+        esac
+}}
+
+cmd extract ${{
+        clear; tput cup $(($(tput lines)/3)); tput bold
+        set -f
+        printf "%s\n\t" "$fx"
+        printf "extract?[y/N]"
+        read ans
+        [ $ans = "y" ] && aunpack $fx
+}}
+
+cmd bulk_rename $vidir
+cmd new_instance $alacritty --working-directory "${PWD}" & disown
+cmd open_spacefm $spacefm -t "${PWD}" & disown
+cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
+cmd mkfile $touch "$(echo $* | tr ' ' '\ ')"
+cmd set_wallpaper $cp "$f" "${XDG_DATA_HOME:-$HOME/.local/share}/wallpaper.png" && feh --bg-scale --no-fehbg "$f"
+
 
 # Bindings
 # Remove some defaults
-map m
-map o
-map n
 map "'"
 map '"'
-map d
 map c
+map d
+map m
+map n
+map o
 map p
 
 map au unarchive
 
 # Basic Functions
 map . set hidden!
-map <c-h> set hidden!
-map <enter> shell
-map <enter> open
 map <c-f> $lf -remote "send $id select '$(sk)'"
-map <f-2> rename
-map <c-n> push :mkdir<space>
-map D delete
-map dd cut
-map mv moveto
-map cp copyto
-map P paste
-map mf push :mkfile<space>
-map md push :mkdir<space>
+map <c-h> set hidden!
 map <c-l> clear
-map bg setwallpaper
-map c $vscodium "$f"
+map <enter> open
+map <enter> shell
+map <f-2> rename
+map D delete
+map E extract
+map P paste
+map bg set_wallpaper
+map cp copyto
+map dd cut
 map e $nvim "$f"
+map md push :mkdir<space>
+map mf push :mkfile<space>
+map mv moveto
+map nN open_spacefm
+map nn new_instance
+map B bulk_rename
 
 
 # Movement
-map gd cd ~/Downloads
 map gD cd ~/Dropbox
-map gn cd ~/Nextcloud
-map gp cd ~/Pictures
 map gc cd ~/.config
-map gr cd ~/repos
-map gv cd ~/Videos
-map gs cd ~/repos/Pyhton/School
-map go cd ~/Documents
+map gd cd ~/Downloads
 map gl cd ~/.local
+map gn cd ~/Nextcloud
+map go cd ~/Documents
+map gp cd ~/Pictures
+map gr cd ~/repos
+map gs cd ~/repos/Pyhton/School
+map gu cd ~/Documents/University
+map gv cd ~/Videos
+map gw cd ~/vimwiki

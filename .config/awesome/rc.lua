@@ -2,17 +2,15 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
--- Awesome Wm Widgets
-local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
-local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
-local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
-local spotify_shell = require("awesome-wm-widgets.spotify-shell.spotify-shell")
-local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+-- AwesomeWM Widgets
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
+local spotify_shell = require("awesome-wm-widgets.spotify-shell.spotify-shell")
+local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 
 -- Standard awesome library
@@ -27,7 +25,6 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
-
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -108,6 +105,7 @@ local editor_cmd = terminal .. " -e " .. editor
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
+
 local modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
@@ -116,11 +114,11 @@ awful.layout.layouts = {
 	awful.layout.suit.tile.left,
 	awful.layout.suit.fair,
 	awful.layout.suit.fair.horizontal,
-	awful.layout.suit.tile.top,
-	awful.layout.suit.tile.bottom,
 	-- awful.layout.suit.spiral.dwindle,
 	-- awful.layout.suit.spiral,
 	-- awful.layout.suit.floating,
+	-- awful.layout.suit.tile.bottom,
+	-- awful.layout.suit.tile.top,
 	-- awful.layout.suit.max,
 	-- awful.layout.suit.max.fullscreen,
 	-- awful.layout.suit.magnifier,
@@ -170,10 +168,9 @@ local mytextclock = wibox.widget.textclock(" %d.%m.%Y, %H:%M:%S, %j ", 1)
 local cw = calendar_widget({
 	theme = "nord",
 	placement = "top_right",
-	previous_month_button = 1,
-	next_month_button = 3,
+	previous_month_button = 4,
+	next_month_button = 5,
 })
-
 mytextclock:connect_signal("button::press", function(_, _, _, button)
 	if button == 1 then
 		cw.toggle()
@@ -336,44 +333,18 @@ awful.screen.connect_for_each_screen(function(s)
 				icons_extension = ".png",
 				timeout = 120,
 			}),
-			batteryarc_widget({
-				--font = "JetBrainsMono NF 10",
-				arc_thickness = 2,
-				show_current_level = true,
-				size = 32,
-				timeout = 1,
-				main_color = beautiful.fg_normal,
-				bg_color = "#ffffff11",
-				low_level_color = "#e53935",
-				medium_level_color = "#c0ca33",
-				charging_color = "#43a047",
-				warning_msg_title = "Huston, we have a problem",
-				warning_msg_text = "Battery is dying",
-				warning_msg_position = "top_right",
-				enable_battery_warning = true,
-				show_battery_mode = "on_hover",
-				notification_position = "top_right",
-			}),
-			brightness_widget({
-				type = "arc",
-				program = "brightnessctl",
-				step = 1,
-				base = 60,
-				font = "JetBrainsMono NF 10",
-				timeout = 1,
-				tooltip = true,
-				percentage = false,
-			}),
 			volume_widget({
 				mixer_cmd = "pulsemixer",
 				step = 1,
-				widget_type = "arc",
+				widget_type = "horizontal_bar",
 				device = "pulse",
-				thickness = 2,
 				main_color = beautiful.fg_normal,
-				bg_color = "#ffffff11",
 				mute_color = "#4b4b4bff",
-				size = 18,
+				bg_color = "#ffffff11",
+				width = 50,
+				margins = 7,
+				shape = "bar",
+				with_icon = true,
 			}),
 			logout_menu_widget({
 				font = "JetBrainsMono NF 10",
@@ -384,13 +355,13 @@ awful.screen.connect_for_each_screen(function(s)
 					awful.spawn.with_shell("xlock -mode random -duration 10")
 				end,
 				onreboot = function()
-					awful.spawn.with_shell("systemctl reboot")
+					awful.spawn.with_shell("loginctl reboot")
 				end,
 				onsuspend = function()
-					awful.spawn.with_shell("systemctl suspend")
+					awful.spawn.with_shell("doas zzz")
 				end,
 				onpoweroff = function()
-					awful.spawn.with_shell("systemctl poweroff")
+					awful.spawn.with_shell("loginctl poweroff")
 				end,
 			}),
 			mytextclock,
@@ -413,34 +384,57 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 local globalkeys = gears.table.join(
 
-	awful.key({}, "#233", function()
-		brightness_widget:inc(5)
-	end), -- increase brightness
-	awful.key({}, "#232", function()
-		brightness_widget:dec(5)
-	end), -- decrease brightness
+	awful.key({ "Shift" }, "Pause", function()
+		awful.spawn.with_shell("playerctl play-pause -a")
+	end, { description = "pause/play all", group = "media controls" }),
 
-	awful.key({}, "#123", function()
-		awful.spawn.with_shell("pulsemixer --change-volume +2")
-	end), -- increase volume
-	awful.key({}, "#122", function()
-		awful.spawn.with_shell("pulsemixer --change-volume -2")
-	end), -- decrease volume
-	awful.key({}, "#121", function()
-		awful.spawn.with_shell("pulsemixer --toggle-mute")
-	end), -- mute
+	awful.key({ "Control" }, "Pause", function()
+		awful.spawn.with_shell("playerctl pause -a")
+	end, { description = "pause all", group = "media controls" }),
 
-	awful.key({}, "#172", function()
+	awful.key({}, "Pause", function()
 		awful.spawn.with_shell("sp play")
-	end), -- play/pause
+	end, { description = "spotify pause/play", group = "media controls" }),
+
+	awful.key({}, "#117", function()
+		awful.spawn.with_shell("sp next")
+	end, { description = "spotify next", group = "media controls" }),
+
+	awful.key({}, "#112", function()
+		awful.spawn.with_shell("sp prev")
+	end, { description = "spotify previous", group = "media controls" }),
 
 	awful.key({ modkey }, "d", function()
 		spotify_shell.launch()
 	end, { description = "spotify shell", group = "media controls" }),
 
-	awful.key({ "Control" }, "#172", function()
+	awful.key({}, "#171", function()
+		awful.spawn.with_shell("sp next")
+	end), -- play next
+
+	awful.key({}, "#173", function()
+		awful.spawn.with_shell("sp previous")
+	end), -- play previous
+
+	awful.key({}, "#174", function()
+		awful.spawn.with_shell("playerctl -a stop")
+	end), -- stop
+
+	awful.key({}, "#172", function()
 		awful.spawn.with_shell("playerctl -a play-pause")
-	end), -- play/pause
+	end), -- play/pause all
+
+	awful.key({}, "#123", function()
+		awful.spawn.with_shell("pulsemixer --change-volume +5")
+	end), -- increase volume
+
+	awful.key({}, "#122", function()
+		awful.spawn.with_shell("pulsemixer --change-volume -5")
+	end), -- decrease volume
+
+	awful.key({}, "#121", function()
+		awful.spawn.with_shell("pulsemixer --toggle-mute")
+	end), -- mute
 
 	awful.key({ "Control" }, "#107", function()
 		awful.spawn.with_shell("flameshot gui")
@@ -486,9 +480,11 @@ local globalkeys = gears.table.join(
 	awful.key({ modkey }, "Return", function()
 		awful.spawn(terminal)
 	end, { description = "open a terminal", group = "launcher" }),
+
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
-	--    awful.key({ modkey, "Control"   }, "q", awesome.quit,
-	--              {description = "quit awesome", group = "awesome"}),
+
+	-- awful.key({ modkey, "Control" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
+
 	awful.key({ modkey }, "b", function()
 		awful.spawn("librewolf")
 	end, { description = "open librewolf", group = "launcher" }),
@@ -641,7 +637,7 @@ local clientbuttons = gears.table.join(
 		c:emit_signal("request::activate", "mouse_click", { raise = true })
 		awful.mouse.client.move(c)
 	end),
-	awful.button({ modkey, "Control" }, 1, function(c)
+	awful.button({ modkey }, 3, function(c)
 		c:emit_signal("request::activate", "mouse_click", { raise = true })
 		awful.mouse.client.resize(c)
 	end)
@@ -678,7 +674,10 @@ awful.rules.rules = {
 				"pinentry",
 			},
 			class = {
+				"Arandr",
 				"Blueman-manager",
+				"Gpick",
+				"Kruler",
 				"MessageWin", -- kalarm.
 				"Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
 				"Wpa_gui",
@@ -706,22 +705,21 @@ awful.rules.rules = {
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
 
 	{
-		rule_any = { class = { "tuxedo-control-center", "corectrl" } },
-		properties = { screen = 1, tag = "7" },
+		rule_any = { class = { "steam_app_1172470", "steam_app_1237970", "steam_app_289070" } },
+		properties = { screen = 1, fullscreen = true, floating = true },
 	},
 	{
-		rule_any = { class = { "Thunderbird", "discord", "ripcord", "TelegramDesktop" } },
-		properties = { screen = 1, tag = "8" },
+		rule_any = { class = { "steam_app_1182480" } },
+		properties = { fullscreen = true },
 	},
-	{ rule_any = { class = { "Spotify" } }, properties = { screen = 1, tag = "9" } },
+	{
+		rule_any = { class = { "discord", "TelegramDesktop", "ripcord" } },
+		properties = { screen = 2, tag = "8" },
+	},
+	{ rule_any = { class = { "kdeconnect.app" } }, properties = { screen = 2, tag = "7" } },
+	{ rule_any = { class = { "Spotify" } }, properties = { screen = 2, tag = "9" } },
 	{ rule_any = { class = { "mpv" } }, properties = { fullscreen = true } },
-	{ rule_any = { class = { "steam_289070" } }, properties = { floating = true, fullscreen = true } },
-
-	-- Set Firefox to always map on the tag named "2" on screen 1.
-	-- { rule = { class = "Firefox" },
-	--   properties = { screen = 1, tag = "2" } },
 }
--- }}}
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
@@ -790,5 +788,6 @@ end)
 -- }}}
 
 -- Autostart Applications
-awful.spawn.with_shell("picom --experimental-backends")
+-- awful.spawn.with_shell("picom --experimental-backends")
+awful.spawn.with_shell("picom")
 awful.spawn.with_shell("setxkbmap lv")

@@ -2,29 +2,29 @@
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/startup" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/startup"
 
 # Options
+setopt appendhistory        # Immediately append history instead of overwriting
+setopt autocd               # If only directory path is entered, cd there
 setopt correct              # Auto correct mistakes setopt extendedglob       # Extended globaling. Allows using regular expressions with *
+setopt histignorealldups    # If a new command is a duplicate, remove older one
+setopt histignorespace      # Don't save commands that start with space
+setopt inc_append_history   # Save commands are addded to the history immediately
+setopt nobeep               # No beep
 setopt nocaseglob           # Case insensative globbing
 setopt numericglobsort      # Sort filenames numeracally when it makse sense
-setopt nobeep               # No beep
-setopt appendhistory        # Immediately append history instead of overwriting
-setopt histignorealldups    # If a new command is a duplicate, remove older one
-setopt autocd               # If only directory path is entered, cd there
-setopt inc_append_history   # Save commands are addded to the history immediately
-setopt histignorespace      # Don't save commands that start with space
 
 autoload -U select-word-style
 
 # Themeing
 autoload -U colors && colors
 
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # Case sensetive TAB completions
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # Colored completion (different colors fr dirs/files/etc)
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # Case sensetive TAB completions
 zstyle ':completion:*' rehash true                          # Automaticly find new executables in path
 # Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
-zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.config/zsh/cache
 zstyle ':completion:*' menu select
+zstyle ':completion:*' use-cache on
 autoload -U compinit
 zmodload zsh/complist
 compinit
@@ -85,22 +85,22 @@ function lfcd() {
 }
 
 # Navigate words with CTRL+ARROW keys
+bindkey '^H' backward-kill-word # delete previous word with CTRL+BACKSPACE
 bindkey '^[Oc' forward-word
 bindkey '^[Od' backward-word
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
-bindkey '^H' backward-kill-word # delete previous word with CTRL+BACKSPACE
-bindkey '^[[Z' undo             # SHIFT+TAB undo last action
 bindkey '^[[3~' delete-char
+bindkey '^[[Z' undo             # SHIFT+TAB undo last action
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # Use vim keys in tab complete menu
 bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
 bindkey -s '^o' '^ulfcd\n'
