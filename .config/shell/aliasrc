@@ -49,3 +49,4 @@ alias \
     weather="curl wttr.in/" \
     ww="$EDITOR ~/vimwiki/index.md" \
     z="zathura"
+	lf="lfub" \
