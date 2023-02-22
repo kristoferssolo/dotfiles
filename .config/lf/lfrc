@@ -1,24 +1,85 @@
 #!/bin/sh
 # Basic Settings
+set autoquit on
 set cleaner ~/.config/lf/cleaner
 set drawbox true
 set hidden true
 set icons true
+set ifs "\n"
 set ifs "\n"
 set ignorecase true
 set info size
 set period 1
 set previewer ~/.config/lf/preview
 set ratios 1:2:3
-set scrolloff 8
+set scrolloff 10
 set shellopts '-eu'
 
 # Custom Functions
 
-# cmds/functions
+cmd moveto ${{
+        clear; tput cup $(($(tput lines)/3)); tput bold
+        set -f
+        clear; echo "Move to where?"
+        dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | sk | sed 's|~|$HOME|')" &&
+        for x in $fx; do
+            eval mv -iv \"$x\" \"$dest\"
+        done &&
+        notify-send "🚚 File(s) moved." "File(s) moved to $dest."
+}}
 
 
-# Archive bindings
+cmd copyto ${{
+        clear; tput cup $(($(tput lines)/3)); tput bold
+        set -f
+        clear; echo "Copy to where?"
+        dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | sk | sed 's|~|$HOME|')" &&
+        for x in $fx; do
+            eval cp -ivr \"$x\" \"$dest\"
+        done &&
+        notify-send "📋 File(s) copied." "File(s) copies to $dest."
+}}
+
+
+cmd open ${{
+        case $(file --mime-type "$(readlink -f $f)" -b) in
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) localc $fx ;;
+            image/vnd.djvu|application/pdf|application/octet-stream|application/postscript) setsid -f zathura $fx >/dev/null 2>&1 ;;
+            text/*|application/json|inode/x-empty|application/x-subrip) $EDITOR $fx ;;
+            image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
+            image/svg+xml) display -- $f ;;
+            image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" |
+                setsid -f nsxiv -aio 2>/dev/null | while read -r file; do
+                    [ -z "$file" ] && continue
+                    lf -remote "send select \"$file\""
+                    lf -remote "send toggle"
+                done &
+                ;;
+            audio/*|video/x-ms-asf) mpv --audio-display=no $f ;;
+            video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
+            application/pdf|application/vnd.djvu|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
+            application/pgp-encrypted) $EDITOR $fx ;;
+            application/vnd.openxmlformats-officedocument.wordprocessingml.document|application/vnd.oasis.opendocument.text) setsid -f lowriter $fx >/dev/null 2>&1 ;;
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/octet-stream|application/vnd.oasis.opendocument.spreadsheet|application/vnd.oasis.opendocument.spreadsheet-template) setsid -f localc $fx >/dev/null 2>&1 ;;
+            application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.oasis.opendocument.presentation-template|application/vnd.oasis.opendocument.presentation|application/vnd.ms-powerpoint) setsid -f loimpress $fx >/dev/null 2>&1 ;;
+            application/vnd.oasis.opendocument.graphics|application/vnd.oasis.opendocument.graphics-template) setsid -f lodraw $fx >/dev/null 2>&1 ;;
+            application/vnd.oasis.opendocument.formula) setsid -f lomath $fx >/dev/null 2>&1 ;;
+            application/vnd.oasis.opendocument.database) setsid -f lobase $fx >/dev/null 2>&1 ;;
+            *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done ;;
+        esac
+}}
+
+
+cmd extract ${{
+        clear; tput cup $(($(tput lines)/3)); tput bold
+        set -f
+        printf "%s\n\t" "$fx"
+        printf "extract?[y/N]"
+        read ans
+        [ $ans = "y" ] && aunpack $fx
+}}
+
+
 cmd unarchive ${{
         case "$f" in
             *.zip) unzip "$f" ;;
@@ -30,66 +91,9 @@ cmd unarchive ${{
 }}
 
 
-cmd moveto ${{
-        clear; tput cup $(($(tput lines)/3)); tput bold
-        set -f
-        clear; echo "Move to where?"
-        dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
-        for x in $fx; do
-            eval mv -iv \"$x\" \"$dest\"
-        done &&
-        notify-send "File(s) moved." "File(s) moved to $dest."
-}}
-
-cmd copyto ${{
-        clear; tput cup $(($(tput lines)/3)); tput bold
-        set -f
-        clear; echo "Copy to where?"
-        dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf | sed 's|~|$HOME|')" &&
-        for x in $fx; do
-            eval cp -ivr \"$x\" \"$dest\"
-        done &&
-        notify-send "File(s) copied." "File(s) copies to $dest."
-}}
-
-cmd open ${{
-        case $(file --mime-type "$(readlink -f $f)" -b) in
-            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) localc $fx ;;
-            image/vnd.djvu|application/pdf|application/octet-stream|application/postscript) setsid -f zathura $fx >/dev/null 2>&1 ;;
-            text/*|application/json|inode/x-empty) $EDITOR $fx ;;
-            image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
-            image/svg+xml) display -- $f ;;
-            image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" |
-                setsid -f sxiv -aio 2>/dev/null | while read -r file; do
-                    [ -z "$file" ] && continue
-                    lf -remote "send select \"$file\""
-                    lf -remote "send toggle"
-                done &
-                ;;
-            audio/*) mpv --audio-display=no $f ;;
-            video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
-            application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
-            application/pgp-encrypted) $EDITOR $fx ;;
-            *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done ;;
-        esac
-}}
-
-cmd extract ${{
-        clear; tput cup $(($(tput lines)/3)); tput bold
-        set -f
-        printf "%s\n\t" "$fx"
-        printf "extract?[y/N]"
-        read ans
-        [ $ans = "y" ] && aunpack $fx
-}}
-
-cmd bulk_rename $vidir
-cmd new_instance $alacritty --working-directory "${PWD}" & disown
-cmd open_spacefm $spacefm -t "${PWD}" & disown
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 cmd mkfile $touch "$(echo $* | tr ' ' '\ ')"
-cmd set_wallpaper $cp "$f" "${XDG_DATA_HOME:-$HOME/.local/share}/wallpaper.png" && feh --bg-scale --no-fehbg "$f"
-
+cmd setbg "$1"
 
 # Bindings
 # Remove some defaults
@@ -106,37 +110,29 @@ map au unarchive
 
 # Basic Functions
 map . set hidden!
-map <c-f> $lf -remote "send $id select '$(sk)'"
+map <c-f> $lf -remote "send $id select \"$(sk)\""
 map <c-h> set hidden!
 map <c-l> clear
 map <enter> open
 map <enter> shell
 map <f-2> rename
+map B $vidir # bulk rename
 map D delete
 map E extract
+map J $lf -remote "send $id cd $(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | sk)"
+map O $mimeopen --ask "$f"
 map P paste
-map bg set_wallpaper
+map Y $printf "%s" "$fx" | xclip -selection clipboard
+map bg $setbg $f
 map cp copyto
 map dd cut
 map e $nvim "$f"
 map md push :mkdir<space>
 map mf push :mkfile<space>
 map mv moveto
-map nN open_spacefm
-map nn new_instance
-map B bulk_rename
+map nN $spacefm -t "${PWD}" & disown >/dev/null 2>&1
+map nn $setsid -f $TERMINAL >/dev/null 2>&1
+map o &mimeopen "$f"
 
-
-# Movement
-map gD cd ~/Dropbox
-map gc cd ~/.config
-map gd cd ~/Downloads
-map gl cd ~/.local
-map gn cd ~/Nextcloud
-map go cd ~/Documents
-map gp cd ~/Pictures
-map gr cd ~/repos
-map gs cd ~/repos/Pyhton/School
-map gu cd ~/Documents/University
-map gv cd ~/Videos
-map gw cd ~/vimwiki
+# Source Bookmarks
+source "~/.config/lf/shortcutrc"
