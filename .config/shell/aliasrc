@@ -3,50 +3,54 @@
 # Use neovim for vim if present
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
-
 # doas not required for some system commands
 for command in mount umount sv pacman updatedb su shutdown poweroff reboot zzz systemctl wg wg-quick; do
-    alias $command="doas $command"
-done; unset command
+	alias $command="doas $command"
+done
+unset command
 
 # Vervosity and settings that you pretty much just always are going to wand
 alias \
-    bc="bc -ql" \
-    cp="cp -iv" \
-    df="df -h" \
-    mkdir="mkdir -pv" \
-    mv="mv -iv" \
-    nsxiv="nsxiv -a" \
-    rm="rm -vI"
+	bc="bc -ql" \
+	cp="cp -iv" \
+	df="df -h" \
+	mkdir="mkdir -pv" \
+	mv="mv -iv" \
+	nsxiv="nsxiv -a" \
+	rm="rm -vI"
+keychain="keychain --dir "$XDG_RUNTIME_DIR"/keychain"
 
 # Colorize commands when possible
 alias \
-    diff="diff --color=auto" \
-    grep="rg --color=auto" \
-    ip="ip -color=auto" \
-    ls="exa -a --icons --group-directories-first"
+	diff="diff --color=auto" \
+	grep="rg --color=auto" \
+	ip="ip -color=auto" \
+	less="moar" \
+	ls="exa -a --icons --group-directories-first"
 
-# These common commands ate just too long! Abbriviate them
+# These common commands ate just too long! Abbreviate them
 alias \
-    battery="acpi" \
-    code="vscodium" \
-    day="redshift -PO 6500" \
-    dv="doasedit" \
-    e="$EDITOR" \
-    g="git" \
-    gP="git push" \
-    ga="git add" \
-    gc="git commit" \
-    gd="git diff" \
-    gp="git pull" \
-    gs="git status" \
-    lf="lfrun" \
-    lg="lazygit" \
-    matrix="unimatrix -s 95" \
-    night="redshift -PO 4500" \
-    py="python" \
-    v="$EDITOR" \
-    weather="curl wttr.in/" \
-    ww="$EDITOR ~/vimwiki/index.md" \
-    z="zathura"
+	battery="acpi" \
+	code="vscodium" \
+	day="redshift -PO 6500" \
+	dv="doasedit" \
+	e="$EDITOR" \
+	g="git" \
+	gP="git push" \
+	ga="git add" \
+	gc="git commit" \
+	gd="git diff" \
+	gp="git pull" \
+	gs="git status" \
 	lf="lfub" \
+	lg="lazygit" \
+	matrix="unimatrix -s 95" \
+	night="redshift -PO 4500" \
+	py="python" \
+	v="$EDITOR" \
+	weather="curl wttr.in/" \
+	ww="$EDITOR ~/vimwiki/index.md" \
+	z="zathura" \
+	vpn-down="wg-quick down wg0" \
+	vpn-restart="wg-quick down wg0 && wg-quick up wg0" \
+	vpn-up="wg-quick up wg0"
