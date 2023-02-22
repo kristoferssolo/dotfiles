@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["wlr/workspaces", "custom/media"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["network", "custom/pacman", "backlight", "temperature", "pulseaudio", "battery", "custom/weather", "tray", "clock"],
+    "modules-right": ["network", "custom/pacman", "backlight", "temperature", "pulseaudio", "battery", "custom/dunst", "custom/weather", "tray", "clock"],
     // Modules configuration
     "wlr/workspaces": {
         "format": "{icon}",
@@ -131,7 +131,7 @@
         "states": {
             "good": 95,
             "warning": 30,
-            "critical": 20
+            "critical": 10
         },
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% ",
@@ -150,6 +150,13 @@
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+
+    "wireplumber": {
+        "format": "{volume}% {icon}",
+        "format-muted": "",
+        "on-click": "pulsemixer --toggle-mute",
+        "format-icons": ["", "", ""]
     },
 
     "pulseaudio": {
@@ -186,13 +193,13 @@
         },
         "escape": true,
         "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        /* "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name */
+        "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null" // Script in resources folder
+        /* "exec": "$HOME/.config/waybar/scripts/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name */
     },
 
 
     "custom/pacman": {
-        "format": "{}  ",
+        "format": "{} ",
         "interval": 600,                     // every hour
         "exec": "checkupdates | wc -l",       // # of updates
         "exec-if": "exit 0",                  // always run; consider advanced run conditions
@@ -202,8 +209,46 @@
 
     "custom/weather": {
         "exec": "curl 'https://wttr.in/?format=1'",
-        "interval": 3600
+        "interval": 600,
+        "on-click": "curl 'https://wttr.in/?format=1'",
     },
 
+    "custom/vpn": {
+        "format": "VPN ",
+        "exec": "echo '{\"class\": \"connected\"}'",
+        "exec-if": "test -d /proc/sys/net/ipv4/conf/tun0",
+        "return-type": "json",
+        "interval": 5
+    },
+
+    "custom/pipewire": {
+        "tooltip": true,
+        "max-length": 10,
+        "exec": "$HOME/.config/waybar/scripts/pipewire.sh",
+        "on-click": "pulsemixer --toggle-mute",
+        "on-click-right": "qpwgraph"
+    },
+
+    "custom/wireguard": {
+        "format": "{}<big> 嬨</big>",
+        "exec": "~/.config/waybar/scripts/wireguard.sh",
+        "on-click": "rofi -modi 'WireGuard:~/.config/waybar/scripts/wireguard-rofi.sh' -show WireGuard",
+        "interval": 60,
+        "return-type": "json"
+    },
+
+    "custom/github": {
+        "format": "{} ",
+        "return-type": "json",
+        "interval": 60,
+        "exec": "$HOME/.config/waybar/scripts/github.sh",
+        "on-click": "xdg-open https://github.com/notifications"
+    },
+
+    "custom/dunst": {
+        "exec": "~/.config/waybar/scripts/dunst.sh",
+        "on-click": "dunstctl set-paused toggle",
+        "restart-interval": 1,
+    },
 }
 
