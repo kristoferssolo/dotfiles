@@ -1,0 +1,11 @@
+#!/bin/sh
+map gD cd ~/Documents
+map gc cd ~/.config
+map gd cd ~/Downloads
+map gl cd ~/.local
+map gn cd ~/Nextcloud
+map gp cd ~/Pictures
+map gr cd ~/repos
+map gu cd ~/vimwiki/university/2nd-semester/
+map gv cd ~/Videos
+map gw cd ~/vimwiki
