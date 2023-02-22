@@ -12,6 +12,7 @@ local spotify_shell = require("awesome-wm-widgets.spotify-shell.spotify-shell")
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
+-- local pacman_widget = require("awesome-wm-widgets.pacman-widget.pacman")
 
 -- Standard awesome library
 local gears = require("gears")
@@ -310,6 +311,15 @@ awful.screen.connect_for_each_screen(function(s)
 				timeout = 1,
 			}),
 			net_speed_widget(),
+			-- pacman_widget({
+			-- 	interval = 600, -- Refresh every 10 minutes
+			-- 	popup_bg_color = "#222222",
+			-- 	popup_border_width = 1,
+			-- 	popup_border_color = "#7e7e7e",
+			-- 	popup_height = 10, -- 10 packages shown in scrollable window
+			-- 	popup_width = 300,
+			-- 	polkit_agent_path = "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
+			-- }),
 			spotify_widget({
 				play_icon = "/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg",
 				pause_icon = "/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg",
@@ -437,14 +447,13 @@ local globalkeys = gears.table.join(
 	end), -- mute
 
 	awful.key({ "Control" }, "#107", function()
-		awful.spawn.with_shell("flameshot gui")
+		awful.spawn.with_shell("( flameshot &; ) && ( sleep 0.5s && flameshot gui )")
 	end, { description = "take region screenshot", group = "launcher" }), -- take region screenshot
 
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
 	awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
-
 	awful.key({ modkey }, "j", function()
 		awful.client.focus.byidx(1)
 	end, { description = "focus next by index", group = "client" }),
@@ -480,7 +489,6 @@ local globalkeys = gears.table.join(
 	awful.key({ modkey }, "Return", function()
 		awful.spawn(terminal)
 	end, { description = "open a terminal", group = "launcher" }),
-
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 
 	-- awful.key({ modkey, "Control" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
@@ -713,8 +721,16 @@ awful.rules.rules = {
 		properties = { fullscreen = true },
 	},
 	{
-		rule_any = { class = { "discord", "TelegramDesktop", "ripcord" } },
+		rule_any = { class = { "discord", "TelegramDesktop", "ripcord", "Ferdium" } },
 		properties = { screen = 2, tag = "8" },
+	},
+	{
+		rule_any = { class = { "discord" } },
+		properties = { screen = 2, tag = "8", minimized = true },
+	},
+	{
+		rule_any = { class = { "easyeffects" } },
+		properties = { screen = 1, tag = "9" },
 	},
 	{ rule_any = { class = { "kdeconnect.app" } }, properties = { screen = 2, tag = "7" } },
 	{ rule_any = { class = { "Spotify" } }, properties = { screen = 2, tag = "9" } },
@@ -785,9 +801,6 @@ end)
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
--- }}}
 
--- Autostart Applications
--- awful.spawn.with_shell("picom --experimental-backends")
-awful.spawn.with_shell("picom")
-awful.spawn.with_shell("setxkbmap lv")
+awful.spawn.with_shell("spotify")
+awful.spawn.with_shell("discord")
