@@ -1,5 +1,5 @@
 # Import and execute startup file
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/startup" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/startup"
+[ -f "$XDG_CONFIG_HOME/zsh/startup" ] && source "$XDG_CONFIG_HOME/zsh/startup"
 
 # Options
 setopt appendhistory        # Immediately append history instead of overwriting
@@ -7,10 +7,10 @@ setopt autocd               # If only directory path is entered, cd there
 setopt correct              # Auto correct mistakes setopt extendedglob       # Extended globaling. Allows using regular expressions with *
 setopt histignorealldups    # If a new command is a duplicate, remove older one
 setopt histignorespace      # Don't save commands that start with space
-setopt inc_append_history   # Save commands are addded to the history immediately
+setopt inc_append_history   # Save commands are added to the history immediately
 setopt nobeep               # No beep
-setopt nocaseglob           # Case insensative globbing
-setopt numericglobsort      # Sort filenames numeracally when it makse sense
+setopt nocaseglob           # Case insensitive globbing
+setopt numericglobsort      # Sort filenames numeracally when it makes sense
 
 autoload -U select-word-style
 
@@ -18,8 +18,8 @@ autoload -U select-word-style
 autoload -U colors && colors
 
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # Colored completion (different colors fr dirs/files/etc)
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # Case sensetive TAB completions
-zstyle ':completion:*' rehash true                          # Automaticly find new executables in path
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # Case sensitive TAB completions
+zstyle ':completion:*' rehash true                          # Automatically find new executables in path
 # Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' cache-path ~/.config/zsh/cache
@@ -32,14 +32,15 @@ _comp_options+=(globdots) # Include hidden files
 
 HISTSIZE=1000000
 SAVEHIST=1000000
-HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/history"
+HISTFILE="$XDG_CACHE_HOME/zsh/history"
 WORDCHARS=${WORDCHARS//\/[&.;]/} # Don't consider certain part of the word
 
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+[ -f "$XDG_CONFIG_HOME/shell/aliasrc" ] && source "$XDG_CONFIG_HOME/shell/aliasrc"
 
 # theme/plugins
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh 2>/dev/null
+source /usr/share/zsh/plugins/zsh-autoswitch-virtualenv/autoswitch_virtualenv.plugin.zsh 2>/dev/null
 zmodload zsh/terminfo
 
 # Keybindings
@@ -49,7 +50,7 @@ bindkey -v
 export KEYTIMEOUT=1
 
 # Change cursor shape for different vi modes.
-function zle-keymap-select {
+zle-keymap-select() {
     case $KEYMAP in
         vicmd) echo -ne '\e[1 q' ;;        # block
         viins | main) echo -ne '\e[5 q' ;; # beam
@@ -65,7 +66,7 @@ echo -ne '\e[5 q'                # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q'; } # Use beam shape cursor for each new prompt.
 
 # Run exa on directory change
-function cd() {
+function cd {
     new_directory="$*"
     if [ $# -eq 0 ]; then
         new_directory=${HOME}
@@ -74,15 +75,16 @@ function cd() {
 }
 
 # Use lf to switch directories and bind it to ctrl-o
-function lfcd() {
-    tmp="$(mktemp)"
-    lfrun -last-dir-path="$tmp" "$@"
+lfcd() {
+    tmp="$(mktemp -uq)"
+    trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM PWR EXIT' HUP INT QUIT TERM PWR EXIT
+    lf -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
-        dir="$(bat "$tmp")"
-        rm -f "$tmp" >/dev/null
+        dir="$(cat "$tmp")"
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
+
 
 # Navigate words with CTRL+ARROW keys
 bindkey '^H' backward-kill-word # delete previous word with CTRL+BACKSPACE
