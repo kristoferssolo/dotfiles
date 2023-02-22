@@ -1,5 +1,4 @@
 #!/bin/zsh
 
-if [ "$(tty)" = "/dev/tty1" ]; then
-    pgrep awesome || sx
-fi
+# Start graphical server on user's current tty if not already running.
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec dbus-launch --sh-syntax --exit-with-session startx "$XINITRC"

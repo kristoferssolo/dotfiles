@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# This file runs when a DM logs you into a graphical session.
+# If you use startx/xinit like a Chad, this file will also be sourced.
+
+# xrandr --dpi 96 # Set DPI. User may want to use a larger number for larger screens.
+setbg & # set the background with the `setbg` script
+xrdb "$XDG_CONFIG_HOME/X11/xresources" &
+xrdbpid=$! # Uncomment to use Xresources colors/settings on startup
+remaps &   # run the remaps script, switching caps/esc and more; check it for more info
+# ssh-agent dbus-launch --sh-syntex --exit-with-session &
+
+autostart="pipewire pipewire-pulse wireplumber dunst"
+
+for program in $autostart; do
+	pidof -s "$program" || "$program" &
+done >/dev/null 2>&1
+
+. "$XDG_CONFIG_HOME/X11/opt-apps"
+
+# Ensure that xrdb has finished running before moving on to start the WM/DE.
+[ -n "$xrdbpid" ] && wait "$xrdbpid"
