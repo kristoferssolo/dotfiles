@@ -1,7 +1,5 @@
 # The Solorice (Kristofers Solo dotfiles)
 
-
-
 - Very useful scripts are in `~/.local/bin/`
 - Settings for:
   - nvim (text editor) 
@@ -16,7 +14,3 @@
 - I try to minimize what's directly in `~` so:
   - All configs that can be in `~/.config/` are there.
   - Some environmental variables have been set in `~/.zshenv` to move configs into `~/.config/`
-
-## Credits
-
-- [lfimg by cirala](https://github.com/cirala/lfimg)
