@@ -1,33 +1,40 @@
 [Default Applications]
+
+# xdg-open will use these settings to determine how to open filetypes.
+# These .desktop entries can also be seen and changed in ~/.local/share/applications/
+
 application/octet-stream=mpv.desktop
 application/pdf=pdf.desktop;
-
-audio/mpeg=mpv.desktop;
-
+application/postscript=pdf.desktop;
+application/rss+xml=rss.desktop
+application/x-bittorrent=torrent.desktop;
+audio/mpeg=video.desktop;
+image/gif=img.desktop;
 image/gif=img.desktop;
 image/heic=img.desktop
 image/heif=img.desktop;
 image/jpeg=img.desktop;
+image/jpeg=img.desktop;
 image/jpg=img.desktop;
+image/png=img.desktop;
 image/png=img.desktop;
 image/svg+xml=org.inkscape.Inkscape.desktop;
 image/webp=img.desktop;
 image/x-canon-cr2=img.desktop;
-
+inode/directory=file.desktop
 inode/directory=spacefm.desktop
-
 text/html=text.desktop;
 text/markdown=text.desktop;
 text/plain=text.desktop;
-text/py=text.desktop;
-
-video/mp4=mpv.desktop;
-video/mpeg=mpv.desktop;
-video/mpv=mpv.desktop;
-video/ts=mpv.desktop;
-
+text/plain=text.desktop;
+text/x-shellscript=text.desktop;
+video/mp4=video.desktop;
+video/mpeg=video.desktop;
+video/ts=video.desktop;
+video/x-matroska=video.desktop
 x-scheme-handler/about=librewolf.desktop;
 x-scheme-handler/http=librewolf.desktop;
 x-scheme-handler/https=librewolf.desktop;
-x-scheme-handler/msteams=teams.desktop;
-x-scheme-handler/tg=userapp-Telegram Desktop-M1D2M1.desktop
+x-scheme-handler/lbry=lbry.desktop
+x-scheme-handler/magnet=torrent.desktop;
+x-scheme-handler/mailto=mail.desktop;
