@@ -3,12 +3,6 @@
 # Use neovim for vim if present
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
-# doas not required for some system commands
-for command in mount umount sv pacman updatedb su shutdown poweroff reboot zzz systemctl wg wg-quick; do
-	alias $command="doas $command"
-done
-unset command
-
 # Vervosity and settings that you pretty much just always are going to wand
 alias \
 	bc="bc -ql" \
@@ -17,8 +11,8 @@ alias \
 	mkdir="mkdir -pv" \
 	mv="mv -iv" \
 	nsxiv="nsxiv -a" \
-	rm="rm -vI"
-keychain="keychain --dir "$XDG_RUNTIME_DIR"/keychain"
+	rm="rm -vI" \
+	keychain="keychain --dir "$XDG_RUNTIME_DIR"/keychain"
 
 # Colorize commands when possible
 alias \
@@ -48,9 +42,16 @@ alias \
 	night="redshift -PO 4500" \
 	py="python" \
 	v="$EDITOR" \
+	vpn-down="wg-quick down wg0" \
+	vpn-restart="wg-quick down wg0 && wg-quick up wg0" \
+	vpn-up="wg-quick up wg0" \
 	weather="curl wttr.in/" \
 	ww="$EDITOR ~/vimwiki/index.md" \
 	z="zathura" \
-	vpn-down="wg-quick down wg0" \
-	vpn-restart="wg-quick down wg0 && wg-quick up wg0" \
-	vpn-up="wg-quick up wg0"
+	sv="rsv"
+
+# doas not required for some system commands
+for command in mount umount rsv sv pacman updatedb su shutdown poweroff reboot zzz systemctl wg wg-quick; do
+	alias $command="doas $command"
+done
+unset command
