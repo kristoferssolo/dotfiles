@@ -1,12 +1,11 @@
 #!/bin/sh
 
-autostart="flameshot nextcloud telegram-desktop headset-charge-indicator spotify ferdium picom discord"
+autostart="nextcloud telegram-desktop headset-charge-indicator spotify ferdium discord transmission-daemon"
 
 for program in $autostart; do
 	pidof -s "$program" || "$program" &
 done >/dev/null 2>&1
 
-numlockx on &
 setxkbmap lv &
 xrandr --output DisplayPort-0 --mode 1920x1080 --rate 75 --output HDMI-A-0 --mode 1920x1080 --rate 60 --left-of DisplayPort-0 &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

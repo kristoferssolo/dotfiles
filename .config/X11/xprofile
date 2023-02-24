@@ -9,7 +9,7 @@ xrdb "$XDG_CONFIG_HOME/X11/xresources" &
 xrdbpid=$! # Uncomment to use Xresources colors/settings on startup
 remaps &   # run the remaps script, switching caps/esc and more; check it for more info
 
-autostart="pipewire pipewire-pulse wireplumber dunst"
+autostart="pipewire pipewire-pulse wireplumber dunst picom flameshot"
 
 for program in $autostart; do
 	pidof -s "$program" || "$program" &
