@@ -802,5 +802,5 @@ client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
 
-awful.spawn.with_shell("spotify")
+-- awful.spawn.with_shell("spotify")
 awful.spawn.with_shell("discord")

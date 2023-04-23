@@ -12,7 +12,7 @@ alias \
 	mv="mv -iv" \
 	nsxiv="nsxiv -a" \
 	rm="rm -vI" \
-	keychain="keychain --dir "$XDG_RUNTIME_DIR"/keychain"
+	keychain="keychain --dir $XDG_RUNTIME_DIR/keychain"
 
 # Colorize commands when possible
 alias \
@@ -41,14 +41,16 @@ alias \
 	matrix="unimatrix -s 95" \
 	night="redshift -PO 4500" \
 	py="python" \
+	sv="rsv" \
 	v="$EDITOR" \
 	vpn-down="wg-quick down wg0" \
 	vpn-restart="wg-quick down wg0 && wg-quick up wg0" \
 	vpn-up="wg-quick up wg0" \
 	weather="curl wttr.in/" \
 	ww="$EDITOR ~/vimwiki/index.md" \
-	z="zathura" \
-	sv="rsv"
+	x="xplr -C ~/.config/xplr/hack.lua" \
+	j="joshutoub" \
+	z="zathura"
 
 # doas not required for some system commands
 for command in mount umount rsv sv pacman updatedb su shutdown poweroff reboot zzz systemctl wg wg-quick; do

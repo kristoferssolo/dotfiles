@@ -1,5 +1,8 @@
-#!/bin/zsh
+#!/bin/sh
 
-if [ "$(tty)" = "/dev/tty1" ]; then
-    pgrep Hyprland || Hyprland
-fi
+export WM="Hyprland"
+export XDG_CURRENT_DESKTOP=Hyprland
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=Hyprland
+
+[ "$(tty)" = "/dev/tty1" ] && ! pidof -s Hyprland >/dev/null 2>&1 && Hyprland

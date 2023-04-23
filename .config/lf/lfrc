@@ -1,16 +1,16 @@
 #!/bin/sh
 # Basic Settings
 set autoquit on
-set cleaner ~/.config/lf/cleaner
+set cleaner "~/.config/lf/cleaner"
 set drawbox true
 set hidden true
+set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 set icons true
-set ifs "\n"
 set ifs "\n"
 set ignorecase true
 set info size
 set period 1
-set previewer ~/.config/lf/preview
+set previewer "~/.config/lf/preview"
 set ratios 1:2:3
 set scrolloff 10
 set shellopts '-eu'
@@ -21,7 +21,7 @@ cmd moveto ${{
         clear; tput cup $(($(tput lines)/3)); tput bold
         set -f
         clear; echo "Move to where?"
-        dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | sk | sed 's|~|$HOME|')" &&
+        dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' $XDG_CONFIG_HOME/shell/bm-dirs | sk | sed 's|~|$HOME|')" &&
         for x in $fx; do
             eval mv -iv \"$x\" \"$dest\"
         done &&
@@ -33,7 +33,7 @@ cmd copyto ${{
         clear; tput cup $(($(tput lines)/3)); tput bold
         set -f
         clear; echo "Copy to where?"
-        dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | sk | sed 's|~|$HOME|')" &&
+        dest="$(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' $XDG_CONFIG_HOME/shell/bm-dirs | sk | sed 's|~|$HOME|')" &&
         for x in $fx; do
             eval cp -ivr \"$x\" \"$dest\"
         done &&
@@ -56,15 +56,15 @@ cmd open ${{
                 done &
                 ;;
             audio/*|video/x-ms-asf) mpv --audio-display=no $f ;;
-            video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
+            video/*) setsid -f mpv --speed=2 $f -quiet >/dev/null 2>&1 ;;
             application/pdf|application/vnd.djvu|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
             application/pgp-encrypted) $EDITOR $fx ;;
-            application/vnd.openxmlformats-officedocument.wordprocessingml.document|application/vnd.oasis.opendocument.text) setsid -f lowriter $fx >/dev/null 2>&1 ;;
-            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/octet-stream|application/vnd.oasis.opendocument.spreadsheet|application/vnd.oasis.opendocument.spreadsheet-template) setsid -f localc $fx >/dev/null 2>&1 ;;
-            application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.oasis.opendocument.presentation-template|application/vnd.oasis.opendocument.presentation|application/vnd.ms-powerpoint) setsid -f loimpress $fx >/dev/null 2>&1 ;;
-            application/vnd.oasis.opendocument.graphics|application/vnd.oasis.opendocument.graphics-template) setsid -f lodraw $fx >/dev/null 2>&1 ;;
-            application/vnd.oasis.opendocument.formula) setsid -f lomath $fx >/dev/null 2>&1 ;;
-            application/vnd.oasis.opendocument.database) setsid -f lobase $fx >/dev/null 2>&1 ;;
+                # application/vnd.openxmlformats-officedocument.wordprocessingml.document|application/vnd.oasis.opendocument.text) setsid -f lowriter $fx >/dev/null 2>&1 ;;
+                # application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/octet-stream|application/vnd.oasis.opendocument.spreadsheet|application/vnd.oasis.opendocument.spreadsheet-template) setsid -f localc $fx >/dev/null 2>&1 ;;
+                # application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.oasis.opendocument.presentation-template|application/vnd.oasis.opendocument.presentation|application/vnd.ms-powerpoint) setsid -f loimpress $fx >/dev/null 2>&1 ;;
+                # application/vnd.oasis.opendocument.graphics|application/vnd.oasis.opendocument.graphics-template) setsid -f lodraw $fx >/dev/null 2>&1 ;;
+                # application/vnd.oasis.opendocument.formula) setsid -f lomath $fx >/dev/null 2>&1 ;;
+                # application/vnd.oasis.opendocument.database) setsid -f lobase $fx >/dev/null 2>&1 ;;
             *) for f in $fx; do setsid -f $OPENER $f >/dev/null 2>&1; done ;;
         esac
 }}
@@ -75,8 +75,8 @@ cmd extract ${{
         set -f
         printf "%s\n\t" "$fx"
         printf "extract?[y/N]"
-        read ans
-        [ $ans = "y" ] && aunpack $fx
+        read answer
+        [ $answer = "y" ] && aunpack $fx
 }}
 
 
@@ -94,6 +94,11 @@ cmd unarchive ${{
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 cmd mkfile $touch "$(echo $* | tr ' ' '\ ')"
 cmd setbg "$1"
+
+cmd dragon %dragon-drop -a -x $fx
+cmd dragon-stay %dragon-drop -a %fx
+cmd dragon-individual %dragon-drop $fx
+
 
 # Bindings
 # Remove some defaults
@@ -119,7 +124,7 @@ map <f-2> rename
 map B $vidir # bulk rename
 map D delete
 map E extract
-map J $lf -remote "send $id cd $(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | sk)"
+map J $lf -remote "send $id cd $(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' $XDG_CONFIG_HOME/shell/bm-dirs | sk)"
 map O $mimeopen --ask "$f"
 map P paste
 map Y $printf "%s" "$fx" | xclip -selection clipboard
@@ -133,6 +138,12 @@ map mv moveto
 map nN $spacefm -t "${PWD}" & disown >/dev/null 2>&1
 map nn $setsid -f $TERMINAL >/dev/null 2>&1
 map o &mimeopen "$f"
+
+# Dragon Mapping
+map dr dragon
+map ds dragon-stay
+map di dragon-individual
+
 
 # Source Bookmarks
 source "~/.config/lf/shortcutrc"
