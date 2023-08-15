@@ -5,17 +5,17 @@
 
 # xrandr --dpi 96 # Set DPI. User may want to use a larger number for larger screens.
 setbg & # set the background with the `setbg` script
-xrdb "$XDG_CONFIG_HOME/X11/xresources" &
+xrdb "$XDG_CONFIG_HOME/x11/xresources" &
 xrdbpid=$! # Uncomment to use Xresources colors/settings on startup
-remaps &   # run the remaps script, switching caps/esc and more; check it for more info
 
-autostart="pipewire pipewire-pulse wireplumber dunst picom flameshot"
+autostart="pipewire pipewire-pulse wireplumber dunst flameshot"
 
 for program in $autostart; do
-	pidof -s "$program" || "$program" &
-done >/dev/null 2>&1
+    pidof -sx "$program" || "$program" &
+done
+# >/dev/null 2>&1
 
-. "$XDG_CONFIG_HOME/X11/opt-apps"
+. "$XDG_CONFIG_HOME/x11/opt-apps"
 
 # Ensure that xrdb has finished running before moving on to start the WM/DE.
-[ -n "$xrdbpid" ] && wait "$xrdbpid"
+[ "$xrdbpid" != "" ] && wait "$xrdbpid"

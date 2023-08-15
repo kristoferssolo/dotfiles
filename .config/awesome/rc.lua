@@ -7,12 +7,12 @@ local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
-local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 local spotify_shell = require("awesome-wm-widgets.spotify-shell.spotify-shell")
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
-local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
--- local pacman_widget = require("awesome-wm-widgets.pacman-widget.pacman")
+local github_activity_widget = require("awesome-wm-widgets.github-activity-widget.github-activity-widget")
+local github_contributions_widget =
+	require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
 
 -- Standard awesome library
 local gears = require("gears")
@@ -31,7 +31,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 -- OpenWeather API
--- !Create file ~/.config/awesome/weather and paste API from OpenWeather, latitude and longitude, each on separate lines
+-- WARNING: Create file ~/.config/awesome/weather and paste API from OpenWeather, latitude and longitude, each on separate line
 local WEATHER_FILE = os.getenv("HOME") .. "/.config/awesome/weather"
 -- see if the file exists
 local function file_exists(file)
@@ -123,7 +123,7 @@ awful.layout.layouts = {
 	-- awful.layout.suit.max,
 	-- awful.layout.suit.max.fullscreen,
 	-- awful.layout.suit.magnifier,
-	-- awful.layout.suit.corner.nw,
+	awful.layout.suit.corner.nw,
 	-- awful.layout.suit.corner.ne,
 	-- awful.layout.suit.corner.sw,
 	-- awful.layout.suit.corner.se,
@@ -160,14 +160,14 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- Keyboard map indicator and switcher
--- mykeyboardlayout = awful.widget.keyboardlayout()
+-- local mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-local mytextclock = wibox.widget.textclock(" %d.%m.%Y, %H:%M:%S, %j ", 1)
+local mytextclock = wibox.widget.textclock(" %d.%m.%Y, %H:%M:%S ", 1)
 
 local cw = calendar_widget({
-	theme = "nord",
+	theme = "naughty",
 	placement = "top_right",
 	previous_month_button = 4,
 	next_month_button = 5,
@@ -282,15 +282,29 @@ awful.screen.connect_for_each_screen(function(s)
 	-- Add widgets to the wibox
 	s.mywibox:setup({
 		layout = wibox.layout.align.horizontal,
-		{ -- Left widgets
+		{
+			-- Left widgets
 			layout = wibox.layout.fixed.horizontal,
 			--mylauncher,
 			s.mytaglist,
 			s.mypromptbox,
 		},
 		s.mytasklist, -- Middle widget
-		{ -- Right widgets
+		{
+			-- Right widgets
 			layout = wibox.layout.fixed.horizontal,
+			github_contributions_widget({
+				username = "kristoferssolo",
+				days = 356,
+				color_of_empty_cells = "",
+				with_border = true,
+				margin_top = 1,
+				theme = "teal",
+			}),
+			github_activity_widget({
+				username = "kristoferssolo",
+				number_of_events = 10,
+			}),
 			wibox.widget.systray(),
 			cpu_widget({
 				width = 50,
@@ -301,25 +315,7 @@ awful.screen.connect_for_each_screen(function(s)
 				process_info_max_length = -1,
 				timeout = 1,
 			}),
-			ram_widget({
-				color_used = beautiful.bg_urgent,
-				color_free = beautiful.fg_normal,
-				color_buf = beautiful.border_color_active,
-				widget_height = 25,
-				widget_width = 25,
-				widget_show_buf = false,
-				timeout = 1,
-			}),
 			net_speed_widget(),
-			-- pacman_widget({
-			-- 	interval = 600, -- Refresh every 10 minutes
-			-- 	popup_bg_color = "#222222",
-			-- 	popup_border_width = 1,
-			-- 	popup_border_color = "#7e7e7e",
-			-- 	popup_height = 10, -- 10 packages shown in scrollable window
-			-- 	popup_width = 300,
-			-- 	polkit_agent_path = "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
-			-- }),
 			spotify_widget({
 				play_icon = "/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg",
 				pause_icon = "/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg",
@@ -331,8 +327,8 @@ awful.screen.connect_for_each_screen(function(s)
 				timeout = 1,
 			}),
 			weather_widget({
-				coordinates = { latitude, longitude },
 				api_key = API,
+				coordinates = { latitude, longitude },
 				font_name = "JetBrainsMono NF 10",
 				both_units_widget = false,
 				units = "metric",
@@ -342,19 +338,6 @@ awful.screen.connect_for_each_screen(function(s)
 				icon_pack_name = "weather-underground-icon",
 				icons_extension = ".png",
 				timeout = 120,
-			}),
-			volume_widget({
-				mixer_cmd = "pulsemixer",
-				step = 1,
-				widget_type = "horizontal_bar",
-				device = "pulse",
-				main_color = beautiful.fg_normal,
-				mute_color = "#4b4b4bff",
-				bg_color = "#ffffff11",
-				width = 50,
-				margins = 7,
-				shape = "bar",
-				with_icon = true,
 			}),
 			logout_menu_widget({
 				font = "JetBrainsMono NF 10",
@@ -694,7 +677,6 @@ awful.rules.rules = {
 				"Nsxiv",
 				"Galculator",
 			},
-
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
 			-- and the name shown there might not match defined rules here.
 			name = {
@@ -713,7 +695,15 @@ awful.rules.rules = {
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
 
 	{
-		rule_any = { class = { "steam_app_1172470", "steam_app_1237970", "steam_app_289070" } },
+		rule_any = {
+			class = {
+				-- "steam_app_1172470",
+				-- "steam_app_1237970",
+				-- "steam_app_289070",
+				-- "steam_app_1172380",
+				"steam_app_1774580",
+			},
+		},
 		properties = { screen = 1, fullscreen = true, floating = true },
 	},
 	{
@@ -765,20 +755,24 @@ client.connect_signal("request::titlebars", function(c)
 	)
 
 	awful.titlebar(c):setup({
-		{ -- Left
+		{
+			-- Left
 			awful.titlebar.widget.iconwidget(c),
 			buttons = buttons,
 			layout = wibox.layout.fixed.horizontal,
 		},
-		{ -- Middle
-			{ -- Title
+		{
+			-- Middle
+			{
+				-- Title
 				align = "center",
 				widget = awful.titlebar.widget.titlewidget(c),
 			},
 			buttons = buttons,
 			layout = wibox.layout.flex.horizontal,
 		},
-		{ -- Right
+		{
+			-- Right
 			awful.titlebar.widget.floatingbutton(c),
 			awful.titlebar.widget.maximizedbutton(c),
 			awful.titlebar.widget.stickybutton(c),
@@ -801,6 +795,3 @@ end)
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)
-
--- awful.spawn.with_shell("spotify")
-awful.spawn.with_shell("discord")

@@ -1,6 +1,6 @@
 #!/bin/sh
 # Basic Settings
-set autoquit on
+set autoquit true
 set cleaner "~/.config/lf/cleaner"
 set drawbox true
 set hidden true
@@ -95,11 +95,6 @@ cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 cmd mkfile $touch "$(echo $* | tr ' ' '\ ')"
 cmd setbg "$1"
 
-cmd dragon %dragon-drop -a -x $fx
-cmd dragon-stay %dragon-drop -a %fx
-cmd dragon-individual %dragon-drop $fx
-
-
 # Bindings
 # Remove some defaults
 map "'"
@@ -139,10 +134,14 @@ map nN $spacefm -t "${PWD}" & disown >/dev/null 2>&1
 map nn $setsid -f $TERMINAL >/dev/null 2>&1
 map o &mimeopen "$f"
 
-# Dragon Mapping
-map dr dragon
-map ds dragon-stay
-map di dragon-individual
+cmd ripdrag-all %ripdrag --all --and-exit $fx
+cmd ripdrag-individual %ripdrag --keep --target $fx
+cmd ripdrag-target %ripdrag --target
+
+# ripdrag Mapping
+map da ripdrag-all
+map di ripdrag-individual
+#map dt ripdrag-target
 
 
 # Source Bookmarks

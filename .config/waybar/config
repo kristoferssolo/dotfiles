@@ -143,7 +143,6 @@
     },
 
     "network": {
-        "interface": "wlo1*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
@@ -227,14 +226,6 @@
         "exec": "$HOME/.config/waybar/scripts/pipewire.sh",
         "on-click": "pulsemixer --toggle-mute",
         "on-click-right": "qpwgraph"
-    },
-
-    "custom/wireguard": {
-        "format": "{}<big> 嬨</big>",
-        "exec": "~/.config/waybar/scripts/wireguard.sh",
-        "on-click": "rofi -modi 'WireGuard:~/.config/waybar/scripts/wireguard-rofi.sh' -show WireGuard",
-        "interval": 60,
-        "return-type": "json"
     },
 
     "custom/github": {

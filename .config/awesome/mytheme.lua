@@ -13,22 +13,22 @@ local theme = {}
 
 theme.font = "JetBrainsMono NF 8"
 
-theme.bg_normal = "#222222"
-theme.bg_focus = "#333333"
-theme.bg_urgent = "#ff0000"
+theme.bg_normal = "#1a1b26"
+theme.bg_focus = "#292e42"
+theme.bg_urgent = "#db4b4b"
 theme.bg_minimize = "#444444"
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#aaaaaa"
-theme.fg_focus = "#ffffff"
-theme.fg_urgent = "#ffffff"
-theme.fg_minimize = "#ffffff"
+theme.fg_normal = "#a9b1d6"
+theme.fg_urgent = "#c0caf5"
+theme.fg_focus = "#c0caf5"
+theme.fg_minimize = "#a9b1d6"
 
 theme.useless_gap = dpi(4)
 theme.border_width = dpi(2)
-theme.border_normal = "#000000"
-theme.border_focus = "#b9bbbd"
-theme.border_marked = "#91231c"
+theme.border_normal = "#15161e"
+theme.border_focus = "#27a1b9"
+theme.border_marked = "#713137"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -41,7 +41,7 @@ theme.border_marked = "#91231c"
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 
---theme.taglist_bg_focus = "#ff0000"
+-- theme.taglist_bg_focus = "#db4b4b"
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
@@ -64,7 +64,7 @@ theme.menu_width = dpi(100)
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
---theme.bg_widget = "#cc0000"
+-- theme.bg_widget = "#db4b4b"
 
 -- Define the image to load
 theme.titlebar_close_button_normal = themes_path .. "default/titlebar/close_normal.png"

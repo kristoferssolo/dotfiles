@@ -1,2 +1,4 @@
 #!/bin/sh
 # fastfetch
+
+export BW_SESSION="21gE9V14VDoh9QmUqq8sVfi1Cxp1Fsq2rr9+LBmk1eMLsbNNFFJhtRfuyI059o2Lq3w7HPLh5EkcFyLDZq4Bow=="

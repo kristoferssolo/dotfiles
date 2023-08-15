@@ -1,0 +1,7 @@
+#!/bin/sh
+for o in HDMI-A-2 DP-1 eDP-1; do
+	grim -o "$o" "/tmp/$o.png"
+	corrupter "/tmp/$o.png" "/tmp/$o.png" &
+done
+wait
+exec gtklock "$@"

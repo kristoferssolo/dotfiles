@@ -22,7 +22,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # Case sensitive TAB
 zstyle ':completion:*' rehash true                          # Automatically find new executables in path
 # Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
-zstyle ':completion:*' cache-path ~/.config/zsh/cache
+zstyle ':completion:*' cache-path ~/.cache/zsh/cache
 zstyle ':completion:*' menu select
 zstyle ':completion:*' use-cache on
 autoload -U compinit

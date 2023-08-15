@@ -1,71 +1,68 @@
 * {
-  /* `otf-font-awesome` is required to be installed for icons */
-  font-family: JetBrains Mono NF, FontAwesome, Roboto, Helvetica, Arial,
-    sans-serif;
-  font-size: 13px;
-  color: #fff;
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family:
+        JetBrains Mono NF,
+        FontAwesome,
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+    font-size: 13px;
+    color: #c0caf5;
 }
 
 window#waybar {
-  border-top: 3px solid transparent;
-  color: #fff;
-  transition-property: background-color;
-  transition-duration: 0.5s;
-  background-color: transparent;
+    border-top: 3px solid transparent;
+    color: #c0caf5;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    background-color: transparent;
 }
 
 #window {
-  border-radius: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 window#waybar.hidden {
-  opacity: 0.2;
+    opacity: 0.2;
 }
 
-/* window#waybar.termite { */
-/*   background-color: #3f3f3f; */
-/* } */
-
 window#waybar.chromium {
-  background-color: #000;
-  border: none;
+    background-color: #000;
+    border: none;
 }
 
 button {
-  /* Use box-shadow instead of border so the text isn't offset */
-  box-shadow: inset 0 3px transparent;
-  /* Avoid rounded borders under each button name */
-  border: none;
-  border-radius: 0;
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
-  background: inherit;
-  box-shadow: inset 0 3px #fff;
+    background: inherit;
+    box-shadow: inset 0 3px #c0caf5;
 }
 
 #workspaces button {
-  padding: 0 5px;
-  color: #fff;
+    padding: 0 5px;
+    color: #c0caf5;
 }
 
-/* #workspaces button:hover { */
-/*   background: rgba(0, 0, 0, 0.2); */
-/* } */
-
 #workspaces button.active {
-  box-shadow: inset 0 3px #fff;
+    box-shadow: inset 0 3px #c0caf5;
 }
 
 #workspaces button.urgent {
-  background-color: #eb4d4b;
+    background-color: #db4b4b;
 }
 
 #mode {
-  border-bottom: 3px solid #fff;
+    border-bottom: 3px solid #c0caf5;
 }
 
 #clock,
@@ -86,107 +83,75 @@ button:hover {
 #custom-wireguard,
 #custom-github,
 #custom-dunst {
-  padding: 0 10px;
-  font-weight: bold;
-  background-color: transparent;
+    padding: 0 10px;
+    font-weight: bold;
+    background-color: transparent;
 }
 
 #custom-pipewire.muted {
-  color: #5b5b5b;
+    color: #414868;
 }
 
 #window,
 #workspaces {
-  margin: 0 4px;
+    margin: 0 4px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
-  margin-right: 0;
+    margin-right: 0;
 }
 
 #battery.charging,
 #battery.plugged {
-  color: #26a65b;
+    color: #1abc9c;
 }
 
 @keyframes blink {
-  to {
-    color: #fff;
-  }
+    to {
+        color: #c0caf5;
+    }
 }
 
 #battery.warning:not(.charging) {
-  color: #ff9e50;
+    color: #e0af68;
 }
 
 #battery.critical:not(.charging) {
-  color: #f53c3c;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+    color: #db4b4b;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #pulseaudio.muted {
-  color: #5b5b5b;
+    color: #414868;
 }
 
 #custom-media {
-  color: #2a5c45;
-  min-width: 100px;
-}
-
-#custom-media.custom-spotify {
-  color: #66cc99;
-}
-
-#custom-media.custom-spotify.paused {
-  color: #cccccc;
-}
-
-#custom-media.custom-vlc {
-  color: #ffa000;
+    color: #41a6b5;
+    min-width: 100px;
 }
 
 #temperature.critical {
-  color: #eb4d4b;
+    color: #db4b4b;
 }
 
 #tray > .passive {
-  -gtk-icon-effect: dim;
+    -gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
-  -gtk-icon-effect: highlight;
+    -gtk-icon-effect: highlight;
 }
 
 #network.disconnected {
-  color: #f53c3c;
-}
-
-#mpd {
-  color: #2a5c45;
-}
-
-#mpd.disconnected {
-  color: #f53c3c;
-}
-
-#mpd.stopped {
-  color: #90b1b1;
-}
-
-#mpd.paused {
-  color: #51a37a;
-}
-
-#scratchpad {
-  background: rgba(0, 0, 0, 0.2);
+    color: #db4b4b;
 }
