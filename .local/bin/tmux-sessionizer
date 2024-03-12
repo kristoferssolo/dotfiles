@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
 	selected=$1
 else
-	selected=$(find ~/repos/Rust/ ~/repos/ ~/vimwiki/university/3rd-semester/ ~/Nextcloud/repos/ -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(fd --min-depth 1 --max-depth 1 --type d . ~/repos/Rust/ ~/repos/ ~/neorg/University/3rd-semester/ ~/Nextcloud/repos/ ~/Nextcloud/Documents/LaTeX/ ~/Nextcloud/Documents/Typst/ ~/Nextcloud/repos/university/** ~/Nextcloud/repos/university/**/**/ | sk --height 16)
 fi
 
 if [[ -z $selected ]]; then

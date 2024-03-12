@@ -1,0 +1,279 @@
+%%
+%% This is file `latvian.ldf',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% latvian.dtx  (with options: `code')
+%% Copyright 1998-1999 Johannes L. Braams and any individual authors
+%% listed elsewhere in this file.  All rights reserved.
+%%
+%% For further copyright information see any other copyright notices in
+%% this file.
+%%
+%% This file is part of the Babel system release 3.6.
+%% --------------------------------------------------
+%%
+%% It may be distributed under the terms of the LaTeX Project Public
+%% License, as described in lppl.txt in the base LaTeX distribution.
+%% Either version 1.0 or, at your option, any later version.
+\ProvidesLanguage{latvian}
+        [2000/02/15 v1.1 Latvian support from the babel system]
+%% File `latvian.dtx'
+%% Babel package for LaTeX version 2e
+%% Copyright (C) 1989 -- 1999
+%%           by Johannes Braams, TeXniek
+%% Latvian language Definition File
+%% Copyright (C) 1999 - 2000
+%%           by Andris Lasis, Faculty of Physics and Mathematics,
+%%                            University of Latvia
+%% Report bugs to: Andris Lasis
+%%                 andrew@simss.lv
+%
+%    This file is part of the babel system, it provides the source code for
+%    the Latvian language definition file.
+\LdfInit{latvian}\captionslatvian
+\ifx\l@latvian\@undefined
+  \@nopatterns{Latvian}
+  \adddialect\l@latvian0\fi
+
+%%%%%%%%%%%%%%%%%%%%% Quotation marks %%%%%%%%%%%%%%%%
+\gdef\set@low@box#1{\setbox\tw@\hbox{,}\setbox\z@\hbox{#1}%
+  \setbox\z@\hbox{\dimen@\ht\z@ \advance\dimen@ -\ht\tw@
+      \lower\dimen@\box\z@}%            % this lowers the latvian
+  \ht\z@\ht\tw@ \dp\z@\dp\tw@}          % left quotes to the same level as
+                                        % the comma
+\gdef\save@sf@q#1{{\ifhmode
+  \edef\@SF{\spacefactor\the\spacefactor}\else
+  \let\@SF\empty \fi \leavevmode #1\@SF}}
+
+\gdef\@flqq{\relax\ifmmode \ll \else \save@sf@q{\penalty\@M
+    \raise .2ex\hbox{$\scriptscriptstyle \ll $}\allowhyphens}\fi}
+\gdef\flqq{\protect\@flqq}              %french left qquotes <<
+\gdef\@frqq{\relax\ifmmode \gg \else \save@sf@q{\penalty\@M
+    \raise .2ex\hbox{$\scriptscriptstyle \gg $}\allowhyphens}\fi}
+\gdef\frqq{\protect\@frqq}              %french right qquotes >>
+\gdef\@flq{\relax\ifmmode <\else \save@sf@q{\penalty\@M
+    \raise .2ex\hbox{$\scriptscriptstyle <$}\allowhyphens}\fi}
+\gdef\flq{\protect\@flq}                %french left quote <
+\gdef\@frq{\relax\ifmmode >\else \save@sf@q{\penalty\@M
+    \raise .2ex\hbox{$\scriptscriptstyle >$}\allowhyphens}\fi}
+\gdef\frq{\protect\@frq}                %french right quote >
+\gdef\@llqq{\save@sf@q{\set@low@box{''\/}\box\z@
+             \kern-.04em\allowhyphens}}
+\gdef\llqq{\protect\@llqq}              %latvian left qquotes ,,
+\gdef\@lrqq{\save@sf@q{\kern-.07em``\kern.07em}}        %''
+\gdef\lrqq{\protect\@lrqq}              %latvian right qquotes ``
+\gdef\@llq{\save@sf@q{\set@low@box{'\/}\box\z@
+            \kern-.04em\allowhyphens}}
+\gdef\llq{\protect\@llq}                %latvian left quote ,
+\gdef\@lrq{\save@sf@q{\kern-.0125em'\kern.07em}}
+\gdef\lrq{\protect\@lrq}                %latvian right quote `
+%%%%%%%%%%%%%%%%%%%%% End of Quotation marks %%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%% Latvian captions %%%%%%%%%%%%%%%%%%%%%%%
+\addto\captionslatvian{%
+\def\prefacename{Priek\v sv\= ards}%
+\def\refname{Literat\= ura}%               %arï: Literatþras ràdïtàjs
+\def\abstractname{Anot\= acija}%
+\def\bibname{Bibliogr\= afija}%
+\def\chaptername{noda\c la}%
+\def\appendixname{Pielikums}%
+\def\contentsname{Saturs}%              %arï: Satura ràdïtàjs
+\def\listfigurename{Att\= elu r\= ad\={\i}t\= ajs}%   %arï: Att³lu saraksts
+\def\listtablename{Tabulu r\= ad\={\i}t\= ajs}%    %arï: Tabulu saraksts
+\def\indexname{Priek\v smetu r\= ad\={\i}t\= ajs}%
+\def\figurename{z\={\i}m.}%
+\def\tablename{tabula}%
+\def\partname{da\c la}%
+\def\enclname{Pielikum\= a}%
+\def\ccname{Kopija(s)}%
+\def\headtoname{}%
+\def\pagename{lpp.}%
+\def\seename{skat.}%
+\def\alsoname{skat. ar\={\i}}%
+}
+%%%%%%%%%%%%%%%%%%%%% End of Latvian captions %%%
+
+%%%%%%%%%%%%%%%%%%%%% Latvian syntax %%%%%%%%%%%%
+%%Section numbering%%
+\gdef\the@chapter        {\ifx\chapter\undefined\relax\else
+                        \ifnum \c@chapter > \z@\thechapter\fi\fi}
+\def\thechapter         {\ifx\chapter\undefined\relax \else
+                        \arabic{chapter}.\fi}
+\def\thesection         {\the@chapter\arabic{section}.}
+\def\thesubsection      {\thesection\arabic{subsection}.}
+\def\thesubsubsection   {\thesubsection\arabic{subsubsection}.}
+\def\theparagraph       {\thesubsubsection\arabic{paragraph}.}
+\def\thesubparagraph    {\theparagraph\arabic{subparagraph}.}
+%% End of section numbering %%
+%% Part numbering and caption %%
+\def\depth@{\ifx\chapter\undefined\m@ne\else -2\relax\fi}
+\def\@part[#1]#2{\relax
+\ifnum \c@secnumdepth > \depth@
+        \refstepcounter{part}
+        \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}\else
+      \addcontentsline{toc}{part}{#1}\fi
+        \ifx\chapter\undefined \bgroup\parindent \z@ \raggedright \else
+                \markboth{}{}\bgroup \centering\fi
+    \interlinepenalty \@M
+    \ifnum \c@secnumdepth > \depth@
+        \normalfont\bfseries \thepart~\partname   %    adopted to Latvian syntax
+      \par      \ifx\chapter\undefined\nobreak\else\vskip 20\p@\fi
+    \fi
+    \ifx\chapter\undefined\huge\else\Huge\fi \normalfont\bfseries #2%
+    \ifx\chapter\undefined\markboth{}{}\fi
+\par\egroup
+        \ifx\chapter\undefined\nobreak
+   \vskip 3ex \@afterheading \else \@endpart \fi
+  }
+%% End of part numbering and caption %%
+%% Chapterhead
+\def\@makechapterhead#1{\vspace*{50pt}
+    {\parindent 0pt \raggedright
+      \ifnum \c@secnumdepth >\m@ne
+      \huge\normalfont\bfseries \thechapter\space\@chapapp{}
+     \par
+     \vskip 20pt \fi
+     \Huge \normalfont\bfseries #1\par \nobreak \vskip 40pt } }
+%% End of chapterhead
+%% Paragraph indent (of the text following a heading)
+\let\@aifORI\@afterindentfalse
+\def\bbl@latvianindent{\let\@afterindentfalse\@afterindenttrue
+                      \@afterindenttrue}
+\def\bbl@nonlatvianindent{\let\@afterindentfalse\@aifORI
+                        \@afterindentfalse}
+\expandafter\addto\csname extras\CurrentOption\endcsname{%
+  \bbl@latvianindent}
+\expandafter\addto\csname noextras\CurrentOption\endcsname{%
+  \bbl@nonlatvianindent}
+%% End of paragraph indent
+%% Minicaptions
+\def\thefigure{\the@chapter\@arabic\c@figure.}
+\def\thetable{\the@chapter\@arabic\c@table.}
+\def\fnum@figure{\thefigure~\figurename}
+\def\fnum@table{\thetable~\tablename}
+\long\def\@makecaption#1#2{\vskip 10\p@
+   \setbox\@tempboxa\hbox{#1\if\empty#2\else: #2\fi}%
+   \ifdim \wd\@tempboxa >\hsize #1: #2\par
+     \else
+       \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+   \fi}
+%% End of minicaptions
+%% Theoremlike environments
+\def\@thmcountersep{}
+\gdef\@makethmnumber#1#2{\ifx\thmno@left0{#1\ #2}\else {#2.
+#1}\fi}
+\def\@begintheorem#1#2{\normalfont\itshape\trivlist
+        \item[\hskip\labelsep \hskip\parindent\normalfont\bfseries
+                                {\@makethmnumber{#1}{#2}}.]}
+\def\@opargbegintheorem#1#2#3{\normalfont\itshape\trivlist
+         \item[\hskip\labelsep \hskip\parindent\normalfont\bfseries {\@makethmnumber{#1}{#2}
+                                (#3).}]}
+\gdef\thmnoleft{\let\thmno@left=1}
+\gdef\thmnoright{\let\thmno@left=0} \thmnoleft
+%% End of theoremlike environments
+%% Equations
+\def\theequation{\the@chapter\arabic{equation}}
+%% End of equations
+%% Running headings
+\ifx\@chapapp\undefined
+ \if@twoside
+ \def\sectionmark#1{\markboth {\uppercase{\ifnum \c@secnumdepth >\z@ne
+      \thesection\hskip 1em\relax \fi #1}}{}}%
+ \def\subsectionmark#1{\markright {\uppercase{\ifnum \c@secnumdepth >\@ne
+   \thesubsection \ \fi #1}}}
+ \else
+ \def\sectionmark#1{\markright {\uppercase{\ifnum \c@secnumdepth >\z@
+      \thesection\hskip 1em\relax \fi #1}}} \fi%
+ \else
+ \def\chaptermark#1{\markboth {\uppercase{\ifnum \c@secnumdepth >\m@ne
+      \thechapter~\@chapapp: \ \fi #1}}{}}% %
+ \def\sectionmark#1{\markright {\uppercase{\ifnum \c@secnumdepth >\z@
+   \thesection \ \fi #1}}}%
+ \fi
+%% End of running headings
+%%%%%%%%%%%%%%%%%%%%% End of Latvian syntax %%%%%
+
+%%%%%%%%%%%%%%%%%%%%% Dates %%%%%%%%%%%%%%%%%%%%
+\gdef\datelatvian{\def\today{\number\year.~g.\space\number\day.~\ifcase\month%
+\or janv\= ar\={\i}\or febru\= ar\={\i}\or mart\= a\or apr\={\i}l\={\i}\or maij\= a\or
+j\= unij\= a\or j\= ulij\= a\or august\= a\or septembr\={\i}\or
+oktobr\={\i}\or novembr\={\i}\or  decembr\={\i}\fi}%
+\global\let\datumaa=\today}
+
+\gdef\datums{\number\year.~g.\space\number\day.~%
+\ifcase\month\or janv\=aris\or febru\=aris\or marts\or apr\={\i}lis\or
+maijs\or j\=unijs\or j\=ulijs\or augusts\or septembris\or
+oktobris\or novembris\or decembris\fi}
+%%%%%%%%%%%%%%%%%%%%% End of dates %%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%% Latvian shorthand declaration %%%%%%%%%%%%%%%%%
+\def\latvianhyphenmins{\tw@\tw@}
+\initiate@active@char{"}
+\addto\extraslatvian{\languageshorthands{latvian}}
+\addto\extraslatvian{\bbl@activate{"}}
+
+\begingroup \catcode`\"12
+\def\x{\endgroup
+  \def\@SS{\mathchar"7019 }
+  \def\dq{"}}
+\x
+\declare@shorthand{latvian}{"a}{\textormath{\={a}}{\= a}}
+\declare@shorthand{latvian}{"e}{\textormath{\={e}}{\= e}}
+\declare@shorthand{latvian}{"u}{\textormath{\={u}}{\= u}}
+\declare@shorthand{latvian}{"i}{\textormath{\={\i}}{\= \i}}
+\declare@shorthand{latvian}{"o}{\textormath{\={o}}{\= o}}
+
+\declare@shorthand{latvian}{"A}{\textormath{\={A}}{\= A}}
+\declare@shorthand{latvian}{"E}{\textormath{\={E}}{\= E}}
+\declare@shorthand{latvian}{"U}{\textormath{\={U}}{\= U}}
+\declare@shorthand{latvian}{"I}{\textormath{\={I}}{\= I}}
+\declare@shorthand{latvian}{"O}{\textormath{\={O}}{\= O}}
+
+\declare@shorthand{latvian}{"r}{\textormath{\c {r}}{\c r}}
+\declare@shorthand{latvian}{"s}{\textormath{\v {s}}{\v s}}
+\declare@shorthand{latvian}{"g}{\textormath{\v {g}}{\v g}}
+\declare@shorthand{latvian}{"k}{\textormath{\c {k}}{\c k}}
+\declare@shorthand{latvian}{"l}{\textormath{\c {l}}{\c l}}
+\declare@shorthand{latvian}{"z}{\textormath{\v {z}}{\v z}}
+\declare@shorthand{latvian}{"c}{\textormath{\v {c}}{\v c}}
+\declare@shorthand{latvian}{"n}{\textormath{\c {n}}{\c n}}
+
+\declare@shorthand{latvian}{"R}{\textormath{\c {R}}{\c R}}
+\declare@shorthand{latvian}{"S}{\textormath{\v {S}}{\v S}}
+\declare@shorthand{latvian}{"G}{\textormath{\c {G}}{\c G}}
+\declare@shorthand{latvian}{"K}{\textormath{\c {K}}{\c K}}
+\declare@shorthand{latvian}{"L}{\textormath{\c {L}}{\c L}}
+\declare@shorthand{latvian}{"Z}{\textormath{\v {Z}}{\v Z}}
+\declare@shorthand{latvian}{"C}{\textormath{\v {C}}{\v C}}
+\declare@shorthand{latvian}{"N}{\textormath{\c {N}}{\c N}}
+
+\declare@shorthand{latvian}{"-}{\nobreak\-\bbl@allowhyphens}
+\declare@shorthand{latvian}{"|}{%
+  \textormath{\penalty\@M\discretionary{-}{}{\kern.03em}%
+              \allowhyphens}{}}
+\declare@shorthand{latvian}{""}{\hskip\z@skip}
+\declare@shorthand{latvian}{"~}{\textormath{\leavevmode\hbox{-}}{-}}
+\declare@shorthand{latvian}{"=}{\penalty\@M-\hskip\z@skip}
+
+%%%%%%%%%%%%%%%%%%%%% End of Latvian shorthand declaration %%%%%%%%%%%%
+\ldf@finish{latvian}
+%%
+%%
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%

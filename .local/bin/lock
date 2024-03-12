@@ -1,7 +1,10 @@
 #!/bin/sh
 for o in HDMI-A-2 DP-1 eDP-1; do
 	grim -o "$o" "/tmp/$o.png"
-	corrupter "/tmp/$o.png" "/tmp/$o.png" &
+    # check if the file exists
+    if [[ -f "/tmp/$o.png" ]]; then
+        corrupter "/tmp/$o.png" "/tmp/$o.png" &
+    fi
 done
 wait
 exec gtklock "$@"

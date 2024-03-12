@@ -1,3 +1,4 @@
+#!/bin/zsh
 # Import and execute startup file
 [ -f "$XDG_CONFIG_HOME/zsh/startup" ] && source "$XDG_CONFIG_HOME/zsh/startup"
 
@@ -37,10 +38,6 @@ WORDCHARS=${WORDCHARS//\/[&.;]/} # Don't consider certain part of the word
 
 [ -f "$XDG_CONFIG_HOME/shell/aliasrc" ] && source "$XDG_CONFIG_HOME/shell/aliasrc"
 
-# theme/plugins
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh 2>/dev/null
-source /usr/share/zsh/plugins/zsh-autoswitch-virtualenv/autoswitch_virtualenv.plugin.zsh 2>/dev/null
 zmodload zsh/terminfo
 
 # Keybindings
@@ -65,13 +62,13 @@ zle -N zle-line-init
 echo -ne '\e[5 q'                # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q'; } # Use beam shape cursor for each new prompt.
 
-# Run exa on directory change
+# Run eza on directory change
 function cd {
     new_directory="$*"
     if [ $# -eq 0 ]; then
         new_directory=${HOME}
     fi
-    builtin cd "${new_directory}" && exa -a --icons --group-directories-first
+    builtin cd "${new_directory}" && eza -a --icons --group-directories-first
 }
 
 # Use lf to switch directories and bind it to ctrl-o
@@ -128,8 +125,20 @@ bindkey -M vicmd '^[[P' vi-delete-char
 bindkey -M vicmd '^e' edit-command-line
 bindkey -M visual '^[[P' vi-delete
 
-bindkey -s '^n' '^uv\n'
+bindkey -s '^n' '^uv .\n'
+bindkey -s '^f' '^utmux neww tmux-sessionizer\n'
 
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
 
 eval "$(starship init zsh)"
+
+[[ -r ~/.local/share/zsh/plugins/znap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/.local/share/zsh/plugins/znap
+source ~/.local/share/zsh/plugins/znap/znap.zsh
+
+znap source zsh-users/zsh-autosuggestions 
+znap source zsh-users/zsh-history-substring-search
+znap source MichaelAquilina/zsh-autoswitch-virtualenv
+znap source zdharma-continuum/fast-syntax-highlighting
+
+. "$XDG_DATA_HOME/cargo/env"

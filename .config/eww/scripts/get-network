@@ -1,0 +1,5 @@
+#!/bin/bash
+
+line=$(nmcli connection show | rg wlan0)
+echo $line
+

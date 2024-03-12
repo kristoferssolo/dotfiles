@@ -1,0 +1,528 @@
+% -----------------------------------------------------------------
+% Latvian hyphenation patterns.
+
+% This file contains Latvian hyphenation patterns for TeX.  It assumes
+% that you have fonts with the Latvian letters in the positions where
+% they occur in cp1257:
+% Letter:  \={a} \v{c} \={e} \c{g} \={\i} \c{k} \c{l} \c{n} \s{s} \={u} \v{z}
+% Position: "E2   "E8   "E7   "EC   "EE    "ED   "EF   "F2   "F0   "FB   "FE
+%
+% Ivars Drikis, drikis@lanet.lv
+% Department of Physics
+% University of Latvia
+% Zellu str. 8, Riga
+% Latvia, LV-1002
+% 
+\message{Latvian hyphenation patterns, Ivars Drikis, 1999-15-12.}
+%
+{
+%
+% Make sure that neither quote nor doublequote are active:
+\catcode`\'=12 \catcode`\"=12
+%
+% Assign appropriate \catcode and \lccode values for all
+% accented characters used in the patterns:
+\catcode`^^e2=11 \uccode`^^e2=`^^c2 \lccode`^^e2=`^^e2  % \={a}
+\catcode`^^e8=11 \uccode`^^e8=`^^c8 \lccode`^^e8=`^^e8  % \v{c}
+\catcode`^^e7=11 \uccode`^^e7=`^^c7 \lccode`^^e7=`^^e7  % \={e}
+\catcode`^^ec=11 \uccode`^^ec=`^^cc \lccode`^^ec=`^^ec  % \c{g}
+\catcode`^^ee=11 \uccode`^^ee=`^^ce \lccode`^^ee=`^^ee  % \={\i}
+\catcode`^^ed=11 \uccode`^^ed=`^^cd \lccode`^^ed=`^^ed  % \c{k}
+\catcode`^^ef=11 \uccode`^^ef=`^^cf \lccode`^^ef=`^^ef  % \c{l}
+\catcode`^^f2=11 \uccode`^^f2=`^^d2 \lccode`^^f2=`^^f2  % \c{n}
+\catcode`^^f0=11 \uccode`^^f0=`^^d0 \lccode`^^f0=`^^f0  % \v{s}
+\catcode`^^fb=11 \uccode`^^fb=`^^db \lccode`^^fb=`^^fb  % \={u}
+\catcode`^^fe=11 \uccode`^^fe=`^^de \lccode`^^fe=`^^fe  % \v{z}
+%
+\catcode`\!=7  % use !!xy instead of ^^xy
+%
+% Define the accent macros in such a way that they
+% expand to single letters in font encoding LV.
+\def\E{\errmessage{Hyphenation pattern file corrupted}}
+\def\=#1{\ifx#1a!!e2\else \ifx#1e!!e7\else \ifx#1i!!ee\else \ifx#1u!!fb\else \E \fi\fi\fi\fi}
+\def\v#1{\ifx#1c!!e8\else \ifx#1s!!f0\else \ifx#1z!!fe\else \E \fi\fi\fi}
+\def\c#1{\ifx#1g!!ec\else \ifx#1k!!ed\else \ifx#1l!!ef\else \ifx#1n!!f2\else \E \fi\fi\fi\fi}
+%
+\catcode`\!=12
+%   
+\patterns{ %
+.ag3 .ai4 .ait3 .ak3l .an2 .an4t .ap5av .apa\c{l}5a .ap5ie
+.ap5l .apo3 .ap5r .ap5\={e}2 .as3n .as1p .as3t .at1a .at3i .ato4
+.at5r .at3v .au4d .augst5s .augst5\={a} .aug\v{s}5o .au4n5 .aun\={a}4
+.au4te .au4ti .au4\v{s} .cir5 .demon5s .divpa5d .d\={a}rg5ak
+.ei4 .ek2 .ek3r .eks5ped\={i} .eo3 .es3k .es5t .gard5\={e}
+.gar\v{s}3 .ie3 .ied2 .ie5kl .ies2 .ie5sti .ie5\v{s} .inter5e\v{s}
+.iz1 .iz5e4 .iz5s .iz5\={e} .jaun5ie .jau4n5o .jaun5\={a}
+.kanc5l .koks5n .krust5p .l\={i}dz3 .l\={i}dzi4 .l\={i}dz5\={i}4
+.meln5z .mes5 .mon4s .ne1k .ne3s4 .no5d .no5g .no5s
+.no5v4 .ob5 .os3 .os1t .ot3ra .pad3s .pa3g .pa5grabu .pa3k4 .pa1p
+.pa3s4j .pas5t\={a} .pa\v{s}5ie .pie4c3 .pie5s .pirm5\={a} .priek\v{s}5s
+.pu2s5 .p\={a}r5ie .radio5 .rent5n .ro5m .r\={i}5d .sa5g
+.sald5\={e}\v{s} .sap5\c{n} .sau3 .sau5d .sau5k4 .sest5d .simt5g
+.tipo5 .to3b .tos5 .trans5l .trans5p .tuks5nes .uz3 .uzu2 .ze2
+.zem5\={a} .ze4m3\={e} .zem5\={u} .\={a}r1 .\={a}ri2 .\={a}rie4
+.\={a}rst5n .\={a}r\={e}2 .\={a}t4 .\={a}tr3i .\={a}tr5us
+.\={a}tr5\={a} .\v{c}etr5o a1a2 aau4 a1b a4bel ab3l a3br
+ab5ri a2bt a1c a3cn a1d ada5s 3adm a3do ad3ro a3ds ads5k ad1v a3e4 a4ei
+ae3r aes5 a1f a4fr a5fri a1g a5ga a3gl ag3lu ag3l\={i} a4gre a3gr\={a}
+a5gu ah3r ai2c ai1e4 ai4kie ain4 ai3n2d ait\={a}4d ai2z aizau3
+aizau5ga aize3 aizie5 5aizm aiz4skr a1j 4ajam 3ak3m 5akmen 5akme\c{n}u
+4a1kr aks4 ak3tai ak5tg ak3ti. ak3t\={a} a3kv a1k\c{l} ak1\c{n}o
+ak\v{s}3\={e}2 a3k4\={u} a3la. al4d\={e}t 3alf 4alg\={a}
+al4mu a1lu al1ur a1l\={a} a3l\={i} al\={i}5dz\={i}5 a1l\={u}
+a1m 3amb\={i} a3mei a5mie. a5mies amin4 amins5t am3ist am4so
+a3m\={u}3 a1n a4nar a4n3b a3ne anes3p an4fr a3nm an3si an5sk an5sr
+an5ta an5tc an5te an5to an5tr a5n4u an4\v{s}e a3o4 aos3t a4pak ap3art
+ap5au ap3a2v ap5avo ap5av\={a} ap5ej a5pi ap3ie2 ap5ie\v{s} a1p3l
+a2pli ap5m ap5n a5poli a1p3r 4aps\={u} ap5ta 3apz ap5\={a}r a1p\={e}
+ap5\={e}s a1p\={i} 3a3p\c{l} a5r4a arau5gu ar4bis ar5eir ar5gm
+aris2 ar3m a1ro ar4pe ar2p5l ar2pr ar5s 5arte\={i} a3ru a1r\={a}
+ar\={a}m3 ar\={a}4mi ar\v{s}3as ar\v{s}o4 ar4\v{s}oj ar4\v{s}os
+ar2\v{s}\={i} a1r\={u} a3s4a as5av a3se as3ies 3asin as2k
+as3ki as3ko as3ku as3k\={a} a1sl as3l\={a} as3m\={e} as3m\={i} a1sn
+a1sp as3pa as3pi as5pu as4p\={a} as5s as1t as4t5n as5tst as3t\={a}
+as4v\={a} a5s\={e} a3s\={u} a1t 3a4t5b ate4j at3ej\={a} at3elp
+at5est\={e}j at3id atie4\v{s} a4t5j at5k 3atkl a4t5l ato3rf at3r
+at4rei at5sa at5sm a4t5t at3ut at3uz 4auc au4di au2d\v{z} aul2 au3lc
+au3lk au3l4l au5lst au3me au2n au4n3ai au4nam aun3\={a} au2ro au2se
+aus2z au3za au4\c{l}o a1v a3viet a3v4k a3v\={e} a4v\={i}z a1z a2z3at
+a4z3iet az3ir az2v a1\={a}4 a1\v{c} 4a\v{c}i a1\={e}2 a1\c{g}
+a4\c{g}e a1\={i}2 a\={i}3d a1\c{k} a1\c{l} a4\c{l}e4 a\c{l}3ej
+a1\c{n} a\c{n}5s a\c{n}u3 2a\v{s} a3\v{s}as a\v{s}3at a\v{s}3aud
+a3\v{s}4de a3\v{s}4di a3\v{s}e a3\v{s}4g a\v{s}pul3 a5\v{s}u
+a\v{s}u3p a3\v{s}\={i} a1\v{s}\c{k} a3\v{s}\c{l} a4\v{s}5\c{n}
+a1\v{z} 1ba ba4las bane4 bar5b 5basp\={e}k bau5d ba4\v{s}3
+2b1d 1be be2br 5bed be2z3 be4\v{s} be4\v{z}i 4bf 1bi 3bi. 3bie.
+b1iek 3biem 4biet bil5d 3bin bin5s bio4t 3bir bir5s bi3r\={e} 2b1j
+4bj. bj3au 2b1k 2b1l4 4b5ld b2le b2lo 3b4l\={i} 2b4n b5na b5n\={a}
+b4o 2b1p b2r b3ra. b5ras b3re b4rem b5ren b3ri b5ri\c{n} b3ru.
+b5r\={a}. br\={a}5\c{k} b3r\={e} 4b1s4 4bt. b3te 4bts 1bu 2b1v 3b\={a}
+4b\={a}r b\={a}rs5tn b4\={a}ru 2b3\v{c} 1b\={e} 1b\={i} b3\c{l}
+3b\={u} ca4p 2c3b 3c4be 3c4bi 2cd 4c3di cek5s4 ce4p3ri cepriek5
+ce4sp 2c3f 3c4fil 2c3g 2ch ci4ne 4c3irz ci5t\={a} 3c4izd 3ci\c{n}
+4cj c3j\={a} 2c1k2 2cl c4leru 2c1m 2c3n4 3c4nor 4co4p 2c1p cpa5
+4c3pr 2cr 2c3s4 2c1t cup3 2c3v cvei5 cveik4 c3z 3c\={a} c\={e}3la 3c\={i}
+c\={i}5te c\={i}4\v{s}i c\={i}4\v{s}u 4c3\c{l} dai3r d3alg
+da4mis dam5s 4d3apm dara4 daras3 da4s das5m 2da3s4t da5ta dau5dzi
+dau5n 2db d5b\={a} 2d3c d3da 3de. dekon4 dekons5 de5le den4s1 2de4o3
+5deoier 3deok 4deokan 4deokl 5deokli 3deoma 4deomat 3deosa de2p3r
+3des de5sa de3s2t de4str des3v de2z 2d3f 4d5g4 5diem die4z di2o di4ok
+di4vis 2diz 5di\v{s} di4\v{z}i 2d3j d4j\={e} 2d3k4 2dl dl\={i}5
+2d1m 2d1n 3dna d5niece d4ok do2l3i do4pl dop5r d5org\={a} d3o2se
+2d3os3t 2d1p 4d5pl 2dr4 d3rak d3ras d3rat 3drau drau5d drau3g 3dra\c{n}
+dre3o4 d3ros d3rot 4drs d1r\={a} 4ds2 5dsak dsa4s5 d5sb ds3d
+ds4k 5dsmita 5dsmitk 5dsmitn 5dsmito 5dsmit\={a} d4sp d5st 5ds\={e}
+2d3t 4d3ug du4sa du2s5e 2dv d3vi d3v\={i} d2z 4dz. 5dzam. 5dzan
+dz3au 5dzej 5dzen 5dze\c{n} 4dzg 5dziet 5dzi\c{n} 4dzm 2dz3n 5dzo
+5dzu 5dz\={e}d 5dz\={e}j\={a} 2dz\={i}m 3d\={a} 3d\={e} 4d\={e}st
+5d\={e}t. 5d\={e}tas d5\={e}4tav 5d\={e}ts 4d\={e}4\v{z}
+4d3\c{k} 2d3\c{n} 4d\c{n}a d4\c{n}e d3\v{s}\c{k} 5d\={u}.
+2d5\={u}d 4d\v{z}m e3a4 eai4 eaiz3 eap5ar eapa5\c{l} eap5e4
+eap5l e4apo eap5r eap5\={e}4 eat3 eau4 eaug5\v{s} e1b eb4ri eb3r\={a}
+e2b3t e1c ec3ar ec1d ece4l ec3eli ec3e4no ece4\c{l}a e3ci e3cu
+e2c\={e}2l ec3\={e}lo e4c\={i}4t ec3\={i}ti e4c3\={i}2\v{s} e1d
+e2dd edemo4 edemok5 edemons5 ed3ra. e3du e3dv e3d\c{n} ed\v{z}ent5
+e1e4 eeks4 eemi3 eemig4 e1f ef4r e1g eg5ak eg3l e1ho eie3d ei3e2i
+eieie3 eie5s4 ei4f eiko5 3ei2r 4eis ei3t4 e2iz ei4\v{z} e1j e3ji
+5ejv ekan3c ek3l e3k4las e4kli ek4lie ek4lu ek4l\={a} e4kl\={i} e5kra
+ek5r\={e} e3kr\={u} ek4st ek5sta ek5stie ek5sto ek5stu ekta2 ekt5aj
+ek3v ek4va e3k\={i} ek4\v{s}3\={a} ek4\v{s}\c{k} e3la el5do e3le.
+e3lek e4lem ele3s e3li e3lo el4tr e1lu e4l3uz e1l\={a} e3l\={i} el\={i}5dzi
+e4l\={i}p el5\={i}pa e1l\={u} e1m em3a2j e3me emel3n e3m4i
+e4mj e3mo emont5i em4pl e3mu em\={a}2k e3m\={e} em\={e}r3\c{k}4
+e3na. e2n3al e3ni e4nil e4n3ist eno5r4ma ens5tr ens5t\={u}
+en4t3ni e1n\={a} e4n\={a}\v{z} eo2 e3ob e4o3k4 eo5kl eo5ko
+e5o4ku eo4n e5ons eo5n\={a} e3o4p eo5pi eo5pl eo5pr e1or eo3s eos5t
+eo3t e3oz 4e1p e3pa epama3 epamat4 epa5r4l epa3s4 epa5t4s e3pe epe5ra
+e5pi epie3 e2ple e3p4m ep2z e1ra e3ra. eradi5o4 eradios5 er3ans
+e5ras e5ra\v{s} e1ro e5roe e5rof e5ros er3s er5sv er4tda e3ru e1r\={a}
+er\={a}5la er3\={a}\c{k} er3\={i}s er3\v{s}4 e3r\={u} e1s
+e5sak esa5p\c{n} esa5r4g e5sa3v4 es5b e4sd e5se e4s3ist es3iz es2k
+e2s3ko es5ks e4sk\={a}b es4l es5la e2s5le es5li. e4slie es5lu. e4sme
+es4mie e3sm\={e} es1m\={i} e4sna e2sn\={i} espa2 e2s1t es3ta. es5tac
+es3tam es3tas e3s4tei es3ti. e4s3tie es4tiep e3s4tip est5m es3to
+es4tr es5tra es5tro es5tru es5tr\={i} es3tu. es3tus es3t\={a}m
+es5t\={a}s. e3st\={a}v es3t\={e} e3s2t\={u} e4sv es3va es3ve
+e5sv\={i} e1t e3t4c e3te. e5t4g e4til\={e} e5t4k etran3 etr3as etr5ist
+e4t3ro et5ro. et3ru etr3\={a}m etr3\={a}s et4s et5si et5sk e5tst
+e5ts\={a} e3t4t e4tuz e3t2v e4tvi e1u2 4e1v e3v\={e} e3ze e1zi e1zo
+e1zu ez2v e1z\={e} e1z\={i} e1\={a}4 e1\v{c} e1\={e}2 e3\c{g} e3\={i}2
+e3\c{k} e1\c{l} e3\c{l}a e2\c{l}\={i} e1\c{n} e3\c{n}a e3\c{n}i
+e3\c{n}u e1\v{s} e2\v{s}3al e5\v{s}au e3\v{s}i e\v{s}4m e3\v{s}ma
+e5\v{s}o e5\v{s}\={a} e\v{s}5\v{c} e\v{s}3\c{k}e e4\v{s}3\c{n}
+e\v{s}5\c{n}i e5\v{s}\c{n}u e1\v{z} e\v{z}3in 5fa fa4b
+1fe fe2b fe3o4 1fi 3fil 3fiz 2f3j f2l4 4f3lk f3lo 3fo 5fo4s 2fp fra3s
+4f5re f2riz f3r\={a} 2f2s 4fs. f3se 2f1t f\={e}1 3f\={i} 3g4a ga4br
+4gadei 4g3ak gal5mu gara3s gar2\v{s} gas3k 5gat gau5 gaun4 gaunie5
+2gb g5b\={a} 2g1d g5da gdemons5 3ge ge2b3 5gena 5genc 5geno gens5
+g3f2 g4g g5gr 3g4i gies5 g2k 4g5kr 2g2l g3las g4l3at g4lau g3li g3lo
+gl4v g3l\={e} 2g1m 4g3me g5met g5m\={a} 2g5n gno4s5 3g4o go2da go3da.
+go3dam gog3 go4gr go3n\={a} 4gope 5goti 2gp g2r 4grab 5graba 5grabie
+5grabs. 5grabus 5grab\={a} g3re g4rem g3ris g3rit gro4p5 g3r\={a}c
+4gr\={a}f\={e} g3r\={a}l g3r\={e} 4gs2 g3sb g5sk g3sm g3s4n
+g5sp gst5a2 g5ste g1sti g4s3ti. g4s3tie gst5k gst5m g3sto gs4tr gs3tu
+gst5v gst3\={a}4 gst5\={a}ka. gst5\={a}kas gst5\={a}ki gst5\={a}ks.
+gst5\={a}m gst5\={a}s g3sv 2g1t 4gt. gtipog5 4gts 1g4u 3gu.
+gul5t 3gur 5gura 2g3v g3z4 2g5zd 3g\={a} 5g\={a}t 3g\={e} 2g\c{l}
+g3\c{n} 4g1\v{s} g\v{s}up5 g4\v{s}3\={a}s g4\v{s}3\c{n} 3g\={u}
+g3\v{z}4 1ha 1he he3o 5hi hi5a hi5de hi5ta 4h1n ho2s 2hs3 2h1t4 ht5k
+h3t2l 1hu hu5g 1h\={a} 3h\={e} i1a4 3i4ac ia5kr i1b iba4s i2b3r i1c
+i4c5b i3ce i3c\={e} i1d i2d3ap i4d3au i4dej idemo4 idemok5 i3di i3dos.
+i4d1r id1s i3du ie4cus ie4c3\={a}m ie1i ieie2 ie3kl iek4n ie1kr
+iek5sti ie1k\c{l} ie3sa 3iesl ies2p ie5svi ie5sv\={e} ie3t4r ie1za
+ie5zi ie1zv 4i1f i2fr i5f\={a} 4ig ig3l i1go ig3r i3i i1j ikau3 i5kiem
+ik3iet ik3l ik4l\={i} ik5l\={i}d ik3ra ikro5 ik2v\={a} il4d3ie
+ild5ien il3ied ili2g ilk4 il5k\v{s} il3nk il2sk il5ss ilt4 i1lu
+i4l3u4p i1l\={a} i3mi ims4 im4t3n im4tr i1m\={e} i1m\={i} i1n ine5a
+in5e\c{l} i4nic i5nieka ino4g5r ino4k inok3l inok3r ino4sk inos5ka
+ino4s5t\={a} ino4s5v ino5z in3s in4si in5ska in5sku in5te 4into
+in4tra in5v i1o2 i3obi io4d i2o3f iog4 io5gr i3o4g\={a} io4i io4k
+i3oko i3ol io4m i3on i2op io3pr io4r ios3 i5ostu i3oti iotran5 i3ots
+i3oz ip3 i1pa i1pi ipo3d ip1r ip5ros ip5r\={a} i1p\={e} i1p\={i}
+i5ra i4rb ir5ba ir4bj i3re ir4m3e ir4mie ir4m5\={a}k i3ro iro5p
+ir3p2 ir4sk\={a} ir4sm ir2s3n irs5ni ir2sp irs5v i3ru i1r\={a} i2r\={e}
+is4a isa4t5 i3si is3kr is3k\={a} is3l is3ma is3m\={i} is3n i4s1p
+is1t 4ist. is5ti is5tk is3t\={a} i3su is1v i1t i3t4b it5bo i3t2d it4kl
+i4tn it4na i3to itor5f it3r4 it4\={e} i1u4 4i1v iv3ist iv1j i1za i3ze2
+iz5el 1izg i1zi i3zi. i3zij i3zi\c{n} 4i1zo iz4s3pr izs5pri i1zu
+iz5ur 4i3z\={e} i3z\={i} i1\={a}4 i1\v{c} i1\={e}2 i1\c{g} i3\={i}2
+i1\c{k} i1\c{l} i2\c{l}3a2m i1\c{n} i1\v{s}e i\v{s}1\c{k}
+i4\v{s}5\c{n} i1\v{z}a i3\v{z}e i3\v{z}i i5\v{z}i. i\v{z}3is
+i5\v{z}u i1\v{z}\={a} 4j3a4mat ja5mi. ja2s3 jas5m ja3t jau4g
+jaun5ai jaun5aj jaun5am jau4n5as jaun5iem 2j1b 2j3c 2j1d 4jersk
+3j4e4s3 jes5t 2jf 2j3g j3ied 2j3j 2j1k 2jl 2j1m 2j1n j4o jo3d jo3n\={a}
+jo3p jo2s3 2j1p 2j3r jro5 2j1s4 2j3t ju3ma 2j1v 2j3z j\={a}1 j\={a}3s4
+j\={a}3to j\={a}3tr j\={a}3tv j\={e}4l 2j\={i}p 2j\v{s} j\={u}3d
+1ka ka5be 5kad kad3r 3kajai kak3 ka3lu 3kam ka4nm ka3pa ka2pl ka4pr
+kara3s 5kase ka2sp 4kastl kau5dz 3kav k3a4\v{c} 5ka\c{l} ka\c{l}3a
+ka4\c{l}as ka2\v{s}3 k3b k1c 4k1d 3k4e kes3 ke2sk k3fl 2k3g 2k3h
+1ki 5kice ki3h ki4l ki5log 4k3iz 2k3j 2k1k4 k3km k2la k3la. k3lac kla2k
+k4lap 1k4lau k4lep k2liz k4lk k5l4p k5l\={a}m k4l\={i}d k4l\={i}s
+2k1m2 k3mj k1n 1k4o 3ko. ko4br ko5b\={a} 3koj 3kok kok4sn koks5ne
+2kono kon5ti kop5ai. kop5ies ko4pl ko4p3r 4kops 3kopu 3kor 3kos
+kos1t 3ko\v{s} 2k3p k2r 2k3rak 4k4ram k3re 1kri 5kris k3roe kro4p k3rosk
+5kru k3r\={a}v\={e} 5kr\={e}j\={a} 1kr\={i} 4k3s2 k4s3c ks4d
+ks4f k4sk k5sku ks4l ks4n k5sne\v{s} k5sn\={i} k4s3p ks4pa k5spat
+k5s4r k5stes k5sti. k5sti\c{n} ks5tn ks1tr ks5tra k5s4t\={a} k5st\={e}
+2k1t4 4kt. kt5d k3tj 4k5t2n kto4b5 k3tr ktro3 4kts kt5si kt5sp
+kts5s kt5v k3t\c{n} 1ku ku3g kuja5 5kun 5kura 5kuri 5kuru 5kur\={a}
+k1v k4vedis k4vo k4v\={e} 2k3z2 1k\={a} 4k\={a}b 5k\={a}bu
+3k\={a}m k4\={a}r 3k\={a}t 4k\={a}\v{z} k3\v{c} 3k\={e} k\c{l}4
+k3\c{l}va 1k\c{l}\={a} 3k\c{l}\={u} k3\c{n} k4\c{n}a k\c{n}3au4
+4k\v{s} k\v{s}4ap k\v{s}3au k\v{s}pulk5 k3\v{s}4p\={a}
+k4\v{s}3v k\v{s}\={e}2d k2\v{s}\={i}4 k3\v{s}2\c{k}
+k5\v{s}\c{k}er k5\v{s}4\c{n} 2k\={u} k3\={u}d 1la la2bi
+l4ac la5ma l3apv 3lar la4sn la2sp 5lasta 4l3au4g lauk5\v{s} lau3n
+4laz 2l3b4 l5b\={a} 2l3c4 l4cer 4l3d4 l4d5ap l4d5iz l4dor l5dorga
+l5dsa ld5sp l4d\={e}jo ld3\={e}ta l5d\={e}ti. ld5\={e}tiem
+l4d\={u} 1le 3leg4 2leir 4leka 4leko l4eks4 lek5sp le1o le3ra
+3le2s le4sta le4tv le\c{n}3a 2l3f4 lfa5 4l3g2 l5ga lg3s lg4t lg4v
+l5g4\v{s} 2l1h 1li 5lietu li1gr li3kl lin5s lio4 4liog 4l3ir lit2 li4tie
+li5tk li5tn lize3 4l3izs 4l3izt l4i\c{n} 2l1j 2l1k2 l2k5a2\v{c}
+l5kd l3km lkok5 l5ksi l3kta l3kti l3ktu l3kt\={a} lk4\c{n}
+l3k4\v{s} 2l1l4 l4len l5ler 4llo ll\={i}5 2l3m2 lms4 3lmus 2l1n
+lna2s l4nasi l3n2c l3n4gai l3ni ln4ko lnrak4 lnraks5 ln3up ln4z l4n3\={a}2d
+1l4o 3lod 5lode lo3dr log4 lok3l los1t 4l3p2 lpsi3 lp4\v{s}
+2l1r 4l1s4 lsa2s5 l3sb ls5ez l5sh ls3ka ls5kal l3sk\={a} l3sl
+l3sm ls5ma lso5j ls5r lss3 lss5t ls5tn ls5\={u} 2l3t2 l4tak l4tb l4td
+l4t3ez l4tf lt4ka l5tkal l5t4ki lt4ko l4t3l lt4m lt4p ltpa4 l5t4si
+lt4v 3lubo lu5dz lu3g 3lum 2lur 2lu3zv 4l3v lva2 2l1z l3z4d l5z4k
+l3z4n 1l\={a}. 4l\={a}b l\={a}4du 1l\={a}k 1l\={a}m 3l\={a}r 5l\={a}ro
+5l\={a}ru l\={a}2te 1l\={e} 5l\={e}c 3l\={e}k 5l\={e}t. 4l\c{g}
+1l4\={i} 5l\={i}b l\={i}5na 5l\={i}nu l\={i}3tu l3\c{k} l3\c{n}
+l3\v{s}4 1l\={u}k 4l\={u}s 4l\={u}\v{s} 2l1\v{z} 1ma ma2k3r
+2m3akt man5ti 2m3ap ma4pr 5masa mas3k 5masu mas1v m4at matai5 mat3al
+ma4t5ien ma4vo ma2z3v 2m3b4 m5b\={a} 2m1c 2m1d 1me med3r mei3e m1eir
+2mej me2s3 me3sa mes5li m4et met3r me2\c{l}a me4\c{l}3au 3me\c{n}
+5me\v{z} me3\v{z}a me\v{z}5s 2m1f 2m1g 1mi mie4k5 m4iem m3iero
+m4ies mie4s3n m3ie\v{s}a mig1 mi2ji mino5 mi4nos min5sk mi4t3d
+2miz 2m1j mjau3 mjaunie5 2mk4 4m3kl m3kr m5ks 4m3k\={a} 4m3l ml\={i}5
+2m1m4 m3ma 4m1n 1mo mon4te mon4t5os mo3n\={a} mo4p3l mo5ra 3more
+mo4s5t 5mot 4m3p4 m5pr m5ps 2m1r 4m1s2 msa4s5 ms3d m3sj ms3ko ms4l
+m3s4p m5spr ms4r ms4st m5sstr ms3ti m3sva 2m1t2 m3t4b m3t4m m3tn m3tr
+mt3re m5tru mt4s m5tsa m3t4t m3tu 1mu mu3g 2muk mu4kr mu4m5or mu3sv
+2m1v 2m3z mze3 mzem\={u}3 1m\={a} m\={a}3ku m\={a}tne4 m\={a}tnes5
+4m3\={a}4z 4m3\v{c} m\={e}4rin 4m\c{g} m\c{g}e3 m\c{g}eo4
+m\c{g}eog5 m4\={i}b 2m1\={i}p 4m\c{l} 2m1\v{s} m4\v{s}b m4\v{s}3\={a}4
+m4\={u} 2m3\={u}d 2m3\v{z} 1na 5nag na4g3l n4ais 3nak
+4nakm 4nal\={i} na4l\={u} 3nam\={a} 5nan na3p n3arm na4sa 4natk 4n3atn\={a}
+4n3att nau3d 4n3auk na\={i}4 2na\v{z} 2n1b4 n3bl 3n2b\={e}
+2n1c 2n3d4 ndemo4 ndemok5 nde4s n5di n4d5k n5d\={e}. 1n4e ne3c
+nece5\c{l} nec\={e}3 ne3d2 neek5 ne3g4 ne4i nei2z3 nekon4s nekons5t
+ne3l nel2l ne1o4 ne4o5n nepa3 2ner\c{g} nes2 nesa5l 5nesim 5nesis
+ne3s4k ne3sm ne5s4v 5nes\={i} ne3t4 ne1z ne5\c{n} 5ne\v{s}ie ne3\v{z}
+2n3f2 n5fr\={e} 2n3g4 2n1h n4hoz 1ni nie3c n4iek n4iem nie3s n4ie\v{s}
+3nij n3ilg 3nin niz4s5 4ni\={a}lp 2n1j 2n3k4 nk5s nk5\v{s} 2n1l
+nl\={i}5dz\={i} 2n1m n2mar n5m\={a} 2n3n nna2 nnas3 3no3 no5a no5b4
+no5do no5e nog4 no5ka no5ko no5k\={a} nol\={i}5d nop4 nop5s nor4f
+nos4 no5sa not4 2n1p npa5d 2n3r 4n1s4 n3sa ns5apg n4s5at n4s5au n5se
+ns5f ns5iz n4sk n5ski ns3kr ns5kri ns5kr\={a} ns3ku ns5kur ns5k\={a}r
+n2s3l n3sla ns5li ns5l\={e}j n5sl\={e}t\={a} ns5l\={i} n2s5n
+n2sp ns5pa ns5pie ns5portam ns5ports ns5portu ns5port\={a} n4s5pr
+n4s5pu ns5ra ns5st n5sta ns5tp n2s3t\={u} n5su n4s5v n5s\={a} 2n3t4
+n4tc n4t5d n4tik n4ti3p n4tiv nt5k n4tl n5tlu ntr5akc n5trakt ntra3s4
+nt5sp nt5st n4t5uz\c{n} n5tv n5t\={i} 1nu nu3b 4nu3p nu4p\={e}
+nu3s nu3t4 4n3uz 4n1v nvi2 2n3z4 1n\={a}. 1n\={a}c 3n\={a}d
+n\={a}3kai n4\={a}ks n4\={a}k\={a} n\={a}5lap 3n\={a}ld 3n\={a}t
+3n\={a}\v{z} 2n3\v{c} 1n\={e} 4n\c{g} 3n\={i} 2n3\c{k} 4n3\v{s}4
+n2\v{s}5e2j 2n5\v{z} n\v{z}e5 2o3a2 o4al oa4t oau4 2o1b o3bl
+obo2j ob4r o3bra ob5r\={e} o3bu ob3\={a}r o1c o3ce o1d o3dap odemo4
+odemok5 odemon4 odemons5 o2dor o4d3ra o4d4re o4dri od4r\={a} od3s
+od3v o3e4 o1f 4ofa o2fl o5fo ofoto4 ofotog5 of4r 2o1g ogar5 ogard\={e}5
+o5gi og4li og3l\={i} o5go o3gr o4gru og5rup o1h o3i4 oie4 oie5ra
+oin4 oin5d oins3 oins5p oiz4s o1j o5j\={a} o1k o3ka o4k3ap o4kf o2kl
+ok3las o4kli o2kn ok4re ok3t o2kv o5k\={a}. o2k\c{l} o1l o3li\c{n}
+ol5m 4o3lok o5lsp 5ol\c{g} o1m o3ma o5mag omato4g5 o3me o5me.
+o5mei ome4l o5met o4mie\v{s} o4m3ug o5m\={a} o5nak on3s o5nska on5sk\={a}
+on4t5am ont5c on4tiem on4tra 4on\={a}ld 4on\={a}t o1o2 o4od
+ooe5 o2o3l oos3 o2ot oot3r4 o1p o3pa opag3r o4pai op5ain ope3j op5id
+o4p5ieg o4pies o4p5iev o5po\={e} o2pr o3pre op5r\={a} opsi3 o4pt
+op5ti o4pz o2p5\={i}p o3ra o5rai or4be oren5 or4fi 3org or5k\v{s}
+o1ro o3r4z o1r\={a} or\={a}5la 3or\c{k} o5r\={u} o1s os4a o3sak
+osa4s5 os4c oses3 o3sf o5si o4sj os2k os5kau o4ski osk\={a}3 os1m
+o2s3n o5so os2p o2st os1to os3tp o4st\={e} os3va o5s\={u} o1t o3te
+ote3l o4t5n o3to3 otor2 oto4t3r ototran5 o3tr ot3ra. ot3ro ot3ru ot3r\={a}
+ot3r\={e} ot5s ot2v ot3\={a}4d 2o3u 2o1v o3va o4vc o3ve o3vi
+ov3j o1z oz2v o4zva o3\={a} o\={a}rs5 o1\v{c} o1\={e}2 o1\c{g} o\c{g}e3
+o\c{g}eo4 o\c{g}eog5 o3\={i}2 2o3\c{k} o1\c{l} o1\c{n} o1\v{s}
+o\v{s}u3p 3o4\v{s}\c{n} o5\={u}4 o1\v{z} p4a 1pa. pa3b4 3pa3d
+5pag 5pais pak2 pa1kl p5akm pa5k\={a} pak\v{s}3 pal5m 3pam 5pans
+3pap4 4p5apj pa5r4c p5art. 1pas pa1sk pas4l pa3s2m pas4p pa1sv 3pat
+4p5atb pa3t4ra pa3tre pa3t4v\={e} pau5d pau4g pau5k\v{s} 5pav p5a2vu
+pa\c{l}a4 pa4\c{l}3ai pa4\c{l}3aj pa4\c{l}as pa4\c{l}3\={a}m
+pa2\v{s} pa\v{s}3an pa\v{s}3i pa3\v{s}\c{k} 2p1b 2p1c
+2p5d2 1p4e 2pec 4ped p3e2j p5ejo p5eju pe3j\={a} 4pem5 pet3r 2p3f 2p5g
+p4i 4pid pie2c piec3a piec3e4 pieci4 piec3o pie4c3\={a} piec3\={e}
+pie3g piek4 piekt5 pie5l piel\={i}5 pie5sa pie5sl pie3sm pie3tu
+pirm3i pir4m3\={a} 5pirt pi3r\={e} 3pit 2p1j 4pj. p5jo 2p5k pk\v{s}4
+p2l p4la p5la. p5laj p5lam p3ler p3li p4lu p3l\={a}. 2p3l\={i}
+5pl\={u} 2p3m4 p5mn p5m\={e} 2p1n pno4s3 pnos5k p5n\={i} 3p4o
+po4gr 5portiz 5portk 5portl 5portp 5portuz pos1 pos4tr po4t3r 2p1p
+p2r4 p1rak 1pre 4prg p4ro p5ro. 5prog p5ron pros3 2p3rt p3ru p4r\={a}
+p5r\={a}n p3r\={e} 2p3r\={i} p3r\={u} 4p1s4 psal5d p3sm p3st
+2p1t4 4pt. p3tm p3tr 4pts p5tv 1p4u pu5g 4pund pu2s1a pu3sa. pus3k pu2so
+pu4s5z 5put 2p5uz 5pu\v{c} 2p5v p1z2 p5zi 1p4\={a} p\={a}3je p\={a}k4
+p\={a}2r p\={a}r1a p\={a}r3i p\={a}rie4 p\={a}r3u p\={a}s5
+2p3\v{c} p4\={e} p1\c{g} p4\={i} p\={i}5dz 5p\={i}k p3\c{k}
+2p\c{l} 4p1\c{n} p5\c{n}a p5\c{n}i p5\c{n}oj p5\c{n}os p5\c{n}ot
+p5\c{n}u 2p3\v{s}4 1p\={u} p3\={u}g p3\v{z} 3rabi\c{n} 3rabst
+3rabt radi4o 5rado r3adv 5raf\={e}ta 5raf\={e}tu ra2g3r 3rain
+rai4r 3raj rak4r 3ram 5rame 2rans rap4s5 ra4sie ras4k ra3sko ras5k\={a}
+ra2s3l 4rats r3atsk 3rat\={a} rau5go rauk5l 3ra\v{c} 4ra\v{s}
+5ra\v{z} r3b2 3r4bas rb3iet rb3ist r5bjo r5bju 4r1c2 r3cd r2c3iz
+r5cj r3ck r3cl r5co rco5p r3cp rc4st r3ct 2r1d2 r3de rdemo4 rdemok5
+r3dj r3d4k r3dl r3dr rds3 r3dz4 rd3\={e}st r4d\v{s} 1re re4br reeks5
+re4gr re3gu r4ei 4reir rek5l re3na re3ne re3ol 3rep re4pl re2s3n
+re2sp re3t4 re5tl ret5ro re5tsp re5tv 5re3v 3re\c{g} 2r1f4 rfoto4
+rfotog5 4r1g4 r4g5au r3gb r4gg r3gl r3gm r5gr r5gsi r3gt r3gv r3g\c{l}
+r1h 1ri 3ri. 3ria 4ric r4id 4r3ier r4iet. rie3te rie3ti ri5k\={a}
+r4in rio4 2r3izs 3ri\={a} r1j 4r3k4 rks4 r5ksa r5ksi rk5sn rk5sta
+rk5ste rk5sti rk5sto rk5stu 5r4ku\c{g} r5k\v{s}a r5k\v{s}u rk5\v{s}\c{k}
+4r1l r3la r3l4b 4r1m r4m5atk r4m5ats r4m3av r3me rm3iz r3m2k
+rmon4s r2mor rm2s rms3i rms3k rms3t rm4\={a}m 2r1n rnes3 rnoz3 3ro.
+3rob2 5robi 4robu 5rodi ro3dr ro4g ro5ga 4ro5gl rog3r ro5gu ro5g\={a}
+roizs5 3ro5k4l rol4l ro3lla ro3n\={a} ro5pa 2ror\c{k} ro4sk
+ro2sl ro2sp ro2sv rotran5 2rovi 5roze 5roz\={e} 3ro\c{k} 2r1p rpa5d
+r3p4c rp5ek r3p2j rp4l rp3la 4r1r 4r1s4 rsa4p5 rsa4s5 rsk\={a}b5
+rs5k\={a}r r3sm r3sn\={i} rso1 rs5pl rs5pu rs5ro rs5s rst3n
+r5st\={a} rs5uz r4sv rs5z r3t4 r4tb rt5dar rtek5 r4tel rtipog5 r5tk
+rt5l\={i} rto2k3 r4tp r5tpa rt5sa r5tsi rt5sp\={e} rt5st rt5sv r4t5t
+1ru ru5dz 2ruk 5ru3ma 3ru\={a} 4r5v4 rval4d5n r3z4 rze5m\={e} rz5k
+rzko3 4r5zo 4r5z\={a} 3r\={a}. 4r\={a}f 5r\={a}f\={e} 3r\={a}k
+r\={a}3ki r\={a}4lam r\={a}ldemok5 3r\={a}n 3r\={a}r r\={a}t4s
+2r\={a}z 4r\={a}\c{k} r3\v{c} 1r\={e} 4r\={e}c 4r3\={e}4di
+r\={e}k\={a}2 3r\={e}n r1\c{g} 1r\={i} r\={i}3p r\={i}2sa
+r\={i}4sis r\={i}4tau r\={i}5\c{k} r1\c{k} r3\c{l}4 r1\c{n}
+4r1\v{s}2 r3\v{s}4t r3\v{s}\v{c} r\v{s}3\={i}2g r3\v{s}\c{l}
+4r\={u}d 1r\={u}p r3\v{z}4 1sa s4ab sa3d2 sa3g s4ai sai3n
+s4ak sa3kl sal5k4 sa3l4l sa3lmu sal\={i}5d sa3l4\v{s} s4am s3ame
+sa5mso sa3nf sa3nh sap4 sa3pa s3apg sa3pl sa1s4 sa3sm s4a3t4 sau4g3
+saugs5ts sauk4l sa3\c{l}2 sa3\v{s}2 sa3\v{z} 2s1b4 s5ba s5b\={u}
+s1c s1d2 4s5di sdivpad5 2s5dr sd\={a}r5 3s4d\={e} 1s4e 5sed se4gr
+sei2d sek5l semp5 ses3t\={a} se4ze 2s3f s4f\={e} 4s5g4 4sh 1si 3si.
+side5o4 2s5iel sie3s 4sih s4ij si4lo sins3 sin4sp si5o4 3s4ir sir5mi
+2siz 2s1j sjau3 sjaun4 sjaun\={a}5 s1k4 s3kl s3kn s5kok5 s3kom 5skops
+5skop\={a} s3kp s2kr s4kub 2s3kv s4k\={a}l s2l s3la s3lo s5lok s5lus
+s5l\={a}cij\={a} sl\={a}3t s5l\={e}k s5l\={e}\v{s} 4s5l\={u}
+2sm2 3s4mak 5smej s3men 5s2me\c{l} 4s5mj smo4g5 smoto4 smotos5
+s4m\={i}n s2n s3na 2s3ne 2s5no sno4s snos5t sn3s s3n4t s3nu s3n\={a}
+1s4o so4b5 so5ja so4ju. so4k3r 3som 3sos so5ti s5ot3r sp4 4s5pa5d
+s5pap 2s3pas spas3n 5spedi 5sped\={e} 5spem spie4p spiep5r spir5m\={a}
+s3pl 2spo 4s3pro 2s3pu 3sp\={e} s4p\={i} 4s3r s5rak 5sref
+s5ri sru3m4 4s3s4 ssa4s5 s5sk s5sl s5sp s5sta s5sv st4 4st. 3stac s4tain
+4stasi 4stau 3s4ta\c{l} s5tb st5c st3d st5dz 5stet s3tf st5g s5tib
+5stila 5stilie 5stilk 5stiln 5stilr 5stils s2tim 4stk st5ko s3tme
+4s3tn s4t3ne st5nes sto4b5 s5tor 2stp s3tr s5tra. 4s5tri 4strs s5tru.
+s5tr\={a}. 4str\={e}. 4str\={e}ju 4s5tr\={e}j\={a} 4str\={e}t.
+4str\={e}ti s5tr\={e}tie 4str\={e}\v{s}o 4sts st5sk s4tug
+stuk5s 4stumi 3stun 4st3v st5vi st5v\={a} s2t\={a} 3st\={a}j 4st\={a}je
+st\={a}2k st5\={a}kai. st5\={a}ku st5\={a}k\={a}m 4st\={a}l
+3st\={a}t 3s4t\={a}z 5st\={a}\v{z} 4st\v{c} 1s2u su4b su3g
+su5ni su3p 2s4uz s3v\={a} s3v\={e}l 2s3z szem2 szem\={a}5 s5z\={i}
+3s4\={a} s\={a}l2s s\v{c}et5 1s\={e} s\={e}4na 3s4\={i} s3\c{k}
+s3\c{l} s\c{l}au3 s\c{l}aun\={a}5 s5\c{n}e s3\v{s}4 s4\v{s}\={e}5
+1s\={u} s3\v{z} 4tac 5tag tai4no 3tak ta3kl 4takm 4talg
+5talg\={a} 4t5alk ta2p5r 4t5arg ta2s t5asi tas3l t5aug 4t5a\c{g}
+2t3b4 4tbo t5br 2t3c 2t1d4 t3di t3dr tdu5s t5d\={e} ted3r te2g
+te5ja te4jo 5teka 4t3eko t5eksp te2l te4nog 3tens te1o4 te5ra te4re4\v{s}
+3tern te2s t3esa t3eso te4s3t tet3r 3te3z te4ze 2t1f4 t3fi
+4t3g4 t5gr 2t3h 4tia 4tib 5tic 4tid tie2b 2t3ied tie4g 3tien 5tiep.
+ties3l ties3p 4t3iest 4t3iez 3tie\c{n} 2tig 4ti3h 4tii 3tij ti3kv
+3tiliz 4timet t5imp ti5ni 5tin5s 2t3int tinte5 tintere5 3tinto 5tinu
+ti3o ti3p4l 4tizg 4t5izl 4t5izp tiz4s5 2t1j4 t5jk 4t3k2 tka2l t5kar
+tki5l 2t1l t3la t5lai t5l\={e} 4t3l\={i} tl\={i}5d t5l\={u} 2t1m
+t3ma t5mal t5mar t3mi tmi5n t5m\={a} 2t1n 4t3na tnes3t t5ne\v{s}a
+1tni tno4s5 t4o 4toav 2tob to2br 5tobrauk 3tobu 3tob\={a} tod3r
+toek5 tog4 5togre 5tog\={e} 2toi 4tokra 5tol to5ma to4m3e tom3ie
+ton5s to3n\={a} 2top to5pi to4p3l to4p3r to5rm 2torp 2tort tos4
+to2s5k to3sp tos3t 4tostr 2totr 5totras 2t3p4 tpak3\c{l} t5pap tpie5
+t5pr tpro4b3 t5pu 3t4p\={a} t2p\={e} 2t2r 4trab 4traj 4tra5p tr3ar
+tr4au 4trb 4trd t3ri t4rist 4t5r4m tro3s tros3k t3roz 4trp 4trr 4trs
+4truk 4trume tr3\={a}2k t3r\={a}\v{z} 5tr\={e}\v{s}o 5tr\={i}c
+5tr\={i}\v{c} 3t4r\={u} 4t3s4 tsa2s5 ts5b\={a} t5se ts5la
+ts5li t4s3m ts5ma ts5mi ts5m\={e} ts5m\={i} t5soc 5tsov t5spi ts5ra
+t4su4 ts5up 5ts\={e} ts5\={u}d 2t3t4 t5te tte3l t5to ttran3 4t5t\={e}
+t5t\={i} 2tud t5ugu tu2m3e4 5tumi tum3\={a} tu4m\={a}f 4tun
+tu4to 2tuz 2t1v 4tval t3van t5vec 4t3ved t5vei 3t2ver 3tve\v{c} 4t3ve\v{z}
+t3vi t3vj 3tv\={e}j 4t3z4 5tza t5zi t5z\={a} 3t\={a}. 3t\={a}c
+4t\={a}d 3t\={a}g 3t\={a}je 4t\={a}jt t\={a}3ka t\={a}5kaji
+t\={a}3ki t\={a}2kl 3t\={a}l t\={a}2le 3t\={a}n 4t\={a}vo
+t3\={a}4\c{k} t5\v{c} 1t\={e} t3\={e}2n t\={e}3n\={a}. t\={e}5ra
+5t\={e}v 4t\c{g} 2t1\={i}p t\={i}pa3 t\={i}pa\v{s}4 2t3\={i}2\c{n}3
+3t\={i}\c{n}u 2t3\c{k} 4t5\c{l} 2t1\c{n} 2t1\v{s}
+t\={u}3d t3\v{z} u1a4 u5ba u5bi u3bo ub5or ub5ri ub3t u1c uc\={i}5\v{s}
+u1d u2d3au4 u3di u5di. u5dis u5di\c{n} ud1r u4dz u5dza u5dzie
+u5dz\={a} u5dz\={i} u1e4 u3f u4f3l u2g ug3k ug3l u4go u5gop u5gor
+u5gos u4g3r u4gt u5g\={a} ug4\v{s}o u1j uja4mi u2kak uk3l uk4lis
+u3k3r uk4r\={e} uks4 uk4sn uk4\c{l}o uk\v{s}4 u5k\v{s}t u5l4gi
+u3lr ul3sk ul5td ul5tk ul4tni ult5nie u1lu u1l\={a} u3l\={u} u1m
+um4ap um5apg u4mau4 uma5v u4ma\c{l} u2mei um3iz um4o u3mu u3na u4n3a2j
+u4n3al u4n3au u3ne u3ni. un1ie2 un5iek\={a} unie4t unie4\v{s}
+un5ie\v{s}a un1iz un3i2\c{n} unkrus5 u4nor un3sb un3sl un3sp
+un5ss u4nt u3nu u4n3us u1n\={a} u3n\={a}. un4\={a}d un3\={a}4k
+u3n\={e} u3o2 u4ot u1p upe4r u2p3l u2pr up3ra up3ri u1ra urb4
+ur5bi u4r3e4j u1ro u3ros ur3p2n u4ru4p ur3upe ur3upi u1r\={a} u3r\={u}
+ur3\={u}d u3sa2m us5ame usa4s5 u4s3is us3l us1m us3ni uso4 us5ob
+us5of us1p us1t ust5pil\={i} 5ustu\c{l} us3t\={a} us3va u3s4z u4s3\={u}
+u1t u4tog u3top uto3s u4tosp utotrans5 ut3r4 utrans5 utr\={a}3
+ut5s u1v uv3j uz1a2 uzau4 5uzb u1ze u1zi u4zi\c{n} u3zo u3zu u5z\={e}
+u1z\={i} u1\={a}4 u1\v{c} u1\={e}2 u1\c{g} u3\={i}2 u1\c{k}
+u1\c{l} u\c{l}a4m3 u5\c{l}os u1\c{n} u\c{n}u5 u1\v{s} u2\v{s}1\c{k}
+u4\v{s}3\c{n} u1\v{z} 5vad va4gr 3vai. 2vaig 3val\v{z}
+va3ni va3r4n 2v3arp vas3k vas3t 2v3b 2v3c 2v1d ve5c4\={i}5 3ven
+ve3ro ves3p ves3t\={a} ve4\v{s}\c{k} 4v3f 4v1g 2v3h 3vid vi3da viek5
+1viet vi4lie v4in4s vins5t 2vin\v{z} vir4s5i virs5m 2vj4 v3je v3jo
+v3jr 2v1k 2vl 3v2lo 2v1m 2v1n 2v1p 2v1r 4v1s4 2v3t v4t\={i}b vu3p 2v1v
+2v1z2 v\={e}r3au5 2v\={e}ru v\={e}4tav v\={i}4no 5v\={i}r 2v3\c{l}
+2v\v{z} za2c za4g zal5 za2n 4z3ap za3pa 4z3a4si zau4ga 2z5b4 2z1c
+2z3d2 z4e ze2b z5ej. ze3jo zem3a zem1\={a}4 ze4m\={e}s zem3\={i}2
+ze2sl zes5t zes3v z1f zf\={i}3 2z3g4 zgar3\v{s} zia5c z3ie4i
+4z3iep zie4ro zie4ru zie4s zie5si zies3p zie4\v{s}a z3inf 3zin5t
+2zi2ot 2zi4r 3ziv z3i4z5 z4izd 2zizm 4z1j 4z3k4 z5ko zkop4j 2z1l
+zl\={i}5dzi 2z1m4 z5mk z3mu 2z1n z3na zno4d3 z2o zo3n\={a} zo4s3 zo5su
+4z5p4 zpal\={i}5 zpie4p3 zpriek5 2z1r 4z3s4 z4s5b zs5pro z5st\={a}
+2z3t4 ztran3 z4ur z1v z3val z2vej z3v\={i} 2z5z4 1z\={a} 4z3\={a}d
+z\={a}4da 2z3\={a}r z3\v{c} z4\={e} z5\={e}4d\={a} 4z\={e}n
+2z\c{g} z\={i}4gai. z1\c{k} 4z\c{l} z1\c{n} z3\v{s}2 3z\={u}
+z3\v{z}4 \={a}1a4 \={a}ap5r \={a}ap4s5p \={a}at3v \={a}5bi
+\={a}b4ju \={a}3bo \={a}b1t \={a}1c \={a}1d \={a}4d3au5 \={a}e2
+\={a}ek5 \={a}eks4 \={a}1f \={a}foto4 \={a}fotog5 \={a}2fr
+\={a}1g \={a}1i2 \={a}ie4 \={a}ieb3 \={a}ieg3r \={a}iek3\c{l}
+\={a}ies3 \={a}iet3v \={a}iza3n \={a}izs5p \={a}iz4st
+\={a}izs5tr \={a}1j \={a}2j3e \={a}4j5or \={a}1k 4\={a}k.
+4\={a}kai 5\={a}km \={a}3ko \={a}2kv \={a}3k\={a} \={a}2k\c{l}
+\={a}la4m \={a}l3ame \={a}4l3ap \={a}2lat \={a}le2 \={a}l3ej
+\={a}l3ek \={a}4l3ieg \={a}2l3iz \={a}l5p 4\={a}lpr \={a}lp\={a}3
+\={a}l4sm \={a}1lu \={a}4l3u4p \={a}1l\={a} \={a}l\={i}3
+\={a}l3\={u} \={a}1m \={a}m3e4j \={a}3mi \={a}5mi. \={a}mie4
+\={a}1n \={a}no4d5r \={a}no4g5 \={a}no4k3 \={a}nok5l \={a}no4s3
+\={a}nos5k \={a}nos5l \={a}nos5p \={a}nos5t \={a}no4t5v
+\={a}no4\v{s}3\c{k} \={a}o2 \={a}1p \={a}pa4g3r \={a}pa4k3
+\={a}pa4p5l \={a}pa2s \={a}pas3k \={a}pas5l \={a}pas5p
+\={a}pie4k5 \={a}pie4p5r \={a}pie4s \={a}pies5k \={a}pies5p
+\={a}pie4\v{s} \={a}pie\v{s}5\c{k} \={a}pil5 \={a}piln4
+\={a}p\={a}3ri \={a}p\={a}3r4o3 \={a}p\={a}r4st \={a}p\={a}rs5tr
+\={a}1ra \={a}rau4g \={a}4r5b \={a}re2 \={a}3re.
+\={a}5rei \={a}r1ej \={a}rep3 \={a}3res \={a}r4g5l \={a}3rid
+\={a}rie2 \={a}3rin \={a}1ro \={a}r3o2r \={a}r3pl \={a}r5sv
+\={a}3r\={a} \={a}4r3\={a}r \={a}3r\={e} \={a}3r\={i} \={a}sa4g3l
+\={a}sa4g3r \={a}sa4p \={a}sap5r \={a}sa2s3 \={a}sas5k
+\={a}sas5n \={a}sas5t \={a}s3n 3\={a}sp \={a}s1t \={a}s3v
+\={a}1t \={a}3te. \={a}t3r \={a}tr3a2 \={a}t4re \={a}t5rum
+\={a}tr\={a}4 \={a}t4sl \={a}t1uz \={a}1u \={a}uz4a \={a}uzau5
+\={a}1v \={a}v1j \={a}1z \={a}z4v \={a}\={i}4 \={a}3\c{k}
+\={a}4\c{k}is \={a}1\c{l}4 \={a}5\c{l}a \={a}1\c{n} \={a}1\v{s}
+\={a}4\v{s}3\c{n} \={a}1\v{z} 3\={a}4\v{z}i 3\v{c}a \v{c}e2s5
+\v{c}et4ro \v{c}et4r3u 3\v{c}i 5\v{c}i. \v{c}irk5 4\v{c}k
+2\v{c}m 5\v{c}o \v{c}3p 2\v{c}s 2\v{c}3t 1\v{c}u \v{c}u3g 4\v{c}\={e}
+\={e}1b \={e}b5n \={e}1c \={e}c3op \={e}1d 5\={e}d. \={e}g3l
+\={e}1j \={e}4k3l \={e}4k3\={a}z \={e}k3\={a}\v{z} \={e}k5\c{n}
+\={e}1l \={e}3lis \={e}3lus \={e}l3\={a}d \={e}5l\={a}m
+\={e}1m \={e}1n \={e}3pi \={e}p3r \={e}3p\={e} \={e}3p\={i}
+\={e}1ra \={e}2r3ap \={e}4rau \={e}r3auk \={e}r5ins \={e}1ro
+\={e}r3p2 \={e}r5sr \={e}1r\={a} \={e}2r3\={a}2d \={e}s3l
+\={e}s3n \={e}s1t \={e}1t \={e}t4a \={e}5tak \={e}t5a4vo \={e}tne4
+\={e}tnes3 \={e}t3r 5\={e}t\={a}jt \={e}1v \={e}v3j \={e}1z
+\={e}1\c{g} \={e}1\c{k} \={e}1\c{l} \={e}1\c{n} \={e}1\v{s}
+\={e}1\v{z} 3\c{g}a 1\c{g}e \c{g}e1ol \c{g}es5 1\c{g}i
+\c{g}io4 2\c{g}n 3\c{g}u 1\c{g}\={e} \={i}1b \={i}b5n \={i}3bu
+\={i}1c \={i}1d \={i}d3v \={i}4dz \={i}5dze \={i}5dzi. \={i}dz3\={a}
+\={i}5dz\={e} \={i}dz\={i}4b\={a} \={i}3f \={i}1g \={i}5gad
+\={i}g3l \={i}g5o4pe \={i}2g3r 4\={i}g3s4 \={i}5gum \={i}1j
+\={i}k3l \={i}ks4 \={i}4k3uz \={i}1l \={i}1m \={i}1n \={i}n3o4g
+1\={i}pa\v{s} \={i}pa3\v{s}i \={i}3pi \={i}1p\={e} \={i}1r
+4\={i}ra \={i}ra4s \={i}4r3asi \={i}2r\={e} \={i}3r\={e}m
+\={i}s3ar \={i}s3as \={i}s3ist \={i}s3l \={i}s3m \={i}s3n
+\={i}s3p \={i}s3t \={i}s3v \={i}1t \={i}t3aus \={i}tie4 \={i}4t5p
+\={i}t3r 4\={i}1v \={i}ve2 \={i}v3j \={i}1z \={i}3\v{c} \={i}1\c{k}
+\={i}4\c{k}3a \={i}1\c{l} \={i}1\c{n} 4\={i}3\c{n}u \={i}1\v{s}
+\={i}\v{s}u3 \={i}1\v{z} 3\c{k}a. 4\c{k}b \c{k}e4b5 3\c{k}ep
+\c{k}es5 \c{k}e3za 4\c{k}n 2\c{k}3p 2\c{k}s 2\c{k}3t 1\c{k}u3
+1\c{k}\={a} 3\c{k}\={i}g \c{k}\={i}3r 2\c{k}3\v{s} 1\c{l}a.
+4\c{l}3a2me \c{l}a5mie \c{l}a5mu \c{l}ap4 \c{l}aps5 \c{l}a2s3
+4\c{l}3at \c{l}au5na \c{l}auna5j \c{l}au3n\={a} \c{l}aun\={a}5ka
+2\c{l}3b4 2\c{l}3c 2\c{l}3d 3\c{l}4di 4\c{l}3ei 5\c{l}en
+\c{l}e5ni \c{l}en5s \c{l}e2s5 2\c{l}f 2\c{l}g 1\c{l}i 4\c{l}5i4g
+2\c{l}3j 2\c{l}1k 2\c{l}1l 2\c{l}1m 2\c{l}1n 1\c{l}o \c{l}o2s
+2\c{l}3ose 2\c{l}3p 2\c{l}1r 2\c{l}3s2 2\c{l}3t 1\c{l}u. \c{l}u5ma
+\c{l}umau5 1\c{l}us 2\c{l}1v \c{l}5ve 2\c{l}3z 4\c{l}3\={a}4d
+4\c{l}3\={a}f 4\c{l}3\={e}4d 2\c{l}1\c{g} \c{l}3\={i}2r
+2\c{l}1\c{k} 2\c{l}1\c{l} 2\c{l}1\c{n} 2\c{l}3\v{s}4
+4\c{n}ab \c{n}a2m \c{n}a4s \c{n}as3p 4\c{n}au \c{n}au5dzi
+2\c{n}1b 2\c{n}3c 2\c{n}1d \c{n}e2p3 \c{n}ep5r \c{n}es5
+2\c{n}1g4 \c{n}in4s5 4\c{n}3j 2\c{n}1k 2\c{n}l 2\c{n}m 2\c{n}1n
+2\c{n}3og 2\c{n}1p \c{n}pa5 \c{n}pie4 \c{n}piep3 2\c{n}1r
+2\c{n}1s4 \c{n}sim5 \c{n}4s3k \c{n}s5kr 2\c{n}3t \c{n}u5d
+4\c{n}uk \c{n}up5r \c{n}u3t4 4\c{n}1v 2\c{n}3z 1\c{n}\={a}
+2\c{n}1\c{g} 2\c{n}1\c{k} 2\c{n}\v{s} 1\v{s}a 3\v{s}a.
+3\v{s}ai. 3\v{s}ais \v{s}1aiz 3\v{s}aj 4\v{s}5ak 3\v{s}am
+4\v{s}3a4p \v{s}5apr 5\v{s}apt 3\v{s}4atr \v{s}au5d \v{s}3au4g
+3\v{s}aut \v{s}3b 3\v{s}4ba \v{s}3c 2\v{s}1d \v{s}ek5 5\v{s}et
+3\v{s}2f 2\v{s}1g 1\v{s}i 3\v{s}i. \v{s}4ie 3\v{s}ig \v{s}3i4r
+\v{s}i5t \v{s}3iz 3\v{s}4izd 3\v{s}izo 3\v{s}4izp \v{s}3j
+2\v{s}1k \v{s}1l 2\v{s}1m \v{s}5mi 2\v{s}1n 3\v{s}4nol 3\v{s}o
+5\v{s}o5ju \v{s}o3o 4\v{s}or 2\v{s}1p \v{s}pa5 \v{s}pal\={i}5
+3\v{s}4pie \v{s}pul2 \v{s}pulk3 2\v{s}3r 4\v{s}1s4
+\v{s}sa2p5 \v{s}4s\={e}dis 2\v{s}3t 3\v{s}u \v{s}u2p 4\v{s}3up.
+2\v{s}1v 3\v{s}2vak \v{s}3vi \v{s}v\={e}s5 2\v{s}1z 3\v{s}\={a}
+5\v{s}\={a}. \v{s}\={a}b3 \v{s}\={a}s5 \v{s}3\={a}st
+\v{s}4\={a}t 2\v{s}4\v{c} 1\v{s}\={e} 2\v{s}3\={e}4d
+1\v{s}\={i} \v{s}\={i}4ga \v{s}\={i}4gi \v{s}4\={i}4gu
+\v{s}5\={i}gu. \v{s}3\={i}r \v{s}\={i}5ra 4\v{s}\c{k}.
+4\v{s}\c{k}en 2\v{s}\c{l} \v{s}3\c{l}a 3\v{s}\c{n} \v{s}4\c{n}i
+\v{s}\c{n}um3 3\v{s}\={u} \={u}1c \={u}1d \={u}2de \={u}3dei
+\={u}d3r 4\={u}dz \={u}g3s \={u}1j \={u}kl3a \={u}k5sk \={u}1l
+\={u}1m \={u}1n \={u}3pa \={u}3pi \={u}1p\={e} \={u}1p\={i}
+\={u}1r \={u}2rak \={u}2riz \={u}4rz \={u}s3m \={u}s3t
+\={u}s\={e}5 4\={u}1t \={u}t3r4 \={u}1v \={u}4v3el \={u}v3i
+\={u}v3j \={u}1z \={u}3\v{c} \={u}1\c{k} \={u}3\c{l} \={u}3\c{n}
+\={u}1\v{s} \={u}\v{s}\={i}5 \={u}1\v{z} \={u}\v{z}5\c{n}
+2\v{z}ap \v{z}a3pa \v{z}3aps \v{z}a3s4 \v{z}a4z3
+2\v{z}3b 2\v{z}3c 4\v{z}3d \v{z}e3za 4\v{z}g 2\v{z}3iz 2\v{z}3j
+2\v{z}1k4 2\v{z}l 2\v{z}m 3\v{z}2mi 2\v{z}1n 1\v{z}o \v{z}ok3
+\v{z}o4k\={a}2 2\v{z}1p \v{z}p\={a}3 \v{z}p\={a}r4 \v{z}p\={a}re3
+2\v{z}3r 2\v{z}1s4 \v{z}4st \v{z}s5tr\={i} 4\v{z}3t
+\v{z}tran3 2\v{z}3u2p 2\v{z}3v 2\v{z}5z 4\v{z}3\={a}4b 2\v{z}1\c{g}
+2\v{z}3\c{n} \v{z}4\c{n}a \v{z}5\c{n}a. 2\v{z}3\v{s}
+} 
+}

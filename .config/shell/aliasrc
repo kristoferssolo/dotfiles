@@ -20,7 +20,7 @@ alias \
     grep="rg --color=auto" \
     ip="ip -color=auto" \
     less="moar" \
-    ls="exa -a --icons --group-directories-first"
+    ls="eza -a --icons --group-directories-first"
 
 # These common commands ate just too long! Abbreviate them
 alias \
@@ -40,16 +40,13 @@ alias \
     j="joshutoub" \
     lf="lfub" \
     lg="lazygit" \
-    matrix="unimatrix -s 95" \
+    lock="swaylock" \
     night="redshift -PO 4500" \
     py="python" \
     sv="rsv" \
     v="$EDITOR" \
-    vpn-down="wg-quick down wg0" \
-    vpn-restart="wg-quick down wg0 && wg-quick up wg0" \
-    vpn-up="wg-quick up wg0" \
     weather="curl wttr.in/" \
-    ww="$EDITOR ~/vimwiki/index.md" \
+    ww="$EDITOR ~/neorg/" \
     x="xplr -C ~/.config/xplr/hack.lua" \
     z="zathura"
 

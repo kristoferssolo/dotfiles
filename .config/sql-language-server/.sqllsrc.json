@@ -1,0 +1,13 @@
+{
+    "connections": [
+        {
+            "name": "kristofersxyz-rs",
+            "adapter": "postgres",
+            "host": "localhost",
+            "port": 5432,
+            "user": "postgres",
+            "database": "kristofersxyz-rs-db",
+            "password": "password"
+        }
+    ]
+}

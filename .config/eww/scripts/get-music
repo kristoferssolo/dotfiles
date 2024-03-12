@@ -1,0 +1,5 @@
+#!/bin/bash
+
+title="$(sp metadata | rg title| cut -d'|' -f2)"
+artist="$(sp metadata | rg artist | cut -d'|' -f2)"
+echo "$artist" - "$title"

@@ -725,6 +725,18 @@ awful.rules.rules = {
 	{ rule_any = { class = { "kdeconnect.app" } }, properties = { screen = 2, tag = "7" } },
 	{ rule_any = { class = { "Spotify" } }, properties = { screen = 2, tag = "9" } },
 	{ rule_any = { class = { "mpv" } }, properties = { fullscreen = true } },
+	-- {
+	-- 	rule = { name = "Tetris", class = "main.py" },
+	-- 	properties = {
+	-- 		skip_taskbar = true,
+	-- 		floating = true,
+	-- 		ontop = false,
+	-- 		below = true,
+	-- 		focusable = false,
+	-- 		screen = 2,
+	-- 		tag = "6",
+	-- 	},
+	-- },
 }
 
 -- {{{ Signals
