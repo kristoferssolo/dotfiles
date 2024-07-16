@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
 	selected=$1
 else
-    selected=$(fd --min-depth 1 --max-depth 1 --type d . ~/repos/Rust/ ~/repos/ ~/neorg/University/3rd-semester/ ~/Nextcloud/repos/ ~/Nextcloud/Documents/LaTeX/ ~/Nextcloud/Documents/Typst/ ~/Nextcloud/repos/university/** ~/Nextcloud/repos/university/**/**/ | sk --height 16)
+    selected=$(fd --min-depth 1 --max-depth 1 --type d . ~/repos/Rust/ ~/repos/examples/ ~/repos/ ~/neorg/University/3rd-semester/ ~/Nextcloud/repos/ ~/Nextcloud/Documents/LaTeX/ ~/Nextcloud/Documents/Typst/ ~/Nextcloud/repos/university/** ~/Nextcloud/repos/university/**/**/ ~/repos/Codnity/ ~/repos/Codnity/emisela/ | sk --height 16)
 fi
 
 if [[ -z $selected ]]; then

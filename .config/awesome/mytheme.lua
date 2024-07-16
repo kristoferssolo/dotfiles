@@ -13,22 +13,38 @@ local theme = {}
 
 theme.font = "JetBrainsMono NF 8"
 
-theme.bg_normal = "#1a1b26"
-theme.bg_focus = "#292e42"
-theme.bg_urgent = "#db4b4b"
-theme.bg_minimize = "#444444"
+local base = "#191724"
+local surface = "#1f1d2e"
+local overlay = "#26233a"
+local muted = "#6e6a86"
+local subtle = "#908caa"
+local text = "#e0def4"
+local love = "#eb6f92"
+local gold = "#f6c177"
+local rose = "#ebbcba"
+local pine = "#31748f"
+local foam = "#9ccfd8"
+local iris = "#c4a7e7"
+local highlightLow = "#21202e"
+local highlightMed = "#403d52"
+local highlightHigh = "#524f67"
+
+theme.bg_normal = base
+theme.bg_focus = surface
+theme.bg_urgent = love
+theme.bg_minimize = highlightMed
 theme.bg_systray = theme.bg_normal
 
-theme.fg_normal = "#a9b1d6"
-theme.fg_urgent = "#c0caf5"
-theme.fg_focus = "#c0caf5"
-theme.fg_minimize = "#a9b1d6"
+theme.fg_normal = subtle
+theme.fg_urgent = text
+theme.fg_focus = text
+theme.fg_minimize = subtle
 
 theme.useless_gap = dpi(4)
 theme.border_width = dpi(2)
-theme.border_normal = "#15161e"
-theme.border_focus = "#27a1b9"
-theme.border_marked = "#713137"
+theme.border_normal = surface
+theme.border_focus = rose
+theme.border_marked = love
 
 -- There are other variable sets
 -- overriding the default one when
@@ -41,7 +57,7 @@ theme.border_marked = "#713137"
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 
--- theme.taglist_bg_focus = "#db4b4b"
+-- theme.taglist_bg_focus = love
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
@@ -64,7 +80,7 @@ theme.menu_width = dpi(100)
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
--- theme.bg_widget = "#db4b4b"
+-- theme.bg_widget = love
 
 -- Define the image to load
 theme.titlebar_close_button_normal = themes_path .. "default/titlebar/close_normal.png"
@@ -118,7 +134,7 @@ theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height, theme.bg_focus
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = nil
+theme.icon_theme = "/usr/share/icons/rose-pine-icons/"
 
 return theme
 

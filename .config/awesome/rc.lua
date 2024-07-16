@@ -13,6 +13,7 @@ local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 local github_activity_widget = require("awesome-wm-widgets.github-activity-widget.github-activity-widget")
 local github_contributions_widget =
 	require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
+-- local docker_widget = require("awesome-wm-widgets.docker-widget.docker")
 
 -- Standard awesome library
 local gears = require("gears")
@@ -316,6 +317,7 @@ awful.screen.connect_for_each_screen(function(s)
 				timeout = 1,
 			}),
 			net_speed_widget(),
+			-- docker_widget(),
 			spotify_widget({
 				play_icon = "/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg",
 				pause_icon = "/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg",
@@ -702,21 +704,18 @@ awful.rules.rules = {
 				-- "steam_app_289070",
 				-- "steam_app_1172380",
 				"steam_app_1774580",
+				"steam_app_1182480",
 			},
 		},
 		properties = { screen = 1, fullscreen = true, floating = true },
 	},
 	{
-		rule_any = { class = { "steam_app_1182480" } },
-		properties = { fullscreen = true },
+		rule_any = { class = { "Ferdium" } },
+		properties = { screen = 2, tag = "5" },
 	},
 	{
-		rule_any = { class = { "discord", "TelegramDesktop", "ripcord", "Ferdium" } },
+		rule_any = { class = { "discord", "TelegramDesktop", "ripcord", "KotatogramDesktop" } },
 		properties = { screen = 2, tag = "8" },
-	},
-	{
-		rule_any = { class = { "discord" } },
-		properties = { screen = 2, tag = "8", minimized = true },
 	},
 	{
 		rule_any = { class = { "easyeffects" } },

@@ -17,6 +17,10 @@ set shellopts '-eu'
 
 # Custom Functions
 
+cmd trash ${{
+        trash-put $f
+}}
+
 cmd moveto ${{
         clear; tput cup $(($(tput lines)/3)); tput bold
         set -f

@@ -1,0 +1,5 @@
+[plugin]
+deps = [{ use = "AnirudhG07/nbpreview", commit = "f0149a4" }, { use = "kirasok/torrent-preview", commit = "76970b6" }, { use = "Sonico98/exifaudio", commit = "92366cf" }, { use = "Reledia/miller", commit = "75f0002" }, { use = "Reledia/glow", commit = "536185a" }, { use = "yazi-rs/plugins#chmod", commit = "3783ea0" }, { use = "yazi-rs/plugins#full-border", commit = "3783ea0" }, { use = "KKV9/archive", commit = "9f3b049" }, { use = "Rolv-Apneseth/starship", commit = "6197e4c" }, { use = "Reledia/hexyl", commit = "64daf93" }, { use = "hankertrix/augment-command", commit = "d81ddb8" }, { use = "imsi32/yatline", commit = "d26ffbc" }, { use = "dedukun/relative-motions", commit = "a5465c0" }, { use = "yazi-rs/plugins#max-preview", commit = "3783ea0" }, { use = "yazi-rs/plugins#hide-preview", commit = "3783ea0" }]
+
+[flavor]
+deps = []

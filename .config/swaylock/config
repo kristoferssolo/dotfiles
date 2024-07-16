@@ -1,5 +1,6 @@
 ignore-empty-password
 font="Fira Sans Semibold"
+font-size=128
 
 clock
 timestr=%T
@@ -12,7 +13,7 @@ screenshots
 # image=~/.cache/current_wallpaper.jpg
 
 # Fade in time
-# fade-in=1
+#fade-in=0.5
 
 # Effect for background
 effect-blur=10x5
@@ -23,12 +24,12 @@ effect-blur=10x5
 indicator
 
 # smaller indicator
-indicator-radius=200
+#indicator-radius=200
 
 # bigger indicator
-# indicator-radius=300
+indicator-radius=300
 
-indicator-thickness=20
+indicator-thickness=0
 indicator-caps-lock
 
 # Define all colors
@@ -36,7 +37,7 @@ indicator-caps-lock
 key-hl-color=00000066
 separator-color=00000000
 
-inside-color=00000033
+inside-color=00000000
 inside-clear-color=c0caf500
 inside-caps-lock-color=c0caf500
 inside-ver-color=c0caf500

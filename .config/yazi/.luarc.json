@@ -1,0 +1,10 @@
+{
+  "diagnostics.globals": [
+    "Status",
+    "cx",
+    "ui",
+    "Progress",
+    "ya"
+  ],
+}
+

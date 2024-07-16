@@ -1,13 +1,16 @@
 #!/bin/zsh
 # Import and execute startup file
 [ -f "$XDG_CONFIG_HOME/zsh/startup" ] && source "$XDG_CONFIG_HOME/zsh/startup"
+fpath=("$XDG_CONFIG_HOME/zsh/zfunc/" $fpath)
 
 # Options
 setopt appendhistory        # Immediately append history instead of overwriting
+setopt sharehistory         # Share history across terminals
 setopt autocd               # If only directory path is entered, cd there
 setopt correct              # Auto correct mistakes setopt extendedglob       # Extended globaling. Allows using regular expressions with *
-setopt histignorealldups    # If a new command is a duplicate, remove older one
-setopt histignorespace      # Don't save commands that start with space
+setopt hist_ignore_all_dups # If a new command is a duplicate, remove older one
+setopt hist_ignore_space    # Don't save commands that start with space
+setopt hist_find_no_dups    # 
 setopt inc_append_history   # Save commands are added to the history immediately
 setopt nobeep               # No beep
 setopt nocaseglob           # Case insensitive globbing
@@ -21,18 +24,21 @@ autoload -U colors && colors
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # Colored completion (different colors fr dirs/files/etc)
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # Case sensitive TAB completions
 zstyle ':completion:*' rehash true                          # Automatically find new executables in path
+zstyle ':completion:*' menu no
 # Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' cache-path ~/.cache/zsh/cache
 zstyle ':completion:*' menu select
 zstyle ':completion:*' use-cache on
 autoload -U compinit
+autoload -Uz _rye
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots) # Include hidden files
 
 HISTSIZE=1000000
-SAVEHIST=1000000
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
 HISTFILE="$XDG_CACHE_HOME/zsh/history"
 WORDCHARS=${WORDCHARS//\/[&.;]/} # Don't consider certain part of the word
 
@@ -82,16 +88,21 @@ lfcd() {
     fi
 }
 
-
-xplrcd() {
+yazicd() {
     tmp="$(mktemp -uq)"
     trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM PWR EXIT' HUP INT QUIT TERM PWR EXIT
-    xplr -last-dir-path="$tmp" "$@"
+	yazi "$@" --cwd-file="$tmp"
     if [ -f "$tmp" ]; then
         dir="$(cat "$tmp")"
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir" || return
     fi
 }
+
+tmux-window-name() {
+	($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
+}
+
+# add-zsh-hook chpwd tmux-window-name
 
 
 # Navigate words with CTRL+ARROW keys
@@ -113,7 +124,7 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -v '^?' backward-delete-char
 
-bindkey -s '^o' '^ulfcd\n'
+bindkey -s '^o' '^uyazicd\n'
 # bindkey -s '^a' 'ubc -lq\n'
 bindkey '^[[P' delete-char
 
@@ -130,15 +141,23 @@ bindkey -s '^f' '^utmux neww tmux-sessionizer\n'
 
 
 eval "$(starship init zsh)"
+eval "$(fzf --zsh)"
 
 [[ -r ~/.local/share/zsh/plugins/znap/znap.zsh ]] ||
     git clone --depth 1 -- \
         https://github.com/marlonrichert/zsh-snap.git ~/.local/share/zsh/plugins/znap
 source ~/.local/share/zsh/plugins/znap/znap.zsh
 
-znap source zsh-users/zsh-autosuggestions 
+znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-history-substring-search
+znap source zsh-users/zsh-completions
 znap source MichaelAquilina/zsh-autoswitch-virtualenv
 znap source zdharma-continuum/fast-syntax-highlighting
+znap source Aloxaf/fzf-tab
+
+autoload -U compinit && compinit
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 . "$XDG_DATA_HOME/cargo/env"
+
+[ -f "$XDG_CONFIG_HOME/zsh/zoxide" ] && source "$XDG_CONFIG_HOME/zsh/zoxide"

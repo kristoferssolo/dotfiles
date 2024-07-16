@@ -12,6 +12,7 @@ alias \
     mv="mv -iv" \
     nsxiv="nsxiv -a" \
     rm="rm -vI" \
+    wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts" \
     keychain="keychain --dir $XDG_RUNTIME_DIR/keychain"
 
 # Colorize commands when possible
@@ -47,8 +48,7 @@ alias \
     v="$EDITOR" \
     weather="curl wttr.in/" \
     ww="$EDITOR ~/neorg/" \
-    x="xplr -C ~/.config/xplr/hack.lua" \
-    z="zathura"
+    yy="yazi"
 
 # doas not required for some system commands
 for command in mount umount rsv sv pacman updatedb su shutdown poweroff reboot zzz systemctl wg wg-quick; do
