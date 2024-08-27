@@ -123,7 +123,7 @@
 
     ### Text ###
 
-    font = JetBrainsMono NF 14
+    font = JetBrainsMono NF 8
 
     icon_theme = "rose-pine-icons"
     enable_recursive_icon_lookup = true

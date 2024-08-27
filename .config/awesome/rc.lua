@@ -479,11 +479,11 @@ local globalkeys = gears.table.join(
 	-- awful.key({ modkey, "Control" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
 	awful.key({ modkey }, "b", function()
-		awful.spawn("librewolf")
-	end, { description = "open librewolf", group = "launcher" }),
+		awful.spawn("floorp")
+	end, { description = "open browser", group = "launcher" }),
 	awful.key({ modkey }, "n", function()
-		awful.spawn("spacefm")
-	end, { description = "open spacefm", group = "launcher" }),
+		awful.spawn("alacritty -e yazi")
+	end, { description = "open yazi", group = "launcher" }),
 
 	awful.key({ modkey }, "l", function()
 		awful.tag.incmwfact(0.05)

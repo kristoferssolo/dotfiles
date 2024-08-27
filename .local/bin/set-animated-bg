@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+
+# Directory containing the videos
+VIDEO_DIR="${HOME}/Pictures/wallpapers/animated/wallset"
+
+# List all video files in the directory
+VIDEOS=($(ls $VIDEO_DIR/*))
+
+# Check if there are any videos in the directory
+if [ ${#VIDEOS[@]} -eq 0 ]; then
+    echo "No videos found in $VIDEO_DIR."
+    exit 1
+fi
+
+
+# Select a random video
+RANDOM_VIDEO=${VIDEOS[$((RANDOM % ${#VIDEOS[@]}))]}
+
+# Play the selected v
+
+wallset --video "$RANDOM_VIDEO"
