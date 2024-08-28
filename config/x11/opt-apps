@@ -1,0 +1,13 @@
+#!/bin/sh
+
+autostart="picom nextcloud discord transmission-daemon floorp discord syncthing mullvad-vpn spotify-launcher"
+
+for program in $autostart; do
+	pidof -sx "$program" || "$program" &
+done
+# >/dev/null 2>&1
+
+remaps & # run the remaps script, switching caps/esc and more; check it for more info
+xrandr --output DisplayPort-0 --rate 60 --output HDMI-A-0 --rate 60 --left-of DisplayPort-0 &
+# spotifyd --no-daemon &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

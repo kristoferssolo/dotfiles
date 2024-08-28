@@ -1,0 +1,139 @@
+[helpers]
+
+[default]
+depends = []
+
+[default.files]
+LICENSE = ""
+"README.md" = ""
+
+[default.variables]
+
+[settings]
+default_target_type = "symbolic"
+
+[base]
+depends = ["default", "zsh", "spotify", "terminal", "local", "misc"]
+
+[x11]
+depends = ["base", "awesome", "picom", "dunst"]
+
+
+[x11.files]
+"config/zsh/.zprofile-x11" = "~/.config/zsh/.zprofile"
+"config/x11/" = "~/.config/x11/"
+"config/x11/xresources" = { target = "~/.config/x11/xresources", type = "template" }
+
+[x11-laptop]
+depends = ["base", "awesome_laptop", "picom", "dunst"]
+
+[x11-laptop.files]
+"config/zsh/.zprofile-x11" = "~/.config/zsh/.zprofile"
+"config/x11/" = "~/.config/x11/"
+"config/x11/xresources" = { target = "~/.config/x11/xresources", type = "template" }
+
+[wayland]
+depends = ["base", "hyprland", "dunst"]
+
+[wayland.files]
+"config/zsh/.zprofile" = "~/.config/zsh/.zprofile"
+"config/x11/xresources" = "~/.config/x11/xresources"
+
+
+[shell.files]
+"config/shell/" = "~/.config/shell/"
+
+[zsh]
+depends = ["shell"]
+
+[zsh.files]
+"config/shell/env" = "~/.zshenv"
+"config/zsh/" = "~/.config/zsh/"
+
+[local.files]
+"local/bin/" = "~/.local/bin/"
+"local/share/" = "~/.local/share/"
+
+[misc]
+depends = ["torrent", "zathura"]
+
+[misc.files]
+"config/batrc" = "~/.config/bat/config"
+"config/btop/" = "~/.config/btop/"
+"config/htoprc" = "~/.config/htop/htoprc"
+"config/fastfetch/" = "~/.config/fastfetch/"
+"config/flameshot.ini" = "~/.config/flameshot/flameshot.ini"
+"config/gitui/" = "~/.config/gitui/"
+"config/mpv/" = "~/.config/mpv/"
+"config/lf/" = "~/.config/lf/"
+"config/paru.conf" = "~/.config/paru/paru.conf"
+"config/nsxiv/" = "~/.config/nsxiv/"
+"config/wgetrc" = "~/.config/wget/wgetrc"
+
+[zathura.files]
+"config/zathura/zathurarc" = "~/.config/zathura/zathurarc"
+
+[torrent.files]
+"config/rustmission.toml" = "~/.config/rustmission/config.toml"
+"config/transmission-daemon.json" = "~/.config/transmission-daemon/settings.json"
+
+[awesome.files]
+"config/awesome/json.lua" = "~/.config/awesome/json.lua"
+"config/awesome/mytheme.lua" = "~/.config/awesome/mytheme.lua"
+"config/awesome/rc.lua" = "~/.config/awesome/rc.lua"
+
+[awesome_laptop.files]
+"config/awesome/json.lua" = "~/.config/awesome/json.lua"
+"config/awesome/mytheme.lua" = "~/.config/awesome/mytheme.lua"
+"config/awesome/rc-laptop.lua" = "~/.config/awesome/rc.lua"
+
+[dunst.files]
+"config/dunst/" = "~/.config/dunst/"
+
+[hyprland]
+depends = ["dunst", "misc", "local", "eww", "gtklock"]
+
+[hyprland.files]
+"config/hypr/" = "~/.config/hypr/"
+
+[wofi.files]
+"config/wofi/" = "~/.config/wofi/"
+
+[eww.files]
+"config/eww/" = "~/.config/eww/"
+
+[hypridbar.files]
+"config/Hypridbar/" = "~/.config/HybridBar/"
+
+[waybar.files]
+"config/waybar/" = "~/.config/waybar/"
+
+[lock.files]
+"config/gtklock/" = "~/.config/gtklock/"
+"config/swaylock" = "~/.config/swaylock/config"
+
+[picom.files]
+"config/picom.conf" = "~/.config/picom/picom.conf"
+
+[spotify.files]
+"config/spotify-tui.yml" = "~/.config/spotify-tui/config.yml"
+
+[terminal]
+depends = ["zsh", "tmux", "yazi"]
+
+[terminal.files]
+"config/alacritty/" = "~/.config/alacritty/"
+"config/alacritty/alacritty.toml" = { target = "~/.config/alacritty/alacritty.toml", type = "template" }
+"config/starship.toml" = "~/.config/starship/starship.toml"
+
+[tmux.files]
+"config/tmux/" = "~/.config/tmux/"
+
+[xplr.files]
+"config/xplr/" = "~/.config/xplr/"
+
+[yazi.files]
+"config/yazi/" = "~/.config/yazi/"
+
+[typst.files]
+"config/typstfmt.tom" = "~/.config/typstfmt/typstfmt.toml"
