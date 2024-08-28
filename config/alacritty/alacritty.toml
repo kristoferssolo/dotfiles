@@ -1,0 +1,217 @@
+import = ["~/.config/alacritty/rose-pine.toml"]
+[colors]
+draw_bold_text_with_bright_colors = true
+transparent_background_colors = false
+
+# [[colors.indexed_colors]]
+# index = 16
+# color = "#ff9e64"
+
+# [[colors.indexed_colors]]
+# index = 17
+# color = "#db4b4b"
+
+# [colors.bright]
+# black = "#414868"
+# red = "#f7768e"
+# green = "#9ece6a"
+# yellow = "#e0af68"
+# blue = "#7aa2f7"
+# magenta = "#bb9af7"
+# cyan = "#7dcfff"
+# white = "#c0caf5"
+
+[colors.cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+# [colors.hints.end]
+# background = "#282a36"
+# foreground = "#f1fa8c"
+#
+# [colors.hints.start]
+# background = "#f1fa8c"
+# foreground = "#282a36"
+
+# [colors.normal]
+# black = "#15161e"
+# red = "#f7768e"
+# green = "#9ece6a"
+# yellow = "#e0af68"
+# blue = "#7aa2f7"
+# magenta = "#bb9af7"
+# cyan = "#7dcfff"
+# white = "#a9b1d6"
+
+# [colors.primary]
+# background = "#1a1b26"
+# bright_foreground = "#ffffff"
+# dim_foreground = "#828482"
+# foreground = "#c0caf5"
+
+# [colors.search.focused_match]
+# background = "#ffb86c"
+# foreground = "#44475a"
+
+# [colors.search.footer_bar]
+# background = "#282a36"
+# foreground = "#f8f8f2"
+
+# [colors.search.matches]
+# background = "#50fa7b"
+# foreground = "#44475a"
+
+[colors.selection]
+background = "CellForeground"
+text = "CellBackground"
+
+[colors.vi_mode_cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+[cursor]
+unfocused_hollow = false
+vi_mode_style = "Block"
+
+[cursor.style]
+shape = "Beam"
+
+[env]
+TERM = "alacritty"
+
+[font]
+size = {{font_size}}
+
+[font.bold]
+family = "JetBrainsMono NF"
+style = "Bold"
+
+[font.bold_italic]
+family = "JetBrainsMono NF"
+style = "Bold Italic"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "JetBrainsMono NF"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMono NF"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = -1
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "Up"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "Down"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToTop"
+key = "Home"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "End"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mode = "~Vi"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "SearchForward"
+key = "F"
+mode = "~Search"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "SearchBackward"
+key = "B"
+mode = "~Search"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "NumpadAdd"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "NumpadSubtract"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "Q"
+mods = "Control|Shift"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mode = "~Vi"
+mouse = "Middle"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[shell]
+program = "/bin/zsh"
+
+[window]
+decorations = "none"
+decorations_theme_variant = "Dark"
+dynamic_padding = true
+dynamic_title = true
+opacity = 0.95
+startup_mode = "Windowed"
+title = "Alacritty"
+
+[window.dimensions]
+columns = 0
+lines = 0
+
+[window.padding]
+x = 0
+y = 0

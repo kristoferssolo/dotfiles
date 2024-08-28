@@ -1,4 +1,7 @@
-.config/awesome/weather
-.config/transmission-daemon
+config/awesome/weather
+config/transmission-daemon.json
 .stfolder
 .stversions
+.dotter/local.toml
+.dotter/cache.toml
+.dotter/cache
