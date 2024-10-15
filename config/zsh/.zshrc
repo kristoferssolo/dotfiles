@@ -3,6 +3,9 @@
 [ -f "$XDG_CONFIG_HOME/zsh/startup" ] && source "$XDG_CONFIG_HOME/zsh/startup"
 fpath=("$XDG_CONFIG_HOME/zsh/zfunc/" $fpath)
 
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":$XDG_CONFIG_HOME/zsh/completions:"* ]]; then export FPATH="$XDG_CONFIG_HOME/zsh/completions:$FPATH"; fi
+
 # Options
 setopt appendhistory        # Immediately append history instead of overwriting
 setopt sharehistory         # Share history across terminals
@@ -158,6 +161,5 @@ znap source Aloxaf/fzf-tab
 autoload -U compinit && compinit
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
-. "$XDG_DATA_HOME/cargo/env"
-
 [ -f "$XDG_CONFIG_HOME/zsh/zoxide" ] && source "$XDG_CONFIG_HOME/zsh/zoxide"
+if [[ ":$FPATH:" != *":$XDG_CONFIG_HOME/zsh/completions:"* ]]; then export FPATH="$XDG_CONFIG_HOME/zsh/completions:$FPATH"; fi

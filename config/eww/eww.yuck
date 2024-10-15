@@ -34,12 +34,14 @@
 
 (defwidget workspaces []
 (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}" :class "workspaces"
-  (box :space-evenly true :halign "start" :spacing 10
+  (box :space-evenly true :halign "start" :spacing 5
     (label :text "${workspaces}${current_workspace}" :visible false)
     (for workspace in workspaces
-      (button :onclick "hyprctl dispatch workspace ${workspace.id}"
-        (box :class "workspaces ${workspace.id == current_workspace ? "current" : ""}"
-          (label :text "${workspace.id}")))))))
+      (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+        (box :class "workspace-entry ${workspace.window > 0 ? "current" : ""}"
+            (label :text "${workspace.id}" :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""}" )))))))
+        ;; (box :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""}"
+        ;;   (label :text "${workspace.id}")))))))
 
 
 (deflisten window :initial "..." "bash ~/.config/eww/scripts/get-window-title")
@@ -159,9 +161,6 @@
   (label
       :text "${EWW_NET.wlan0.NET_DOWN == 0 && EWW_NET.wlan0.NET_UP == 0 ? "Disconnected ⚠" : ""}")))
 
-
-
-
     ;; "network": {
     ;;     "format-wifi": "{essid} ({signalStrength}%) ",
     ;;     "format-ethernet": "{ipaddr}/{cidr} ",
@@ -178,7 +177,7 @@
   :geometry (geometry
     :x "0%"
     :y "0%"
-    :width "100%"
+    :width "133.333%"
     :height "10px"
     :anchor "top center")
   :reserve (struts :side "top" :distance "4%")

@@ -298,11 +298,6 @@ awful.screen.connect_for_each_screen(function(s)
 				show_tooltip = true,
 				timeout = 1,
 			}),
-			batteryarc_widget({
-				show_current_level = true,
-				arc_thickness = 1,
-				size = 8,
-			}),
 			logout_menu_widget({
 				font = "JetBrainsMono NF 10",
 				onlogout = function()
@@ -320,6 +315,12 @@ awful.screen.connect_for_each_screen(function(s)
 				onpoweroff = function()
 					awful.spawn.with_shell("loginctl poweroff")
 				end,
+			}),
+			batteryarc_widget({
+				show_current_level = true,
+				font = "JetBrainsMono NF 6",
+				arc_thickness = 2,
+				size = 24,
 			}),
 			mytextclock,
 			s.mylayoutbox,

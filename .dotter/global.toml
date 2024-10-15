@@ -1,7 +1,7 @@
 [helpers]
 
 [default]
-depends = []
+depends = [  ]
 
 [default.files]
 LICENSE = ""
@@ -13,38 +13,38 @@ LICENSE = ""
 default_target_type = "symbolic"
 
 [base]
-depends = ["default", "zsh", "spotify", "terminal", "local", "misc"]
+depends = [ "default", "zsh", "spotify", "terminal", "local", "misc" ]
 
 [x11]
-depends = ["base", "awesome", "picom", "dunst"]
+depends = [ "base", "awesome", "picom", "dunst" ]
 
 
 [x11.files]
 "config/zsh/.zprofile-x11" = "~/.config/zsh/.zprofile"
 "config/x11/" = "~/.config/x11/"
-"config/x11/xresources" = { target = "~/.config/x11/xresources", type = "template" }
+"config/x11/xresources" = {target = "~/.config/x11/xresources", type = "template"}
 
 [x11-laptop]
-depends = ["base", "awesome_laptop", "picom", "dunst"]
+depends = [ "base", "awesome_laptop", "picom", "dunst" ]
 
 [x11-laptop.files]
 "config/zsh/.zprofile-x11" = "~/.config/zsh/.zprofile"
 "config/x11/" = "~/.config/x11/"
-"config/x11/xresources" = { target = "~/.config/x11/xresources", type = "template" }
+"config/x11/xresources" = {target = "~/.config/x11/xresources", type = "template"}
 
 [wayland]
-depends = ["base", "hyprland", "dunst"]
+depends = [ "base", "hyprland", "dunst" ]
 
 [wayland.files]
-"config/zsh/.zprofile" = "~/.config/zsh/.zprofile"
-"config/x11/xresources" = "~/.config/x11/xresources"
+"config/zsh/.zprofile-wayland" = "~/.config/zsh/.zprofile"
+"config/x11/xresources" = {target = "~/.config/x11/xresources", type = "template"}
 
 
 [shell.files]
 "config/shell/" = "~/.config/shell/"
 
 [zsh]
-depends = ["shell"]
+depends = [ "shell" ]
 
 [zsh.files]
 "config/shell/env" = "~/.zshenv"
@@ -55,7 +55,7 @@ depends = ["shell"]
 "local/share/" = "~/.local/share/"
 
 [misc]
-depends = ["torrent", "zathura"]
+depends = [ "torrent", "zathura" ]
 
 [misc.files]
 "config/batrc" = "~/.config/bat/config"
@@ -69,13 +69,14 @@ depends = ["torrent", "zathura"]
 "config/paru.conf" = "~/.config/paru/paru.conf"
 "config/nsxiv/" = "~/.config/nsxiv/"
 "config/wgetrc" = "~/.config/wget/wgetrc"
+"config/rsftch.json" = "~/.config/rsftch/info.json"
 
 [zathura.files]
 "config/zathura/zathurarc" = "~/.config/zathura/zathurarc"
 
 [torrent.files]
 "config/rustmission.toml" = "~/.config/rustmission/config.toml"
-"config/transmission-daemon.json" = "~/.config/transmission-daemon/settings.json"
+# "config/transmission-daemon.json" = "~/.config/transmission-daemon/settings.json"
 
 [awesome.files]
 "config/awesome/json.lua" = "~/.config/awesome/json.lua"
@@ -91,7 +92,7 @@ depends = ["torrent", "zathura"]
 "config/dunst/" = "~/.config/dunst/"
 
 [hyprland]
-depends = ["dunst", "misc", "local", "eww", "gtklock"]
+depends = [ "dunst", "misc", "local", "eww", "lock" ]
 
 [hyprland.files]
 "config/hypr/" = "~/.config/hypr/"
@@ -119,11 +120,11 @@ depends = ["dunst", "misc", "local", "eww", "gtklock"]
 "config/spotify-tui.yml" = "~/.config/spotify-tui/config.yml"
 
 [terminal]
-depends = ["zsh", "tmux", "yazi"]
+depends = [ "zsh", "tmux", "yazi" ]
 
 [terminal.files]
 "config/alacritty/" = "~/.config/alacritty/"
-"config/alacritty/alacritty.toml" = { target = "~/.config/alacritty/alacritty.toml", type = "template" }
+"config/alacritty/alacritty.toml" = {target = "~/.config/alacritty/alacritty.toml", type = "template"}
 "config/starship.toml" = "~/.config/starship/starship.toml"
 
 [tmux.files]

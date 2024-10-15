@@ -1,6 +1,6 @@
 #!/bin/sh
 
-autostart="picom nextcloud discord transmission-daemon floorp discord syncthing mullvad-vpn spotify-launcher"
+autostart="picom nextcloud discord transmission-daemon floorp discord syncthing mullvad-vpn spotify-launcher set-animated-bg"
 
 for program in $autostart; do
 	pidof -sx "$program" || "$program" &

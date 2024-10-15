@@ -57,114 +57,114 @@ $warning: #e0af68;
 $yellow: #e0af68;
 
 * {
-    all: unset; //Unsets everything so you can style everything from scratch
+  all: unset; //Unsets everything so you can style everything from scratch
 }
 
 //Global Styles
 .bar,
 .bar-1 {
-    background-color: rgba(22, 22, 30, 0.7);
-    color: $fg;
-    font-family: "JetBrainsMono NF";
-    font-weight: bold;
+  background-color: rgba(22, 22, 30, 0.7);
+  color: $fg;
+  font-family: "JetBrainsMono NF";
+  font-weight: bold;
 }
 
 // Styles on classes (see eww.yuck for more information)
 
 .sidestuff slider {
-    all: unset;
+  all: unset;
 }
 
 .metric scale trough highlight {
-    all: unset;
-    background-color: $error;
-    border-radius: 10px;
+  all: unset;
+  background-color: $error;
+  border-radius: 10px;
 }
 
 .metric scale trough {
-    all: unset;
-    background-color: $bg_visual;
-    border-radius: 50px;
-    min-height: 3px;
-    min-width: 50px;
-    margin-left: 1px;
-    margin-right: 2px;
+  all: unset;
+  background-color: $bg_visual;
+  border-radius: 50px;
+  min-height: 3px;
+  min-width: 50px;
+  margin-left: 1px;
+  margin-right: 2px;
 }
 
 .metric scale trough highlight {
-    all: unset;
-    // background-color: $fg_sidebar;
-    background-color: $teal;
-    color: $bg;
-    border-radius: 10px;
+  all: unset;
+  // background-color: $fg_sidebar;
+  background-color: $teal;
+  color: $bg;
+  border-radius: 10px;
 }
 
 .metric scale trough {
-    all: unset;
-    background-color: $bg_visual;
-    border-radius: 50px;
-    min-height: 3px;
-    min-width: 50px;
-    margin-left: 1px;
-    margin-right: 2px;
+  all: unset;
+  background-color: $bg_visual;
+  border-radius: 50px;
+  min-height: 3px;
+  min-width: 50px;
+  margin-left: 1px;
+  margin-right: 2px;
 }
 
 .label-ram {
-    font-size: large;
+  font-size: large;
 }
 
 .music {
-    &.playing {
-        color: $teal;
-    }
+  &.playing {
+    color: $teal;
+  }
 
-    &.paused {
-        color: $terminal_black;
-    }
+  &.paused {
+    color: $terminal_black;
+  }
 }
 
 .workspaces {
-    .current {
-        color: $hint;
-    }
+  .current {
+    color: $hint;
+  }
 }
 
 .icon-module {
-    & > &__icon {
-        margin-right: 5px;
-    }
+  &>&__icon {
+    margin-right: 5px;
+  }
 }
 
 .cpu {
-    &.warning {
-        color: $warning;
-    }
+  &.warning {
+    color: $warning;
+  }
 
-    &.danger {
-        color: $red;
-    }
+  &.danger {
+    color: $red;
+  }
 }
 
 .battery {
-    &.warning {
-        color: $warning;
-    }
+  &.warning {
+    color: $warning;
+  }
 
-    &.critical {
-        color: $red;
-    }
+  &.critical {
+    color: $red;
+  }
 
-    &.Charging {
-        color: $teal;
-    }
+  &.Charging {
+    color: $teal;
+  }
 }
 
 .network {
-    &.disconnected {
-        color: $error;
-    }
+  &.disconnected {
+    color: $error;
+  }
 }
 
 .workspaces button:hover {
-    background: $bg_highlight;
+  background: $bg_highlight;
 }

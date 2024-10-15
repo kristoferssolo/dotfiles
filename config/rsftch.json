@@ -1,0 +1,25 @@
+{
+  "color": [
+    "blue",
+    "green",
+    "red",
+    "yellow"
+  ],
+  "info": [
+    [
+      "os",
+      "packs",
+      "kernel"
+    ],
+    [
+      "wm",
+      "cpu",
+      "gpu",
+      "mem"
+    ],
+    [
+      "uptime",
+      "disk"
+    ]
+  ]
+}

@@ -10,6 +10,7 @@ typeset -U PATH path
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
 export PATH="$PATH:~/.spicetify"
+export PATH="$PATH:${$(find ~/.cache/.bun/bin -type d -printf %p:)%%:}"
 
 # Disable files
 export LESSHISTFILE=-
@@ -109,4 +110,4 @@ export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
 export _JAVA_AWT_WM_NONREPARENTING=1 # Fix for Java applications in dwm
 . "$XDG_DATA_HOME/cargo/env"
 . "$XDG_DATA_HOME/rye/env"
-
+. "$XDG_CACHE_HOME/deno/.deno/env"
