@@ -1,4 +1,4 @@
--- require("relative-motions"):setup({ show_numbers = "relative", show_motion = true })
+require("relative-motions"):setup({ show_numbers = "relative", show_motion = true })
 require("full-border"):setup()
 require("starship"):setup()
 require("augment-command"):setup({
@@ -14,3 +14,4 @@ require("augment-command"):setup({
 	ignore_hidden_items = false,
 	wraparound_file_navigation = false,
 })
+require("git"):setup()

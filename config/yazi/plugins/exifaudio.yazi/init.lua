@@ -1,11 +1,14 @@
 local M = {}
 
-function M:peek()
-	local cache = ya.file_cache(self)
-	if not cache then
-		return
+function GetPath(str)
+	local sep = '/'
+	if ya.target_family() == "windows" then
+		sep = '\\'
 	end
+    return str:match("(.*"..sep..")")
+end
 
+function Exiftool(...)
 	local child = Command("exiftool")
 		:args({
 			"-q", "-q", "-S", "-Title", "-SortName",
@@ -16,11 +19,58 @@ function M:peek()
 			"-AlbumArtistSortOrder", "-Genre", "-TrackNumber",
 			"-Year", "-Duration", "-SampleRate", 
 			"-AudioSampleRate", "-AudioBitrate", "-AvgBitrate",
-			"-Channels", "-AudioChannels", tostring(self.file.url),
+			"-Channels", "-AudioChannels", tostring(...),
 		})
 		:stdout(Command.PIPED)
 		:stderr(Command.NULL)
-	:spawn()
+		:spawn()
+	return child
+end
+
+function Mediainfo(...)
+	local file, cache_dir = ...
+	local template = cache_dir.."mediainfo.txt"
+	local child = Command("mediainfo")
+		:args({
+			"--Output=file://"..template, tostring(file)
+		})
+		:stdout(Command.PIPED)
+		:stderr(Command.NULL)
+		:spawn()
+	return child
+end
+
+function M:peek()
+	local cache = ya.file_cache(self)
+	if not cache then
+		return
+	end
+
+	-- Get cache dir to find the mediainfo template file
+	local cache_dir = GetPath(tostring(cache))
+
+	-- Try mediainfo, otherwise use exiftool
+	pcall(display_metadata_legacy)
+	pcall(display_metadata)
+	local status, child = pcall(Mediainfo, self.file.url, cache_dir)
+	if not status or child == nil then
+		status, child = pcall(Exiftool, self.file.url)
+		if not status or child == nil then
+			local error = ui.Line { ui.Span("Make sure exiftool is installed and in your PATH") }
+			-- TODO)) Remove legacy method when v0.4 gets released
+			local function display_error_legacy()
+				local p = ui.Paragraph(self.area, { error }):wrap(ui.Paragraph.WRAP)
+				ya.preview_widgets(self, { p })
+			end
+			local function display_error()
+				local p = ui.Text(error):area(self.area):wrap(ui.Text.WRAP)
+				ya.preview_widgets(self, { p })
+			end
+			pcall(display_error_legacy)
+			pcall(display_error)
+			return
+		end
+	end
 
 	local limit = self.area.h
 	local i, metadata = 0, {}
@@ -34,16 +84,27 @@ function M:peek()
 
 		i = i + 1
 		if i > self.skip then
-			local m_title, m_tag = prettify(next)
-			local ti = ui.Span(m_title):bold()
-			local ta = ui.Span(m_tag)
-			table.insert(metadata, ui.Line{ti, ta})
-			table.insert(metadata, ui.Line{})
+			local m_title, m_tag = Prettify(next)
+			if m_title ~= "" and m_tag ~= "" then
+				local ti = ui.Span(m_title):bold()
+				local ta = ui.Span(m_tag)
+				table.insert(metadata, ui.Line{ti, ta})
+				table.insert(metadata, ui.Line{})
+			end
 		end
 	until i >= self.skip + limit
-	
-	local p = ui.Paragraph(self.area, metadata):wrap(ui.Paragraph.WRAP)
-	ya.preview_widgets(self, { p })
+
+	-- TODO)) Remove legacy method when v0.4 gets released
+	local function display_metadata_legacy()
+		local p = ui.Paragraph(self.area, metadata):wrap(ui.Paragraph.WRAP)
+		ya.preview_widgets(self, { p })
+	end
+	local function display_metadata()
+		local p = ui.Text(metadata):area(self.area):wrap(ui.Text.WRAP)
+		ya.preview_widgets(self, { p })
+	end
+	pcall(display_metadata_legacy)
+	pcall(display_metadata)
 
 	local cover_width = self.area.w / 2 - 5
 	local cover_height = (self.area.h / 4) + 3
@@ -60,7 +121,7 @@ function M:peek()
 	end
 end
 
-function prettify(metadata)
+function Prettify(metadata)
 	local substitutions = {
 		Sortname = "Sort Title:",
 		SortName = "Sort Title:",
@@ -99,11 +160,19 @@ function prettify(metadata)
 	-- Separate the tag title from the tag data
 	local t={}
 	for str in string.gmatch(metadata , "([^"..":".."]+)") do
-                table.insert(t, str)
+		if str ~= "\n" then
+			table.insert(t, str)
+		else
+			table.insert(t, nil)
+		end
 	end
 
 	-- Add back semicolon to title, rejoin tag data if it happened to contain a semicolon
-	return t[1]..":", table.concat(t, ":", 2)
+	local title, tag_data = "", ""
+	if t[1] ~= nil then
+		title, tag_data = t[1]..":", table.concat(t, ":", 2)
+	end
+	return title, tag_data
 
 end
 
@@ -122,6 +191,33 @@ function M:preload()
 	if not cache or fs.cha(cache) then
 		return 1
 	end
+
+	local mediainfo_template = 'General;"\
+$if(%Track%,Title: %Track%,)\
+$if(%Track/Sort%,Sort Title: %Track/Sort%,)\
+$if(%Title/Sort%,Sort Title: %Title/Sort%,)\
+$if(%TITLESORT%,Sort Title: %TITLESORT%,)\
+$if(%Performer%,Artist: %Performer%,)\
+$if(%Performer/Sort%,Sort Artist: %Performer/Sort%,)\
+$if(%ARTISTSORT%,Sort Artist: %ARTISTSORT%,)\
+$if(%Album%,Album: %Album%,)\
+$if(%Album/Sort%,Sort Album: %Album/Sort%)\
+$if(%ALBUMSORT%,Sort Album: %ALBUMSORT%)\
+$if(%Album/Performer%,Album Artist: %Album/Performer%)\
+$if(%Album/Performer/Sort%,Sort Album Artist: %Album/Performer/Sort%)\
+$if(%Genre%,Genre: %Genre%)\
+$if(%Track/Position%,Track Number: %Track/Position%)\
+$if(%Recorded_Date%,Year: %Recorded_Date%)\
+$if(%Duration/String%,Duration: %Duration/String%)\
+$if(%BitRate/String%,Bitrate: %BitRate/String%)\
+"\
+Audio;"Sample Rate: %SamplingRate%\
+Channels: %Channel(s)%"\
+'
+
+	-- Write the mediainfo template file into yazi's cache dir
+	local cache_dir = GetPath(tostring(cache))
+	fs.write(Url(cache_dir.."mediainfo.txt"), mediainfo_template)
 
 	local output = Command("exiftool")
 		:args({ "-b", "-CoverArt", "-Picture", tostring(self.file.url) })

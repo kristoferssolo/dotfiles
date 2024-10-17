@@ -9,7 +9,7 @@ local function notify_error(message, urgency)
 end
 
 -- Check for windows
-local is_windows = package.config:sub(1, 1) == "\\"
+local is_windows = ya.target_family() == "windows"
 
 -- Make table of selected or hovered: path = filenames
 local selected_or_hovered = ya.sync(function()
@@ -45,9 +45,18 @@ local function is_command_available(cmd)
 	if cmd_exists then
 		return true
 	else
-		notify_error(string.format("%s not available", cmd), "error")
 		return false
 	end
+end
+
+-- Archive command list --> string
+local function find_binary(cmd_list)
+	for _, cmd in ipairs(cmd_list) do
+		if is_command_available(cmd) then
+			return cmd
+		end
+	end
+	return cmd_list[1] -- Return first command as fallback
 end
 
 -- Check if file exists
@@ -87,10 +96,11 @@ return {
 		-- Use appropriate archive command
 		local archive_commands = {
 			["%.zip$"] = { command = "zip", args = { "-r" } },
-			["%.7z$"] = { command = "7z", args = { "a" } },
+			["%.7z$"] = { command = { "7z", "7zz" }, args = { "a" } },
 			["%.tar.gz$"] = { command = "tar", args = { "rpf" }, compress = "gzip" },
 			["%.tar.xz$"] = { command = "tar", args = { "rpf" }, compress = "xz" },
 			["%.tar.bz2$"] = { command = "tar", args = { "rpf" }, compress = "bzip2" },
+			["%.tar.zst$"] = { command = "tar", args = { "rpf" }, compress = "zstd", compress_args = { "--rm" } },
 			["%.tar$"] = { command = "tar", args = { "rpf" } },
 		}
 
@@ -116,6 +126,7 @@ return {
 					compress = "7z",
 					compress_args = { "a", "-tbzip2", "-sdel", output_name },
 				},
+				["%.tar.zst$"] = { command = "tar", args = { "rpf" }, compress = "zstd", compress_args = { "--rm" } },
 				["%.tar$"] = { command = "tar", args = { "rpf" } },
 			}
 		end
@@ -131,6 +142,11 @@ return {
 			end
 		end
 
+		-- Check if archive command has multiple names
+		if type(archive_cmd) == "table" then
+			archive_cmd = find_binary(archive_cmd)
+		end
+
 		-- Check if no archive command is available for the extention
 		if not archive_cmd then
 			notify_error("Unsupported file extention", "error")
@@ -139,11 +155,13 @@ return {
 
 		-- Exit if archive command is not available
 		if not is_command_available(archive_cmd) then
+			notify_error(string.format("%s not available", archive_cmd), "error")
 			return
 		end
 
 		-- Exit if compress command is not available
 		if archive_compress and not is_command_available(archive_compress) then
+			notify_error(string.format("%s compression not available", archive_compress), "error")
 			return
 		end
 
