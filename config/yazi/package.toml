@@ -1,13 +1,12 @@
 [plugin]
 deps = [
   {use = "AnirudhG07/nbpreview", rev = "52a14b3"},
-  {use = "Reledia/glow", rev = "d8b36ff"},
+  {use = "Reledia/glow", rev = "f52b382"},
   {use = "Reledia/hexyl", rev = "ccc0a4a"},
   {use = "Reledia/miller", rev = "40e0265"},
-  {use = "Rolv-Apneseth/starship", rev = "77a65f5"},
   {use = "Sonico98/exifaudio", rev = "d75db46"},
   {use = "dedukun/relative-motions", rev = "6aecfcd"},
-  {use = "hankertrix/augment-command", rev = "b0f113d"},
+  {use = "hankertrix/augment-command", rev = "7ea8dde"},
   {use = "imsi32/yatline", rev = "7b56434"},
   {use = "kirasok/torrent-preview", rev = "76970b6"},
   {use = "ndtoan96/ouch", rev = "251da69"},

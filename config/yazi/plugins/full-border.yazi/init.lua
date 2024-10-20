@@ -17,13 +17,9 @@ local function setup(_, opts)
 				return v4("bar", ui.Rect.default, ui.Bar.TOP)
 			end
 
-			return ui.Bar(
-				ui.Rect({
-					x = x,
-					y = math.max(0, y),
-					w = ya.clamp(0, self._area.w - x, 1),
-					h = math.min(1, self._area.h),
-				}),
+			return v4(
+				"bar",
+				ui.Rect { x = x, y = math.max(0, y), w = ya.clamp(0, self._area.w - x, 1), h = math.min(1, self._area.h) },
 				ui.Bar.TOP
 			):symbol(c)
 		end
@@ -37,9 +33,9 @@ local function setup(_, opts)
 
 		local style = THEME.manager.border_style
 		self._base = ya.list_merge(self._base or {}, {
-			ui.Border(self._area, ui.Border.ALL):type(type):style(style),
-			ui.Bar(self._chunks[1], ui.Bar.RIGHT):style(style),
-			ui.Bar(self._chunks[3], ui.Bar.LEFT):style(style),
+			v4("border", self._area, ui.Border.ALL):type(type):style(style),
+			v4("bar", self._chunks[1], ui.Bar.RIGHT):style(style),
+			v4("bar", self._chunks[3], ui.Bar.LEFT):style(style),
 
 			bar("┬", c[1].right - 1, c[1].y),
 			bar("┴", c[1].right - 1, c[1].bottom - 1),
