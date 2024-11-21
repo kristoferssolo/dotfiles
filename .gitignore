@@ -5,3 +5,4 @@ config/transmission-daemon.json
 .dotter/local.toml
 .dotter/cache.toml
 .dotter/cache
+spicetify/
