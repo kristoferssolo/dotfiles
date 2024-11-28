@@ -38,6 +38,10 @@ export XDG_RUNTIME_DIR="$HOME/.cache/xdgr"
 export XDG_STATE_HOME="$HOME/.local/share"
 
 export HYPRSHOT_DIR="$HOME/Pictures/screenshots"
+# export XDG_CURRENT_DESKTOP=Hyprland
+# export XDG_SESSION_TYPE=wayland
+# export XDG_SESSION_DESKTOP=Hyprland
+# export HYPRLAND_INSTANCE_SIGNATURE=/tmp/hypr
 
 
 export ANDROID_HOME="$XDG_CONFIG_HOME/android"
