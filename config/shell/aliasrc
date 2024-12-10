@@ -46,7 +46,6 @@ alias \
     night="redshift -PO 4500" \
     py="python" \
     sv="rsv" \
-    typst-port="ss -tunlp | rg tinymist" \
     v="$EDITOR" \
     weather="curl wttr.in/" \
     wg-down="wg-quick down wg0" \

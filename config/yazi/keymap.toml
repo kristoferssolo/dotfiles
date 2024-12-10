@@ -170,7 +170,7 @@ prepend_keymap = [
   {on = [ "m", "a" ], run = ''' shell 'ripdrag -atk "$@"' --confirm ''', desc = "Drag and drop all"},
   {on = [ "m", "i" ], run = ''' shell 'ripdrag -tk "$@"' --confirm ''', desc = "Drag and drop individual"},
   # vidir
-  {on = [ "B" ], run = ''' shell 'vidir "$@"' --confirm ''', desc = "Bulk rename"},
+  {on = "B", run = 'vidir "$1"', desc = "Bulk rename"},
   # Max Preview
   {on = "T", run = "plugin --sync max-preview", desc = "Maximize or restore preview"},
   # Hide Preview

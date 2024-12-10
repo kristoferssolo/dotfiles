@@ -1,0 +1,32 @@
+#!/usr/bin/bash
+
+copy_to_clipboard() {
+    if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+        # Wayland
+        wl-copy
+    else
+        # X11
+        xclip -selection clipboard
+    fi
+}
+
+get_tinymist_ports() {
+    local line_num=${1:-0}  # Default to 0 if no argument provided
+
+    # Get all lines and store in array
+    mapfile -t lines < <(ss -tunlp | grep tinymist | awk '{
+        split($5, addr, ":")
+        print addr[1] ":" addr[2]
+    }')
+
+    # Check if requested line exists
+    if [ "$line_num" -lt 0 ] || [ "$line_num" -ge "${#lines[@]}" ]; then
+        echo "Error: Line $line_num does not exist"
+        exit 1
+    fi
+    
+    # Output the requested line
+    echo "${lines[$line_num]}" | tee >(copy_to_clipboard)
+}
+
+get_tinymist_ports "$1"
