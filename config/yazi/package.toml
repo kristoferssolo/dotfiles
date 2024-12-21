@@ -6,16 +6,16 @@ deps = [
   {use = "Reledia/miller", rev = "40e0265" },
   {use = "Sonico98/exifaudio", rev = "d794614" },
   {use = "dedukun/relative-motions", rev = "df97039" },
-  {use = "hankertrix/augment-command", rev = "4d64860" },
+  {use = "hankertrix/augment-command", rev = "369f992" },
   {use = "imsi32/yatline", rev = "1b4a9a1" },
   {use = "kirasok/torrent-preview", rev = "76970b6" },
   {use = "ndtoan96/ouch", rev = "b869886" },
   {use = "pirafrank/what-size", rev = "f08f7f2" },
-  {use = "yazi-rs/plugins:chmod", rev = "ec97f88" },
-  {use = "yazi-rs/plugins:full-border", rev = "ec97f88" },
-  {use = "yazi-rs/plugins:git", rev = "ec97f88" },
-  {use = "yazi-rs/plugins:hide-preview", rev = "ec97f88" },
-  {use = "yazi-rs/plugins:max-preview", rev = "ec97f88" },
+  {use = "yazi-rs/plugins:chmod", rev = "7afba3a" },
+  {use = "yazi-rs/plugins:full-border", rev = "7afba3a" },
+  {use = "yazi-rs/plugins:git", rev = "7afba3a" },
+  {use = "yazi-rs/plugins:hide-preview", rev = "7afba3a" },
+  {use = "yazi-rs/plugins:max-preview", rev = "7afba3a" },
 ]
 
 [flavor]
