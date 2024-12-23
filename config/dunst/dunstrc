@@ -82,7 +82,7 @@
     separator_height = 1
 
     # Padding between text and separator.
-    padding = 10
+    padding = 5
 
     # Horizontal padding.
     horizontal_padding = 5

@@ -15,4 +15,5 @@ else
 fi
 
 ssh-agent awesome
+# ssh-agent dwm
 # dbus-launch --sh-syntax --exit-with-session awesome

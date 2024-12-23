@@ -6,7 +6,7 @@ deps = [
   {use = "Reledia/miller", rev = "40e0265" },
   {use = "Sonico98/exifaudio", rev = "d794614" },
   {use = "dedukun/relative-motions", rev = "df97039" },
-  {use = "hankertrix/augment-command", rev = "369f992" },
+  {use = "hankertrix/augment-command", rev = "3fa924a" },
   {use = "imsi32/yatline", rev = "1b4a9a1" },
   {use = "kirasok/torrent-preview", rev = "76970b6" },
   {use = "ndtoan96/ouch", rev = "b869886" },
