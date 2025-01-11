@@ -1,7 +1,6 @@
 # augment-command.yazi
 
-A [Yazi](https://github.com/sxyazi/yazi)
-plugin that enhances Yazi's default commands.
+A [Yazi][yazi-link] plugin that enhances Yazi's default commands.
 This plugin is inspired by the
 [Yazi tips page](https://yazi-rs.github.io/docs/tips),
 the [bypass.yazi](https://github.com/Rolv-Apneseth/bypass.yazi) plugin
@@ -13,7 +12,7 @@ plugin.
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [What about the commands are augmented?](#what-about-the-commands-are-augmented)
+- [What about the commands are augmented?][augment-section]
 - [Augmented commands](#augmented-commands)
 - [New commands](#new-commands)
 - [Usage](#usage)
@@ -22,8 +21,8 @@ plugin.
 ## Requirements
 
 - [Yazi](https://github.com/sxyazi/yazi) v0.4.2+
-- [`7z` or `7zz` command](https://github.com/p7zip-project/p7zip)
-- [`file` command](https://www.darwinsys.com/file/)
+- [`7z` or `7zz` command][7z-link]
+- [`file` command][file-command-link]
 
 ## Installation
 
@@ -40,26 +39,24 @@ ya pack -u
 
 ## Configuration
 
-| Configuration                       | Values                                | Default   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ----------------------------------- | ------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `prompt`                            | `true` or `false`                     | `false`   | Create a prompt to choose between hovered and selected items when both exist. If this option is disabled, selected items will only be operated on when the hovered item is selected, otherwise the hovered item will be the default item that is operated on.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `default_item_group_for_prompt`     | `hovered`, `selected` or `none`       | `hovered` | The default item group to operate on when the prompt is submitted without any value. This only takes effect if `prompt` is set to `true`, otherwise this option doesn't do anything. `hovered` means the hovered item is operated on, `selected` means the selected items are operated on, and `none` just cancels the operation.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `smart_enter`                       | `true` or `false`                     | `true`    | Use one command to open files or enter a directory. With this option set, the `enter` and `open` commands will both call the `enter` command when a directory is hovered and call the `open` command when a regular file is hovered. You can also enable this behaviour by passing the `--smart` flag to the `enter` or `open` commands.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `smart_paste`                       | `true` or `false`                     | `false`   | Paste items into a directory without entering it. The behaviour is exactly the same as the [smart paste tip on Yazi's documentation](https://yazi-rs.github.io/docs/tips#smart-paste). Setting this option to `false` will use the default `paste` behaviour. You can also enable this behaviour by passing the `--smart` flag to the `paste` command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `smart_tab_create`                  | `true` or `false`                     | `false`   | Create tabs in the directory that is being hovered instead of the current directory. The behaviour is exactly the same as the [smart tab tip on Yazi's documentation](https://yazi-rs.github.io/docs/tips#smart-tab). Setting this option to `false` will use the default `tab_create` behaviour, which means you need to pass the `--current` flag to the command. You can also enable this behaviour by passing the `--smart` flag to the `tab_create` command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `smart_tab_switch`                  | `true` or `false`                     | `false`   | If the tab that is being switched to does not exist yet, setting this option to `true` will create all the tabs in between the current number of open tabs, and the tab that is being switched to. The behaviour is exactly the same as [this tip](https://github.com/sxyazi/yazi/issues/918#issuecomment-2058157773). Setting this option to `false` will use the default `tab_switch` behaviour. You can also enable this behaviour by passing the `--smart` flag to the `tab_switch` command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `open_file_after_creation`          | `true` or `false`                     | `false`   | This option determines whether the plugin will open a file after it has been created. Setting this option to `true` will cause the plugin to open created file. You can also enable this behaviour by passing the `--open` flag to the `create` command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `enter_directory_after_creation`    | `true` or `false`                     | `false`   | This option determines whether the plugin will enter a directory after it has been created. Setting this option to `true` will cause the plugin enter the created directory. You can also enable this behaviour by passing the `--enter` flag to the `create` command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `use_default_create_behaviour`      | `true` or `false`                     | `false`   | This option determines whether the plugin will use the behaviour of Yazi's `create` command. Setting this option to `true` will use the behaviour of Yazi's `create` command. You can also enable this behaviour by passing the `--default-behaviour` flag to the `create` command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `enter_archives`                    | `true` or `false`                     | `true`    | Automatically extract and enter archive files. This option requires the [7z or 7zz command](https://github.com/p7zip-project/p7zip) to be present.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `extract_retries`                   | An integer, like `1`, `3`, `10`, etc. | `3`       | This option determines how many times the plugin will retry opening an encrypted or password-protected archive when a wrong password is given. This value plus 1 is the total number of times the plugin will try opening an encrypted or password-protected archive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `extract_archives_recursively`      | `true` or `false`                     | `true`    | This option determines whether the plugin will extract all archives inside an archive file recursively. If this option is set to `false`, archive files inside an archive will not be extracted, and you will have to manually extract them yourself.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `must_have_hovered_item`            | `true` or `false`                     | `true`    | This option stops the plugin from executing any commands when there is no hovered item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `skip_single_subdirectory_on_enter` | `true` or `false`                     | `true`    | Skip directories when there is only one subdirectory and no other files when entering directories. This behaviour can be turned off by passing the `--no-skip` flag to the `enter` or `open` commands.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `skip_single_subdirectory_on_leave` | `true` or `false`                     | `true`    | Skip directories when there is only one subdirectory and no other files when leaving directories. This behaviour can be turned off by passing the `--no-skip` flag to the `leave` command.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `ignore_hidden_items`               | `true` or `false`                     | `false`   | Ignore hidden items when determining whether a directory only has one subdirectory and no other items. Setting this option to `false` will mean that hidden items in a directory will stop the plugin from skipping the single subdirectory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `wraparound_file_navigation`        | `true` or `false`                     | `false`   | Wrap around from the bottom to the top or from the top to the bottom when using the `arrow` or `parent_arrow` command to navigate.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `sort_directories_first`            | `true` or `false`                     | `true`    | This option tells the plugin if you have sorted directories first in your [`yazi.toml` file](https://yazi-rs.github.io/docs/configuration/yazi#manager.sort_dir_first), located at `~/.config/yazi/yazi.toml` on Linux and macOS or `C:\Users\USERNAME\AppData\Roaming\yazi\config\yazi.toml` on Windows, where `USERNAME` is your Windows username. If you have set [`sort_dir_first`](https://yazi-rs.github.io/docs/configuration/yazi#manager.sort_dir_first) to `true` in your [`yazi.toml` file](https://yazi-rs.github.io/docs/configuration/yazi#manager.sort_dir_first), set this option to `true` as well. If you have set [`sort_dir_first`](https://yazi-rs.github.io/docs/configuration/yazi#manager.sort_dir_first) to `false` instead, set this option to `false` as well. This option only affects the `parent_arrow` command with `wraparound_file_navigation` set to `true`. If the [`sort_dir_first`](https://yazi-rs.github.io/docs/configuration/yazi#manager.sort_dir_first) setting doesn't match the plugin's `sort_directories_first` setting, i.e. Yazi's `sort_dir_first` is `true` but the plugin's `sort_directories_first` is `false`, or Yazi's `sort_dir_first` is `false` but the plugin's `sort_directories_first` is `true`, the wraparound functionality of the `parent_arrow` command will not work properly and may act erratically. The default value of `sort_directories_first` follows Yazi's [`sort_dir_first`](https://yazi-rs.github.io/docs/configuration/yazi#manager.sort_dir_first) default value, which is `true`. |
+| Configuration                       | Values                                | Default   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ----------------------------------- | ------------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `prompt`                            | `true` or `false`                     | `false`   | Create a prompt to choose between hovered and selected items when both exist. If this option is disabled, selected items will only be operated on when the hovered item is selected, otherwise the hovered item will be the default item that is operated on.                                                                                                                                                                                                                       |
+| `default_item_group_for_prompt`     | `hovered`, `selected` or `none`       | `hovered` | The default item group to operate on when the prompt is submitted without any value. This only takes effect if `prompt` is set to `true`, otherwise this option doesn't do anything. `hovered` means the hovered item is operated on, `selected` means the selected items are operated on, and `none` just cancels the operation.                                                                                                                                                   |
+| `smart_enter`                       | `true` or `false`                     | `true`    | Use one command to open files or enter a directory. With this option set, the `enter` and `open` commands will both call the `enter` command when a directory is hovered and call the `open` command when a regular file is hovered. You can also enable this behaviour by passing the `--smart` flag to the `enter` or `open` commands.                                                                                                                                            |
+| `smart_paste`                       | `true` or `false`                     | `false`   | Paste items into a directory without entering it. The behaviour is exactly the same as the [smart paste tip on Yazi's documentation][smart-paste-tip]. Setting this option to `false` will use the default `paste` behaviour. You can also enable this behaviour by passing the `--smart` flag to the `paste` command.                                                                                                                                                              |
+| `smart_tab_create`                  | `true` or `false`                     | `false`   | Create tabs in the directory that is being hovered instead of the current directory. The behaviour is exactly the same as the [smart tab tip on Yazi's documentation][smart-tab-tip]. Setting this option to `false` will use the default `tab_create` behaviour, which means you need to pass the `--current` flag to the command. You can also enable this behaviour by passing the `--smart` flag to the `tab_create` command.                                                   |
+| `smart_tab_switch`                  | `true` or `false`                     | `false`   | If the tab that is being switched to does not exist yet, setting this option to `true` will create all the tabs in between the current number of open tabs, and the tab that is being switched to. The behaviour is exactly the same as the [smart switch tip on Yazi's documentation][smart-switch-tip]. Setting this option to `false` will use the default `tab_switch` behaviour. You can also enable this behaviour by passing the `--smart` flag to the `tab_switch` command. |
+| `open_file_after_creation`          | `true` or `false`                     | `false`   | This option determines whether the plugin will open a file after it has been created. Setting this option to `true` will cause the plugin to open the created file. You can also enable this behaviour by passing the `--open` flag to the `create` command.                                                                                                                                                                                                                        |
+| `enter_directory_after_creation`    | `true` or `false`                     | `false`   | This option determines whether the plugin will enter a directory after it has been created. Setting this option to `true` will cause the plugin to enter the created directory. You can also enable this behaviour by passing the `--enter` flag to the `create` command.                                                                                                                                                                                                           |
+| `use_default_create_behaviour`      | `true` or `false`                     | `false`   | This option determines whether the plugin will use the behaviour of Yazi's `create` command. Setting this option to `true` will use the behaviour of Yazi's `create` command. You can also enable this behaviour by passing the `--default-behaviour` flag to the `create` command.                                                                                                                                                                                                 |
+| `enter_archives`                    | `true` or `false`                     | `true`    | Automatically extract and enter archive files. This option requires the [`7z` or `7zz` command][7z-link] to be present.                                                                                                                                                                                                                                                                                                                                                             |
+| `extract_retries`                   | An integer, like `1`, `3`, `10`, etc. | `3`       | This option determines how many times the plugin will retry opening an encrypted or password-protected archive when a wrong password is given. This value plus 1 is the total number of times the plugin will try opening an encrypted or password-protected archive.                                                                                                                                                                                                               |
+| `recursively_extract_archives`      | `true` or `false`                     | `true`    | This option determines whether the plugin will extract all archives inside an archive file recursively. If this option is set to `false`, archive files inside an archive will not be extracted, and you will have to manually extract them yourself.                                                                                                                                                                                                                               |
+| `must_have_hovered_item`            | `true` or `false`                     | `true`    | This option stops the plugin from executing any commands when there is no hovered item.                                                                                                                                                                                                                                                                                                                                                                                             |
+| `skip_single_subdirectory_on_enter` | `true` or `false`                     | `true`    | Skip directories when there is only one subdirectory and no other files when entering directories. This behaviour can be turned off by passing the `--no-skip` flag to the `enter` or `open` commands.                                                                                                                                                                                                                                                                              |
+| `skip_single_subdirectory_on_leave` | `true` or `false`                     | `true`    | Skip directories when there is only one subdirectory and no other files when leaving directories. This behaviour can be turned off by passing the `--no-skip` flag to the `leave` command.                                                                                                                                                                                                                                                                                          |
+| `wraparound_file_navigation`        | `true` or `false`                     | `false`   | Wrap around from the bottom to the top or from the top to the bottom when using the `arrow` or `parent_arrow` command to navigate.                                                                                                                                                                                                                                                                                                                                                  |
 
 If you would like to use the default configuration, which is shown below,
 you don't need to add anything to your `~/.config/yazi/init.lua`
@@ -84,13 +81,11 @@ require("augment-command"):setup({
     use_default_create_behaviour = false,
     enter_archives = true,
     extract_retries = 3,
-    extract_archives_recursively = true,
+    recursively_extract_archives = true,
     must_have_hovered_item = true,
     skip_single_subdirectory_on_enter = true,
     skip_single_subdirectory_on_leave = true,
-    ignore_hidden_items = false,
     wraparound_file_navigation = false,
-    sort_directories_first = true,
 })
 ```
 
@@ -114,9 +109,7 @@ require("augment-command"):setup({
     open_file_after_creation = true,
     enter_directory_after_creation = true,
     extract_retries = 5,
-    ignore_hidden_items = true,
     wraparound_file_navigation = true,
-    sort_directories_first = false,
 })
 ```
 
@@ -143,6 +136,19 @@ then it will operate on the selected items.
 
 ### Open (`open`)
 
+- The `open` command is augmented as stated in
+  [this section above][augment-section].
+
+  Videos:
+
+  - When `prompt` is set to `true`:
+
+    [open-prompt-video]
+
+  - When `prompt` is set to `false`:
+
+    [open-behaviour-video]
+
 - When `smart_enter` is set to `true`,
   it calls the `enter` command when the hovered item is a directory.
 - `--smart` flag to use one command to `open` files and `enter` directories.
@@ -151,6 +157,11 @@ then it will operate on the selected items.
   This allows you to set a key to use this behaviour
   with the `open` command instead of using it for
   every `open` command.
+
+  Video:
+
+  [smart-enter-video]
+
 - `--no-skip` flag, which only applies
   when `smart_enter` is used as it is passed to the `enter` command.
   More details about this flag can be found at the documentation
@@ -161,15 +172,20 @@ then it will operate on the selected items.
   This can be disabled by setting `enter_archives` to `false`
   in the configuration.
   This feature requires the
-  [`7z` or `7zz` command](https://github.com/p7zip-project/p7zip)
+  [`7z` or `7zz` command][7z-link]
   to be present to extract the archives.
+
+  Video:
+
+  [open-auto-extract-archives-video]
+
 - If the extracted archive file contains other archive
   files in it, those archives will be automatically
   extracted, keeping the directory structure
   of the archive if the archive doesn't
   only contain a single archive file.
   This feature requires the
-  [`file` command](https://www.darwinsys.com/file/)
+  [`file` command][file-command-link]
   to detect the mime type of the extracted file,
   and to check whether it is an archive file or not.
   This makes extracting binaries from
@@ -177,17 +193,17 @@ then it will operate on the selected items.
   to press a key twice to decompress and extract
   the compressed tarballs.
   You can disable this feature by setting
-  `extract_archives_recursively` to `false`
+  `recursively_extract_archives` to `false`
   in the configuration.
+
+  Video:
+
+  [open-recursively-extract-archives-video]
 
 ### Enter (`enter`)
 
 - When `smart_enter` is set to `true`,
   it calls the `open` command when the hovered item is a file.
-- Automatically skips directories that
-  contain only one subdirectory when entering directories.
-  This can be turned off by setting
-  `skip_single_subdirectory_on_enter` to `false` in the configuration.
 - `--smart` flag to use one command to `enter` directories and `open` files.
   This flag will cause the `enter` command to call the `open` command when
   the selected items or the hovered item is a file,
@@ -195,6 +211,20 @@ then it will operate on the selected items.
   This allows you to set a key to use this behaviour
   with the `enter` command instead of using it for
   every `enter` command.
+
+  Video:
+
+  [smart-enter-video]
+
+- Automatically skips directories that
+  contain only one subdirectory when entering directories.
+  This can be turned off by setting
+  `skip_single_subdirectory_on_enter` to `false` in the configuration.
+
+  Video:
+
+  [enter-skip-single-subdirectory-video]
+
 - `--no-skip` flag. It stops the plugin from skipping directories
   that contain only one subdirectory when entering directories,
   even when `skip_single_subdirectory_on_enter` is set to `true`.
@@ -208,6 +238,11 @@ then it will operate on the selected items.
   This can be turned off by
   setting `skip_single_subdirectory_on_leave` to `false`
   in the configuration.
+
+  Video:
+
+  [leave-skip-single-subdirectory-video]
+
 - `--no-skip` flag. It stops the plugin
   from skipping directories that contain only one subdirectory,
   even when `skip_single_subdirectory_on_leave` is set to `true`.
@@ -217,12 +252,48 @@ then it will operate on the selected items.
 ### Rename (`rename`)
 
 - The `rename` command is augmented as stated in
-  [this section above](#what-about-the-commands-are-augmented).
+  [this section above][augment-section].
+
+  Videos:
+
+  - When `must_have_hovered_item` is `true`:
+
+    [rename-must-have-hovered-item-video]
+
+  - When `must_have_hovered_item` is `false`:
+
+    [rename-hovered-item-optional-video]
+
+  - When `prompt` is set to `true`:
+
+    [rename-prompt-video]
+
+  - When `prompt` is set to `false`:
+
+    [rename-behaviour-video]
 
 ### Remove (`remove`)
 
 - The `remove` command is augmented as stated in
-  [this section above](#what-about-the-commands-are-augmented).
+  [this section above][augment-section].
+
+  Videos:
+
+  - When `must_have_hovered_item` is `true`:
+
+    [remove-must-have-hovered-item-video]
+
+  - When `must_have_hovered_item` is `false`:
+
+    [remove-hovered-item-optional-video]
+
+  - When `prompt` is set to `true`:
+
+    [remove-prompt-video]
+
+  - When `prompt` is set to `false`:
+
+    [remove-behaviour-video]
 
 ### Create (`create`)
 
@@ -246,31 +317,81 @@ then it will operate on the selected items.
   component to prompt for a confirmation, like in Yazi v0.3.0 and below.
   This is not ideal, but it shouldn't happen that often and
   hopefully wouldn't be too annoying.
+  If you are using the latest version of Yazi from the main branch,
+  the `confirm` component is now exposed to plugin developers and
+  the plugin will use the `confirm` component instead.
+  However, the separator in the `confirm` component will be the text colour
+  instead of your configured border colour for the `confirm` component as
+  the `list` part of the `confirm` component has not been exposed to plugin
+  developers, so the separator is made using text.
 - The rationale for this behaviour is that creating a path without
   a file extension usually means you intend to create a directory instead
   of a file, as files usually have file extensions.
+
+  Video:
+
+  [create-behaviour-video]
+
 - When `open_file_after_creation` is set to `true`, the `create` command
   will `open` the created file. This behaviour can also be enabled by
   passing the `--open` flag to the `create` command.
+
+  Video:
+
+  [create-and-open-files-video]
+
   Likewise, when `enter_directory_after_creation` is set to `true`,
   the `create` command will `enter` the created directory.
   This behaviour can also be enabled by passing the `--enter` flag
   to the `create` command.
+
+  Video:
+
+  [create-and-open-directories-video]
+
   To enable both behaviours with flags, just pass both the `--open` flag
   and the `--enter` flag to the `create` command.
+
+  Video:
+
+  [create-and-open-files-and-directories-video]
+
 - If you would like to use the behaviour of Yazi's `create` command,
   probably because you would like to automatically open and enter the created
   file and directory respectively, you can either set
   `use_default_create_behaviour` to `true`,
   or pass the `--default-behaviour` flag to the `create` command.
 
+  Video:
+
+  [create-default-behaviour-video]
+
 ### Shell (`shell`)
 
 - This command runs the shell command given with the augment stated in
-  [this section above](#what-about-the-commands-are-augmented). You should
+  [this section above][augment-section]. You should
   only use this command if you need the plugin to determine a suitable
   item group for the command to operate on. Otherwise, you should just
   use the default `shell` command provided by Yazi.
+
+  Videos:
+
+  - When `must_have_hovered_item` is `true`:
+
+    [shell-must-have-hovered-item-video]
+
+  - When `must_have_hovered_item` is `false`:
+
+    [shell-hovered-item-optional-video]
+
+  - When `prompt` is set to `true`:
+
+    [shell-prompt-video]
+
+  - When `prompt` is set to `false`:
+
+    [shell-behaviour-video]
+
 - To use this command, the syntax is exactly the same as the default
   `shell` command provided by Yazi. You just provide the command you want and
   provide any Yazi shell variable, which is documented
@@ -332,6 +453,25 @@ then it will operate on the selected items.
   desc = "Open the pager"
   ```
 
+  It is also used in the `editor` command, since you usually wouldn't use
+  your text editor to open directories, especially if you are already using
+  a terminal file manager like [Yazi][yazi-link].
+  The `editor` command is essentially:
+
+  ```toml
+  # ~/.config/yazi/keymap.toml on Linux and macOS
+  # C:\Users\USERNAME\AppData\Roaming\yazi\config\keymap.toml on Windows
+
+  [[manager.prepend_keymap]]
+  on = [ "i" ]
+  run = '''plugin augment-command --args="shell '$EDITOR $@' --block --exit-if-dir"'''
+  desc = "Open the pager"
+  ```
+
+  Video:
+
+  [shell-exit-if-directory-video]
+
 ### Paste (`paste`)
 
 - When `smart_paste` is set to `true`,
@@ -349,6 +489,10 @@ then it will operate on the selected items.
   This allows you to set a key to use this behaviour
   with the `paste` command instead of using it for
   every `paste` command.
+
+  Video:
+
+  [smart-paste-video]
 
 ### Tab create (`tab_create`)
 
@@ -371,6 +515,10 @@ then it will operate on the selected items.
   This allows you to set a specific key to use this
   behaviour with the `tab_create` command instead
   of using it for every `tab_create` command.
+
+  Video:
+
+  [smart-tab-create-video]
 
 ### Tab switch (`tab_switch`)
 
@@ -406,11 +554,20 @@ then it will operate on the selected items.
   behaviour with the `tab_switch` command instead
   of using it for every `tab_switch` command.
 
+  Video:
+
+  [smart-tab-switch-video]
+
 ### Arrow (`arrow`)
 
 - When `wraparound_file_navigation` is set to `true`,
   the arrow command will wrap around from the bottom to the top or
   from the top to the bottom when navigating.
+
+  Video:
+
+  [wraparound-arrow-video]
+
   Otherwise, it'll behave like the default `arrow` command.
 
 ## New commands
@@ -421,74 +578,18 @@ then it will operate on the selected items.
   but in the parent directory.
   It allows you to navigate in the parent directory
   without leaving the current directory.
+
+  Video:
+
+  [parent-arrow-video]
+
 - When `wraparound_file_navigation` is set to `true`,
   this command will also wrap around from the bottom to the top or
   from top to the bottom when navigating in the parent directory.
-  For this feature to work properly, the
-  [`sort_dir_first`](https://yazi-rs.github.io/docs/configuration/yazi#manager.sort_dir_first)
-  option in your `~/.config/yazi/yazi.toml` file on Linux and macOS,
-  or your `C:\Users\USERNAME\AppData\Roaming\yazi\config\yazi.toml`
-  file on Windows, where `USERNAME` is your Windows username,
-  has to match the plugin's `sort_directories_first` option,
-  i.e. if you have set the
-  [`sort_dir_first`](https://yazi-rs.github.io/docs/configuration/yazi#manager.sort_dir_first)
-  to `true` in your `~/.config/yazi/yazi.toml` file on Linux and macOS,
-  or your `C:\Users\USERNAME\AppData\Roaming\yazi\config\yazi.toml`
-  on Windows, like so:
 
-  ```toml
-  # ~/.config/yazi/yazi.toml on Linux and macOS
-  # C:\Users\USERNAME\AppData\Roaming\yazi\config\yazi.toml on Windows
+  Video:
 
-  [manager]
-  sort_dir_first = true
-  ```
-
-  Then `sort_directories_first` should be set to `true`
-  as well in your `~/.config/yazi/init.lua` file on Linux and macOS,
-  or your `C:\Users\USERNAME\AppData\Roaming\yazi\config\yazi.toml`
-  file on Windows, where `USERNAME` is your Windows username, like so:
-
-  ```lua
-  -- ~/.config/yazi/init.lua on Linux and macOS
-  -- C:\Users\USERNAME\AppData\Roaming\yazi\config\init.lua on Windows
-
-  require("augment-command"):setup({
-      sort_directories_first = true
-  })
-  ```
-
-  If your `~/.config/yazi/yazi.toml` file on Linux and macOS, or your
-  `C:\Users\USERNAME\AppData\Roaming\yazi\config\yazi.toml` file on Windows,
-  where `USERNAME` is your Windows username, has
-  [`sort_dir_first`](https://yazi-rs.github.io/docs/configuration/yazi#manager.sort_dir_first)
-  set to `false`, like so:
-
-  ```toml
-  # ~/.config/yazi/yazi.toml on Linux and macOS
-  # C:\Users\USERNAME\AppData\Roaming\yazi\config\yazi.toml on Windows
-
-  [manager]
-  sort_dir_first = false
-  ```
-
-  Then `sort_directories_first` should be set to `false`
-  as well in your `~/.config/yazi/init.lua` file on Linux and macOS,
-  or your `C:\Users\USERNAME\AppData\Roaming\yazi\config\yazi.toml`
-  file on Windows, where `USERNAME` is your Windows username, like so:
-
-  ```lua
-  -- ~/.config/yazi/init.lua on Linux and macOS
-  -- C:\Users\USERNAME\AppData\Roaming\yazi\config\init.lua on Windows
-
-  require("augment-command"):setup({
-      sort_directories_first = false
-  })
-  ```
-
-  The default value of `sort_directories_first` follows Yazi's
-  [`sort_dir_first`](https://yazi-rs.github.io/docs/configuration/yazi#manager.sort_dir_first)
-  default value, which is `true`.
+  [wraparound-parent-arrow-video]
 
 - You can also replicate this using this series of commands below,
   but it doesn't work as well,
@@ -517,14 +618,32 @@ then it will operate on the selected items.
 - The `editor` command opens the default editor set by the
   `$EDITOR` environment variable.
 - The command is also augmented as stated in
-  [this section above](#what-about-the-commands-are-augmented).
+  [this section above][augment-section].
+
+  Videos:
+
+  - When `must_have_hovered_item` is `true`:
+
+    [editor-must-have-hovered-item-video]
+
+  - When `must_have_hovered_item` is `false`:
+
+    [editor-hovered-item-optional-video]
+
+  - When `prompt` is set to `true`:
+
+    [editor-prompt-video]
+
+  - When `prompt` is set to `false`:
+
+    [editor-behaviour-video]
 
 ### Pager (`pager`)
 
 - The `pager` command opens the default pager set by the
   `$PAGER` environment variable.
 - The command is also augmented as stated in
-  [this section above](#what-about-the-commands-are-augmented).
+  [this section above][augment-section].
 - The `pager` command will also skip opening directories, as the pager
   cannot open directories and will error out.
   Hence, the command will not do anything when the hovered item
@@ -532,6 +651,24 @@ then it will operate on the selected items.
   This makes the pager command less annoying as it will not
   try to open a directory and then immediately fail with an error,
   causing a flash and causing Yazi to send a notification.
+
+  Videos:
+
+  - When `must_have_hovered_item` is `true`:
+
+    [pager-must-have-hovered-item-video]
+
+  - When `must_have_hovered_item` is `false`:
+
+    [pager-hovered-item-optional-video]
+
+  - When `prompt` is set to `true`:
+
+    [pager-prompt-video]
+
+  - When `prompt` is set to `false`:
+
+    [pager-behaviour-video]
 
 ## Usage
 
@@ -585,9 +722,8 @@ run = "plugin augment-command --args='remove --permanently'"
 desc = "Permanently delete the files"
 ```
 
-For the default descriptions of the commands,
-you can refer to
-[Yazi's `keymap.toml` file](https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/keymap.toml).
+For the default descriptions of the commands, you can refer to
+[Yazi's default `keymap.toml` file][yazi-keymap-toml].
 
 Essentially, all you need to do to use this plugin
 is to wrap a Yazi command in single quotes,
@@ -599,10 +735,105 @@ in front of it, which results in
 ### Full configuration example
 
 For a full configuration example,
-you can take a look at
-[my `keymap.toml` file](https://github.com/hankertrix/Dotfiles/blob/master/.config/yazi/keymap.toml).
+you can take a look at [my `keymap.toml` file][my-keymap-toml].
 
-## [Licence](LICENSE)
+## [Licence]
 
-This plugin is licenced under the [GNU AGPL v3 licence](LICENSE).
-You can view the full licence in the [`LICENSE`](LICENSE) file.
+This plugin is licenced under the [GNU AGPL v3 licence][Licence].
+You can view the full licence in the [`LICENSE`][Licence] file.
+
+<!-- Regular links -->
+
+[yazi-link]: https://github.com/sxyazi/yazi
+[smart-paste-tip]: https://yazi-rs.github.io/docs/tips#smart-paste
+[smart-tab-tip]: https://yazi-rs.github.io/docs/tips#smart-tab
+[smart-switch-tip]: https://yazi-rs.github.io/docs/tips#smart-switch
+[augment-section]: #what-about-the-commands-are-augmented
+[7z-link]: https://www.7-zip.org/
+[file-command-link]: https://www.darwinsys.com/file/
+[my-keymap-toml]: https://github.com/hankertrix/Dotfiles/blob/main/.config/yazi/keymap.toml
+[yazi-keymap-toml]: https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/keymap-default.toml
+[Licence]: LICENSE
+
+<!-- Videos -->
+
+<!-- Open command -->
+
+[open-behaviour-video]: https://github.com/user-attachments/assets/5636ffc0-fe24-4da3-9f0e-98de9cd74096
+[open-prompt-video]: https://github.com/user-attachments/assets/6bad5a20-e5d3-491d-9c7c-0f5962b77c1c
+[open-auto-extract-archives-video]: https://github.com/user-attachments/assets/aeb3368b-4f7d-431e-9f7a-69a443af7153
+[open-recursively-extract-archives-video]: https://github.com/user-attachments/assets/44228646-3e82-41e4-a445-f93ab5649309
+
+<!-- Enter command -->
+
+[smart-enter-video]: https://github.com/user-attachments/assets/d3507110-1385-4029-bf64-da3225446d72
+[enter-skip-single-subdirectory-video]: https://github.com/user-attachments/assets/2cdb9289-ef41-454f-817b-81beb8a8d030
+
+<!-- Leave command -->
+
+[leave-skip-single-subdirectory-video]: https://github.com/user-attachments/assets/49acdddb-4d04-4624-8d29-057ada33fd01
+
+<!-- Rename command -->
+
+[rename-hovered-item-optional-video]: https://github.com/user-attachments/assets/3f592893-cda6-4759-ae32-3059f0c285f0
+[rename-must-have-hovered-item-video]: https://github.com/user-attachments/assets/074c6713-60e8-4249-867f-926ac6ee2bd6
+[rename-behaviour-video]: https://github.com/user-attachments/assets/ba6c79e0-9062-43ae-a76b-2782f28a9a18
+[rename-prompt-video]: https://github.com/user-attachments/assets/4d42653e-9595-4322-b0c9-451b112dc596
+
+<!-- Remove command -->
+
+[remove-hovered-item-optional-video]: https://github.com/user-attachments/assets/dd033b80-b8b0-46db-ab02-9fc1f1b7002d
+[remove-must-have-hovered-item-video]: https://github.com/user-attachments/assets/5533b8b6-a966-4453-a86a-09d2ab2340e9
+[remove-behaviour-video]: https://github.com/user-attachments/assets/cc0617b1-fedf-45d3-b894-00524ba31434
+[remove-prompt-video]: https://github.com/user-attachments/assets/d23283fd-5068-429d-b06d-72b0c6a3bb36
+
+<!-- Create command -->
+
+[create-and-open-directories-video]: https://github.com/user-attachments/assets/52b244db-50a8-4adc-912f-239e01a10cc6
+[create-and-open-files-video]: https://github.com/user-attachments/assets/8f2306ea-b795-4da4-9867-9a5ed34f7e12
+[create-and-open-files-and-directories-video]: https://github.com/user-attachments/assets/ed14e451-a8ca-4622-949f-1469e1d17643
+[create-behaviour-video]: https://github.com/user-attachments/assets/0bee02b7-f0c3-4b24-8e8d-43c9d3ada3d6
+[create-default-behaviour-video]: https://github.com/user-attachments/assets/8c59f579-8f32-443c-8ae1-edd8d18e5ba0
+
+<!-- Shell command -->
+
+[shell-hovered-item-optional-video]: https://github.com/user-attachments/assets/db4b0a30-0cbb-4747-9788-2fb2f8857449
+[shell-must-have-hovered-item-video]: https://github.com/user-attachments/assets/f7699493-99e7-4926-92c7-8811d3428cd4
+[shell-behaviour-video]: https://github.com/user-attachments/assets/5d898205-e5ca-487e-b731-4624ca0123ee
+[shell-prompt-video]: https://github.com/user-attachments/assets/d1790105-1e40-4639-bf65-d395a488ae94
+[shell-exit-if-directory-video]: https://github.com/user-attachments/assets/a992300a-2eed-40a1-97e4-d4efef57f7f0
+
+<!-- Paste command -->
+
+[smart-paste-video]: https://github.com/user-attachments/assets/9796fbf1-6807-4f74-a0eb-a36c6306c761
+
+<!-- Tab create command -->
+
+[smart-tab-create-video]: https://github.com/user-attachments/assets/2738598c-ccdf-49e4-9d57-90a6378f6155
+
+<!-- Tab switch command -->
+
+[smart-tab-switch-video]: https://github.com/user-attachments/assets/78240347-7d5e-4b45-85df-8446cfb61edf
+
+<!-- Arrow command -->
+
+[wraparound-arrow-video]: https://github.com/user-attachments/assets/28d96bb3-276d-41c8-aa17-eebd7fde9390
+
+<!-- Parent arrow command -->
+
+[parent-arrow-video]: https://github.com/user-attachments/assets/d58a841d-0c05-4555-bf1b-f4d539b9d9c9
+[wraparound-parent-arrow-video]: https://github.com/user-attachments/assets/72dcd01a-63f0-4193-9a23-cefa61142d73
+
+<!-- Editor command -->
+
+[editor-hovered-item-optional-video]: https://github.com/user-attachments/assets/97e7f313-afcd-4619-bdec-539ffa0ce9a4
+[editor-must-have-hovered-item-video]: https://github.com/user-attachments/assets/4fb901d2-9a86-44ec-9896-453f6df16ea1
+[editor-behaviour-video]: https://github.com/user-attachments/assets/af057282-8f75-4662-8b4b-29e594cf4163
+[editor-prompt-video]: https://github.com/user-attachments/assets/6c12380c-36fb-4a57-bd82-8452fdcad7e6
+
+<!-- Pager command -->
+
+[pager-hovered-item-optional-video]: https://github.com/user-attachments/assets/e63af138-b553-4598-b6da-c7e3de57f328
+[pager-must-have-hovered-item-video]: https://github.com/user-attachments/assets/aa9e27e0-39ed-466f-ae84-812c08d93293
+[pager-behaviour-video]: https://github.com/user-attachments/assets/d18aec12-8be3-483a-a24a-2929ad8fc6c2
+[pager-prompt-video]: https://github.com/user-attachments/assets/ac3cd3b3-2624-4ea2-b22d-5ab6a49a98c6

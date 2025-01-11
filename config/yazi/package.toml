@@ -1,21 +1,21 @@
 [plugin]
 deps = [
   {use = "AnirudhG07/nbpreview", rev = "1d85745" },
-  {use = "Reledia/glow", rev = "c2ed51e" },
+  {use = "Reledia/glow", rev = "5ce76dc" },
   {use = "Reledia/hexyl", rev = "39d3d4e" },
   {use = "Reledia/miller", rev = "40e0265" },
   {use = "Sonico98/exifaudio", rev = "d794614" },
   {use = "dedukun/relative-motions", rev = "df97039" },
-  {use = "hankertrix/augment-command", rev = "3fa924a" },
-  {use = "imsi32/yatline", rev = "1b4a9a1" },
-  {use = "kirasok/torrent-preview", rev = "76970b6" },
+  {use = "hankertrix/augment-command", rev = "6a367db" },
+  {use = "imsi32/yatline", rev = "600ed1f" },
+  {use = "kirasok/torrent-preview", rev = "c9e67df" },
   {use = "ndtoan96/ouch", rev = "b869886" },
-  {use = "pirafrank/what-size", rev = "f08f7f2" },
-  {use = "yazi-rs/plugins:chmod", rev = "7afba3a" },
-  {use = "yazi-rs/plugins:full-border", rev = "7afba3a" },
-  {use = "yazi-rs/plugins:git", rev = "7afba3a" },
-  {use = "yazi-rs/plugins:hide-preview", rev = "7afba3a" },
-  {use = "yazi-rs/plugins:max-preview", rev = "7afba3a" },
+  {use = "pirafrank/what-size", rev = "b23e3a4" },
+  {use = "yazi-rs/plugins:chmod", rev = "71c4fc2" },
+  {use = "yazi-rs/plugins:full-border", rev = "71c4fc2" },
+  {use = "yazi-rs/plugins:git", rev = "71c4fc2" },
+  {use = "yazi-rs/plugins:hide-preview", rev = "71c4fc2" },
+  {use = "yazi-rs/plugins:max-preview", rev = "71c4fc2" },
 ]
 
 [flavor]
