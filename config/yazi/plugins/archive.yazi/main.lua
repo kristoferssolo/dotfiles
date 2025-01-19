@@ -1,1 +1,0 @@
-/home/kristofers/Nextcloud/repos/solorice/config/yazi/plugins/archive.yazi/init.lua
