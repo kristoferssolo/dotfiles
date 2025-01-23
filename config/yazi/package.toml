@@ -1,22 +1,82 @@
-[plugin]
-deps = [
-  {use = "AnirudhG07/nbpreview", rev = "1d85745" },
-  {use = "Reledia/glow", rev = "5ce76dc" },
-  {use = "Reledia/hexyl", rev = "39d3d4e" },
-  {use = "Reledia/miller", rev = "40e0265" },
-  {use = "Sonico98/exifaudio", rev = "d794614" },
-  {use = "dedukun/relative-motions", rev = "df97039" },
-  {use = "hankertrix/augment-command", rev = "6a367db" },
-  {use = "imsi32/yatline", rev = "600ed1f" },
-  {use = "kirasok/torrent-preview", rev = "c9e67df" },
-  {use = "ndtoan96/ouch", rev = "b869886" },
-  {use = "pirafrank/what-size", rev = "b23e3a4" },
-  {use = "yazi-rs/plugins:chmod", rev = "71c4fc2" },
-  {use = "yazi-rs/plugins:full-border", rev = "71c4fc2" },
-  {use = "yazi-rs/plugins:git", rev = "71c4fc2" },
-  {use = "yazi-rs/plugins:hide-preview", rev = "71c4fc2" },
-  {use = "yazi-rs/plugins:max-preview", rev = "71c4fc2" },
-]
+[[plugin.deps]]
+use = "AnirudhG07/nbpreview"
+rev = "1d85745"
+hash = "d378328e5d0a1b9fb9f04ab3aade4575"
+
+[[plugin.deps]]
+use = "Reledia/glow"
+rev = "5ce76dc"
+hash = "52e5f5c602962e7cbf874da28f52ba45"
+
+[[plugin.deps]]
+use = "Reledia/hexyl"
+rev = "39d3d4e"
+hash = "dd624cbaff94af65f39fd86bc57b340"
+
+[[plugin.deps]]
+use = "Reledia/miller"
+rev = "40e0265"
+hash = "2d6d77583162aaf0a599e7a3091b5878"
+
+[[plugin.deps]]
+use = "Sonico98/exifaudio"
+rev = "d794614"
+hash = "a8e15d3c21c02a5af41d46ed04778a02"
+
+[[plugin.deps]]
+use = "dedukun/relative-motions"
+rev = "df97039"
+hash = "395940d2b22941e0acb1232579c9d4cf"
+
+[[plugin.deps]]
+use = "hankertrix/augment-command"
+rev = "c0fd61f"
+hash = "3e56e8b9ee07aabc0d08743c05835929"
+
+[[plugin.deps]]
+use = "imsi32/yatline"
+rev = "9328205"
+hash = "3e51d1fd8a2e481fcfa8eab1251d1c5f"
+
+[[plugin.deps]]
+use = "kirasok/torrent-preview"
+rev = "c9e67df"
+hash = "f0d9a684da8e4ab9ccbcd255a97cf42b"
+
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "083d564"
+hash = "1e4c0ac1fca31a23412324710193358a"
+
+[[plugin.deps]]
+use = "pirafrank/what-size"
+rev = "b23e3a4"
+hash = "98e5f5af3efd3ba8bc2db0720187cc83"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "6418698"
+hash = "4c7e8fd0266eedee7b619d966bd2d025"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "6418698"
+hash = "882ed23839778f82dc137248979c8681"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "6418698"
+hash = "e9cf1bfc03de7fee0f1d4260da0d1dfd"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:hide-preview"
+rev = "6418698"
+hash = "5be5885898ca9df783bdec0d402bf4b0"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:max-preview"
+rev = "6418698"
+hash = "9bc26d10d2f6e2aa93b10905b1b76979"
 
 [flavor]
-deps = [  ]
+deps = []

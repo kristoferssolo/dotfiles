@@ -143,6 +143,8 @@ bindkey -s '^f' '^utmux neww tmux-sessionizer\n'
 
 eval "$(starship init zsh)"
 eval "$(fzf --zsh)"
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
 
 [[ -r ~/.local/share/zsh/plugins/znap/znap.zsh ]] ||
     git clone --depth 1 -- \

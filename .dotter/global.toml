@@ -122,7 +122,7 @@ depends = [ "misc", "local", "eww", "lock" ]
 "config/spotify-tui.yml" = "~/.config/spotify-tui/config.yml"
 
 [terminal]
-depends = [ "zsh", "tmux", "yazi" ]
+depends = [ "zsh", "tmux" ]
 
 [terminal.files]
 "config/alacritty/" = "~/.config/alacritty/"
