@@ -671,7 +671,7 @@ awful.rules.rules = {
 		properties = { screen = 2, tag = "5" },
 	},
 	{
-		rule_any = { class = { "discord", "TelegramDesktop", "ripcord", "KotatogramDesktop" } },
+		rule_any = { class = { "discord", "TelegramDesktop", "ripcord", "KotatogramDesktop", "vesktop" } },
 		properties = { screen = 2, tag = "8" },
 	},
 	{
