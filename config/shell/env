@@ -114,3 +114,4 @@ export _JAVA_AWT_WM_NONREPARENTING=1 # Fix for Java applications in dwm
 . "$XDG_DATA_HOME/cargo/env"
 . "$XDG_DATA_HOME/rye/env"
 . "$XDG_CACHE_HOME/deno/.deno/env"
+. "/home/kristofers/.local/share/cargo/env"

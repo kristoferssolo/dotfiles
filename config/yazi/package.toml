@@ -30,8 +30,8 @@ hash = "395940d2b22941e0acb1232579c9d4cf"
 
 [[plugin.deps]]
 use = "hankertrix/augment-command"
-rev = "c0fd61f"
-hash = "3e56e8b9ee07aabc0d08743c05835929"
+rev = "e337feb"
+hash = "feeb35edcf1677c7bafac2bc573670bb"
 
 [[plugin.deps]]
 use = "imsi32/yatline"
@@ -55,27 +55,27 @@ hash = "98e5f5af3efd3ba8bc2db0720187cc83"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "6418698"
+rev = "f202fa8"
 hash = "4c7e8fd0266eedee7b619d966bd2d025"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "6418698"
+rev = "f202fa8"
 hash = "882ed23839778f82dc137248979c8681"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "6418698"
-hash = "e9cf1bfc03de7fee0f1d4260da0d1dfd"
+rev = "f202fa8"
+hash = "4d6a07559118975e2dee983d27474d70"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:hide-preview"
-rev = "6418698"
+rev = "f202fa8"
 hash = "5be5885898ca9df783bdec0d402bf4b0"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:max-preview"
-rev = "6418698"
+rev = "f202fa8"
 hash = "9bc26d10d2f6e2aa93b10905b1b76979"
 
 [flavor]
