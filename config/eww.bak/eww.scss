@@ -1,0 +1,129 @@
+$base: #191724;
+$surface: #1f1d2e;
+$overlay: #26233a;
+$muted: #6e6a86;
+$subtle: #908caa;
+$text: #e0def4;
+$love: #eb6f92;
+$gold: #f6c177;
+$rose: #ebbcba;
+$pine: #31748f;
+$foam: #9ccfd8;
+$iris: #c4a7e7;
+$highlight_low: #21202e;
+$highlight_med: #403d52;
+$highlight_high: #524f67;
+$bg: rgba(25, 23, 37, 0.7);
+
+* {
+  all: unset; //Unsets everything so you can style everything from scratch
+  font-family: "JetBrainsMono NF";
+}
+
+//Global Styles
+.bar,
+.bar-1 {
+  background-color: $bg;
+  color: $text;
+  font-weight: bold;
+}
+
+// Styles on classes (see eww.yuck for more information)
+
+.sidestuff slider {
+  all: unset;
+}
+
+.metric scale trough highlight {
+  all: unset;
+  background-color: $love;
+  border-radius: 10px;
+}
+
+.metric scale trough {
+  all: unset;
+  background-color: $highlight_med;
+  border-radius: 50px;
+  min-height: 3px;
+  min-width: 50px;
+  margin-left: 1px;
+  margin-right: 2px;
+}
+
+.metric scale trough highlight {
+  all: unset;
+  // background-color: $subtle;
+  background-color: $foam;
+  color: $base;
+  border-radius: 10px;
+}
+
+.metric scale trough {
+  all: unset;
+  background-color: $highlight_med;
+  border-radius: 50px;
+  min-height: 3px;
+  min-width: 50px;
+  margin-left: 1px;
+  margin-right: 2px;
+}
+
+.label-ram {
+  font-size: large;
+}
+
+.music {
+  &.playing {
+    color: $pine;
+  }
+
+  &.paused {
+    color: $muted;
+  }
+}
+
+.workspaces {
+  .current {
+    color: $pine;
+  }
+}
+
+.icon-module {
+  & > &__icon {
+    margin-right: 5px;
+  }
+}
+
+.cpu {
+  &.warning {
+    color: $gold;
+  }
+
+  &.danger {
+    color: $love;
+  }
+}
+
+.battery {
+  &.warning {
+    color: $gold;
+  }
+
+  &.critical {
+    color: $love;
+  }
+
+  &.Charging {
+    color: $pine;
+  }
+}
+
+.network {
+  &.disconnected {
+    color: $love;
+  }
+}
+
+.workspaces button:hover {
+  background: $highlight_med;
+}

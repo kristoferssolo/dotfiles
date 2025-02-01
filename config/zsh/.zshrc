@@ -145,6 +145,7 @@ eval "$(starship init zsh)"
 eval "$(fzf --zsh)"
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+eval "$(zoxide init zsh)"
 
 [[ -r ~/.local/share/zsh/plugins/znap/znap.zsh ]] ||
     git clone --depth 1 -- \

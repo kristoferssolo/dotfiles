@@ -1,0 +1,244 @@
+;; Variables
+(defpoll clock_time :interval "5m" "date +\%I")
+(defpoll clock_minute :interval "5s" "date +\%M")
+(defpoll clock_date :interval "10h" "date '+%d/%m'")
+(defpoll volume_percent :interval "3s" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+(defpoll mic_percent :interval "3s" "amixer -D pulse sget Capture | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+(defpoll brightness_percent :interval "5s" "brightnessctl -m | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
+;; (defpoll battery :interval "15s" "./scripts/battery --bat")
+;; (defpoll battery_status :interval "1m" "./scripts/battery --bat-st")
+;; (defpoll memory :interval "15s" "scripts/memory")
+;; (defpoll memory_used_mb :interval "2m" "scripts/mem-ad used")
+;; (defpoll memory_total_mb :interval "2m" "scripts/mem-ad total")
+;; (defpoll memory_free_mb :interval "2m" "scripts/mem-ad free")
+(defvar vol_reveal false)
+(defvar br_reveal false)
+(defvar music_reveal false)
+(defvar wifi_rev false)
+(defvar time_rev false)
+(deflisten workspace "scripts/workspace")
+
+(defvar eww "$HOME/.local/bin/eww/eww -c $HOME/.config/eww/bar")
+
+(defwidget bar []
+(centerbox :orientation "h"
+  (workspaces)
+  (window)
+  (sidestuff)))
+
+(defwidget sidestuff []
+(box
+    :class "sidestuff"
+    :orientation "h"
+    :space-evenly false
+    :halign "end"
+    :spacing 10
+  (music)
+  (metric
+      :label ""
+      :value volume
+      :onchange "pulsemixer --set-volume {}" )
+  ;; (metric_extended
+  ;;     :label ""
+  ;;     :value brightness
+  ;;     :onchange "doas brightnessctl set {}" )
+  (cpu)
+  (github)
+  ;; (network)
+  (battery)
+  (bright)
+  time
+  date
+  ))
+
+
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
+
+(defwidget workspaces []
+  (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}" :class "workspaces"
+    (box :space-evenly true
+         :halign "start"
+         :space-evenly true
+         :spacing 5
+      (label :text "${workspaces}${current_workspace}" :visible false)
+      (for workspace in workspaces
+        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+          (box :class "workspace-entry ${workspace.windows > 0 ? "occupied" : "empty"}"
+            (label :text "${workspace.id}" :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""}" )
+            )
+          )
+        )
+      )
+    )
+  )
+
+
+(deflisten window :initial "..." "bash ~/.config/eww/scripts/get-window-title")
+(defwidget window []
+(box :class "window"
+  (label :text "${window}")))
+
+(defwidget music []
+(box :class "music ${music_status == "Playing" ? "playing" : "paused"}"
+    :orientation "h"
+    :space-evenly false
+    :halign "center"
+  (button :onclick "sp play" {music != "" ? "${music}" : ""})))
+
+(defwidget icon-module [icon ?class ?visible]
+(box :class "${class} icon-module"
+    :orientation "h"
+    :halign "end"
+    :space-evenly false
+    :visible {visible ?: true} ; because the argument is optional
+  (label :class "icon-module__icon" :text "${icon}")
+  (children)))
+
+(defwidget metric [label value onchange]
+(box :orientation "h"
+    :class "metric"
+    :space-evenly false
+  (box :class "label" label)
+  (scale :min 0
+      :max 101
+      :active {onchange != ""}
+      :value value
+      :onchange onchange)))
+
+(defpoll music
+  :interval "1s"
+  "scripts/get-music")
+
+(defpoll music_status
+  :interval "1s"
+  "sp status")
+
+(defpoll volume
+  :interval "1s"
+  "scripts/getvol")
+
+(defwidget metric_extended [label value onchange]
+(box
+    :orientation "h"
+    :class "metric"
+    :space-evenly false
+  (box
+      :class "label" label)
+  (scale
+      :min 0
+      :max 256
+      :active {onchange != ""}
+      :value value
+      :onchang
+      :onchange onchange)))
+
+(defpoll brightness
+  :interval "1s"
+  :class "brightness"
+  "brightnessctl get")
+
+;; "format-icons": ["", "", "", "", "", "", "", "", ""],
+
+(defwidget battery []
+(icon-module
+    :icon "${EWW_BATTERY.BAT0.status == "Charging" ? "" :
+      EWW_BATTERY.BAT0.capacity > 90 ? "" :
+      EWW_BATTERY.BAT0.capacity > 70 ? "" :
+      EWW_BATTERY.BAT0.capacity > 40 ? "" :
+      EWW_BATTERY.BAT0.capacity > 20 ? "" :
+      ""}"
+    :class "battery ${EWW_BATTERY.BAT0.capacity > 30 ? "good" : EWW_BATTERY.BAT0.capacity > 10 ? "warning" : "critical"} ${EWW_BATTERY.BAT0.status}"
+  (label
+      :text "${EWW_BATTERY.BAT0.capacity}%")))
+
+
+(defpoll time :interval "1s"
+  "date '+%H:%M:%S'")
+
+(defpoll date :interval "10s"
+  "date '+%d.%m.%Y'")
+
+
+(defpoll github_poll
+  :initial ""
+  :interval "1m" "sh ~/.config/eww/scripts/github")
+(defwidget github []
+(button
+    :onclick "xdg-open https://github.com/notifications"
+  (box
+    (icon-module
+        :class "github"
+        :icon ""
+        :visible {github_poll != ""})
+      github_poll)))
+
+
+(defwidget cpu []
+(icon-module
+    :icon ""
+    :class "cpu ${EWW_CPU.avg > 90 ? "danger" : EWW_CPU.avg > 60 ? "warning" : ""}"
+  (label
+      :text "${round(EWW_CPU.avg, 0)}%")))
+
+;; (defpoll net_poll
+;;   :initial "..."
+;;   :interval "10s" "sh ~/.config/eww/scripts/get-network")
+(defwidget network []
+(icon-module
+    :icon ""
+    :class "network ${EWW_NET.wlan0.NET_DOWN == 0 && EWW_NET.wlan0.NET_UP == 0 ? "disconnected" : ""}"
+  (label
+      :text "${EWW_NET.wlan0.NET_DOWN == 0 && EWW_NET.wlan0.NET_UP == 0 ? "Disconnected ⚠" : ""}")))
+
+    ;; "network": {
+    ;;     "format-wifi": "{essid} ({signalStrength}%) ",
+    ;;     "format-ethernet": "{ipaddr}/{cidr} ",
+    ;;     "tooltip-format": "{ifname} via {gwaddr} ",
+    ;;     "format-linked": "{ifname} (No IP) ",
+    ;;     "format-disconnected": "",
+    ;;     "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    ;; },
+
+
+(defwindow bar
+  :monitor 0
+  :exclusive true
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "100%"
+    :height "10px"
+    :anchor "top center")
+  :reserve (struts :side "top" :distance "4%")
+(bar))
+
+
+(defwindow bar-1
+  :monitor 1
+  :exclusive true
+  :geometry (geometry
+    :x "0%"
+    :y "0%"
+    :width "100%"
+    :height "10px"
+    :anchor "top center")
+  :reserve (struts :side "top" :distance "4%")
+(bar))
+
+(defwidget bright []
+  (eventbox :onhover "eww update br_reveal=true" :onhoverlost "eww update br_reveal=false"
+  (box :class "module-2" :space-evenly "false" :orientation "h" :spacing "3"
+    (label
+        :text "${brightness_percent < 30 ? "☼": "☀"}"
+        :class "bright_icon" :tooltip "brightness")
+	(revealer :transition "slideleft"
+			  :reveal br_reveal
+			  :duration "350ms"
+	(scale    :class "brightbar"
+			  :value brightness_percent
+			  :orientation "h"
+			  :tooltip "${brightness_percent}%"
+			  :max 100
+			  :min 0
+			  :onchange "brightnessctl set {}%" )))))

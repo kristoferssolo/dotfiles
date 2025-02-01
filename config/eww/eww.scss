@@ -1,170 +1,466 @@
-$bg: #1a1b26;
-$bg_dark: #16161e;
-$bg_float: #16161e;
-$bg_highlight: #292e42;
-$bg_popup: #16161e;
-$bg_search: #3d59a1;
-$bg_sidebar: #16161e;
-$bg_statusline: #16161e;
-$bg_visual: #283457;
-$black: #15161e;
-$blue: #7aa2f7;
-$blue0: #3d59a1;
-$blue1: #2ac3de;
-$blue2: #0db9d7;
-$blue5: #89ddff;
-$blue6: #b4f9f8;
-$blue7: #394b70;
-$border: #15161e;
-$border_highlight: #27a1b9;
-$comment: #565f89;
-$cyan: #7dcfff;
-$dark3: #545c7e;
-$dark5: #737aa2;
-$delta_add: #2c5a66;
-$delta_delete: #713137;
-$diff_add: #20303b;
-$diff_change: #1f2231;
-$diff_delete: #37222c;
-$diff_text: #394b70;
-$error: #db4b4b;
-$fg: #c0caf5;
-$fg_dark: #a9b1d6;
-$fg_float: #c0caf5;
-$fg_gutter: #3b4261;
-$fg_sidebar: #a9b1d6;
-$git_add: #449dab;
-$git_change: #6183bb;
-$git_delete: #914c54;
-$git_ignore: #545c7e;
-$gitSigns_add: #266d6a;
-$gitSigns_change: #536c9e;
-$gitSigns_delete: #b2555b;
-$green: #9ece6a;
-$green1: #73daca;
-$green2: #41a6b5;
-$hint: #1abc9c;
-$info: #0db9d7;
-$magenta: #bb9af7;
-$magenta2: #ff007c;
-$orange: #ff9e64;
-$purple: #9d7cd8;
-$red: #f7768e;
-$red1: #db4b4b;
-$teal: #1abc9c;
-$terminal_black: #414868;
-$warning: #e0af68;
-$yellow: #e0af68;
+$base: #191724;
+$surface: #1f1d2e;
+$overlay: #26233a;
+$muted: #6e6a86;
+$subtle: #908caa;
+$text: #e0def4;
+$love: #eb6f92;
+$gold: #f6c177;
+$rose: #ebbcba;
+$pine: #31748f;
+$foam: #9ccfd8;
+$iris: #c4a7e7;
+$highlight_low: #21202e;
+$highlight_med: #403d52;
+$highlight_high: #524f67;
+$bg: rgba(25, 23, 37, 0.7);
 
 * {
-  all: unset; //Unsets everything so you can style everything from scratch
-}
-
-//Global Styles
-.bar,
-.bar-1 {
-  background-color: rgba(22, 22, 30, 0.7);
-  color: $fg;
+  all: unset;
   font-family: "JetBrainsMono NF";
+  font-size: 14;
+}
+
+/** General **/
+.bar {
+  background-color: $bg;
+  color: $text;
+}
+
+.module {
+  margin: 0px 0px 0px 0px;
+  border-radius: 10px 16px 0px 10px;
+}
+
+/** tooltip!! **/
+tooltip.background {
+  background-color: $bg;
+  border-radius: 10px;
+  color: #bfc9db;
+}
+
+tooltip label {
+  margin: 6px;
+}
+
+/** Widgets **/
+
+.clock_time_sep {
+  font-size: 16;
+  color: #bfc9db;
+  margin: 0px 4px 1px 4px;
+}
+
+.clock_date {
+  font-size: 18;
+  margin: 0px 10px 0px 10px;
+  color: $iris;
+}
+
+clock_time {
+  margin: 0px 20px 0px 3px;
+  color: #bfc9db;
+}
+
+.clock_time {
+  color: #bfc9db;
+  margin: 0px 5px 0px 0px;
+}
+
+.membar {
+  color: $rose;
+  background-color: $highlight_med;
+  border-radius: 10px;
+}
+
+.batbar {
+  color: $pine;
+  background-color: $highlight_med;
+  border-radius: 10px;
+}
+
+.brightbar trough highlight {
+  background-image: linear-gradient(
+    to right,
+    $rose 30%,
+    #f1bf99 50%,
+    $gold 100% * 50
+  );
+  border-radius: 10px;
+}
+
+.volbar trough highlight {
+  background-image: linear-gradient(
+    to right,
+    $foam 30%,
+    #67a2b4 50%,
+    $pine 100% * 50
+  );
+  border-radius: 10px;
+}
+
+.volume_icon {
+  font-size: 22;
+  color: $foam;
+  margin: 0px 10px 0px 10px;
+}
+
+.module_essid {
+  /* font-size: 18; */
+  color: $foam;
+  margin: 0px 10px 0px 0px;
+}
+
+.module-wif {
+  /* font-size: 22; */
+  color: $foam;
+  border-radius: 100%;
+  margin: 0px 10px 0px 5px;
+}
+
+.iconmem {
+  color: $rose;
+}
+
+.iconbat {
+  color: $foam;
+
+  &__Charging {
+    color: $gold;
+  }
+}
+
+.iconbat,
+.iconmem {
+  font-size: 15;
+  margin: 10px;
+}
+
+.bright_icon {
+  font-size: 22;
+  color: $rose;
+  margin: 0px 10px 0px 10px;
+}
+
+.separ {
+  color: $highlight_med;
   font-weight: bold;
+  font-size: 22px;
+  margin: 0px 8px 0px 8px;
 }
 
-// Styles on classes (see eww.yuck for more information)
+.mem_module {
+  border-radius: 16px;
+  margin: 0px 10px 0px 3px;
+}
 
-.sidestuff slider {
+.bat_module {
+  border-radius: 16px;
+  margin: 0px 10px 0px 10px;
+}
+
+scale trough {
   all: unset;
-}
-
-.metric scale trough highlight {
-  all: unset;
-  background-color: $error;
-  border-radius: 10px;
-}
-
-.metric scale trough {
-  all: unset;
-  background-color: $bg_visual;
-  border-radius: 50px;
-  min-height: 3px;
-  min-width: 50px;
-  margin-left: 1px;
-  margin-right: 2px;
-}
-
-.metric scale trough highlight {
-  all: unset;
-  // background-color: $fg_sidebar;
-  background-color: $teal;
-  color: $bg;
-  border-radius: 10px;
-}
-
-.metric scale trough {
-  all: unset;
-  background-color: $bg_visual;
-  border-radius: 50px;
-  min-height: 3px;
-  min-width: 50px;
-  margin-left: 1px;
-  margin-right: 2px;
-}
-
-.label-ram {
-  font-size: large;
-}
-
-.music {
-  &.playing {
-    color: $teal;
-  }
-
-  &.paused {
-    color: $terminal_black;
-  }
+  background-color: $overlay;
+  box-shadow: 0 2px 3px 2px $highlight_low;
+  border-radius: 16px;
+  min-height: 10px;
+  min-width: 70px;
+  margin: 0px 10px 0px 0px;
 }
 
 .workspaces {
   .current {
-    color: $hint;
+    color: $pine;
   }
 }
 
-.icon-module {
-  &>&__icon {
-    margin-right: 5px;
+.song_cover_art {
+  background-size: cover;
+  background-position: center;
+  /* min-height: 24px; */
+  min-width: 24px;
+  margin: 10px;
+  border-radius: 100px;
+}
+
+.song {
+  color: $foam;
+  /* font-size: 18px; */
+  font-weight: bold;
+  margin: 3px 5px 0px 0px;
+}
+
+.song_btn_play {
+  color: $foam;
+  font-size: 28px;
+  margin: 3px 0px 0px 5px;
+}
+
+.song_btn_prev,
+.song_btn_next {
+  color: #bfc9db;
+  font-size: 24px;
+  margin: 3px 0px 0px 5px;
+}
+
+// Calendar
+.cal {
+  background-color: $bg;
+  font-size: 18px;
+  font-weight: normal;
+
+  .cal-in {
+    padding: 0px 10px 0px 10px;
+    color: $text;
+
+    .cal {
+      &.highlight {
+        padding: 20px;
+      }
+
+      padding: 5px 5px 5px 5px;
+      margin-left: 10px;
+    }
   }
 }
 
-.cpu {
-  &.warning {
-    color: $warning;
-  }
-
-  &.danger {
-    color: $red;
-  }
+calender {
+  color: $text;
 }
 
-.battery {
-  &.warning {
-    color: $warning;
-  }
-
-  &.critical {
-    color: $red;
-  }
-
-  &.Charging {
-    color: $teal;
-  }
+calendar:selected {
+  color: $iris;
 }
 
-.network {
-  &.disconnected {
-    color: $error;
-  }
+calendar.header {
+  color: $iris;
+  font-weight: bold;
 }
 
-.workspaces button:hover {
-  background: $bg_highlight;
+calendar.button {
+  color: $iris;
+}
+
+calendar.highlight {
+  color: $iris;
+  font-weight: bold;
+}
+
+calendar:indeterminate {
+  color: #bfc9db;
+}
+
+.sys_sep {
+  color: $highlight_med;
+  font-size: 18;
+  margin: 0px 10px 0px 10px;
+}
+
+.sys_text_bat_sub,
+.sys_text_mem_sub {
+  font-size: 16;
+  color: $text;
+  margin: 5px 0px 0px 25px;
+}
+
+.sys_text_bat,
+.sys_text_mem {
+  font-size: 21;
+  font-weight: bold;
+  margin: 14px 0px 0px 25px;
+}
+
+.sys_icon_bat,
+.sys_icon_mem {
+  font-size: 30;
+  margin: 30px;
+}
+
+.sys_win {
+  background-color: #0f0f17;
+}
+
+.sys_bat {
+  color: #afbea2;
+  background-color: $highlight_med;
+  border-radius: 10px;
+}
+
+.sys_mem {
+  color: $rose;
+  background-color: $highlight_med;
+  border-radius: 10px;
+}
+
+.sys_icon_bat,
+.sys_text_bat {
+  color: #afbea2;
+}
+
+.sys_icon_mem,
+.sys_text_mem {
+  color: $rose;
+}
+
+.sys_bat_box {
+  border-radius: 16px;
+  margin: 15px 10px 10px 20px;
+}
+
+.sys_mem_box {
+  border-radius: 16px;
+  margin: 10px 10px 15px 20px;
+}
+
+.music_pop {
+  background-color: #0f0f17;
+  border-radius: 16px;
+}
+
+.music_cover_art {
+  background-size: cover;
+  background-position: center;
+  /* min-height: 100px; */
+  box-shadow: 5px 5px 5px 5px #06060b;
+  min-width: 170px;
+  margin: 20px;
+  border-radius: 20px;
+}
+
+.music {
+  color: $foam;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 20px 0px 0px -15px;
+}
+
+.music_artist {
+  color: $text;
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0px 0px 0px 0px;
+}
+
+.music_btn_prev {
+  color: $text;
+  font-size: 32px;
+  font-weight: normal;
+  margin: 0px 0px 0px 0px;
+}
+
+.music_btn_play {
+  color: $foam;
+  font-size: 48px;
+  font-weight: normal;
+  margin: 0px 0px 0px 0px;
+}
+
+.music_btn_next {
+  color: $text;
+  font-size: 32px;
+  font-weight: normal;
+  margin: 0px 0px 0px 0px;
+}
+
+.music_bar scale trough highlight {
+  all: unset;
+  background-image: linear-gradient(
+    to right,
+    $foam 30%,
+    #67a2b4 50%,
+    $pine 100% * 50
+  );
+  border-radius: 24px;
+}
+
+.music_bar scale trough {
+  all: unset;
+  background-color: #232232;
+  box-shadow: 0 6px 5px 2px #06060b;
+  border-radius: 24px;
+  /* min-height: 13px; */
+  min-width: 190px;
+  margin: -10px 10px 20px 0px;
+}
+
+.audio-box {
+  background-color: #0f0f17;
+  border-radius: 16px;
+}
+
+.speaker_icon {
+  background-size: cover;
+  background-image: url("images/speaker.png");
+  background-position: center;
+  /* min-height: 70px; */
+  min-width: 75px;
+  margin: 10px 20px 5px 20px;
+  border-radius: 12px;
+}
+
+.speaker_text {
+  color: $foam;
+  font-size: 26px;
+  font-weight: bold;
+  margin: 20px 0px 0px 0px;
+}
+
+.speaker_bar scale trough highlight {
+  all: unset;
+  background-image: linear-gradient(
+    to right,
+    $foam 30%,
+    #67a2b4 50%,
+    $pine 100% * 50
+  );
+  border-radius: 24px;
+}
+
+.speaker_bar scale trough {
+  all: unset;
+  background-color: #232232;
+  box-shadow: 0 6px 5px 2px #06060b;
+  border-radius: 24px;
+  /* min-height: 13px; */
+  min-width: 120px;
+  margin: 0px 0px 5px 0px;
+}
+
+.mic_icon {
+  background-size: cover;
+  background-image: url("images/mic.png");
+  background-position: center;
+  /* min-height: 70px; */
+  min-width: 75px;
+  margin: 5px 20px 20px 20px;
+  border-radius: 12px;
+}
+
+.mic_text {
+  color: $foam;
+  font-size: 26px;
+  font-weight: bold;
+  margin: 0px 0px 0px 0px;
+}
+
+.mic_bar scale trough highlight {
+  all: unset;
+  background-image: linear-gradient(
+    to right,
+    $foam 30%,
+    #67a2b4 50%,
+    $pine 100% * 50
+  );
+  border-radius: 24px;
+}
+
+.mic_bar scale trough {
+  all: unset;
+  box-shadow: 0 6px 5px 2px #06060b;
+  background-color: #232232;
+  border-radius: 24px;
+  /* min-height: 13px; */
+  min-width: 120px;
+  margin: 0px 0px 20px 0px;
 }

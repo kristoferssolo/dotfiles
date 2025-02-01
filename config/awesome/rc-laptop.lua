@@ -442,7 +442,7 @@ local globalkeys = gears.table.join(
 	-- awful.key({ modkey, "Control" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
 	awful.key({ modkey }, "b", function()
-		awful.spawn("floorp")
+		awful.spawn("zen-browser")
 	end, { description = "open browser", group = "launcher" }),
 	awful.key({ modkey }, "n", function()
 		awful.spawn("alacritty -e yazi")
@@ -593,6 +593,10 @@ local clientbuttons = gears.table.join(
 	awful.button({ modkey }, 1, function(c)
 		c:emit_signal("request::activate", "mouse_click", { raise = true })
 		awful.mouse.client.move(c)
+	end),
+	awful.button({ modkey, "shift" }, 1, function(c)
+		c:emit_signal("request::activate", "mouse_click", { raise = true })
+		awful.mouse.client.resize(c)
 	end),
 	awful.button({ modkey }, 3, function(c)
 		c:emit_signal("request::activate", "mouse_click", { raise = true })
