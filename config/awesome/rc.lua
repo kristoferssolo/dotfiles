@@ -435,7 +435,7 @@ local globalkeys = gears.table.join(
 	-- awful.key({ modkey, "Control" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
 	awful.key({ modkey }, "b", function()
-		awful.spawn("floorp")
+		awful.spawn("zen-browser")
 	end, { description = "open browser", group = "launcher" }),
 	awful.key({ modkey }, "n", function()
 		awful.spawn("alacritty -e yazi")

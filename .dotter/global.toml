@@ -66,6 +66,7 @@ depends = [ "torrent", "zathura" ]
 "config/fastfetch/" = "~/.config/fastfetch/"
 "config/flameshot.ini" = "~/.config/flameshot/flameshot.ini"
 "config/gitui/" = "~/.config/gitui/"
+"config/git/" = "~/.config/git/"
 "config/mpv/" = "~/.config/mpv/"
 "config/lf/" = "~/.config/lf/"
 "config/paru.conf" = "~/.config/paru/paru.conf"
@@ -128,6 +129,8 @@ depends = [ "zsh", "tmux" ]
 "config/alacritty/" = "~/.config/alacritty/"
 "config/alacritty/alacritty.toml" = {target = "~/.config/alacritty/alacritty.toml", type = "template"}
 "config/starship.toml" = "~/.config/starship/starship.toml"
+"config/ghostty/" = "~/.config/ghostty/"
+"config/ghostty/config" = {target = "~/.config/ghostty/config", type = "template"}
 
 [tmux.files]
 "config/tmux/" = "~/.config/tmux/"

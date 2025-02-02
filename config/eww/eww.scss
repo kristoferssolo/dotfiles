@@ -18,7 +18,7 @@ $bg: rgba(25, 23, 37, 0.7);
 * {
   all: unset;
   font-family: "JetBrainsMono NF";
-  font-size: 14;
+  font-size: 20;
 }
 
 /** General **/
@@ -127,6 +127,10 @@ clock_time {
 
   &__Charging {
     color: $gold;
+  }
+
+  &__low {
+    color: $love;
   }
 }
 
@@ -275,6 +279,10 @@ calendar:indeterminate {
 .sys_icon_mem {
   font-size: 30;
   margin: 30px;
+
+  &__low {
+    color: $love;
+  }
 }
 
 .sys_win {
