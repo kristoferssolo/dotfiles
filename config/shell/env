@@ -22,7 +22,7 @@ unsetopt PROMPT_SP
 
 
 # Default Apps
-export BROWSER="zen-browser"
+export BROWSER="floorp"
 export EDITOR="nvim"
 export IMAGE="nsxiv"
 export READER="zathura"

@@ -20,18 +20,18 @@ hash = "2d6d77583162aaf0a599e7a3091b5878"
 
 [[plugin.deps]]
 use = "Sonico98/exifaudio"
-rev = "d794614"
+rev = "4379fcf"
 hash = "a8e15d3c21c02a5af41d46ed04778a02"
 
 [[plugin.deps]]
 use = "dedukun/relative-motions"
-rev = "a1466a9"
-hash = "26d7fd10e163e0624d733c067eba4b61"
+rev = "8103065"
+hash = "9f13f0740fa3a0c18e47ec6fb62ddfaa"
 
 [[plugin.deps]]
 use = "hankertrix/augment-command"
-rev = "af31941"
-hash = "71c1ef899b40a54fcdf5a41f87daa967"
+rev = "f4a904c"
+hash = "60dff62dcb958c83b7c84dfb3d5ef68b"
 
 [[plugin.deps]]
 use = "imsi32/yatline"
@@ -54,29 +54,29 @@ rev = "b23e3a4"
 hash = "98e5f5af3efd3ba8bc2db0720187cc83"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:chmod"
-rev = "5186af7"
-hash = "f28138c2e11e87962b66d583fef724c3"
-
-[[plugin.deps]]
-use = "yazi-rs/plugins:full-border"
-rev = "5186af7"
-hash = "ae9e1d0c6bfd68cdebc98cc684c22b45"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "5186af7"
+rev = "3d0c7c6"
 hash = "771f18427fb75fb19990ce602bb322f4"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:hide-preview"
-rev = "5186af7"
-hash = "1e31898370b752e4faf335b762b3eeaf"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:max-preview"
-rev = "5186af7"
+rev = "3d0c7c6"
 hash = "a8025f2bb311e869069364fba01abffc"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "3d0c7c6"
+hash = "2f1053f89d1a301a648ab181d0948e38"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "3d0c7c6"
+hash = "9dce00232a0e0e2502565c7aa2b0ed4e"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:hide-preview"
+rev = "3d0c7c6"
+hash = "53f826884e2c7e521cecc492a7f31d7e"
+
 [flavor]
-deps = []
+deps = [  ]

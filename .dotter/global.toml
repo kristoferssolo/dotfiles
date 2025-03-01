@@ -66,6 +66,7 @@ depends = [ "torrent", "zathura" ]
 "config/fastfetch/" = "~/.config/fastfetch/"
 "config/flameshot.ini" = "~/.config/flameshot/flameshot.ini"
 "config/gitui/" = "~/.config/gitui/"
+"config/lazygit/" = "~/.config/lazygit/"
 "config/git/" = "~/.config/git/"
 "config/mpv/" = "~/.config/mpv/"
 "config/lf/" = "~/.config/lf/"

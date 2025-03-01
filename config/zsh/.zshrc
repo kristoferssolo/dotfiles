@@ -3,7 +3,7 @@
 [ -f "$XDG_CONFIG_HOME/zsh/startup" ] && source "$XDG_CONFIG_HOME/zsh/startup"
 fpath=("$XDG_CONFIG_HOME/zsh/zfunc/" $fpath)
 
-# Add deno completions to search path
+# Add completions to search path
 if [[ ":$FPATH:" != *":$XDG_CONFIG_HOME/zsh/completions:"* ]]; then export FPATH="$XDG_CONFIG_HOME/zsh/completions:$FPATH"; fi
 
 # Options
@@ -146,6 +146,7 @@ eval "$(fzf --zsh)"
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
 eval "$(zoxide init zsh)"
+eval "$(fastanime completions)"
 
 [[ -r ~/.local/share/zsh/plugins/znap/znap.zsh ]] ||
     git clone --depth 1 -- \

@@ -1,0 +1,2 @@
+services:
+  git.modulation.lv: gitlab:git.modulation.lv/api/v4/projects
