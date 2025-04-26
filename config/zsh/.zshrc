@@ -165,3 +165,5 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 [ -f "$XDG_CONFIG_HOME/zsh/zoxide" ] && source "$XDG_CONFIG_HOME/zsh/zoxide"
 if [[ ":$FPATH:" != *":$XDG_CONFIG_HOME/zsh/completions:"* ]]; then export FPATH="$XDG_CONFIG_HOME/zsh/completions:$FPATH"; fi
+
+. "$HOME/.local/share/../bin/env"
