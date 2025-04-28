@@ -1,7 +1,5 @@
+#!config
 font-family = "JetBrainsMono NF"
-font-family-bold = "JetBrainsMono NF Bold"
-font-family-italic = "JetBrainsMono NF Italic"
-font-family-bold-italic = "JetBrainsMono NF Bold Italic"
 
 font-feature = "-calt, -liga, -dlig"
 font-size = {{font_size}}
@@ -12,9 +10,10 @@ title = "Ghostty"
 class = "ghostty"
 
 window-padding-x = 4
-window-padding-y = 4
+window-padding-y = 0
 
 background-opacity = 0.95
+cursor-style = bar
 background-blur = true
 resize-overlay = never
 quick-terminal-animation-duration = 0
