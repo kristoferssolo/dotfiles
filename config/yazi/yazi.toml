@@ -56,7 +56,7 @@ play = [
 rules = [
   {name = "*/", use = [ "edit", "open", "reveal" ]},
   {mime = "text/*", use = [ "edit", "reveal" ]},
-  {mime = "image/*", use = [ "open", "reveal" ]},
+  {mime = "image/*", use = [ "reveal" ]},
   {mime = "{audio,video}/*", use = [ "play", "reveal" ]},
   {mime = "inode/x-empty", use = [ "edit", "reveal" ]},
   {mime = "application/*zip", use = [ "extract", "reveal" ]},
@@ -77,47 +77,65 @@ suppress_preload = false
 [plugin]
 
 preloaders = [
-  # Image
   {mime = "image/*", run = "image"},
-  # Video
   {mime = "video/*", run = "video"},
-  # PDF
   {mime = "application/pdf", run = "pdf"},
+]
+prepend_preloaders = [
+  # Office Documents
+  {mime = "application/openxmlformats-officedocument.*", run = "office"},
+  {mime = "application/oasis.opendocument.*", run = "office"},
+  {mime = "application/ms-*", run = "office"},
+  {mime = "application/msword", run = "office"},
+  {name = "*.docx", run = "office"},
+  {mime = "{audio,video,image}/*", run = "mediainfo"},
+  {mime = "application/subrip", run = "mediainfo"},
 ]
 previewers = [
   {name = "*/", run = "folder", sync = true},
-  # Code
   {mime = "text/*", run = "code"},
   {mime = "*/{xml,javascript,x-wine-extension-ini}", run = "code"},
-  # JSON
   {mime = "application/json", run = "code"},
-  # Image
   {mime = "image/vnd.djvu", run = "noop"},
-  # {mime = "image/*", run = "image"},
-  # Video
-  # {mime = "video/*", run = "video"},
-  # PDF
-  # {mime = "application/pdf", run = "pdf"},
+  {mime = "application/pdf", run = "pdf"},
   # Fallback
   {name = "*", run = "file"},
 ]
-prepend_previewers = [  ]
-
-append_previewers = [
-  {name = "*.ipynb", run = "nbpreview"},
-  {mime = "application/x-bittorrent", run = "torrent-preview"},
-  {mime = "audio/*", run = "exifaudio"},
+prepend_previewers = [
   {mime = "text/csv", run = "miller"},
-  {name = "*.{md,mdx,markdown}", run = "glow"},
+  # mediainfo
+  {mime = "{audio,video,image}/*", run = "mediainfo"},
+  {mime = "application/subrip", run = "mediainfo"},
+  # rich preview
+  {name = "*.csv", run = "rich-preview"},                     # for csv files
+  {name = "*.{md,mdx,markdown}", run = "rich-preview"},       # for markdown (.md) files
+  {name = "*.rst", run = "rich-preview"},                     # for restructured text (.rst) files
+  {name = "*.ipynb", run = "rich-preview"},                   # for jupyter notebooks (.ipynb)
+  {name = "*.json", run = "rich-preview"},                    # for json (.json) files
+  {mime = "application/bittorrent", run = "torrent-preview"},
   # Archive previewer
   {mime = "application/*zip", run = "ouch"},
-  {mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", run = "ouch"},
+  {mime = "application/tar", run = "ouch"},
+  {mime = "application/bzip2", run = "ouch"},
+  {mime = "application/7z-compressed", run = "ouch"},
+  {mime = "application/rar", run = "ouch"},
+  {mime = "application/xz", run = "ouch"},
+  # Office Documents
+  {mime = "application/openxmlformats-officedocument.*", run = "office"},
+  {mime = "application/oasis.opendocument.*", run = "office"},
+  {mime = "application/ms-*", run = "office"},
+  {mime = "application/msword", run = "office"},
+  {name = "*.docx", run = "office"},
+]
+
+append_previewers = [
   {name = "*", run = "hexyl"},
 ]
 
 prepend_fetchers = [
   {id = "git", name = "*", run = "git"},
   {id = "git", name = "*/", run = "git"},
+  {id = "mime", name = "*", run = "mime-ext", prio = "high"},
 ]
 
 [input]

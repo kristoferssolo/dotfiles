@@ -1,22 +1,16 @@
 local M = {}
 
 function M:peek(job)
-	local child = Command("nbpreview")
+	local child = Command("rich")
 		:args({
-			-- DO NOT CHANGE --
-			"--no-paging",
-			"--nerd-font",
-			"--decorated",
-
-			-- OPTIONAL CHANGES --
-			"--no-files",
-			"--unicode",
-			"--color",
-			"--images",
-
-			-- SPECIAL CUSTOMIZATIONS --
-			"--color-system=standard",
-			"--theme=ansi_dark",
+			"-j",
+			"--left",
+			"--line-numbers",
+			"--force-terminal",
+			"--panel=rounded",
+			"--guides",
+			"--max-width",
+			tostring(job.area.w),
 			tostring(job.file.url),
 		})
 		:stdout(Command.PIPED)

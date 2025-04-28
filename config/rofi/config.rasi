@@ -8,7 +8,7 @@ configuration {
     // xoffset: 0;
     fixed-num-lines: true;
     show-icons: true;
-    terminal: "alacritty";
+    terminal: "{{terminal}}";
     ssh-clicnt: "ssh";
     // ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";
     // run-command: "{cmd}";

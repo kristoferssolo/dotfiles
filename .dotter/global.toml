@@ -51,9 +51,12 @@ depends = [ "shell" ]
 [local.files]
 "local/bin/" = "~/.local/bin/"
 "local/share/" = "~/.local/share/"
+"local/share/applications/text.desktop" = {target = "~/.local/share/applications/text.desktop", type = "template"}
+"local/share/applications/file.desktop" = {target = "~/.local/share/applications/file.desktop", type = "template"}
 
 [rofi.files]
 "config/rofi/" = "~/.config/rofi/"
+"config/rofi/config.rasi" = {target = "~/.config/rofi/config.rasi", type = "template"}
 
 [misc]
 depends = [ "torrent", "zathura" ]
@@ -85,12 +88,12 @@ depends = [ "torrent", "zathura" ]
 [awesome.files]
 "config/awesome/json.lua" = "~/.config/awesome/json.lua"
 "config/awesome/mytheme.lua" = "~/.config/awesome/mytheme.lua"
-"config/awesome/rc.lua" = "~/.config/awesome/rc.lua"
+"config/awesome/rc.lua" = {target = "~/.config/awesome/rc.lua", type = "template"}
 
 [awesome_laptop.files]
 "config/awesome/json.lua" = "~/.config/awesome/json.lua"
 "config/awesome/mytheme.lua" = "~/.config/awesome/mytheme.lua"
-"config/awesome/rc-laptop.lua" = "~/.config/awesome/rc.lua"
+"config/awesome/rc-laptop.lua" = {target = "~/.config/awesome/rc.lua", type = "template"}
 
 [dunst.files]
 "config/dunst/" = "~/.config/dunst/"
@@ -100,6 +103,7 @@ depends = [ "misc", "local", "eww", "lock" ]
 
 [hyprland.files]
 "config/hypr/" = "~/.config/hypr/"
+"config/hypr/hyprland.conf" = {target = "~/.config/hypr/hyprland.conf", type = "template"}
 
 [wofi.files]
 "config/wofi/" = "~/.config/wofi/"

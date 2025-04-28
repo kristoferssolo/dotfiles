@@ -196,16 +196,6 @@
         /* "exec": "$HOME/.config/waybar/scripts/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name */
     },
 
-
-    "custom/pacman": {
-        "format": "{} ",
-        "interval": 600,                     // every hour
-        "exec": "checkupdates | wc -l",       // # of updates
-        "exec-if": "exit 0",                  // always run; consider advanced run conditions
-        "on-click": "alacritty -e paru -Syu --noconfirm; pkill -RTMIN+8 waybar", // update system
-        "signal": 8
-    },
-
     "custom/weather": {
         "exec": "curl 'https://wttr.in/?format=1'",
         "interval": 600,

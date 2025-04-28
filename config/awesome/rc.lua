@@ -30,7 +30,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- {{{ Error handling
+--- Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -59,15 +59,14 @@ do
 		in_error = false
 	end)
 end
--- }}}
 
--- {{{ Variable definitions
+--- Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.init(gears.filesystem.get_configuration_dir() .. "mytheme.lua")
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "alacritty"
+local terminal = "{{terminal}}"
 local editor = os.getenv("EDITOR") or "nvim"
 local editor_cmd = terminal .. " -e " .. editor
 
@@ -98,9 +97,8 @@ awful.layout.layouts = {
 	-- awful.layout.suit.corner.sw,
 	-- awful.layout.suit.corner.se,
 }
--- }}}
 
--- {{{ Menu
+--- Menu
 -- Create a launcher widget and a main menu
 local myawesomemenu = {
 	{
@@ -127,12 +125,11 @@ local mymainmenu =
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
 
 -- Keyboard map indicator and switcher
 -- local mykeyboardlayout = awful.widget.keyboardlayout()
 
--- {{{ Wibar
+--- Wibar
 -- Create a textclock widget
 local mytextclock = wibox.widget.textclock(" %d.%m.%Y, %H:%M:%S ", 1)
 
@@ -320,9 +317,8 @@ awful.screen.connect_for_each_screen(function(s)
 		},
 	})
 end)
--- }}}
 
--- {{{ Mouse bindings
+--- Mouse bindings
 root.buttons(gears.table.join(
 	awful.button({}, 3, function()
 		mymainmenu:toggle()
@@ -330,9 +326,8 @@ root.buttons(gears.table.join(
 	awful.button({}, 4, awful.tag.viewnext),
 	awful.button({}, 5, awful.tag.viewprev)
 ))
--- }}}
 
--- {{{ Key bindings
+--- Key bindings
 local globalkeys = gears.table.join(
 
 	awful.key({ "Shift" }, "Pause", function()
@@ -438,7 +433,7 @@ local globalkeys = gears.table.join(
 		awful.spawn("floorp")
 	end, { description = "open browser", group = "launcher" }),
 	awful.key({ modkey }, "n", function()
-		awful.spawn("alacritty -e yazi")
+		awful.spawn(terminal .. " -e yazi")
 	end, { description = "open yazi", group = "launcher" }),
 
 	awful.key({ modkey }, "l", function()
@@ -595,9 +590,8 @@ local clientbuttons = gears.table.join(
 
 -- Set keys
 root.keys(globalkeys)
--- }}}
 
--- {{{ Rules
+--- Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
 	-- All clients will match this rule.
@@ -683,7 +677,7 @@ awful.rules.rules = {
 	{ rule_any = { class = { "mpv" } }, properties = { fullscreen = true } },
 }
 
--- {{{ Signals
+--- Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function(c)
 	-- Set the windows at the slave,
