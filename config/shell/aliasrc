@@ -31,13 +31,6 @@ alias \
     dv="doasedit" \
     e="$EDITOR" \
     fetch="fastfetch" \
-    g="git" \
-    gP="git push" \
-    ga="git add" \
-    gc="git commit" \
-    gd="git diff" \
-    gp="git pull" \
-    gs="git status" \
     j="joshutoub" \
     lf="lfub" \
     lg="lazygit" \
@@ -53,6 +46,17 @@ alias \
     ww="$EDITOR ~/neorg/" \
     yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config" \
     yy="yazi"
+
+alias \
+    gP="git push" \
+    ga="git add" \
+    gap="git add --patch" \
+    gc="git commit" \
+    gd="git diff --output-indicator-new=' ' --output-indicator-old=' '" \
+    gds="git diff --staged" \
+    gl="git log --all --graph --pretty=format:'%C(magenta)%h %C(white) %an  %ar%C(auto)  %D%n%s%n'" \
+    gp="git pull" \
+    gs="git status --short"
 
 # doas not required for some system commands
 for command in mount umount rsv sv pacman updatedb su shutdown poweroff reboot zzz systemctl wg wg-quick; do

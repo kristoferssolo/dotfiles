@@ -5,6 +5,18 @@
     defaultBranch = main
 [core]
     editor = nvim
+    compression = 9
+    whitespace = error
+    preloadindex = true
+
+[url "git@github.com:kristoferssolo"]
+    insteadOf = "solo:"
+[url "git@github.com"]
+    insteadOf = "gh:"
+
+[status]
+    branch = true
+    showStash = true
 
 # https://blog.gitbutler.com/how-git-core-devs-configure-git/
 # clearly makes git better
@@ -18,7 +30,9 @@
     algorithm = histogram
     colorMoved = plain
     mnemonicPrefix = true
-    renames = true
+    renames = true ; copies
+    context = 3
+    interHunkContext = 10
 [push]
     default = simple
     autoSetupRemote = true
@@ -34,6 +48,7 @@
     autocorrect = prompt
 [commit]
     verbose = true
+    gpgSign = true
 [rerere]
     enabled = true
     autoupdate = true
@@ -43,6 +58,7 @@
     autoSquash = true
     autoStash = true
     updateRefs = true
+    missingCommitsCheck = warn
 
 # a matter of taste (uncomment if you dare)
 
@@ -54,3 +70,42 @@
         # conflictstyle = zdiff3
 [pull]
         # rebase = true
+[log]
+    abbrevCommit = true
+    graphColors = blue, yellow,cyan,magenta,green,red
+
+
+[pager]
+    diff = diff-so-fancy | less --tabs=4 -RF
+    branch = false
+    tag = false
+
+[interactive]
+    diffFilter = diff-so-fancy --patch
+    singlekey = true
+
+[diff-so-fancy]
+    markEmptyLines = false
+
+[color "diff"]
+    meta = black bold
+    frag = magenta
+    context = white
+    whitespace = yellow reverse
+    old = red
+
+[color "decorate"]
+    HEAD = red
+    branch = blue
+    tag = yellow
+    remoteBranch = magenta
+
+[color "branch"]
+    current = magenta
+    local = default
+    remote = yellow
+    upstream = green
+    plain = blue
+
+[include] # TODO: include only for my repos
+    path = ~/.config/git/key
