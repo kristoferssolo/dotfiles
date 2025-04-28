@@ -13,7 +13,7 @@ setopt autocd               # If only directory path is entered, cd there
 setopt correct              # Auto correct mistakes setopt extendedglob       # Extended globaling. Allows using regular expressions with *
 setopt hist_ignore_all_dups # If a new command is a duplicate, remove older one
 setopt hist_ignore_space    # Don't save commands that start with space
-setopt hist_find_no_dups    # 
+setopt hist_find_no_dups    #
 setopt inc_append_history   # Save commands are added to the history immediately
 setopt nobeep               # No beep
 setopt nocaseglob           # Case insensitive globbing
@@ -95,9 +95,9 @@ function yazicd() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
     yazi "$@" --cwd-file="$tmp"
     if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
+		builtin cd -- "$cwd" && eza -a --icons --group-directories-first
 	fi
-	rm -f -- "$tmp"
+	rm -f -- "$tmp" >/dev/null 2>&1
 }
 tmux-window-name() {
 	($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
