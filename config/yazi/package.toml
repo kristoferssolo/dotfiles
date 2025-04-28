@@ -10,8 +10,8 @@ hash = "23915860e59348bf4166778bb0e606f7"
 
 [[plugin.deps]]
 use = "hankertrix/augment-command"
-rev = "91ba6c5"
-hash = "6ac13898ec80c623e2d9ea90b947c86a"
+rev = "04cda98"
+hash = "3ec6486539188b1e1932ac27f3582917"
 
 [[plugin.deps]]
 use = "kirasok/torrent-preview"
@@ -52,11 +52,6 @@ hash = "dd97eede8e20e59cd2604e8006e470e2"
 use = "yazi-rs/plugins:smart-filter"
 rev = "864a021"
 hash = "f0c4b41b5d19a3144958383333eff6e7"
-
-[[plugin.deps]]
-use = "yazi-rs/plugins:mime-ext"
-rev = "864a021"
-hash = "5e24c167e9ae9a203a48f2a438b8c705"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
