@@ -14,12 +14,24 @@ selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s "$selected_name" -c "$selected"
+    # Create new session with nvim in first window, detached
+    tmux new-session -ds "$selected_name" -c "$selected" "${EDITOR:-vim} ."
+    # Create second window as plain terminal
+    tmux new-window -t "$selected_name:" -c "$selected"
+    # Select the first window (index 0)
+    tmux select-window -t "$selected_name:1"
+    # Attach to the session
+    tmux attach-session -t "$selected_name"
     exit 0
 fi
 
 if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-    tmux new-session -ds "$selected_name" -c "$selected"
+    # Create new session with nvim in first window, detached
+    tmux new-session -ds "$selected_name" -c "$selected" "${EDITOR:-vim} ."
+    # Create second window as plain terminal
+    tmux new-window -t "$selected_name:" -c "$selected"
+    # Select the first window (index 0)
+    tmux select-window -t "$selected_name:1"
 fi
 
 tmux switch-client -t "$selected_name"

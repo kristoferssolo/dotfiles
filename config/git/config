@@ -1,3 +1,4 @@
+#!config
 [user]
 	email = dev@kristofers.xyz
 	name = Kristofers Solo
@@ -88,7 +89,7 @@
     markEmptyLines = false
 
 [color "diff"]
-    meta = black bold
+    meta = white dim
     frag = magenta
     context = white
     whitespace = yellow reverse
