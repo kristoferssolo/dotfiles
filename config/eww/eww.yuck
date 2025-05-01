@@ -99,12 +99,12 @@
         :tooltip "Battery on ${EWW_BATTERY.BAT0.capacity}%"
         :show_truncated false
         :wrap false
-        "${EWW_BATTERY.BAT0.status == "Charging" ? "" :
-          EWW_BATTERY.BAT0.capacity > 90 ? "" :
-          EWW_BATTERY.BAT0.capacity > 70 ? "" :
-          EWW_BATTERY.BAT0.capacity > 40 ? "" :
-          EWW_BATTERY.BAT0.capacity > 20 ? "" :
-          ""}"
+        ;; "${EWW_BATTERY.BAT0.status == "Charging" ? "" :
+        ;;   EWW_BATTERY.BAT0.capacity > 90 ? "" :
+        ;;   EWW_BATTERY.BAT0.capacity > 70 ? "" :
+        ;;   EWW_BATTERY.BAT0.capacity > 40 ? "" :
+        ;;   EWW_BATTERY.BAT0.capacity > 20 ? "" :
+        ;;   ""}"
       ))))
 
 
@@ -124,7 +124,7 @@
         :tooltip "Using ${memory}% ram"
         :show_truncated false
         :wrap false
-        ""))))
+        ))))
 
 
 
@@ -311,12 +311,12 @@
         :class "sys_bat"
         :thickness 9
         (label
-          :text "${EWW_BATTERY.BAT0.status == "Charging" ? "" :
-          EWW_BATTERY.BAT0.capacity > 90 ? "" :
-          EWW_BATTERY.BAT0.capacity > 70 ? "" :
-          EWW_BATTERY.BAT0.capacity > 40 ? "" :
-          EWW_BATTERY.BAT0.capacity > 20 ? "" :
-          ""}"
+          ;; :text "${EWW_BATTERY.BAT0.status == "Charging" ? "" :
+          ;; EWW_BATTERY.BAT0.capacity > 90 ? "" :
+          ;; EWW_BATTERY.BAT0.capacity > 70 ? "" :
+          ;; EWW_BATTERY.BAT0.capacity > 40 ? "" :
+          ;; EWW_BATTERY.BAT0.capacity > 20 ? "" :
+          ;; ""}"
           :interval "5m"
           :class "sys_icon_bat ${EWW_BATTERY.BAT0.capacity} syst_icon_bat__${EWW_BATTERY.BAT0.status} ${EWW_BATTERY.BAT0.capacity < 20 ? "sys_icon_bat__low" : ""}"
           :limit-width 2
@@ -350,7 +350,7 @@
           :show_truncated false
           :wrap false)))
     (label
-      :text ""
+      :text ""
       :class "sys_sep"
       :halign "center")
     (box
@@ -363,7 +363,6 @@
         :class "sys_mem"
         :thickness 9
         (label
-          :text ""
           :class "sys_icon_mem"
           :limit-width 2
           :show_truncated false
@@ -566,3 +565,16 @@
 (box :class "window"
   (label :text "${window}")))
 
+(defwidget activate-linux []
+  (box
+    :orientation "v"
+    :halign "start"
+    :valign "start"
+    (label :xalign 0 :markup "<span font_size=\"large\">Activate Linux</span>")
+    (label :xalign 0 :text "Go to Settings to activate Linux")))
+
+(defwindow activate-linux
+  :monitor 0
+  :stacking "fg"
+  :geometry (geometry :x "8px" :y "64px" :width "420px" :anchor "bottom right")
+  (activate-linux))

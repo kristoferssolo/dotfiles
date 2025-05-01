@@ -68,6 +68,7 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "mytheme.lua")
 
 -- This is used later as the default terminal and editor to run.
 local terminal = "{{terminal}}"
+local browser = "{{browser}}"
 local editor = os.getenv("EDITOR") or "nvim"
 local editor_cmd = terminal .. " -e " .. editor
 
@@ -437,7 +438,7 @@ local globalkeys = gears.table.join(
 	-- awful.key({ modkey, "Control" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
 	awful.key({ modkey }, "b", function()
-		awful.spawn("floorp")
+		awful.spawn(browser)
 	end, { description = "open browser", group = "launcher" }),
 	awful.key({ modkey }, "n", function()
 		awful.spawn(terminal .. " -e yazi")

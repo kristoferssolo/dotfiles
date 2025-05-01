@@ -34,8 +34,8 @@ alias \
     j="joshutoub" \
     lf="lfub" \
     lg="lazygit" \
-    lzd="lazydocker" \
     lock="swaylock" \
+    lzd="lazydocker" \
     night="redshift -PO 4500" \
     py="python" \
     sv="rsv" \
@@ -45,6 +45,7 @@ alias \
     wg-up="wg-quick up wg0" \
     ww="$EDITOR ~/neorg/" \
     yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config" \
+    va="source .venv/bin/activate" \
     yy="yazi"
 
 alias \

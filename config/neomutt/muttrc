@@ -1,0 +1,67 @@
+# === Basic Settings ===
+set realname = "Kristiāns Francis Cagulis"
+set from = "kristians.cagulis@gmail.com"
+set use_from = yes
+set envelope_from = yes             # Use 'from' address for envelope
+set edit_headers = yes              # Let you edit headers when composing
+
+# === Editor ===
+set editor = "nano" # Or vim, emacs, etc.
+
+# === Folder Settings ===
+# This is where NeoMutt will look for mailboxes.
+# For IMAP, it's usually the remote server.
+set folder = "imaps://imap.example.com:993" # Your IMAP server and port
+set spoolfile = "+INBOX"                    # Your main inbox
+set postponed = "+Drafts"                   # Where to save drafts (adjust folder name)
+set record = "+Sent"                        # Where to save sent messages (adjust folder name)
+set trash = "+Trash"                        # Where to move deleted messages (adjust folder name)
+
+# === IMAP Settings ===
+set imap_user = "kristians.cagulis@gmail.com"
+# set imap_pass = "YOUR_APP_PASSWORD" # We'll source this from another file
+set imap_check_subscribed = yes
+set imap_keepalive = 300
+set mail_check = 60                         # Check for new mail every 60 seconds
+set imap_passive = no                       # Some servers need this
+
+# === SMTP Settings (Sending Mail) ===
+set smtp_url = "smtps://your_email@example.com@smtp.example.com:465" # SMTP server, port, and username
+# set smtp_pass = "YOUR_APP_PASSWORD" # We'll source this from another file
+
+# === Sorting ===
+set sort = threads        # Sort by threads
+set sort_aux = last-date-received # Sort threads by last received date
+
+# === Header Weeding (Clean up displayed headers) ===
+ignore *
+unignore from: to: cc: date: subject:
+hdr_order from: to: cc: date: subject:
+
+# === Sidebar (Optional but highly recommended) ===
+set sidebar_visible = yes
+set sidebar_width = 25
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S" # Folder | Unread / Total
+# Keybindings for sidebar navigation (Ctrl-B, Ctrl-T, Ctrl-O, Ctrl-C)
+bind index,pager \cb sidebar-prev
+bind index,pager \ct sidebar-next
+bind index,pager \co sidebar-open
+bind index,pager \cc sidebar-toggle-visible
+
+# === Other useful settings ===
+set confirmappend = no    # Don't ask when appending to mbox
+set quit = ask-yes        # Ask before quitting
+set pager_context = 3     # Show 3 lines of context in pager
+set menu_scroll = yes     # Scroll menus
+set tilde = yes           # Show tildes for empty lines like in Vim
+
+# === Source account-specific configurations (like passwords) ===
+# Make sure the path is correct!
+source "~/.config/neomutt/accounts/my_email.conf"
+
+# === GPG Settings (Optional, for encrypted/signed mail) ===
+# set crypt_autosign = yes
+# set crypt_autoencrypt = yes
+# set pgp_sign_as = "0xYOUR_GPG_KEY_ID"
+# set pgp_timeout = 3600 # Cache GPG passphrase for 1 hour
+# set pgp_good_sign = "~G Good signature from"

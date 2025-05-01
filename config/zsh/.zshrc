@@ -77,7 +77,7 @@ function cd {
     if [ $# -eq 0 ]; then
         new_directory=${HOME}
     fi
-    builtin cd "${new_directory}" && eza -a --icons --group-directories-first
+    z "${new_directory}" && eza -a --icons --group-directories-first
 }
 
 # Use lf to switch directories and bind it to ctrl-o
@@ -87,7 +87,7 @@ lfcd() {
     lf -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
         dir="$(cat "$tmp")"
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir" || return
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && z "$dir" || return
     fi
 }
 
@@ -95,16 +95,41 @@ function yazicd() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
     yazi "$@" --cwd-file="$tmp"
     if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd" && eza -a --icons --group-directories-first
+		z -- "$cwd" && eza -a --icons --group-directories-first
 	fi
 	rm -f -- "$tmp" >/dev/null 2>&1
 }
-tmux-window-name() {
+
+function tmux-window-name() {
 	($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
 }
 
-# add-zsh-hook chpwd tmux-window-name
+function fzf_sesh_connect_widget() {
+  local session
+  session=$(
+    sesh list --icons | fzf-tmux -p 80%,70% \
+      --no-sort --ansi \
+      --border-label ' sesh ' \
+      --prompt '⚡  ' \
+      --header '  ^a all  ^t tmux  ^g configs  ^x zoxide  ^d tmux kill  ^f find' \
+      --bind 'tab:down,btab:up' \
+      --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+      --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
+      --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+      --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+      --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+      --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+      --preview-window 'right:55%' \
+      --preview 'sesh preview {}'
+  )
 
+  # if the user picked something, build & run the command
+  if [[ -n $session ]]; then
+    BUFFER="sesh connect \"$session\""
+    zle accept-line
+  fi
+}
+zle -N fzf_sesh_connect_widget
 
 # Navigate words with CTRL+ARROW keys
 bindkey '^H' backward-kill-word # delete previous word with CTRL+BACKSPACE
@@ -138,8 +163,8 @@ bindkey -M vicmd '^e' edit-command-line
 bindkey -M visual '^[[P' vi-delete
 
 bindkey -s '^n' '^uv .\n'
-bindkey -s '^f' '^utmux neww tmux-sessionizer\n'
-
+# bindkey -s '^f' '^utmux neww tmux-sessionizer\n'
+bindkey '^F' fzf_sesh_connect_widget
 
 eval "$(starship init zsh)"
 eval "$(fzf --zsh)"

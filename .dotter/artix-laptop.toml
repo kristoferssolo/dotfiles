@@ -1,0 +1,7 @@
+packages = [ "wayland" ]
+
+[variables]
+dpi = "96"
+font_size = "16"
+terminal = "ghostty"
+browser = "floorp"

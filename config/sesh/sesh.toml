@@ -1,0 +1,4 @@
+[default_session]
+startup_command = "tmux new-window && tmux select-window -t 1 && clear"
+preview_command = "eza -a --icons --git --group-directories-first --color=always {}"
+blacklist = [ "**/SoloVim/*", "**/solorice/**" ]

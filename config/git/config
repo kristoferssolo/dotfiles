@@ -10,7 +10,7 @@
     whitespace = error
     preloadindex = true
 
-[url "git@github.com:kristoferssolo"]
+[url "git@github.com:kristoferssolo:"]
     insteadOf = "solo:"
 [url "git@github.com"]
     insteadOf = "gh:"

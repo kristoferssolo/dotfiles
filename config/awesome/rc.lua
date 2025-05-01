@@ -67,6 +67,7 @@ beautiful.init(gears.filesystem.get_configuration_dir() .. "mytheme.lua")
 
 -- This is used later as the default terminal and editor to run.
 local terminal = "{{terminal}}"
+local browser = "{{browser}}"
 local editor = os.getenv("EDITOR") or "nvim"
 local editor_cmd = terminal .. " -e " .. editor
 
@@ -107,9 +108,9 @@ local myawesomemenu = {
 			hotkeys_popup.show_help(nil, awful.screen.focused())
 		end,
 	},
-	{ "manual", terminal .. " -e man awesome" },
+	{ "manual",      terminal .. " -e man awesome" },
 	{ "edit config", editor_cmd .. " " .. awesome.conffile },
-	{ "restart", awesome.restart },
+	{ "restart",     awesome.restart },
 	{
 		"quit",
 		function()
@@ -430,7 +431,7 @@ local globalkeys = gears.table.join(
 	-- awful.key({ modkey, "Control" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
 	awful.key({ modkey }, "b", function()
-		awful.spawn("floorp")
+		awful.spawn(browser)
 	end, { description = "open browser", group = "launcher" }),
 	awful.key({ modkey }, "n", function()
 		awful.spawn(terminal .. " -e yazi")
@@ -485,7 +486,7 @@ local globalkeys = gears.table.join(
 	-- Menubar
 	awful.key({ modkey }, "p", function()
 		-- menubar.show()
-		awful.spawn("rofi -show drun -show-icons")
+		awful.spawn("rofi -show combi -show-icons")
 	end, { description = "show the menubar", group = "launcher" })
 )
 
@@ -672,9 +673,9 @@ awful.rules.rules = {
 		rule_any = { class = { "easyeffects" } },
 		properties = { screen = 1, tag = "9" },
 	},
-	{ rule_any = { class = { "kdeconnect.app" } }, properties = { screen = 2, tag = "7" } },
-	{ rule_any = { class = { "Spotify" } }, properties = { screen = 2, tag = "9" } },
-	{ rule_any = { class = { "mpv" } }, properties = { fullscreen = true } },
+	{ rule_any = { class = { "kdeconnect.app" } },  properties = { screen = 2, tag = "7" } },
+	{ rule_any = { class = { "Spotify" } },         properties = { screen = 2, tag = "9" } },
+	{ rule_any = { class = { "mpv" } },             properties = { fullscreen = true } },
 }
 
 --- Signals
