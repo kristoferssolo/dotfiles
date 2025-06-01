@@ -2,6 +2,7 @@ packages = [ "wayland" ]
 
 [variables]
 dpi = "96"
-font_size = "16"
-terminal = "ghostty"
+# font_size = "16"
+font_size = "12"
+terminal = "alacritty"
 browser = "floorp"

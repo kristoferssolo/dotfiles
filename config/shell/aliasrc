@@ -57,6 +57,7 @@ alias \
     gds="git diff --staged" \
     gl="git log --all --graph --pretty=format:'%C(magenta)%h %C(white) %an  %ar%C(auto)  %D%n%s%n'" \
     gp="git pull" \
+    gC="git clone" \
     gs="git status --short"
 
 # doas not required for some system commands

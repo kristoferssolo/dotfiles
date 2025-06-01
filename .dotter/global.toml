@@ -32,7 +32,7 @@ depends = [ "base", "awesome_laptop", "picom", "dunst", "rofi" ]
 "config/x11/xresources" = {target = "~/.config/x11/xresources", type = "template"}
 
 [wayland]
-depends = [ "base", "hyprland", "dunst", "rofi" ]
+depends = [ "base", "hyprland", "dunst", "rofi", "niri", "fuzzel" ]
 
 [wayland.files]
 "config/zsh/.zprofile-wayland" = "~/.config/zsh/.zprofile"
@@ -45,7 +45,7 @@ depends = [ "base", "hyprland", "dunst", "rofi" ]
 depends = [ "shell" ]
 
 [zsh.files]
-"config/shell/env" = "~/.zshenv"
+"config/shell/env" = {target = "~/.zshenv", type = "template"}
 "config/zsh/" = "~/.config/zsh/"
 
 [fish]
@@ -63,6 +63,9 @@ depends = [ "shell" ]
 [rofi.files]
 "config/rofi/" = "~/.config/rofi/"
 "config/rofi/config.rasi" = {target = "~/.config/rofi/config.rasi", type = "template"}
+
+[fuzzel.files]
+"config/fuzzel/" = "~/.config/fuzzel/"
 
 [misc]
 depends = [ "torrent", "zathura", "email" ]
@@ -103,6 +106,12 @@ depends = [ "torrent", "zathura", "email" ]
 
 [dunst.files]
 "config/dunst/" = "~/.config/dunst/"
+
+[niri]
+depends = [ "misc", "local", "eww", "lock" ]
+
+[niri.files]
+"config/niri/" = "~/.config/niri/"
 
 [hyprland]
 depends = [ "misc", "local", "eww", "lock" ]
