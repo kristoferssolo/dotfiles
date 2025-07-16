@@ -92,6 +92,7 @@ depends = [ "torrent", "zathura", "email" ]
 
 [torrent.files]
 "config/rustmission.toml" = "~/.config/rustmission/config.toml"
+"config/traxor/" = "~/.config/traxor/"
 # "config/transmission-daemon.json" = "~/.config/transmission-daemon/settings.json"
 
 [awesome.files]
