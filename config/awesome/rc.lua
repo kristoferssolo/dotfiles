@@ -5,14 +5,15 @@ pcall(require, "luarocks.loader")
 -- AwesomeWM Widgets
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+-- local docker_widget = require("awesome-wm-widgets.docker-widget.docker")
+local github_activity_widget = require("awesome-wm-widgets.github-activity-widget.github-activity-widget")
+local github_contributions_widget =
+	require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
 local spotify_shell = require("awesome-wm-widgets.spotify-shell.spotify-shell")
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
-local github_activity_widget = require("awesome-wm-widgets.github-activity-widget.github-activity-widget")
-local github_contributions_widget =
-	require("awesome-wm-widgets.github-contributions-widget.github-contributions-widget")
--- local docker_widget = require("awesome-wm-widgets.docker-widget.docker")
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 
 -- Standard awesome library
 local gears = require("gears")
@@ -108,9 +109,9 @@ local myawesomemenu = {
 			hotkeys_popup.show_help(nil, awful.screen.focused())
 		end,
 	},
-	{ "manual",      terminal .. " -e man awesome" },
+	{ "manual", terminal .. " -e man awesome" },
 	{ "edit config", editor_cmd .. " " .. awesome.conffile },
-	{ "restart",     awesome.restart },
+	{ "restart", awesome.restart },
 	{
 		"quit",
 		function()
@@ -295,6 +296,11 @@ awful.screen.connect_for_each_screen(function(s)
 				show_tooltip = true,
 				timeout = 1,
 			}),
+			volume_widget({
+				mixer_cmd = "{{terminal}} -e pulsemixer",
+				toggle_cmd = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+				widget_type = "horizontal_bar",
+			}),
 			logout_menu_widget({
 				font = "JetBrainsMono NF 10",
 				onlogout = function()
@@ -341,7 +347,7 @@ local globalkeys = gears.table.join(
 
 	awful.key({}, "Pause", function()
 		awful.spawn.with_shell("sp play")
-	end, { description = "spotify pause/play", group = "media controls" }),
+	end, { description = "pause/play spotify", group = "media controls" }),
 
 	awful.key({}, "#117", function()
 		awful.spawn.with_shell("sp next")
@@ -357,31 +363,31 @@ local globalkeys = gears.table.join(
 
 	awful.key({}, "#171", function()
 		awful.spawn.with_shell("sp next")
-	end), -- play next
+	end, { description = "next song", group = "media controls" }), -- play next
 
 	awful.key({}, "#173", function()
 		awful.spawn.with_shell("sp previous")
-	end), -- play previous
+	end, { description = "prev song", group = "media controls" }), -- play previous
 
 	awful.key({}, "#174", function()
 		awful.spawn.with_shell("playerctl -a stop")
-	end), -- stop
+	end, { description = "stop spotify", group = "media controls" }), -- stop
 
 	awful.key({}, "#172", function()
-		awful.spawn.with_shell("playerctl -a play-pause")
-	end), -- play/pause all
+		awful.spawn.with_shell("playerctl play-pause -a")
+	end, { description = "play/pause all", group = "media controls" }), -- play/pause all
 
-	awful.key({}, "#123", function()
-		awful.spawn.with_shell("pulsemixer --change-volume +5")
-	end), -- increase volume
+	awful.key({}, "XF86AudioRaiseVolume", function()
+		awful.spawn.with_shell("wpctl set-volume $(get-spotify-id) 0.05+ -l 1")
+	end, { description = "increase spotify volume", group = "media controls" }), -- increase volume
 
-	awful.key({}, "#122", function()
-		awful.spawn.with_shell("pulsemixer --change-volume -5")
-	end), -- decrease volume
+	awful.key({}, "XF86AudioLowerVolume", function()
+		awful.spawn.with_shell("wpctl set-volume $(get-spotify-id) 0.05-")
+	end, { description = "decrease spotify volume", group = "media controls" }), -- decrease volume
 
-	awful.key({}, "#121", function()
-		awful.spawn.with_shell("pulsemixer --toggle-mute")
-	end), -- mute
+	awful.key({}, "XF86AudioMute", function()
+		awful.spawn.with_shell("sp play")
+	end, { description = "play/pause spotify", group = "media controls" }), -- mute
 
 	awful.key({ "Control" }, "#107", function()
 		awful.spawn.with_shell("( flameshot &; ) && ( sleep 0.5s && flameshot gui )")
@@ -673,9 +679,9 @@ awful.rules.rules = {
 		rule_any = { class = { "easyeffects" } },
 		properties = { screen = 1, tag = "9" },
 	},
-	{ rule_any = { class = { "kdeconnect.app" } },  properties = { screen = 2, tag = "7" } },
-	{ rule_any = { class = { "Spotify" } },         properties = { screen = 2, tag = "9" } },
-	{ rule_any = { class = { "mpv" } },             properties = { fullscreen = true } },
+	{ rule_any = { class = { "kdeconnect.app" } }, properties = { screen = 2, tag = "7" } },
+	{ rule_any = { class = { "Spotify" } }, properties = { screen = 2, tag = "9" } },
+	{ rule_any = { class = { "mpv" } }, properties = { fullscreen = true } },
 }
 
 --- Signals

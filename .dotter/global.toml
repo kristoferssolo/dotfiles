@@ -32,7 +32,7 @@ depends = [ "base", "awesome_laptop", "picom", "dunst", "rofi" ]
 "config/x11/xresources" = {target = "~/.config/x11/xresources", type = "template"}
 
 [wayland]
-depends = [ "base", "hyprland", "dunst", "rofi", "niri", "fuzzel" ]
+depends = [ "base", "hyprland", "niri", "fuzzel", "mako" ]
 
 [wayland.files]
 "config/zsh/.zprofile-wayland" = "~/.config/zsh/.zprofile"
@@ -108,11 +108,14 @@ depends = [ "torrent", "zathura", "email" ]
 [dunst.files]
 "config/dunst/" = "~/.config/dunst/"
 
-[niri]
-depends = [ "misc", "local", "eww", "lock" ]
+[mako.files]
+"config/mako/" = "~/.config/mako/"
 
-[niri.files]
-"config/niri/" = "~/.config/niri/"
+[niri]
+depends = [ "misc", "local", "waybar", "lock" ]
+
+# [niri.files]
+# "config/niri/" = "~/.config/niri/"
 
 [hyprland]
 depends = [ "misc", "local", "eww", "lock" ]
@@ -132,6 +135,7 @@ depends = [ "misc", "local", "eww", "lock" ]
 
 [waybar.files]
 "config/waybar/" = "~/.config/waybar/"
+"config/waybar/config.jsonc" = {target = "~/.config/waybar/config.jsonc", type = "template"}
 
 [lock.files]
 "config/gtklock/" = "~/.config/gtklock/"

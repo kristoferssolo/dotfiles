@@ -14,6 +14,7 @@ killall xcape 2>/dev/null
 # Turn off caps lock if on since there is no longer a key for it.
 xset -q | grep "Caps Lock:\s*on" && xdotool key Caps_Lock
 # Turn on num lock
-xset -q | grep "Num Lock:\s*off" && xdotool key Num_Lock
+# xset -q | grep "Num Lock:\s*off" && xdotool key Num_Lock
+xset -q | grep "Num Lock:\s*on" && xdotool key Num_Lock
 
 setxkbmap lv
