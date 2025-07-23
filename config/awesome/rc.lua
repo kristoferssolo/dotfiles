@@ -363,36 +363,33 @@ local globalkeys = gears.table.join(
 
 	awful.key({}, "#171", function()
 		awful.spawn.with_shell("sp next")
-	end, { description = "next song", group = "media controls" }), -- play next
+	end, { description = "next song", group = "media controls" }),
 
 	awful.key({}, "#173", function()
 		awful.spawn.with_shell("sp previous")
-	end, { description = "prev song", group = "media controls" }), -- play previous
+	end, { description = "prev song", group = "media controls" }),
 
 	awful.key({}, "#174", function()
 		awful.spawn.with_shell("playerctl -a stop")
-	end, { description = "stop spotify", group = "media controls" }), -- stop
+	end, { description = "stop spotify", group = "media controls" }),
 
 	awful.key({}, "#172", function()
 		awful.spawn.with_shell("playerctl play-pause -a")
-	end, { description = "play/pause all", group = "media controls" }), -- play/pause all
+	end, { description = "play/pause all", group = "media controls" }),
 
 	awful.key({}, "XF86AudioRaiseVolume", function()
 		awful.spawn.with_shell("wpctl set-volume $(get-spotify-id) 0.05+ -l 1")
-	end, { description = "increase spotify volume", group = "media controls" }), -- increase volume
-
+	end, { description = "increase spotify volume", group = "media controls" }),
 	awful.key({}, "XF86AudioLowerVolume", function()
 		awful.spawn.with_shell("wpctl set-volume $(get-spotify-id) 0.05-")
-	end, { description = "decrease spotify volume", group = "media controls" }), -- decrease volume
-
+	end, { description = "decrease spotify volume", group = "media controls" }),
 	awful.key({}, "XF86AudioMute", function()
 		awful.spawn.with_shell("sp play")
-	end, { description = "play/pause spotify", group = "media controls" }), -- mute
+	end, { description = "play/pause spotify", group = "media controls" }),
 
 	awful.key({ "Control" }, "#107", function()
 		awful.spawn.with_shell("( flameshot &; ) && ( sleep 0.5s && flameshot gui )")
-	end, { description = "take region screenshot", group = "launcher" }), -- take region screenshot
-
+	end, { description = "take region screenshot", group = "launcher" }),
 	awful.key({ modkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
