@@ -13,7 +13,7 @@ LICENSE = ""
 default_target_type = "symbolic"
 
 [base]
-depends = [ "default", "zsh", "spotify", "terminal", "local", "misc" ]
+depends = [ "default", "zsh", "spotify", "terminal", "local", "misc", "dev" ]
 
 [x11]
 depends = [ "base", "awesome", "picom", "dunst", "rofi" ]
@@ -172,3 +172,6 @@ depends = [ "zsh", "tmux", "fish" ]
 
 [typst.files]
 "config/typstfmt.tom" = "~/.config/typstfmt/typstfmt.toml"
+
+[dev.files]
+"config/sqruff/" = "~/.config/sqruff/"
