@@ -155,8 +155,6 @@ prepend_keymap = [
   {on = [ "y" ], run = [ 'shell -- echo "$@" | xclip -selection clipboard', "yank" ], desc = "Yank the selected files"},
   {on = [ "y" ], run = [ 'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list', "yank" ], desc = "Yank the selected files"},
   {on = [ "b", "g" ], run = [ ''' shell 'setbg "$1"' --confirm ''' ], desc = "Set the background image"},
-  # vidir
-  {on = "B", run = [ "escape --visual", "plugin --sync vidir" ], desc = "Bulk rename with vidir"},
   # chmod
   {on = [ "c", "m" ], run = "plugin chmod", desc = "Chmod on selected files"},
   # Archive

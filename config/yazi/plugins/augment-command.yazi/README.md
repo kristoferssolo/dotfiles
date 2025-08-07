@@ -32,6 +32,7 @@ plugin.
   - [Arrow (`arrow`)](#arrow-arrow)
 - [New commands](#new-commands)
   - [Parent arrow (`parent_arrow`)](#parent-arrow-parent_arrow)
+  - [First file (`first_file`)](#first-file-first_file)
   - [Archive (`archive`)](#archive-archive)
   - [Emit (`emit`)](#emit-emit)
   - [Editor (`editor`)](#editor-editor)
@@ -995,6 +996,33 @@ in your `keymap.toml` file.
   wrapping around,
   even when `wraparound_file_navigation` is set to `true`.
 
+### First file (`first_file`)
+
+- This command just moves the cursor to the first file
+  in the current directory, regardless of the current cursor position.
+- It is useful for quickly getting to the first file
+  in the current directory when `sort_dir_first` is set to `true`,
+  which is the case by default.
+
+  Video:
+
+  [first-file-video]
+
+- It also works with smooth scrolling, so when `smooth_scrolling`
+  is set to `true`, the command will smoothly scroll the cursor
+  to the first file.
+
+  Video:
+
+  [smooth-first-file-video]
+
+- Alternatively, if you just want to get to a file
+  in the current directory, you can use the built-in `G` key bind
+  that calls `arrow bot` to get to the last item
+  in the current directory, which would be a file
+  if `sort_dir_first` is set to `true`,
+  which is the case by default.
+
 ### Archive (`archive`)
 
 - The `archive` command adds the selected or hovered items
@@ -1410,7 +1438,7 @@ and [my `yazi.toml` file][my-yazi-toml].
 
 ## [Licence]
 
-This plugin is licenced under the [GNU AGPL v3 licence][Licence].
+This plugin is licensed under the [GNU AGPL v3 licence][Licence].
 You can view the full licence in the [`LICENSE`][Licence] file.
 
 <!-- Regular links -->
@@ -1426,15 +1454,15 @@ You can view the full licence in the [`LICENSE`][Licence] file.
 [gnu-tar-link]: https://www.gnu.org/software/tar/
 [apple-tar-link]: https://ss64.com/mac/tar.html
 [brew-link]: https://brew.sh/
-[yazi-yazi-toml-extract-openers]: https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/yazi-default.toml#L51-L54
+[yazi-yazi-toml-extract-openers]: https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/yazi-default.toml#L50-L53
 [yazi-yazi-toml]: https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/yazi-default.toml
-[yazi-shell-variables]: https://yazi-rs.github.io/docs/configuration/keymap/#manager.shell
-[thunderbird-tip]: https://yazi-rs.github.io/docs/tips#email-selected-files-using-thunderbird
+[yazi-shell-variables]: https://yazi-rs.github.io/docs/configuration/keymap/#mgr.shell
+[thunderbird-tip]: https://yazi-rs.github.io/docs/tips/#email-selected-files
 [input-configuration]: https://yazi-rs.github.io/docs/configuration/yazi#input
 [confirm-configuration]: https://yazi-rs.github.io/docs/configuration/yazi#confirm
 [yazi-keymap-toml]: https://github.com/sxyazi/yazi/blob/main/yazi-config/preset/keymap-default.toml
-[my-keymap-toml]: https://github.com/hankertrix/Dotfiles/blob/main/.config/yazi/keymap.toml
-[my-yazi-toml]: https://github.com/hankertrix/Dotfiles/blob/main/.config/yazi/yazi.toml
+[my-keymap-toml]: https://github.com/hankertrix/Dotfiles/blob/main/tilde/dot_config/yazi/keymap.toml.tmpl
+[my-yazi-toml]: https://github.com/hankertrix/Dotfiles/blob/main/tilde/dot_config/yazi/yazi.toml
 [Licence]: LICENSE
 
 <!-- Videos -->
@@ -1531,6 +1559,11 @@ You can view the full licence in the [`LICENSE`][Licence] file.
 [smooth-parent-arrow-video]: https://github.com/user-attachments/assets/1b7ac44c-f7bc-4847-aa8a-897380aed54e
 [wraparound-parent-arrow-video]: https://github.com/user-attachments/assets/ce35b55f-98dc-485d-a5e4-005ebe3ea169
 [smooth-wraparound-parent-arrow-video]: https://github.com/user-attachments/assets/5256f0c5-b96b-4f4c-ac1d-f4a3f087cc57
+
+<!-- First file command -->
+
+[first-file-video]: https://github.com/user-attachments/assets/4b4a1e6d-b013-47b5-919f-90279977fd98
+[smooth-first-file-video]: https://github.com/user-attachments/assets/f4c9c191-fa9f-428e-87e2-9bf654e60f72
 
 <!-- Archive command -->
 

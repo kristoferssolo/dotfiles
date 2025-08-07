@@ -159,6 +159,7 @@ depends = [ "zsh", "tmux", "fish" ]
 "config/starship.toml" = "~/.config/starship/starship.toml"
 "config/ghostty/" = "~/.config/ghostty/"
 "config/ghostty/config" = {target = "~/.config/ghostty/config", type = "template"}
+"config/xdg-desktop-portal-termfilechooser/" = "~/.config/xdg-desktop-portal-termfilechooser/"
 
 [tmux.files]
 "config/tmux/" = "~/.config/tmux/"
