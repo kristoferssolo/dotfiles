@@ -1,0 +1,10 @@
+packages = [ "x11" ]
+
+[variables]
+dpi = "96"
+font_size = "10"
+terminal = "alacritty"
+browser = "floorp"
+
+[files]
+"config/niri/config-desktop.kdl" = "~/.config/niri/config.kdl"
