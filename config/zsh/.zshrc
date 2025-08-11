@@ -1,10 +1,13 @@
 #!/bin/zsh
 # Import and execute startup file
 [ -f "$XDG_CONFIG_HOME/zsh/startup" ] && source "$XDG_CONFIG_HOME/zsh/startup"
-fpath=("$XDG_CONFIG_HOME/zsh/zfunc/" $fpath)
+fpath=("$XDG_CONFIG_HOME/zsh/completions/" $fpath)
+autoload -U compinit && compinit
 
 # Add completions to search path
-if [[ ":$FPATH:" != *":$XDG_CONFIG_HOME/zsh/completions:"* ]]; then export FPATH="$XDG_CONFIG_HOME/zsh/completions:$FPATH"; fi
+if [[ ":$FPATH:" != *":$XDG_CONFIG_HOME/zsh/completions:"* ]]; then
+    export FPATH="$XDG_CONFIG_HOME/zsh/completions:$FPATH"
+fi
 
 # Options
 setopt appendhistory        # Immediately append history instead of overwriting
@@ -167,11 +170,7 @@ bindkey -s '^n' '^uv .\n'
 bindkey '^F' fzf_sesh_connect_widget
 
 eval "$(starship init zsh)"
-eval "$(fzf --zsh)"
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
 eval "$(zoxide init zsh)"
-eval "$(fastanime completions)"
 
 [[ -r ~/.local/share/zsh/plugins/znap/znap.zsh ]] ||
     git clone --depth 1 -- \
@@ -189,6 +188,8 @@ autoload -U compinit && compinit
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 [ -f "$XDG_CONFIG_HOME/zsh/zoxide" ] && source "$XDG_CONFIG_HOME/zsh/zoxide"
-if [[ ":$FPATH:" != *":$XDG_CONFIG_HOME/zsh/completions:"* ]]; then export FPATH="$XDG_CONFIG_HOME/zsh/completions:$FPATH"; fi
 
-. "$HOME/.local/share/../bin/env"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun completions
+[ -s "/home/kristofers/.bun/_bun" ] && source "/home/kristofers/.bun/_bun"
