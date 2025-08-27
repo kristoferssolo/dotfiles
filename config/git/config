@@ -53,8 +53,6 @@
 [rerere]
     enabled = true
     autoupdate = true
-[core]
-    excludesfile = ~/.gitignore
 [rebase]
     autoSquash = true
     autoStash = true
@@ -68,7 +66,7 @@
         # untrackedCache = true
 [merge]
         # (just 'diff3' if git version < 2.3)
-        # conflictstyle = zdiff3
+        conflictstyle = zdiff3
 [pull]
         # rebase = true
 [log]
@@ -110,3 +108,6 @@
 
 [include] # TODO: include only for my repos
     path = ~/.config/git/key
+[maintenance]
+	repo = /home/kristofers/Nextcloud/repos/SoloVim
+	repo = /home/kristofers/Nextcloud/repos/maze-ascension

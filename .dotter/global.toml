@@ -13,7 +13,7 @@ LICENSE = ""
 default_target_type = "symbolic"
 
 [base]
-depends = [ "default", "zsh", "spotify", "terminal", "local", "misc", "dev" ]
+depends = [ "default", "zsh", "spotify", "terminal", "local", "misc", "dev", "apps", "gtk" ]
 
 [x11]
 depends = [ "base", "awesome", "picom", "dunst", "rofi" ]
@@ -176,3 +176,11 @@ depends = [ "zsh", "tmux", "fish" ]
 
 [dev.files]
 "config/sqruff/" = "~/.config/sqruff/"
+"config/asm-lsp/" = "~/.config/asm-lsp/"
+
+[apps.files]
+"config/Vencord/" = "~/.config/Vencord/"
+
+[gtk.files]
+"config/gtk-3.0/" = "~/.config/gtk-3.0/"
+"config/gtk-4.0/" = "~/.config/gtk-4.0/"

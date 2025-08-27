@@ -1,0 +1,27 @@
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/ServerColumns/ServerColumns.css);
+
+:root {
+  --columns: 1;
+  /* default: 3 (amount of servercolumns) */
+
+  --guildsize: 40;
+  /* default: 50 (serversize in pixel) */
+
+  --guildgap: 3;
+  /* default: 3 (top/bottom gap between servers in pixel) */
+
+  --aligndms: 2;
+  /* default: 0 (should DMs be aligned in columns: 0 = no, 1 = yes) */
+}
+
+@import url("https://mr-miner1.github.io/Better-Badges/src/badges.css");
+
+:root {
+  --badge-size: 22px;
+  /*discord default = 18px, theme default = 22px;*/
+  --badge-margin: 1.5px;
+  /*discord default = 2px, theme default = 1.5px*/
+  --badges-everywhere-size: 15px;
+  /*default = 15px*/
+  --windows-hover: 0;
+}
