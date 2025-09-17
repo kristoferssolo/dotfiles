@@ -8,4 +8,4 @@ terminal = "alacritty"
 browser = "floorp"
 
 [files]
-"config/niri/config-laptop.kdl" = "~/.config/niri/config.kdl"
+"config/niri/config-laptop.kdl" = {target = "~/.config/niri/config.kdl", type = "template"}

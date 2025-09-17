@@ -10,9 +10,9 @@
     whitespace = error
     preloadindex = true
 
-[url "git@github.com:kristoferssolo:"]
+[url "git@github.com:kristoferssolo/"]
     insteadOf = "solo:"
-[url "git@github.com"]
+[url "git@github.com:"]
     insteadOf = "gh:"
 
 [status]
@@ -108,6 +108,3 @@
 
 [include] # TODO: include only for my repos
     path = ~/.config/git/key
-[maintenance]
-	repo = /home/kristofers/Nextcloud/repos/SoloVim
-	repo = /home/kristofers/Nextcloud/repos/maze-ascension

@@ -80,6 +80,7 @@ depends = [ "torrent", "zathura", "email" ]
 "config/gitui/" = "~/.config/gitui/"
 "config/lazygit/" = "~/.config/lazygit/"
 "config/git/" = "~/.config/git/"
+"config/jj/" = "~/.config/jj/"
 "config/mpv/" = "~/.config/mpv/"
 "config/lf/" = "~/.config/lf/"
 "config/paru.conf" = "~/.config/paru/paru.conf"
@@ -139,7 +140,7 @@ depends = [ "misc", "local", "eww", "lock" ]
 
 [lock.files]
 "config/gtklock/" = "~/.config/gtklock/"
-"config/swaylock" = "~/.config/swaylock/config"
+"config/swaylock.conf" = "~/.config/swaylock/config"
 
 [picom.files]
 "config/picom.conf" = "~/.config/picom/picom.conf"

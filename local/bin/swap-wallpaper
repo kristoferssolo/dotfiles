@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+WALLPAPER_DIR="$HOME/Pictures/wallpapers/PoE2/3880x2160/"
+
+if pgrep -x "Hyprland" >/dev/null; then
+    CURRENT_WALL=$(hyprctl hyprpaper listloaded)
+    WALLPAPER=$(fd --type file --exclude "$(basename "$CURRENT_WALL")" . "$WALLPAPER_DIR" | shuf -nz 1)
+    hyprctl hyprpaper reload ,"$WALLPAPER"
+else
+    WALLPAPER=$(fd --type file . "$WALLPAPER_DIR" | shuf -n 1)
+    pkill swaybg 2>/dev/null || true
+    swaybg -m fill -i "$WALLPAPER" &
+    disown
+fi

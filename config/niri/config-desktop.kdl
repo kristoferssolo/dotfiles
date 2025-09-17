@@ -116,10 +116,6 @@ workspace "browser" {
     open-on-output "DP-1"
 }
 
-workspace "eq" {
-    open-on-output "DP-1"
-}
-
 workspace "chat" {
     open-on-output "HDMI-A-1"
 }
@@ -372,13 +368,17 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id=r#"floorp$"#
-    open-maximized false
+    match at-startup=true app-id="floorp"
+    open-maximized true
     open-on-workspace "browser"
 }
 
 window-rule {
     match at-startup=true app-id=r#"^org\.telegram\.desktop$"#
+    match at-startup=true app-id=r#"^org\.gnome\.Fractal$"#
+    match at-startup=true app-id=r#"discord"#
+    match at-startup=true app-id=r#"vesktop"#
+
     exclude app-id=r#"^org\.telegram\.desktop$"# title="^Media viewer$"
     open-on-workspace "chat"
 }
@@ -408,7 +408,8 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+P hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Super+Space hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
+    Super+Space allow-when-locked=true hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    // Super+Space hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
@@ -630,6 +631,9 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+
+    Mod+Shift+P { spawn "swap-wallpaper"; }
+    Mod+B { spawn "floorp"; }
 }
 
 hotkey-overlay {

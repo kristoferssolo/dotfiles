@@ -14,16 +14,16 @@
     "modules-left": [
         "wlr/taskbar"
     ],
-    "modules-center": [
-        "clock"
-    ],
+    "modules-center": [],
     "modules-right": [
         "tray",
         "network",
         "cpu",
         "memory",
-        "pulseaudio",
-        "custom/waybar-media"
+        "battery",
+        // "pulseaudio"
+        "custom/waybar-media",
+        "clock"
     ],
     // "modules-right": ["cpu", "memory", "battery", "network", "tray"],
     // Modules configuration
@@ -50,7 +50,7 @@
     },
     "wlr/taskbar": {
         // "all-outputs": true,
-        // "format": "{icon} {title} {short_state}",
+        // "format": "{icon} {title} {app_id}",
         "format": "{icon}",
         "tooltip-format": "{title} | {app_id}",
         "on-click": "activate",
@@ -119,7 +119,7 @@
     "clock": {
         "interval": 1,
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%d.%m. %H:%M:%S}"
+        "format": "{:%d.%m.%Y %H:%M:%S}"
     },
     "cpu": {
         "format": "{usage}% 󰍛",
@@ -158,7 +158,7 @@
     },
     "battery": {
         "states": {
-            // "good": 95,
+            "good": 95,
             "warning": 30,
             "critical": 15
         },

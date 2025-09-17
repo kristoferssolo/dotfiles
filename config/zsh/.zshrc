@@ -193,3 +193,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # bun completions
 [ -s "/home/kristofers/.bun/_bun" ] && source "/home/kristofers/.bun/_bun"
+
+. "$HOME/.local/share/../bin/env"

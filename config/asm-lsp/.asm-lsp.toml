@@ -4,25 +4,19 @@ assembler = "gas"
 instruction_set = "riscv"
 
 [default_config.opts]
-compiler = "zig"
-compile_flags_txt = [
-  "cc",
-  "-x",
-  "assembler-with-cpp",
-  "-g",
-  "-Wall",
-  "-Wextra",
-  "-pedantic",
-  "-pedantic-errors",
-  "-std=c2y",
-  "-target",
-  "aarch64-linux-musl",
-]
-diagnostics = true
-default_diagnostics = false
-
-[project.opts]
-compiler = "zig"
-compile_flags_txt = [  ]
+# compiler = "zig"
+# compile_flags_txt = [
+#   "cc",
+#   "-x",
+#   "assembler-with-cpp",
+#   "-g",
+#   "-Wall",
+#   "-Wextra",
+#   "-pedantic",
+#   "-pedantic-errors",
+#   "-std=c2y",
+#   "-target",
+#   "aarch64-linux-musl",
+# ]
 diagnostics = true
 default_diagnostics = false

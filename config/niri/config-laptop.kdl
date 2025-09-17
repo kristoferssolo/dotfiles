@@ -4,7 +4,9 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
 workspace "browser"
+workspace "terminal"
 workspace "chat"
+workspace "music"
 
 environment {
     QT_QPA_PLATFORM "wayland"
@@ -126,7 +128,7 @@ output "eDP-1" {
     variable-refresh-rate on-demand=true
     focus-at-startup
     background-color "#000"
-    backdrop-color "#000"
+    backdrop-color "#191724"
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -284,20 +286,23 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
+spawn-at-startup "xwayland-satellite"
 spawn-at-startup "pipewire"
 spawn-at-startup "pipewire-pulse"
 spawn-at-startup "wireplumber"
-spawn-at-startup "eww" "daemon"
-spawn-at-startup "eww" "open bar"
+spawn-at-startup "waybar"
+// spawn-at-startup "eww" "daemon"
+// spawn-at-startup "eww" "open bar"
 spawn-at-startup "mako"
 // spawn-at-startup "dbus-update-activation-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "DISPLAY" "XAUTHORITY"
 spawn-at-startup "nextcloud"
 // spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "xrdb" "~/.config/x11/xresources"
 spawn-at-startup "transmission-daemon"
-spawn-at-startup "floorp"
+spawn-at-startup "{{browser}}"
 spawn-at-startup "kotatogram-desktop"
-spawn-at-startup "flatpak" "run" "dev.vencord.Vesktop"
+spawn-at-startup "vesktop"
+spawn-at-startup "swap-wallpaper"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -328,6 +333,10 @@ animations {
 layer-rule {
     match namespace="^notifications$"
     block-out-from "screencast"
+}
+
+window-rule {
+    draw-border-with-background false
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -372,17 +381,21 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id=r#"floorp$"#
+    match at-startup=true app-id="floorp"
     open-maximized true
     open-on-workspace "browser"
 }
 
 window-rule {
     match at-startup=true app-id=r#"^org\.telegram\.desktop$"#
+    match at-startup=true app-id=r#"^org\.gnome\.Fractal$"#
+    match at-startup=true app-id=r#"discord"#
+    match at-startup=true app-id=r#"vesktop"#
+
     exclude app-id=r#"^org\.telegram\.desktop$"# title="^Media viewer$"
     open-on-workspace "chat"
+    opacity 0.95
 }
-
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
@@ -407,9 +420,10 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: {{terminal}}" { spawn "{{terminal}}"; }
     Mod+P hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Super+Space hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
+    Super+Space allow-when-locked=true hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    // Super+Space hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
@@ -527,24 +541,24 @@ binds {
     //
     // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
     // will all refer to the 3rd workspace.
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
+    Mod+1 { focus-workspace "browser"; }
+    Mod+2 { focus-workspace "terminal"; }
     Mod+3 { focus-workspace 3; }
     Mod+4 { focus-workspace 4; }
     Mod+5 { focus-workspace 5; }
     Mod+6 { focus-workspace 6; }
     Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
-    Mod+Shift+1 { move-column-to-workspace 1; }
-    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+8 { focus-workspace "chat"; }
+    Mod+9 { focus-workspace "music"; }
+    Mod+Shift+1 { move-column-to-workspace "browser"; }
+    Mod+Shift+2 { move-column-to-workspace "terminal"; }
     Mod+Shift+3 { move-column-to-workspace 3; }
     Mod+Shift+4 { move-column-to-workspace 4; }
     Mod+Shift+5 { move-column-to-workspace 5; }
     Mod+Shift+6 { move-column-to-workspace 6; }
     Mod+Shift+7 { move-column-to-workspace 7; }
-    Mod+Shift+8 { move-column-to-workspace 8; }
-    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+Shift+8 { move-column-to-workspace "chat"; }
+    Mod+Shift+9 { move-column-to-workspace "music"; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
@@ -630,7 +644,10 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Mod+Shift+P { power-off-monitors; }
+    // Mod+Shift+P { power-off-monitors; }
+
+    Mod+Shift+P { spawn "swap-wallpaper"; }
+    Mod+B { spawn "{{browser}}"; }
 }
 
 hotkey-overlay {

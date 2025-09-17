@@ -270,10 +270,10 @@ awful.screen.connect_for_each_screen(function(s)
 				margin_top = 1,
 				theme = "teal",
 			}),
-			github_activity_widget({
+			--[[ github_activity_widget({
 				username = "kristoferssolo",
 				number_of_events = 10,
-			}),
+			}), ]]
 			wibox.widget.systray(),
 			cpu_widget({
 				width = 50,
@@ -284,7 +284,7 @@ awful.screen.connect_for_each_screen(function(s)
 				process_info_max_length = -1,
 				timeout = 1,
 			}),
-			net_speed_widget(),
+			-- net_speed_widget(),
 			-- docker_widget(),
 			spotify_widget({
 				play_icon = "/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg",
@@ -612,7 +612,6 @@ awful.rules.rules = {
 			placement = awful.placement.no_overlap + awful.placement.no_offscreen,
 		},
 	},
-
 	-- Floating clients.
 	{
 		rule_any = {
@@ -669,7 +668,17 @@ awful.rules.rules = {
 		properties = { screen = 2, tag = "5" },
 	},
 	{
-		rule_any = { class = { "discord", "TelegramDesktop", "ripcord", "KotatogramDesktop", "vesktop" } },
+		rule_any = {
+			class = {
+				"discord",
+				"ripcord",
+				"vesktop",
+				"TelegramDesktop",
+				"KotatogramDesktop",
+				"AyuGram",
+				"AyuGramDesktop",
+			},
+		},
 		properties = { screen = 2, tag = "8" },
 	},
 	{
@@ -679,6 +688,22 @@ awful.rules.rules = {
 	{ rule_any = { class = { "kdeconnect.app" } }, properties = { screen = 2, tag = "7" } },
 	{ rule_any = { class = { "Spotify" } }, properties = { screen = 2, tag = "9" } },
 	{ rule_any = { class = { "mpv" } }, properties = { fullscreen = true } },
+
+	{
+		rule = {
+			class = "exiled-exchange-2",
+		},
+		properties = {
+			-- fullscreen = true,
+			floating = true, -- Float above PoE2
+			ontop = true, -- Stay on top
+			sticky = false, -- ← KEY: Pin to PoE2 workspace only (stops flicker)
+			skip_taskbar = true, -- Hide from taskbar
+			skip_pager = true, -- Hide from workspace switcher
+			placement = awful.placement.top_right, -- Top-right overlay
+			raise = false, -- Don't auto-raise (helps with flicker)
+		},
+	},
 }
 
 --- Signals
