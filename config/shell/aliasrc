@@ -11,6 +11,7 @@ alias \
     mkdir="mkdir -pv" \
     mv="mv -iv" \
     nsxiv="nsxiv -a" \
+    img="oculante" \
     rm="rm -vI" \
     wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts" \
     keychain="keychain --dir $XDG_RUNTIME_DIR/keychain"
@@ -20,7 +21,7 @@ alias \
     diff="diff --color=auto" \
     grep="rg --color=auto" \
     ip="ip -color=auto" \
-    less="moar" \
+    less="moor" \
     ls="eza -a --icons --group-directories-first"
 
 # These common commands ate just too long! Abbreviate them

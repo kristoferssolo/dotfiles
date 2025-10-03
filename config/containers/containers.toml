@@ -1,0 +1,10 @@
+[engine]
+cgroup_manager = "cgroupfs"
+events_logger = "file"
+runtime = "crun"
+
+[network]
+network_backend = "cni"
+
+[storage]
+driver = "overlay"

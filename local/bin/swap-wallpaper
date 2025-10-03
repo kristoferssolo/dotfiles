@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-WALLPAPER_DIR="$HOME/Pictures/wallpapers/PoE2/3880x2160/"
+WALLPAPER_DIR="$HOME/Pictures/wallpapers/Linux-Dynamic-Wallpapers/"
 
 if pgrep -x "Hyprland" >/dev/null; then
     CURRENT_WALL=$(hyprctl hyprpaper listloaded)

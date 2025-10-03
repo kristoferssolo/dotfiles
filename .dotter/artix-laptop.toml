@@ -6,6 +6,7 @@ dpi = "96"
 font_size = "12"
 terminal = "alacritty"
 browser = "floorp"
+waybar_font_size = "14px"
 
 [files]
 "config/niri/config-laptop.kdl" = {target = "~/.config/niri/config.kdl", type = "template"}

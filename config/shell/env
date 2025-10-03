@@ -6,11 +6,14 @@ typeset -U PATH path
 # If you don't plan on reverting to bash, you can remove the link in ~/.profile
 # to clean up.
 
+export BUN_INSTALL="$XDG_DATA_HOME/bun"
+
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
 export PATH="$PATH:~/.spicetify"
 export PATH="$PATH:${$(find ~/.cache/.bun/bin -type d -printf %p:)%%:}"
 export PATH="$JAVA_HOME/bin:$PATH"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Disable files
 export LESSHISTFILE=-
@@ -25,13 +28,14 @@ unsetopt PROMPT_SP
 # Default Apps
 export BROWSER="floorp"
 export EDITOR="nvim"
-export IMAGE="nsxiv"
+export IMAGE="oculante"
 export READER="zathura"
 export TERMINAL="{{terminal}}"
 export VIDEO="mpv"
 export VISUAL="$EDITOR"
 export WM="awesome"
 
+export GTK_THEME=rose-pine-gtk
 
 # $HOME Clean-up
 export XDG_CACHE_HOME="$HOME/.cache"

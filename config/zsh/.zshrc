@@ -195,3 +195,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 [ -s "/home/kristofers/.bun/_bun" ] && source "/home/kristofers/.bun/_bun"
 
 . "$HOME/.local/share/../bin/env"
+
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env

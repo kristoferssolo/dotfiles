@@ -3,13 +3,29 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
+workspace "browser" {
+    open-on-output "DP-1"
+}
+
+workspace "terminal" {
+    open-on-output "DP-1"
+}
+
+workspace "chat" {
+    open-on-output "HDMI-A-1"
+}
+
+workspace "music" {
+    open-on-output "HDMI-A-1"
+}
+
 environment {
     QT_QPA_PLATFORM "wayland"
     XDG_SESSION_TYPE "wayland"
     XDG_CURRENT_DESKTOP "niri"
     XDG_SESSION_DESKTOP "niri"
     WM "niri"
-    DISPLAY ":0"
+    DISPLAY ":0" // for X11 apps to run
     ELECTRON_OZONE_PLATFORM_HINT "auto"
 }
 
@@ -112,17 +128,6 @@ output "HDMI-A-1" {
     backdrop-color "#000"
 }
 
-workspace "browser" {
-    open-on-output "DP-1"
-}
-
-workspace "chat" {
-    open-on-output "HDMI-A-1"
-}
-
-workspace "music" {
-    open-on-output "HDMI-A-1"
-}
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
@@ -279,7 +284,6 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "xwayland-satellite"
 spawn-at-startup "pipewire"
 spawn-at-startup "pipewire-pulse"
 spawn-at-startup "wireplumber"
@@ -287,12 +291,14 @@ spawn-at-startup "mako"
 spawn-at-startup "waybar"
 // spawn-at-startup "dbus-update-activation-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "DISPLAY" "XAUTHORITY"
 spawn-at-startup "nextcloud"
-spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+// spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "xrdb" "~/.config/x11/xresources"
 spawn-at-startup "transmission-daemon"
-spawn-at-startup "floorp"
-spawn-at-startup "kotatogram-desktop"
-spawn-at-startup "discord"
+spawn-at-startup "{{browser}}"
+// spawn-at-startup "flatpak" "run" "com.ayugram.desktop"
+spawn-at-startup "AyuGram"
+spawn-at-startup "vesktop"
+spawn-at-startup "swap-wallpaper"
 spawn-at-startup "spotify-launcher"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -318,7 +324,7 @@ animations {
     off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
+    slowdown 3.0
 }
 
 layer-rule {
@@ -326,6 +332,9 @@ layer-rule {
     block-out-from "screencast"
 }
 
+window-rule {
+    draw-border-with-background false
+}
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
@@ -346,8 +355,14 @@ window-rule {
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    match app-id=r#"floorp$"# title="^Picture-in-Picture$"
+    match app-id=r#"floorp-default"# title="^Picture-in-Picture$"
     open-floating true
+}
+
+window-rule {
+    match title=r#"^Extension:.*Bitwarden.*"#
+
+    default-floating-position x=10 y=10 relative-to="top-right"
 }
 
 window-rule {
@@ -360,6 +375,8 @@ window-rule {
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    match title="Bitwarden"
 
     block-out-from "screen-capture"
 
@@ -368,19 +385,41 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id="floorp"
-    open-maximized true
+    match at-startup=true app-id="floorp-default"
     open-on-workspace "browser"
+    open-maximized true
 }
 
 window-rule {
     match at-startup=true app-id=r#"^org\.telegram\.desktop$"#
+    match at-startup=true app-id=r#"^com\.ayugram\.desktop$"#
     match at-startup=true app-id=r#"^org\.gnome\.Fractal$"#
     match at-startup=true app-id=r#"discord"#
     match at-startup=true app-id=r#"vesktop"#
 
+    exclude app-id=r#"^com\.ayugram\.desktop$"# title="^Media viewer$"
     exclude app-id=r#"^org\.telegram\.desktop$"# title="^Media viewer$"
     open-on-workspace "chat"
+    opacity 0.95
+}
+
+window-rule {
+    match app-id="mpv"
+    open-fullscreen true
+}
+
+window-rule {
+    match app-id=r#"^com\.ayugram\.desktop$"# title="^Media viewer$"
+    match app-id=r#"^org\.telegram\.desktop$"# title="^Media viewer$"
+
+    open-maximized true
+}
+
+window-rule {
+    match at-startup=true app-id="Spotify"
+    open-maximized true
+
+    open-on-workspace "music"
 }
 
 // Example: enable rounded corners for all windows.
@@ -406,9 +445,9 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: {{terminal}}" { spawn "{{terminal}}"; }
     Mod+P hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Super+Space allow-when-locked=true hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    // Super+Space allow-when-locked=true hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     // Super+Space hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
@@ -417,10 +456,12 @@ binds {
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.01+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.01-"; }
-    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume $(get-spotify-id) 0.01+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume $(get-spotify-id) 0.01-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "sp" "play"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    Page_Down allow-when-locked=true {spawn "sp" "next"; }
+    Page_Up allow-when-locked=true {spawn "sp" "prev"; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
@@ -469,23 +510,20 @@ binds {
     // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
     // ...
 
-    Mod+Page_Down      { focus-workspace-down; }
-    Mod+Page_Up        { focus-workspace-up; }
-    Mod+U              { focus-workspace-down; }
-    Mod+I              { focus-workspace-up; }
-    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-    Mod+Ctrl+U         { move-column-to-workspace-down; }
-    Mod+Ctrl+I         { move-column-to-workspace-up; }
+    Mod+Down      { focus-workspace-down; }
+    Mod+Up        { focus-workspace-up; }
+    Mod+Ctrl+Down         { move-column-to-workspace-down; }
+    Mod+Ctrl+Up         { move-column-to-workspace-up; }
+
+    Mod+Alt+J      { focus-workspace-down; }
+    Mod+Alt+K        { focus-workspace-up; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
     // ...
 
-    Mod+Shift+Page_Down { move-workspace-down; }
-    Mod+Shift+Page_Up   { move-workspace-up; }
-    Mod+Shift+U         { move-workspace-down; }
-    Mod+Shift+I         { move-workspace-up; }
+    Mod+Shift+Down { move-workspace-down; }
+    Mod+Shift+Up   { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -527,24 +565,24 @@ binds {
     //
     // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
     // will all refer to the 3rd workspace.
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
+    Mod+1 { focus-workspace "browser"; }
+    Mod+2 { focus-workspace "terminal"; }
     Mod+3 { focus-workspace 3; }
     Mod+4 { focus-workspace 4; }
     Mod+5 { focus-workspace 5; }
     Mod+6 { focus-workspace 6; }
     Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
-    Mod+Shift+1 { move-column-to-workspace 1; }
-    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+8 { focus-workspace "chat"; }
+    Mod+9 { focus-workspace "music"; }
+    Mod+Shift+1 { move-column-to-workspace "browser"; }
+    Mod+Shift+2 { move-column-to-workspace "terminal"; }
     Mod+Shift+3 { move-column-to-workspace 3; }
     Mod+Shift+4 { move-column-to-workspace 4; }
     Mod+Shift+5 { move-column-to-workspace 5; }
     Mod+Shift+6 { move-column-to-workspace 6; }
     Mod+Shift+7 { move-column-to-workspace 7; }
-    Mod+Shift+8 { move-column-to-workspace 8; }
-    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+Shift+8 { move-column-to-workspace "chat"; }
+    Mod+Shift+9 { move-column-to-workspace "music"; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
@@ -610,9 +648,9 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    Mod+Delete { screenshot; }
+    Mod+Shift+Delete { screenshot-screen; }
+    Mod+Alt+Delete { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
@@ -630,10 +668,10 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Mod+Shift+P { power-off-monitors; }
+    // Mod+Shift+P { power-off-monitors; }
 
     Mod+Shift+P { spawn "swap-wallpaper"; }
-    Mod+B { spawn "floorp"; }
+    Mod+B { spawn "{{browser}}"; }
 }
 
 hotkey-overlay {

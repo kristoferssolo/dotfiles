@@ -18,7 +18,7 @@ alias keychain="keychain --dir $XDG_RUNTIME_DIR/keychain"
 alias diff="diff --color=auto"
 alias grep="rg --color=auto"
 alias ip="ip -color=auto"
-alias less="moar"
+alias less="moor"
 alias ls="eza -a --icons --group-directories-first"
 
 # These common commands ate just too long! Abbreviate them

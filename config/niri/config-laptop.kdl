@@ -3,10 +3,15 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
-workspace "browser"
-workspace "terminal"
-workspace "chat"
-workspace "music"
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "5"
+workspace "6"
+workspace "7"
+workspace "8"
+workspace "9"
 
 environment {
     QT_QPA_PLATFORM "wayland"
@@ -14,7 +19,7 @@ environment {
     XDG_CURRENT_DESKTOP "niri"
     XDG_SESSION_DESKTOP "niri"
     WM "niri"
-    DISPLAY null
+    DISPLAY ":0" // for X11 appls to run
     ELECTRON_OZONE_PLATFORM_HINT "auto"
 }
 
@@ -286,13 +291,10 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "xwayland-satellite"
 spawn-at-startup "pipewire"
 spawn-at-startup "pipewire-pulse"
 spawn-at-startup "wireplumber"
 spawn-at-startup "waybar"
-// spawn-at-startup "eww" "daemon"
-// spawn-at-startup "eww" "open bar"
 spawn-at-startup "mako"
 // spawn-at-startup "dbus-update-activation-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "DISPLAY" "XAUTHORITY"
 spawn-at-startup "nextcloud"
@@ -300,7 +302,7 @@ spawn-at-startup "nextcloud"
 spawn-at-startup "xrdb" "~/.config/x11/xresources"
 spawn-at-startup "transmission-daemon"
 spawn-at-startup "{{browser}}"
-spawn-at-startup "kotatogram-desktop"
+spawn-at-startup "flatpak" "run" "com.ayugram.desktop"
 spawn-at-startup "vesktop"
 spawn-at-startup "swap-wallpaper"
 
@@ -383,17 +385,19 @@ window-rule {
 window-rule {
     match at-startup=true app-id="floorp"
     open-maximized true
-    open-on-workspace "browser"
+    open-on-workspace "1"
 }
 
 window-rule {
     match at-startup=true app-id=r#"^org\.telegram\.desktop$"#
+    match at-startup=true app-id=r#"^com\.ayugram\.desktop$"#
     match at-startup=true app-id=r#"^org\.gnome\.Fractal$"#
     match at-startup=true app-id=r#"discord"#
     match at-startup=true app-id=r#"vesktop"#
 
+    exclude app-id=r#"^com\.ayugram\.desktop$"# title="^Media viewer$"
     exclude app-id=r#"^org\.telegram\.desktop$"# title="^Media viewer$"
-    open-on-workspace "chat"
+    open-on-workspace "8"
     opacity 0.95
 }
 
@@ -541,24 +545,24 @@ binds {
     //
     // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
     // will all refer to the 3rd workspace.
-    Mod+1 { focus-workspace "browser"; }
-    Mod+2 { focus-workspace "terminal"; }
-    Mod+3 { focus-workspace 3; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace "chat"; }
-    Mod+9 { focus-workspace "music"; }
-    Mod+Shift+1 { move-column-to-workspace "browser"; }
-    Mod+Shift+2 { move-column-to-workspace "terminal"; }
-    Mod+Shift+3 { move-column-to-workspace 3; }
-    Mod+Shift+4 { move-column-to-workspace 4; }
-    Mod+Shift+5 { move-column-to-workspace 5; }
-    Mod+Shift+6 { move-column-to-workspace 6; }
-    Mod+Shift+7 { move-column-to-workspace 7; }
-    Mod+Shift+8 { move-column-to-workspace "chat"; }
-    Mod+Shift+9 { move-column-to-workspace "music"; }
+    Mod+1 { focus-workspace "1"; }
+    Mod+2 { focus-workspace "2"; }
+    Mod+3 { focus-workspace "3"; }
+    Mod+4 { focus-workspace "4"; }
+    Mod+5 { focus-workspace "5"; }
+    Mod+6 { focus-workspace "6"; }
+    Mod+7 { focus-workspace "7"; }
+    Mod+8 { focus-workspace "8"; }
+    Mod+9 { focus-workspace "9"; }
+    Mod+Shift+1 { move-column-to-workspace "1"; }
+    Mod+Shift+2 { move-column-to-workspace "2"; }
+    Mod+Shift+3 { move-column-to-workspace "3"; }
+    Mod+Shift+4 { move-column-to-workspace "4"; }
+    Mod+Shift+5 { move-column-to-workspace "5"; }
+    Mod+Shift+6 { move-column-to-workspace "6"; }
+    Mod+Shift+7 { move-column-to-workspace "7"; }
+    Mod+Shift+8 { move-column-to-workspace "8"; }
+    Mod+Shift+9 { move-column-to-workspace "9"; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }

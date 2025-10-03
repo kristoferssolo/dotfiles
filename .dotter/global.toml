@@ -71,8 +71,8 @@ depends = [ "shell" ]
 depends = [ "torrent", "zathura", "email" ]
 
 [misc.files]
-"config/batrc" = "~/.config/bat/config"
-"config/tmThemes/" = "~/.config/silicon/themes/"
+"config/bat/" = "~/.config/bat/"
+"config/silicon/" = "~/.config/silicon/"
 "config/btop/" = "~/.config/btop/"
 "config/htoprc" = "~/.config/htop/htoprc"
 "config/fastfetch/" = "~/.config/fastfetch/"
@@ -137,6 +137,7 @@ depends = [ "misc", "local", "eww", "lock" ]
 [waybar.files]
 "config/waybar/" = "~/.config/waybar/"
 "config/waybar/config.jsonc" = {target = "~/.config/waybar/config.jsonc", type = "template"}
+"config/waybar/style.css" = {target = "~/.config/waybar/style.css", type = "template"}
 
 [lock.files]
 "config/gtklock/" = "~/.config/gtklock/"
@@ -178,9 +179,12 @@ depends = [ "zsh", "tmux", "fish" ]
 [dev.files]
 "config/sqruff/" = "~/.config/sqruff/"
 "config/asm-lsp/" = "~/.config/asm-lsp/"
+"config/containers/" = "~/.config/containers/"
+
 
 [apps.files]
 "config/Vencord/" = "~/.config/Vencord/"
+"config/obs-studio/" = "~/.config/obs-studio/"
 
 [gtk.files]
 "config/gtk-3.0/" = "~/.config/gtk-3.0/"

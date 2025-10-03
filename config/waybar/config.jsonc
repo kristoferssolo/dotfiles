@@ -12,7 +12,8 @@
     "spacing": 0, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
-        "wlr/taskbar"
+        // "wlr/taskbar"
+        "cffi/niri-taskbar"
     ],
     "modules-center": [],
     "modules-right": [
@@ -49,6 +50,16 @@
         "on-click": "niri msg action quit"
     },
     "wlr/taskbar": {
+        // "all-outputs": true,
+        "format": "{title} | {app_id}",
+        // "format": "{icon}",
+        "tooltip-format": "{title} | {app_id}",
+        "on-click": "activate",
+        "on-click-middle": "close",
+        "on-click-right": "fullscreen"
+    },
+    "cffi/niri-taskbar": {
+        "module_path": "/usr/lib/waybar/libniri_taskbar.so",
         // "all-outputs": true,
         // "format": "{icon} {title} {app_id}",
         "format": "{icon}",

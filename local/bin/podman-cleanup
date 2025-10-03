@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if command -v podman >/dev/null; then
+    export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+    podman --runtime-flag timeout=5s stop --all 2>/dev/null || true
+    podman --runtime-flag timeout=5s rm --all --force 2>/dev/null || true
+    rm -rf "${XDG_RUNTIME_DIR}/libpod" "${XDG_RUNTIME_DIR}/containers" 2>/dev/null || true
+fi
