@@ -23,7 +23,7 @@
         "memory",
         "battery",
         // "pulseaudio"
-        "custom/waybar-media",
+        // "custom/waybar-media",
         "clock"
     ],
     // "modules-right": ["cpu", "memory", "battery", "network", "tray"],

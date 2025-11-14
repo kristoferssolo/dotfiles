@@ -35,6 +35,7 @@ input {
             // For example:
             layout "lv"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
+            options "caps:escape"
         }
 
         // Enable numlock on startup, omitting this setting disables it.

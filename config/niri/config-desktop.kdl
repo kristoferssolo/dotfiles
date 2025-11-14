@@ -41,6 +41,7 @@ input {
             // For example:
             layout "lv"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
+            options "caps:escape"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
@@ -285,17 +286,18 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "pipewire"
+spawn-at-startup "pipewire"
 spawn-at-startup "pipewire-pulse"
 spawn-at-startup "wireplumber"
 spawn-at-startup "mako"
 spawn-at-startup "waybar"
-// spawn-at-startup "dbus-update-activation-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "DISPLAY" "XAUTHORITY"
+// spawn-sh-at-startup "dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY XAUTHORITY"
 spawn-at-startup "nextcloud"
 // spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "xrdb" "~/.config/x11/xresources"
 spawn-at-startup "transmission-daemon"
 spawn-at-startup "{{browser}}"
-// spawn-at-startup "flatpak" "run" "com.ayugram.desktop"
+// spawn-sh-at-startup "flatpak run com.ayugram.desktop"
 spawn-at-startup "AyuGram"
 spawn-at-startup "vesktop"
 spawn-at-startup "swap-wallpaper"
@@ -386,6 +388,7 @@ window-rule {
 
 window-rule {
     match at-startup=true app-id="floorp-default"
+    match at-startup=true app-id="floorp"
     open-on-workspace "browser"
     open-maximized true
 }
@@ -420,6 +423,13 @@ window-rule {
     open-maximized true
 
     open-on-workspace "music"
+}
+window-rule {
+    match app-id="awakened-poe-trade"
+    match app-id="exiled-exchange-2"
+    // open-fullscreen true
+    open-floating true
+    open-focused true
 }
 
 // Example: enable rounded corners for all windows.
@@ -673,6 +683,7 @@ binds {
     Mod+Shift+P { spawn "swap-wallpaper"; }
     Mod+B { spawn "{{browser}}"; }
 }
+
 
 hotkey-overlay {
     skip-at-startup
