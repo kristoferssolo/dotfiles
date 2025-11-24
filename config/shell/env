@@ -6,12 +6,19 @@ typeset -U PATH path
 # If you don't plan on reverting to bash, you can remove the link in ~/.profile
 # to clean up.
 
+# $HOME Clean-up
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+# export XDG_RUNTIME_DIR="$HOME/.cache/xdgr"
+export XDG_STATE_HOME="$HOME/.local/share"
+
 export BUN_INSTALL="$XDG_DATA_HOME/bun"
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
 export PATH="$PATH:~/.spicetify"
-export PATH="$PATH:${$(find ~/.cache/.bun/bin -type d -printf %p:)%%:}"
+export PATH="$PATH:${$(find ~/.local/share/bun/bin -type d -printf %p:)%%:}"
 export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
@@ -37,12 +44,6 @@ export WM="awesome"
 
 export GTK_THEME=rose-pine-gtk
 
-# $HOME Clean-up
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-# export XDG_RUNTIME_DIR="$HOME/.cache/xdgr"
-export XDG_STATE_HOME="$HOME/.local/share"
 
 export HYPRSHOT_DIR="$HOME/Pictures/screenshots"
 
@@ -118,4 +119,4 @@ export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
 export _JAVA_AWT_WM_NONREPARENTING=1 # Fix for Java applications in dwm
 
 . "$XDG_DATA_HOME/cargo/env"
-. "$XDG_CACHE_HOME/deno/.deno/env"
+. "$XDG_DATA_HOME/deno/env"
