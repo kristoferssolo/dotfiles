@@ -420,7 +420,7 @@ window-rule {
 }
 
 window-rule {
-    match at-startup=true app-id="Spotify"
+    match at-startup=true app-id="spotify"
     open-maximized true
 
     open-on-workspace "music"

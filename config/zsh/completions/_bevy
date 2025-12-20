@@ -1,0 +1,862 @@
+#compdef bevy
+
+autoload -U is-at-least
+
+_bevy() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" : \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'-V[Print version]' \
+'--version[Print version]' \
+":: :_bevy_commands" \
+"*::: :->bevy" \
+&& ret=0
+    case $state in
+    (bevy)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+'-t+[The name of the template to use for generating the project]:TEMPLATE:_default' \
+'--template=[The name of the template to use for generating the project]:TEMPLATE:_default' \
+'(--revision --tag)--branch=[Branch to use when installing from git]:BRANCH:_default' \
+'(--revision --branch)--tag=[Tag to use when installing from git]:TAG:_default' \
+'(--tag --branch)--revision=[Git revision to use when installing from git (e.g. a commit hash)]:REVISION:_default' \
+'--yes[Confirm all prompts automatically]' \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+':name -- The desired name for the new project:_default' \
+'*::ARGS -- Arguments to pass to `cargo-generate`:_default' \
+&& ret=0
+;;
+(build)
+_arguments "${_arguments_options[@]}" : \
+'*--config=[Override a configuration value]:KEY=VALUE|PATH:_default' \
+'--rustflags=[custom flags to pass to all compiler invocations]:RUSTFLAGS:_default' \
+'*-Z+[Unstable (nightly-only) flags to Cargo, see \`cargo -Z help\` for details]:FLAG:_default' \
+'-p+[Package to build (see \`cargo help pkgid\`)]:SPEC:_default' \
+'--package=[Package to build (see \`cargo help pkgid\`)]:SPEC:_default' \
+'--exclude=[Exclude packages from the build]:SPEC:_default' \
+'--bin=[Build only the specified binary]:NAME:_default' \
+'--example=[Build only the specified example]:NAME:_default' \
+'--test=[Build only the specified test target]:NAME:_default' \
+'--bench=[Build only the specified bench target]:NAME:_default' \
+'*-F+[Space or comma separated list of features to activate]:FEATURES:_default' \
+'*--features=[Space or comma separated list of features to activate]:FEATURES:_default' \
+'--profile=[Build artifacts with the specified profile]:PROFILE-NAME:_default' \
+'-j+[Number of parallel jobs, defaults to # of CPUs]:N:_default' \
+'--jobs=[Number of parallel jobs, defaults to # of CPUs]:N:_default' \
+'--target=[Build for the target triple]:TRIPLE:_default' \
+'--target-dir=[Directory for all generated artifacts]:DIRECTORY:_default' \
+'--manifest-path=[Path to Cargo.toml]:PATH:_default' \
+'--yes[Confirm all prompts automatically]' \
+'--workspace[Build all packages in the workspace]' \
+'--lib[Build only this package'\''s library]' \
+'--bins[Build all binaries]' \
+'--examples[Build all examples]' \
+'--tests[Build all tests]' \
+'--benches[Build all benches]' \
+'--all-targets[Build all benches]' \
+'--all-features[Activate all available features]' \
+'--no-default-features[Do not activate the \`default\` feature]' \
+'-r[Build artifacts in release mode, with optimizations]' \
+'--release[Build artifacts in release mode, with optimizations]' \
+'--keep-going[Do not abort the build as soon as there is an error]' \
+'--ignore-rust-version[Ignore \`rust-version\` specification in packages]' \
+'--locked[Assert that \`Cargo.lock\` will remain unchanged]' \
+'--offline[Run without accessing the network]' \
+'--frozen[Equivalent to specifying both --locked and --offline]' \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+":: :_bevy__build_commands" \
+"*::: :->build" \
+&& ret=0
+
+    case $state in
+    (build)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-build-command-$line[1]:"
+        case $line[1] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+'*--wasm-opt=[Use \`wasm-opt\` to optimize the wasm binary]:WASM_OPT:_default' \
+'*-U+[Enable unstable web features]:WEB FEATURE:((multi-threading\:"Enable building and running multi-threaded Wasm apps"))' \
+'*--unstable=[Enable unstable web features]:WEB FEATURE:((multi-threading\:"Enable building and running multi-threaded Wasm apps"))' \
+'-b[Bundle all web artifacts into a single folder]' \
+'--bundle[Bundle all web artifacts into a single folder]' \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_bevy__build__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-build-help-command-$line[1]:"
+        case $line[1] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(b)
+_arguments "${_arguments_options[@]}" : \
+'*--config=[Override a configuration value]:KEY=VALUE|PATH:_default' \
+'--rustflags=[custom flags to pass to all compiler invocations]:RUSTFLAGS:_default' \
+'*-Z+[Unstable (nightly-only) flags to Cargo, see \`cargo -Z help\` for details]:FLAG:_default' \
+'-p+[Package to build (see \`cargo help pkgid\`)]:SPEC:_default' \
+'--package=[Package to build (see \`cargo help pkgid\`)]:SPEC:_default' \
+'--exclude=[Exclude packages from the build]:SPEC:_default' \
+'--bin=[Build only the specified binary]:NAME:_default' \
+'--example=[Build only the specified example]:NAME:_default' \
+'--test=[Build only the specified test target]:NAME:_default' \
+'--bench=[Build only the specified bench target]:NAME:_default' \
+'*-F+[Space or comma separated list of features to activate]:FEATURES:_default' \
+'*--features=[Space or comma separated list of features to activate]:FEATURES:_default' \
+'--profile=[Build artifacts with the specified profile]:PROFILE-NAME:_default' \
+'-j+[Number of parallel jobs, defaults to # of CPUs]:N:_default' \
+'--jobs=[Number of parallel jobs, defaults to # of CPUs]:N:_default' \
+'--target=[Build for the target triple]:TRIPLE:_default' \
+'--target-dir=[Directory for all generated artifacts]:DIRECTORY:_default' \
+'--manifest-path=[Path to Cargo.toml]:PATH:_default' \
+'--yes[Confirm all prompts automatically]' \
+'--workspace[Build all packages in the workspace]' \
+'--lib[Build only this package'\''s library]' \
+'--bins[Build all binaries]' \
+'--examples[Build all examples]' \
+'--tests[Build all tests]' \
+'--benches[Build all benches]' \
+'--all-targets[Build all benches]' \
+'--all-features[Activate all available features]' \
+'--no-default-features[Do not activate the \`default\` feature]' \
+'-r[Build artifacts in release mode, with optimizations]' \
+'--release[Build artifacts in release mode, with optimizations]' \
+'--keep-going[Do not abort the build as soon as there is an error]' \
+'--ignore-rust-version[Ignore \`rust-version\` specification in packages]' \
+'--locked[Assert that \`Cargo.lock\` will remain unchanged]' \
+'--offline[Run without accessing the network]' \
+'--frozen[Equivalent to specifying both --locked and --offline]' \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+":: :_bevy__build_commands" \
+"*::: :->build" \
+&& ret=0
+
+    case $state in
+    (build)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-build-command-$line[1]:"
+        case $line[1] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+'*--wasm-opt=[Use \`wasm-opt\` to optimize the wasm binary]:WASM_OPT:_default' \
+'*-U+[Enable unstable web features]:WEB FEATURE:((multi-threading\:"Enable building and running multi-threaded Wasm apps"))' \
+'*--unstable=[Enable unstable web features]:WEB FEATURE:((multi-threading\:"Enable building and running multi-threaded Wasm apps"))' \
+'-b[Bundle all web artifacts into a single folder]' \
+'--bundle[Bundle all web artifacts into a single folder]' \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_bevy__build__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-build-help-command-$line[1]:"
+        case $line[1] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(run)
+_arguments "${_arguments_options[@]}" : \
+'*--config=[Override a configuration value]:KEY=VALUE|PATH:_default' \
+'--rustflags=[custom flags to pass to all compiler invocations]:RUSTFLAGS:_default' \
+'*-Z+[Unstable (nightly-only) flags to Cargo, see \`cargo -Z help\` for details]:FLAG:_default' \
+'-p+[Package with the target to run]:SPEC:_default' \
+'--package=[Package with the target to run]:SPEC:_default' \
+'--bin=[Build only the specified binary]:NAME:_default' \
+'--example=[Build only the specified example]:NAME:_default' \
+'*-F+[Space or comma separated list of features to activate]:FEATURES:_default' \
+'*--features=[Space or comma separated list of features to activate]:FEATURES:_default' \
+'--profile=[Build artifacts with the specified profile]:PROFILE-NAME:_default' \
+'-j+[Number of parallel jobs, defaults to # of CPUs]:N:_default' \
+'--jobs=[Number of parallel jobs, defaults to # of CPUs]:N:_default' \
+'--target=[Build for the target triple]:TRIPLE:_default' \
+'--target-dir=[Directory for all generated artifacts]:DIRECTORY:_default' \
+'--manifest-path=[Path to Cargo.toml]:PATH:_default' \
+'--yes[Confirm all prompts automatically]' \
+'--all-features[Activate all available features]' \
+'--no-default-features[Do not activate the \`default\` feature]' \
+'-r[Build artifacts in release mode, with optimizations]' \
+'--release[Build artifacts in release mode, with optimizations]' \
+'--keep-going[Do not abort the build as soon as there is an error]' \
+'--ignore-rust-version[Ignore \`rust-version\` specification in packages]' \
+'--locked[Assert that \`Cargo.lock\` will remain unchanged]' \
+'--offline[Run without accessing the network]' \
+'--frozen[Equivalent to specifying both --locked and --offline]' \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'::ARGS -- Arguments to pass to the underlying Bevy app:_default' \
+":: :_bevy__run_commands" \
+"*::: :->run" \
+&& ret=0
+
+    case $state in
+    (run)
+        words=($line[2] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-run-command-$line[2]:"
+        case $line[2] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+'-p+[The port to run the web server on]:PORT:_default' \
+'--port=[The port to run the web server on]:PORT:_default' \
+'--host=[The host address to run the web server on]:HOST:_default' \
+'*-H+[Headers to add to the web-server responses, in the format \`name\:value\` or \`name=value\`]:HEADERS:_default' \
+'*--headers=[Headers to add to the web-server responses, in the format \`name\:value\` or \`name=value\`]:HEADERS:_default' \
+'*--wasm-opt=[Use \`wasm-opt\` to optimize the wasm binary]:WASM_OPT:_default' \
+'*-U+[Enable unstable web features]:WEB FEATURE:((multi-threading\:"Enable building and running multi-threaded Wasm apps"))' \
+'*--unstable=[Enable unstable web features]:WEB FEATURE:((multi-threading\:"Enable building and running multi-threaded Wasm apps"))' \
+'-o[Open the app in the browser]' \
+'--open[Open the app in the browser]' \
+'-b[Bundle all web artifacts into a single folder]' \
+'--bundle[Bundle all web artifacts into a single folder]' \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_bevy__run__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-run-help-command-$line[1]:"
+        case $line[1] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(r)
+_arguments "${_arguments_options[@]}" : \
+'*--config=[Override a configuration value]:KEY=VALUE|PATH:_default' \
+'--rustflags=[custom flags to pass to all compiler invocations]:RUSTFLAGS:_default' \
+'*-Z+[Unstable (nightly-only) flags to Cargo, see \`cargo -Z help\` for details]:FLAG:_default' \
+'-p+[Package with the target to run]:SPEC:_default' \
+'--package=[Package with the target to run]:SPEC:_default' \
+'--bin=[Build only the specified binary]:NAME:_default' \
+'--example=[Build only the specified example]:NAME:_default' \
+'*-F+[Space or comma separated list of features to activate]:FEATURES:_default' \
+'*--features=[Space or comma separated list of features to activate]:FEATURES:_default' \
+'--profile=[Build artifacts with the specified profile]:PROFILE-NAME:_default' \
+'-j+[Number of parallel jobs, defaults to # of CPUs]:N:_default' \
+'--jobs=[Number of parallel jobs, defaults to # of CPUs]:N:_default' \
+'--target=[Build for the target triple]:TRIPLE:_default' \
+'--target-dir=[Directory for all generated artifacts]:DIRECTORY:_default' \
+'--manifest-path=[Path to Cargo.toml]:PATH:_default' \
+'--yes[Confirm all prompts automatically]' \
+'--all-features[Activate all available features]' \
+'--no-default-features[Do not activate the \`default\` feature]' \
+'-r[Build artifacts in release mode, with optimizations]' \
+'--release[Build artifacts in release mode, with optimizations]' \
+'--keep-going[Do not abort the build as soon as there is an error]' \
+'--ignore-rust-version[Ignore \`rust-version\` specification in packages]' \
+'--locked[Assert that \`Cargo.lock\` will remain unchanged]' \
+'--offline[Run without accessing the network]' \
+'--frozen[Equivalent to specifying both --locked and --offline]' \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'::ARGS -- Arguments to pass to the underlying Bevy app:_default' \
+":: :_bevy__run_commands" \
+"*::: :->run" \
+&& ret=0
+
+    case $state in
+    (run)
+        words=($line[2] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-run-command-$line[2]:"
+        case $line[2] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+'-p+[The port to run the web server on]:PORT:_default' \
+'--port=[The port to run the web server on]:PORT:_default' \
+'--host=[The host address to run the web server on]:HOST:_default' \
+'*-H+[Headers to add to the web-server responses, in the format \`name\:value\` or \`name=value\`]:HEADERS:_default' \
+'*--headers=[Headers to add to the web-server responses, in the format \`name\:value\` or \`name=value\`]:HEADERS:_default' \
+'*--wasm-opt=[Use \`wasm-opt\` to optimize the wasm binary]:WASM_OPT:_default' \
+'*-U+[Enable unstable web features]:WEB FEATURE:((multi-threading\:"Enable building and running multi-threaded Wasm apps"))' \
+'*--unstable=[Enable unstable web features]:WEB FEATURE:((multi-threading\:"Enable building and running multi-threaded Wasm apps"))' \
+'-o[Open the app in the browser]' \
+'--open[Open the app in the browser]' \
+'-b[Bundle all web artifacts into a single folder]' \
+'--bundle[Bundle all web artifacts into a single folder]' \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_bevy__run__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-run-help-command-$line[1]:"
+        case $line[1] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(lint)
+_arguments "${_arguments_options[@]}" : \
+'*--config=[Override a configuration value]:KEY=VALUE|PATH:_default' \
+'--rustflags=[custom flags to pass to all compiler invocations]:RUSTFLAGS:_default' \
+'*-Z+[Unstable (nightly-only) flags to Cargo, see \`cargo -Z help\` for details]:FLAG:_default' \
+'-p+[Package to check (see \`cargo help pkgid\`)]:SPEC:_default' \
+'--package=[Package to check (see \`cargo help pkgid\`)]:SPEC:_default' \
+'--exclude=[Exclude packages from the check]:SPEC:_default' \
+'--bin=[Check only the specified binary]:NAME:_default' \
+'--example=[Check only the specified example]:NAME:_default' \
+'--test=[Check only the specified test target]:NAME:_default' \
+'--bench=[Check only the specified bench target]:NAME:_default' \
+'*-F+[Space or comma separated list of features to activate]:FEATURES:_default' \
+'*--features=[Space or comma separated list of features to activate]:FEATURES:_default' \
+'--profile=[Build artifacts with the specified profile]:PROFILE-NAME:_default' \
+'-j+[Number of parallel jobs, defaults to # of CPUs]:N:_default' \
+'--jobs=[Number of parallel jobs, defaults to # of CPUs]:N:_default' \
+'--target=[Build for the target triple]:TRIPLE:_default' \
+'--target-dir=[Directory for all generated artifacts]:DIRECTORY:_default' \
+'--manifest-path=[Path to Cargo.toml]:PATH:_default' \
+'--version[Show version information]' \
+'--fix[Automatically fix lint warnings reported by bevy_lint]' \
+'--workspace[Check all packages in the workspace]' \
+'--lib[Check only this package'\''s library]' \
+'--bins[Check all binaries]' \
+'--examples[Check all examples]' \
+'--tests[Check all tests]' \
+'--benches[Check all benches]' \
+'--all-targets[Check all benches]' \
+'--all-features[Activate all available features]' \
+'--no-default-features[Do not activate the \`default\` feature]' \
+'-r[Build artifacts in release mode, with optimizations]' \
+'--release[Build artifacts in release mode, with optimizations]' \
+'--keep-going[Do not abort the build as soon as there is an error]' \
+'--ignore-rust-version[Ignore \`rust-version\` specification in packages]' \
+'--locked[Assert that \`Cargo.lock\` will remain unchanged]' \
+'--offline[Run without accessing the network]' \
+'--frozen[Equivalent to specifying both --locked and --offline]' \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'::ARGS -- Arguments to forward to `bevy_lint`:_default' \
+":: :_bevy__lint_commands" \
+"*::: :->lint" \
+&& ret=0
+
+    case $state in
+    (lint)
+        words=($line[2] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-lint-command-$line[2]:"
+        case $line[2] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'*::ARGS -- Arguments to forward to `bevy_lint`:_default' \
+&& ret=0
+;;
+(install)
+_arguments "${_arguments_options[@]}" : \
+'--yes[Confirm all prompts automatically]' \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'::version:_default' \
+'*::ARGS -- Arguments to forward to `bevy_lint`:_default' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'*::ARGS -- Arguments to forward to `bevy_lint`:_default' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_bevy__lint__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-lint-help-command-$line[1]:"
+        case $line[1] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(install)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(completions)
+_arguments "${_arguments_options[@]}" : \
+'-v[Use verbose output]' \
+'--verbose[Use verbose output]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+':shell:(bash elvish fish powershell zsh)' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_bevy__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-help-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(build)
+_arguments "${_arguments_options[@]}" : \
+":: :_bevy__help__build_commands" \
+"*::: :->build" \
+&& ret=0
+
+    case $state in
+    (build)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-help-build-command-$line[1]:"
+        case $line[1] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(run)
+_arguments "${_arguments_options[@]}" : \
+":: :_bevy__help__run_commands" \
+"*::: :->run" \
+&& ret=0
+
+    case $state in
+    (run)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-help-run-command-$line[1]:"
+        case $line[1] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(lint)
+_arguments "${_arguments_options[@]}" : \
+":: :_bevy__help__lint_commands" \
+"*::: :->lint" \
+&& ret=0
+
+    case $state in
+    (lint)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:bevy-help-lint-command-$line[1]:"
+        case $line[1] in
+            (web)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(install)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(completions)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_bevy_commands] )) ||
+_bevy_commands() {
+    local commands; commands=(
+'new:Create a new Bevy project from a specified template' \
+'build:Build your Bevy app' \
+'b:Build your Bevy app' \
+'run:Run your Bevy app' \
+'r:Run your Bevy app' \
+'lint:Check the current project using Bevy-specific lints' \
+'completions:Prints the auto-completion script for a specific shell' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'bevy commands' commands "$@"
+}
+(( $+functions[_bevy__build_commands] )) ||
+_bevy__build_commands() {
+    local commands; commands=(
+'web:Build your app for the browser' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'bevy build commands' commands "$@"
+}
+(( $+functions[_bevy__build__help_commands] )) ||
+_bevy__build__help_commands() {
+    local commands; commands=(
+'web:Build your app for the browser' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'bevy build help commands' commands "$@"
+}
+(( $+functions[_bevy__build__help__help_commands] )) ||
+_bevy__build__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy build help help commands' commands "$@"
+}
+(( $+functions[_bevy__build__help__web_commands] )) ||
+_bevy__build__help__web_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy build help web commands' commands "$@"
+}
+(( $+functions[_bevy__build__web_commands] )) ||
+_bevy__build__web_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy build web commands' commands "$@"
+}
+(( $+functions[_bevy__completions_commands] )) ||
+_bevy__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy completions commands' commands "$@"
+}
+(( $+functions[_bevy__help_commands] )) ||
+_bevy__help_commands() {
+    local commands; commands=(
+'new:Create a new Bevy project from a specified template' \
+'build:Build your Bevy app' \
+'run:Run your Bevy app' \
+'lint:Check the current project using Bevy-specific lints' \
+'completions:Prints the auto-completion script for a specific shell' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'bevy help commands' commands "$@"
+}
+(( $+functions[_bevy__help__build_commands] )) ||
+_bevy__help__build_commands() {
+    local commands; commands=(
+'web:Build your app for the browser' \
+    )
+    _describe -t commands 'bevy help build commands' commands "$@"
+}
+(( $+functions[_bevy__help__build__web_commands] )) ||
+_bevy__help__build__web_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy help build web commands' commands "$@"
+}
+(( $+functions[_bevy__help__completions_commands] )) ||
+_bevy__help__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy help completions commands' commands "$@"
+}
+(( $+functions[_bevy__help__help_commands] )) ||
+_bevy__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy help help commands' commands "$@"
+}
+(( $+functions[_bevy__help__lint_commands] )) ||
+_bevy__help__lint_commands() {
+    local commands; commands=(
+'web:Lint your app for the browser' \
+'install:Install a \`bevy_lint\` version' \
+'list:List all available \`bevy_lint\` versions' \
+    )
+    _describe -t commands 'bevy help lint commands' commands "$@"
+}
+(( $+functions[_bevy__help__lint__install_commands] )) ||
+_bevy__help__lint__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy help lint install commands' commands "$@"
+}
+(( $+functions[_bevy__help__lint__list_commands] )) ||
+_bevy__help__lint__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy help lint list commands' commands "$@"
+}
+(( $+functions[_bevy__help__lint__web_commands] )) ||
+_bevy__help__lint__web_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy help lint web commands' commands "$@"
+}
+(( $+functions[_bevy__help__new_commands] )) ||
+_bevy__help__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy help new commands' commands "$@"
+}
+(( $+functions[_bevy__help__run_commands] )) ||
+_bevy__help__run_commands() {
+    local commands; commands=(
+'web:Run your app in the browser' \
+    )
+    _describe -t commands 'bevy help run commands' commands "$@"
+}
+(( $+functions[_bevy__help__run__web_commands] )) ||
+_bevy__help__run__web_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy help run web commands' commands "$@"
+}
+(( $+functions[_bevy__lint_commands] )) ||
+_bevy__lint_commands() {
+    local commands; commands=(
+'web:Lint your app for the browser' \
+'install:Install a \`bevy_lint\` version' \
+'list:List all available \`bevy_lint\` versions' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'bevy lint commands' commands "$@"
+}
+(( $+functions[_bevy__lint__help_commands] )) ||
+_bevy__lint__help_commands() {
+    local commands; commands=(
+'web:Lint your app for the browser' \
+'install:Install a \`bevy_lint\` version' \
+'list:List all available \`bevy_lint\` versions' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'bevy lint help commands' commands "$@"
+}
+(( $+functions[_bevy__lint__help__help_commands] )) ||
+_bevy__lint__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy lint help help commands' commands "$@"
+}
+(( $+functions[_bevy__lint__help__install_commands] )) ||
+_bevy__lint__help__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy lint help install commands' commands "$@"
+}
+(( $+functions[_bevy__lint__help__list_commands] )) ||
+_bevy__lint__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy lint help list commands' commands "$@"
+}
+(( $+functions[_bevy__lint__help__web_commands] )) ||
+_bevy__lint__help__web_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy lint help web commands' commands "$@"
+}
+(( $+functions[_bevy__lint__install_commands] )) ||
+_bevy__lint__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy lint install commands' commands "$@"
+}
+(( $+functions[_bevy__lint__list_commands] )) ||
+_bevy__lint__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy lint list commands' commands "$@"
+}
+(( $+functions[_bevy__lint__web_commands] )) ||
+_bevy__lint__web_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy lint web commands' commands "$@"
+}
+(( $+functions[_bevy__new_commands] )) ||
+_bevy__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy new commands' commands "$@"
+}
+(( $+functions[_bevy__run_commands] )) ||
+_bevy__run_commands() {
+    local commands; commands=(
+'web:Run your app in the browser' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'bevy run commands' commands "$@"
+}
+(( $+functions[_bevy__run__help_commands] )) ||
+_bevy__run__help_commands() {
+    local commands; commands=(
+'web:Run your app in the browser' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'bevy run help commands' commands "$@"
+}
+(( $+functions[_bevy__run__help__help_commands] )) ||
+_bevy__run__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy run help help commands' commands "$@"
+}
+(( $+functions[_bevy__run__help__web_commands] )) ||
+_bevy__run__help__web_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy run help web commands' commands "$@"
+}
+(( $+functions[_bevy__run__web_commands] )) ||
+_bevy__run__web_commands() {
+    local commands; commands=()
+    _describe -t commands 'bevy run web commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_bevy" ]; then
+    _bevy "$@"
+else
+    compdef _bevy bevy
+fi

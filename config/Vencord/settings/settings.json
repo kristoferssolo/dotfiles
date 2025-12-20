@@ -351,7 +351,9 @@
             "enabled": true
         },
         "QuickReply": {
-            "enabled": true
+            "enabled": true,
+            "ignoreBlockedAndIgnored": true,
+            "shouldMention": 2
         },
         "ReadAllNotificationsButton": {
             "enabled": true
@@ -408,7 +410,8 @@
         },
         "GameActivityToggle": {
             "enabled": true,
-            "oldIcon": false
+            "oldIcon": false,
+            "location": "PANEL"
         },
         "GifPaste": {
             "enabled": true
@@ -418,7 +421,7 @@
             "saveZoomValues": true,
             "preventCarouselFromClosingOnClick": true,
             "invertScroll": true,
-            "zoom": 2.2,
+            "zoom": 2.8,
             "size": 300,
             "zoomSpeed": 0.5,
             "nearestNeighbour": false,
@@ -672,7 +675,8 @@
         "BetterSettings": {
             "enabled": true,
             "disableFade": true,
-            "eagerLoad": true
+            "eagerLoad": true,
+            "organizeMenu": true
         },
         "FriendsSince": {
             "enabled": true
@@ -714,7 +718,8 @@
             "enabled": true,
             "latency": 2,
             "detectDiscordKotlin": true,
-            "showMillis": false
+            "showMillis": false,
+            "ignoreSelf": false
         },
         "NoServerEmojis": {
             "enabled": false
@@ -857,6 +862,9 @@
         },
         "DisableDeepLinks": {
             "enabled": true
+        },
+        "AutoDNDWhilePlaying": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -871,7 +879,7 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1763020721595
+        "settingsSyncVersion": 1765994185131
     },
     "enabledThemes": [],
     "eagerPatches": false,
