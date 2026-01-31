@@ -1,14 +1,52 @@
 #!/usr/bin/env bash
 
-WALLPAPER_DIR="$HOME/Pictures/wallpapers/Linux-Dynamic-Wallpapers/"
+BG_DIR_PATH="$HOME/Pictures/wallpapers/Linux-Dynamic-Wallpapers/"
+PICK_CMD="shuf -n 1"
 
 if pgrep -x "Hyprland" >/dev/null; then
     CURRENT_WALL=$(hyprctl hyprpaper listloaded)
-    WALLPAPER=$(fd --type file --exclude "$(basename "$CURRENT_WALL")" . "$WALLPAPER_DIR" | shuf -nz 1)
+    WALLPAPER=$(fd --type file --exclude "$(basename "$CURRENT_WALL")" . "$BG_DIR_PATH" | $PICK_CMD)
     hyprctl hyprpaper reload ,"$WALLPAPER"
+elif pgrep -x "niri" >/dev/null; then
+    # Read script flags
+    FLAG_NOTIFY=false
+    FLAG_DELAY=false
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+        -n | --notify) FLAG_NOTIFY=true ;;
+        -d | --delay) FLAG_DELAY=true ;;
+        *) echo "Unknown option: $1" ;;
+        esac
+        shift
+    done
+
+    # Choose most-recent accessed file by default or least-recent to cycle
+    BG_SELECT_PATH=$(fd --type file . "$BG_DIR_PATH" | $PICK_CMD)
+
+    # Notify if needed
+    if $FLAG_NOTIFY; then
+        notify-send "Wallpaper Changed" $(basename "$BG_SELECT_PATH")
+    fi
+
+    # Get previous swaybg so we can stop it once we start a new instance
+    PREV_SWAYBG_PID=$(pidof swaybg)
+
+    # Update access on selected file, for cycling
+    touch -ac $BG_SELECT_PATH
+    swaybg -i "$BG_SELECT_PATH" &
+
+    # Wait a bit and then stop prior swaybg instances (if present)
+    # -> Delay because it can take a moment for new bg to load
+    # -> If user spams this script, we can end up creating many instances of sway because of this delay!
+    #    The kill command will clean them all up, but it's a bit messy
+    if $FLAG_DELAY; then
+        sleep 0.5
+    fi
+
+    # Close all prior swaybg instances (would be 'behind' current wallpaper)
+    if [[ -n "$PREV_SWAYBG_PID" ]]; then
+        kill $PREV_SWAYBG_PID
+    fi
 else
-    WALLPAPER=$(fd --type file . "$WALLPAPER_DIR" | shuf -n 1)
-    pkill swaybg 2>/dev/null || true
-    swaybg -m fill -i "$WALLPAPER" &
-    disown
+    notify-send --urgency critical --icon dialog-error "Wallpaper Script Error" "No compatible window manager found (Hyprland or Niri required)"
 fi

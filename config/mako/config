@@ -1,4 +1,4 @@
-layer=top
+layer=overlay
 background-color=#1e1e2eee
 border-size=2
 border-color=#74c7ec
@@ -8,15 +8,15 @@ font=Cantarell 12
 #output=eDP-1
 
 [urgency=high]
-layer=overlay
 border-color=#f38ba8
 
 [desktop-entry="org.telegram.desktop"]
-layer=top
+border-color=#74c7ec
+
+[desktop-entry="com.ayugram.desktop"]
 border-color=#74c7ec
 
 [desktop-entry="org.gnome.Fractal"]
-layer=top
 border-color=#74c7ec
 
 [mode=dnd]

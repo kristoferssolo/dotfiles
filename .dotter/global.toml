@@ -75,7 +75,8 @@ depends = [ "torrent", "zathura", "email" ]
 "config/tmThemes/" = "~/.config/silicon/"
 "config/btop/" = "~/.config/btop/"
 "config/htoprc" = "~/.config/htop/htoprc"
-"config/fastfetch/" = "~/.config/fastfetch/"
+"config/fastfetch/examples/10.jsonc" = "~/.config/fastfetch/config.jsonc"
+# "config/fastfetch/config.jsonc" = "~/.config/fastfetch/config.jsonc"
 "config/flameshot.ini" = "~/.config/flameshot/flameshot.ini"
 "config/gitui/" = "~/.config/gitui/"
 "config/lazygit/" = "~/.config/lazygit/"
@@ -113,7 +114,7 @@ depends = [ "torrent", "zathura", "email" ]
 "config/mako/" = "~/.config/mako/"
 
 [niri]
-depends = [ "misc", "local", "waybar", "lock" ]
+depends = [ "misc", "local", "waybar", "ashell", "lock" ]
 
 # [niri.files]
 # "config/niri/" = "~/.config/niri/"
@@ -138,6 +139,9 @@ depends = [ "misc", "local", "eww", "lock" ]
 "config/waybar/" = "~/.config/waybar/"
 "config/waybar/config.jsonc" = {target = "~/.config/waybar/config.jsonc", type = "template"}
 "config/waybar/style.css" = {target = "~/.config/waybar/style.css", type = "template"}
+
+[ashell.files]
+"config/ashell/" = {target = "~/.config/ashell/", type = "template"}
 
 [lock.files]
 "config/gtklock/" = "~/.config/gtklock/"

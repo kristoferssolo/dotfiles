@@ -56,7 +56,7 @@ play = [
 [open]
 rules = [
   # Folder
-  {name = "*/", use = [ "edit", "open", "reveal" ]},
+  {url = "*/", use = [ "edit", "open", "reveal" ]},
   # Text
   {mime = "text/*", use = [ "edit", "reveal" ]},
   # Image
@@ -71,7 +71,7 @@ rules = [
   # Empty file
   {mime = "inode/empty", use = [ "edit", "reveal" ]},
   # Fallback
-  {name = "*", use = [ "open", "reveal" ]},
+  {url = "*", use = [ "open", "reveal" ]},
 ]
 
 [tasks]
@@ -89,14 +89,14 @@ preloaders = [
   {mime = "application/pdf", run = "pdf"},
 ]
 previewers = [
-  {name = "*/", run = "folder", sync = true},
+  {url = "*/", run = "folder", sync = true},
   {mime = "text/*", run = "code"},
   {mime = "*/{xml,javascript,x-wine-extension-ini}", run = "code"},
   {mime = "application/json", run = "code"},
   {mime = "image/vnd.djvu", run = "noop"},
   {mime = "application/pdf", run = "pdf"},
   # Fallback
-  {name = "*", run = "file"},
+  {url = "*", run = "file"},
 ]
 prepend_previewers = [
   {mime = "text/csv", run = "miller"},
@@ -104,11 +104,11 @@ prepend_previewers = [
   {mime = "{audio,video,image}/*", run = "mediainfo"},
   {mime = "application/subrip", run = "mediainfo"},
   # rich preview
-  {name = "*.csv", run = "rich-preview"},                     # for csv files
-  {name = "*.{md,mdx,markdown}", run = "rich-preview"},       # for markdown (.md) files
-  {name = "*.rst", run = "rich-preview"},                     # for restructured text (.rst) files
-  {name = "*.ipynb", run = "rich-preview"},                   # for jupyter notebooks (.ipynb)
-  {name = "*.json", run = "rich-preview"},                    # for json (.json) files
+  {url = "*.csv", run = "rich-preview"},                      # for csv files
+  {url = "*.{md,mdx,markdown}", run = "rich-preview"},        # for markdown (.md) files
+  {url = "*.rst", run = "rich-preview"},                      # for restructured text (.rst) files
+  {url = "*.ipynb", run = "rich-preview"},                    # for jupyter notebooks (.ipynb)
+  {url = "*.json", run = "rich-preview"},                     # for json (.json) files
   {mime = "application/bittorrent", run = "torrent-preview"},
   # Archive previewer
   {mime = "application/*zip", run = "ouch"},
@@ -127,16 +127,16 @@ prepend_previewers = [
   {mime = "application/oasis.opendocument.*", run = "office"},
   {mime = "application/ms-*", run = "office"},
   {mime = "application/msword", run = "office"},
-  {name = "*.docx", run = "office"},
+  {url = "*.docx", run = "office"},
 ]
 
 append_previewers = [
-  {name = "*", run = "hexyl"},
+  {url = "*", run = "hexyl"},
 ]
 
 prepend_fetchers = [
-  {id = "git", name = "*", run = "git"},
-  {id = "git", name = "*/", run = "git"},
+  {id = "git", url = "*", run = "git"},
+  {id = "git", url = "*/", run = "git"},
 ]
 
 [input]

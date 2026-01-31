@@ -1,0 +1,67 @@
+log_level = "warn"
+outputs = "All"
+position = "Top"
+app_launcher_cmd = "fuzzel"
+
+[modules]
+left = [ [ "Workspaces" ] ]
+center = [ "WindowTitle" ]
+right = [ "SystemInfo", "Tray", [ "Clock", "Privacy", "Settings" ] ]
+
+[updates]
+check_cmd = "checkupdates; paru -Qua"
+update_cmd = 'alacritty -e bash -c "paru; echo Done - Press enter to exit; read" &'
+
+[workspaces]
+visibility_mode = "All"
+# enable_workspace_filling = true
+# disable_special_workspaces = true
+
+[clock]
+format = "%a %d %b %Y %H:%M:%S"
+
+[settings]
+indicators = [ "IdleInhibitor", "PowerProfile", "Audio", "Bluetooth", "Network", "Vpn", "Battery" ]
+lock_cmd = "playerctl --all-players pause; swaylock"
+audio_sinks_more_cmd = "{{terminal}} -e pulsemixer"
+audio_sources_more_cmd = "{{terminal}} -e pulsemixer"
+wifi_more_cmd = "nm-connection-editor"
+vpn_more_cmd = "mullvad-vpn"
+bluetooth_more_cmd = "{{terminal}} -e bluetui"
+suspend_cmd = "loginctl suspend"
+hibernate_cmd = "loginctl hibernate"
+reboot_cmd = "loginctl reboot"
+logout_cmd = "logout"
+remove_airplane_btn = true
+remove_idle_btn = true
+
+[system_info]
+indicators = [ "Cpu", "Memory", "Temperature" ]
+
+[system_info.temperature]
+sensor = "k10temp Tctl"
+warn_threshold = 70
+alert_threshold = 85
+
+[appearance]
+style = "Solid"
+opacity = 0.9
+
+# Rose Pine (main)
+primary_color = "#c4a7e7"                # iris
+success_color = "#31748f"                # pine
+text_color = "#e0def4"                   # text
+workspace_colors = [ "#31748f" ]
+special_workspace_colors = [ "#31748f" ]
+
+[appearance.danger_color]
+base = "#eb6f92" # love
+weak = "#f6c177" # gold
+
+[appearance.background_color]
+base = "#191724"   # base
+weak = "#1f1d2e"   # surface
+strong = "#26233a" # overlay
+
+[appearance.secondary_color]
+base = "#26233a" # overlay

@@ -4,19 +4,19 @@
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
 workspace "browser" {
-    open-on-output "DP-1"
+    open-on-output "DP-2"
 }
 
 workspace "terminal" {
-    open-on-output "DP-1"
+    open-on-output "DP-2"
 }
 
 workspace "chat" {
-    open-on-output "HDMI-A-1"
+    open-on-output "DP-1"
 }
 
 workspace "music" {
-    open-on-output "HDMI-A-1"
+    open-on-output "DP-1"
 }
 
 environment {
@@ -91,7 +91,7 @@ output "DP-1" {
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "1920x1080@74.973"
+    mode "2560x1440@180.002"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
     scale 1
@@ -111,20 +111,21 @@ output "DP-1" {
     // automatically.
     position x=0 y=0
 
-    variable-refresh-rate on-demand=false
-    focus-at-startup
+    variable-refresh-rate on-demand=true
     background-color "#000"
     backdrop-color "#000"
 }
 
-output "HDMI-A-1" {
-    // off
-    mode "1920x1080@60.000"
+output "DP-2" {
+    mode "1920x1080@74.973"
     scale 1
+
     transform "normal"
-    position x=-1920 y=0
+
+    position x=-1920 y=180
 
     variable-refresh-rate on-demand=false
+    focus-at-startup
     background-color "#000"
     backdrop-color "#000"
 }
@@ -286,11 +287,11 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "pipewire"
-spawn-at-startup "pipewire"
 spawn-at-startup "pipewire-pulse"
 spawn-at-startup "wireplumber"
 spawn-at-startup "mako"
-spawn-at-startup "waybar"
+// spawn-at-startup "waybar"
+spawn-at-startup "ashell"
 // spawn-sh-at-startup "dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY XAUTHORITY"
 spawn-at-startup "nextcloud"
 // spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
@@ -404,6 +405,15 @@ window-rule {
     exclude app-id=r#"^com\.ayugram\.desktop$"# title="^Media viewer$"
     exclude app-id=r#"^org\.telegram\.desktop$"# title="^Media viewer$"
     open-on-workspace "chat"
+}
+window-rule {
+    match app-id=r#"^org\.telegram\.desktop$"#
+    match app-id=r#"^com\.ayugram\.desktop$"#
+    match app-id=r#"^org\.gnome\.Fractal$"#
+    match app-id=r#"discord"#
+    match app-id=r#"vesktop"#
+    match app-id=r#"spotify"#
+
     opacity 0.95
 }
 
@@ -467,8 +477,8 @@ binds {
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume $(get-spotify-id) 0.01+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume $(get-spotify-id) 0.01-"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume $(get-spotify-id) 0.02+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume $(get-spotify-id) 0.02-"; }
     XF86AudioMute        allow-when-locked=true { spawn "sp" "play"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
     Page_Down allow-when-locked=true {spawn "sp" "next"; }
@@ -646,6 +656,8 @@ binds {
     Mod+Ctrl+Space       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
+    // Mod+Shift+Space { spawn "nsticky" "sticky" "toggle-active"; }
+
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
     // rather than stacked on top of each other.
@@ -681,7 +693,7 @@ binds {
     // moving the mouse or pressing any other key.
     // Mod+Shift+P { power-off-monitors; }
 
-    Mod+Shift+P { spawn "swap-wallpaper"; }
+    Mod+Shift+P { spawn-sh "swap-wallpaper -n"; }
     Mod+B { spawn "{{browser}}"; }
 }
 

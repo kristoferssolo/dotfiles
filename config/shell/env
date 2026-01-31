@@ -19,6 +19,7 @@ export BUN_INSTALL="$XDG_DATA_HOME/bun"
 export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
 export PATH="$PATH:~/.spicetify"
 export PATH="$PATH:${$(find ~/.local/share/bun/bin -type d -printf %p:)%%:}"
+export PATH="$PATH:$HOME/.lmstudio/bin"
 export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
@@ -96,6 +97,10 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=${XDG_CONFIG_HOME}/java - Djavafx.cachedir=${XDG_CACHE_HOME}/openjfx"
 # export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME/java"
 export JAVA_HOME="/usr/lib/jvm/java-21-openjdk"
+export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
+export PSQL_HISTORY="$XDG_DATA_HOME/psql_history"
+export STACK_ROOT="$XDG_DATA_HOME/stack"
+export STACK_XDG=1
 
 # Other program settings
 export AWT_TOOLKIT="MToolkit wmname LG3D" # May have to install wmname

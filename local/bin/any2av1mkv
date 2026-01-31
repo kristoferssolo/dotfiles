@@ -1,0 +1,150 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# any2av1mkv - Convert provided files to MKV with AV1 video (VAAPI on AMD),
+# keeping ALL audio tracks, subtitles (including PGS), and attachments.
+#
+# Default is bitrate-controlled VBR, tuned for 1080p and "not inflating".
+#
+# Usage:
+#   any2av1mkv input1.mkv input2.mp4 "weird name.avi"
+#   any2av1mkv *                  # skips directories
+#
+# Options:
+#   -d, --dry-run        print ffmpeg command(s) only
+#   --no-skip            overwrite output if it already exists
+#   --cqp                use constant-quality mode instead of VBR
+#   --audio-encode aac   re-encode ALL audio tracks to AAC (default: copy)
+#   -h, --help
+#
+# Env vars:
+#   DEV=/dev/dri/renderD128
+#
+# VBR mode (default):
+#   B=3500k              target video bitrate (1080p 10-bit starting point)
+#   MAX=5000k            max video bitrate
+#   BUF=10000k           VBV buffer
+#
+# CQP mode (with --cqp):
+#   QP=42                higher = smaller / lower quality (try 40-46 for 1080p)
+
+DEV="${DEV:-/dev/dri/renderD128}"
+
+B="${B:-1500k}"
+MAX="${MAX:-2200k}"
+BUF="${BUF:-4400k}"
+
+QP="${QP:-46}"
+
+dry_run=0
+skip_existing=1
+audio_mode="acc" # or "copy"
+use_cqp=0
+
+args=()
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+    -d | --dry-run)
+        dry_run=1
+        shift
+        ;;
+    --no-skip)
+        skip_existing=0
+        shift
+        ;;
+    --cqp)
+        use_cqp=1
+        shift
+        ;;
+    --audio-encode)
+        [[ "${2:-}" == "aac" ]] || {
+            echo "Error: --audio-encode only supports: aac" >&2
+            exit 1
+        }
+        audio_mode="aac"
+        shift 2
+        ;;
+    -h | --help)
+        sed -n '1,220p' "$0"
+        exit 0
+        ;;
+    --)
+        shift
+        args+=("$@")
+        break
+        ;;
+    *)
+        args+=("$1")
+        shift
+        ;;
+    esac
+done
+
+command -v ffmpeg >/dev/null 2>&1 || {
+    echo "Error: ffmpeg not found." >&2
+    exit 1
+}
+
+if [[ ${#args[@]} -eq 0 ]]; then
+    echo "No input files. Provide file names/globs (e.g. *.mkv, *)."
+    exit 2
+fi
+
+for f in "${args[@]}"; do
+    [[ -e "$f" ]] || {
+        echo "Skip (missing): $f"
+        continue
+    }
+    [[ -f "$f" ]] || {
+        echo "Skip (not a file): $f"
+        continue
+    }
+
+    base="${f##*/}"
+    stem="${base%.*}"
+    out_dir="$(dirname -- "$f")"
+    out="${out_dir}/${stem}.av1.mkv"
+
+    if [[ $skip_existing -eq 1 && -e "$out" ]]; then
+        echo "Skip (exists): $out"
+        continue
+    fi
+
+    echo "Transcoding: $f -> $out"
+
+    if [[ "$audio_mode" == "aac" ]]; then
+        aopts=(-c:a aac -b:a 192k)
+    else
+        aopts=(-c:a copy)
+    fi
+
+    # Video options:
+    # - Use p010le to preserve 10-bit sources (and avoid 8-bit nv12 forcing).
+    # - If your source is 8-bit, VAAPI will still handle it; p010le is generally safe.
+    if [[ $use_cqp -eq 1 ]]; then
+        vopts=(-c:v av1_vaapi -rc_mode CQP -qp "$QP")
+    else
+        vopts=(-c:v av1_vaapi -rc_mode VBR -b:v "$B" -maxrate "$MAX" -bufsize "$BUF")
+    fi
+
+    cmd=(
+        ffmpeg -hide_banner -nostdin -y
+        -vaapi_device "$DEV"
+        -i "$f"
+        -map 0
+        -vf 'format=p010le,hwupload'
+        "${vopts[@]}"
+        "${aopts[@]}"
+        -c:s copy
+        -c:t copy
+        -c:d copy
+        "$out"
+    )
+
+    if [[ $dry_run -eq 1 ]]; then
+        printf '%q ' "${cmd[@]}"
+        printf '\n'
+    else
+        "${cmd[@]}"
+    fi
+done
