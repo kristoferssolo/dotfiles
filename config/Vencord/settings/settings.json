@@ -107,7 +107,14 @@
             "enabled": false
         },
         "IgnoreActivities": {
-            "enabled": false
+            "enabled": false,
+            "listMode": 0,
+            "idsList": "",
+            "ignorePlaying": false,
+            "ignoreStreaming": false,
+            "ignoreListening": false,
+            "ignoreWatching": false,
+            "ignoreCompeting": false
         },
         "InvisibleChat": {
             "enabled": true,
@@ -150,10 +157,10 @@
             "enabled": false
         },
         "NoDevtoolsWarning": {
-            "enabled": false
+            "enabled": true
         },
         "NoF1": {
-            "enabled": false
+            "enabled": true
         },
         "NoRPC": {
             "enabled": false
@@ -307,7 +314,7 @@
             "enabled": false
         },
         "FriendInvites": {
-            "enabled": false
+            "enabled": true
         },
         "FxTwitter": {
             "enabled": false
@@ -322,7 +329,8 @@
             "enabled": false
         },
         "MessageTags": {
-            "enabled": false
+            "enabled": true,
+            "tagsList": {}
         },
         "MoreCommands": {
             "enabled": false
@@ -626,7 +634,8 @@
             "color": "313338"
         },
         "FixImagesQuality": {
-            "enabled": true
+            "enabled": true,
+            "originalImagesInChat": false
         },
         "SuperReactionTweaks": {
             "enabled": false
@@ -763,7 +772,7 @@
             "enabled": true
         },
         "DontRoundMyTimestamps": {
-            "enabled": false
+            "enabled": true
         },
         "MaskedLinkPaste": {
             "enabled": true
@@ -865,6 +874,9 @@
         },
         "AutoDNDWhilePlaying": {
             "enabled": false
+        },
+        "MoreQuickReactions": {
+            "enabled": false
         }
     },
     "notifications": {
@@ -879,7 +891,7 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1765994185131
+        "settingsSyncVersion": 1769949633424
     },
     "enabledThemes": [],
     "eagerPatches": false,

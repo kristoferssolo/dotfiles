@@ -1,5 +1,5 @@
-function _fastanime_completion;
-    set -l response (env _FASTANIME_COMPLETE=fish_complete COMP_WORDS=(commandline -cp) COMP_CWORD=(commandline -t) fastanime);
+function _viu_completion;
+    set -l response (env _VIU_COMPLETE=fish_complete COMP_WORDS=(commandline -cp) COMP_CWORD=(commandline -t) viu);
 
     for completion in $response;
         set -l metadata (string split "," $completion);
@@ -14,4 +14,5 @@ function _fastanime_completion;
     end;
 end;
 
-complete --no-files --command fastanime --arguments "(_fastanime_completion)";
+complete --no-files --command viu --arguments "(_viu_completion)";
+

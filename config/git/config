@@ -62,26 +62,29 @@
 # a matter of taste (uncomment if you dare)
 
 [core]
-        # fsmonitor = true
-        # untrackedCache = true
+    # fsmonitor = true
+    # untrackedCache = true
 [merge]
-        # (just 'diff3' if git version < 2.3)
-        conflictstyle = zdiff3
+    # (just 'diff3' if git version < 2.3)
+    conflictstyle = zdiff3
 [pull]
         # rebase = true
 [log]
     abbrevCommit = true
     graphColors = blue, yellow,cyan,magenta,green,red
 
-
 [pager]
-    diff = diff-so-fancy | less --tabs=4 -RF
+    diff = delta
     branch = false
     tag = false
 
 [interactive]
-    diffFilter = diff-so-fancy --patch
+    diffFilter = delta --color-only
     singlekey = true
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
 
 [diff-so-fancy]
     markEmptyLines = false

@@ -13,7 +13,7 @@ LICENSE = ""
 default_target_type = "symbolic"
 
 [base]
-depends = [ "default", "zsh", "spotify", "terminal", "local", "misc", "dev", "apps", "gtk" ]
+depends = [ "default", "spotify", "terminal", "local", "misc", "dev", "apps", "gtk" ]
 
 [x11]
 depends = [ "base", "awesome", "picom", "dunst", "rofi" ]
@@ -35,7 +35,7 @@ depends = [ "base", "awesome_laptop", "picom", "dunst", "rofi" ]
 depends = [ "base", "hyprland", "niri", "fuzzel", "mako" ]
 
 [wayland.files]
-"config/zsh/.zprofile-wayland" = "~/.config/zsh/.zprofile"
+# "config/zsh/.zprofile-wayland" = "~/.config/zsh/.zprofile"
 "config/x11/xresources" = {target = "~/.config/x11/xresources", type = "template"}
 
 [shell.files]
@@ -47,12 +47,6 @@ depends = [ "shell" ]
 [zsh.files]
 "config/shell/env" = {target = "~/.zshenv", type = "template"}
 "config/zsh/" = "~/.config/zsh/"
-
-[fish]
-depends = [ "shell" ]
-
-[fish.files]
-"config/fish/" = "~/.config/fish/"
 
 [local.files]
 "local/bin/" = "~/.local/bin/"
@@ -157,7 +151,7 @@ depends = [ "misc", "local", "eww", "lock" ]
 "config/neomutt/" = "~/.config/neomutt/"
 
 [terminal]
-depends = [ "zsh", "tmux", "fish" ]
+depends = [ "tmux", "zsh" ]
 
 [terminal.files]
 "config/alacritty/" = "~/.config/alacritty/"

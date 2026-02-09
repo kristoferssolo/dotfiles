@@ -1,0 +1,5 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR __fish_initialized:4300
+SETUVAR _fisher_upgraded_to_4_4:\x1d
+SETUVAR fish_user_paths:/home/kristofers/\x2elocal/share/deno/bin\x1e/home/kristofers/\x2elocal/share/cargo/bin\x1e/home/kristofers/\x2elmstudio/bin\x1e/home/kristofers/\x2elocal/share/bun/bin\x1e/home/kristofers/\x2elocal/bin\x1e/usr/lib/jvm/java\x2d21\x2dopenjdk/bin\x1e/home/kristofers/\x2espicetify\x1e/bin
