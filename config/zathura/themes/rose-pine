@@ -60,3 +60,13 @@ set recolor-darkcolor           "#e0def4"
 
 set recolor                     "true"
 set recolor-keephue             "false"
+
+set default-bg "#191724"
+set default-fg "#e0def4"
+
+set window-title-basename "true"
+set window-width 960
+set window-height 1080
+
+# Force window/canvas background
+set window-bg "#191724"

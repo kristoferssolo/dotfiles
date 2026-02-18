@@ -5,9 +5,9 @@ if status is-login
     if test (tty) = "/dev/tty1"
         if not pgrep -x niri >/dev/null 2>&1
             set -gx WM "niri"
-            # set -gx XDG_CURRENT_DESKTOP niri
-            # set -gx XDG_SESSION_TYPE wayland
-            # set -gx XDG_SESSION_DESKTOP niri
+            set -gx XDG_CURRENT_DESKTOP "niri"
+            set -gx XDG_SESSION_TYPE "wayland"
+            set -gx XDG_SESSION_DESKTOP "niri"
             if command -q dbus-run-session
                 exec dbus-run-session niri --session
             else

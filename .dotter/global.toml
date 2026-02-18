@@ -183,6 +183,8 @@ depends = [ "tmux", "zsh" ]
 [apps.files]
 "config/Vencord/" = "~/.config/Vencord/"
 "config/obs-studio/" = "~/.config/obs-studio/"
+"config/opencode/" = "~/.config/opencode/"
+
 
 [gtk.files]
 "config/gtk-3.0/" = "~/.config/gtk-3.0/"
