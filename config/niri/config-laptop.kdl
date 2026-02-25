@@ -129,12 +129,18 @@ output "eDP-1" {
     // so to put another output directly adjacent to it on the right, set its x to 1920.
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
-    position x=1280 y=0
+    position x=0 y=0
 
     variable-refresh-rate on-demand=true
     focus-at-startup
     background-color "#000"
     backdrop-color "#191724"
+}
+
+output "HDMI-A-1" {
+    mode "4096x2160@120.000"
+    scale 1
+    position x=0 y=0
 }
 
 // Settings that influence how windows are positioned and sized.

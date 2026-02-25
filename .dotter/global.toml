@@ -184,6 +184,7 @@ depends = [ "tmux", "zsh" ]
 "config/Vencord/" = "~/.config/Vencord/"
 "config/obs-studio/" = "~/.config/obs-studio/"
 "config/opencode/" = "~/.config/opencode/"
+"config/viu/" = "~/.config/viu/"
 
 
 [gtk.files]
