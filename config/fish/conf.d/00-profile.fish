@@ -8,7 +8,6 @@ set -gx XDG_STATE_HOME "$HOME/.local/share"
 
 # Java
 set -gx JAVA_HOME "/usr/lib/jvm/java-21-openjdk"
-
 # Bun
 set -gx BUN_INSTALL "$XDG_DATA_HOME/bun"
 

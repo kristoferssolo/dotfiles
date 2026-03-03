@@ -6,4 +6,4 @@ config/transmission-daemon.json
 .dotter/cache.toml
 .dotter/cache
 spicetify/
-fish_variables
+fish_variables*

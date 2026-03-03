@@ -13,10 +13,13 @@ LICENSE = ""
 default_target_type = "symbolic"
 
 [base]
-depends = [ "default", "spotify", "terminal", "local", "misc", "dev", "apps", "gtk" ]
+depends = [ "default", "spotify", "terminal", "local", "misc", "dev", "apps", "gtk", "ai" ]
 
 [x11]
 depends = [ "base", "awesome", "picom", "dunst", "rofi" ]
+
+[ai]
+depends = [ "codex", "claude", "opencode" ]
 
 [x11.files]
 "config/zsh/.zprofile-x11" = "~/.config/zsh/.zprofile"
@@ -179,14 +182,21 @@ depends = [ "tmux", "zsh" ]
 "config/asm-lsp/" = "~/.config/asm-lsp/"
 "config/containers/" = "~/.config/containers/"
 
-
 [apps.files]
 "config/Vencord/" = "~/.config/Vencord/"
 "config/obs-studio/" = "~/.config/obs-studio/"
-"config/opencode/" = "~/.config/opencode/"
 "config/viu/" = "~/.config/viu/"
-
 
 [gtk.files]
 "config/gtk-3.0/" = "~/.config/gtk-3.0/"
 "config/gtk-4.0/" = "~/.config/gtk-4.0/"
+
+[codex.files]
+# "config/AGENTS.md" = "~/.codex/AGENTS.md"
+
+[claude.files]
+# "config/AGENTS.md" = "~/.claude/AGENTS.md"
+
+[opencode.files]
+"config/opencode/" = "~/.config/opencode/"
+"config/AGENTS.md" = "~/.config/opencode/AGENTS.md"
