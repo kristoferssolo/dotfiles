@@ -192,11 +192,10 @@ depends = [ "tmux", "zsh" ]
 "config/gtk-4.0/" = "~/.config/gtk-4.0/"
 
 [codex.files]
-# "config/AGENTS.md" = "~/.codex/AGENTS.md"
+"config/AGENTS.md" = "~/.codex/AGENTS.md"
 
 [claude.files]
-# "config/AGENTS.md" = "~/.claude/AGENTS.md"
+"config/AGENTS-CLAUDE.md" = "~/.claude/AGENTS.md"
 
 [opencode.files]
 "config/opencode/" = "~/.config/opencode/"
-"config/AGENTS.md" = "~/.config/opencode/AGENTS.md"
