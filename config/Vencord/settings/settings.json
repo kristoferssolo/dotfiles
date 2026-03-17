@@ -328,10 +328,6 @@
         "MessageClickActions": {
             "enabled": false
         },
-        "MessageTags": {
-            "enabled": true,
-            "tagsList": {}
-        },
         "MoreCommands": {
             "enabled": false
         },
@@ -877,6 +873,10 @@
         },
         "MoreQuickReactions": {
             "enabled": false
+        },
+        "CustomCommands": {
+            "enabled": true,
+            "tagsList": {}
         }
     },
     "notifications": {
@@ -891,7 +891,7 @@
         "authenticated": true,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1773063985102
+        "settingsSyncVersion": 1773565652266
     },
     "enabledThemes": [],
     "eagerPatches": false,

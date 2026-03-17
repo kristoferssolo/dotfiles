@@ -6,7 +6,7 @@ enable_esc_key = true
 
 [modules]
 left = [ [ "Workspaces" ] ]
-center = [ "WindowTitle" ]
+center = [  ]
 right = [ "SystemInfo", "Tray", [ "Clock", "Privacy", "Settings" ] ]
 
 [updates]
