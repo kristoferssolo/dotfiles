@@ -5,6 +5,7 @@ set -gx XDG_CACHE_HOME "$HOME/.cache"
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx XDG_DATA_HOME "$HOME/.local/share"
 set -gx XDG_STATE_HOME "$HOME/.local/share"
+set -gx XDG_PICTURES_DIR "$HOME/Pictures/screenshots/"
 
 # Java
 set -gx JAVA_HOME "/usr/lib/jvm/java-21-openjdk"
