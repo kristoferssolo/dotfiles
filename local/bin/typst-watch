@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ -f main.typ ]; then
+    tmux new-window 'bash -c "trap : INT; mkdir -p target && typst watch main.typ target/main.pdf; exec $SHELL"'
+else
+    tmux new-window
+fi
+
+tmux select-window -t 1

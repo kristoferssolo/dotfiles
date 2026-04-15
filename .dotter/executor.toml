@@ -3,7 +3,7 @@ packages = [ "wayland" ]
 [variables]
 dpi = "96"
 font_size = "10"
-terminal = "alacritty"
+terminal = "ghostty"
 browser = "floorp"
 waybar_font_size = "12px"
 

@@ -2,9 +2,13 @@
 cgroup_manager = "cgroupfs"
 events_logger = "file"
 runtime = "crun"
+compose_warning_logs = false
 
 [network]
 network_backend = "cni"
 
 [storage]
 driver = "overlay"
+
+[storage.options.overlay]
+mount_program = ""

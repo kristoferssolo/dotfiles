@@ -1,28 +1,28 @@
-#!config
-font-family = "JetBrainsMono NF"
+theme = Rose Pine
 
+# ── Font ─────────────────────────────────────────────────────────────
+font-family = JetBrainsMono NF
 font-feature = "-calt, -liga, -dlig"
 font-size = {{font_size}}
 
-theme = rose-pine
+# ── Cursor ───────────────────────────────────────────────────────────
+cursor-style = bar
 
+# ── Window ───────────────────────────────────────────────────────────
 title = "Ghostty"
 class = "ghostty"
-
-window-padding-x = 4
-window-padding-y = 0
-
-background-opacity = 0.95
-cursor-style = bar
-background-blur = true
-resize-overlay = never
-quick-terminal-animation-duration = 0
-gtk-titlebar = false
 window-decoration = false
-scrollback-limit = 10000000
-mouse-hide-while-typing = true
+window-theme = dark
+background-opacity = 0.95
+window-padding-x = 0
+window-padding-y = 0
+window-padding-balance = true
+resize-overlay = never
 confirm-close-surface = false
-mouse-scroll-multiplier = 0.5
+copy-on-select = clipboard
+
+working-directory = home
+window-inherit-working-directory = false
 
 # Keybinds
 keybind = alt+f4=ignore
@@ -84,4 +84,3 @@ keybind = super+ctrl+shift+equal=ignore
 keybind = super+ctrl+shift+left=ignore
 keybind = super+ctrl+shift+right=ignore
 keybind = super+ctrl+shift+up=ignore
-

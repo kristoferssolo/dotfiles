@@ -15,7 +15,7 @@ LICENSE = ""
 # Top-level bundles
 
 [base]
-depends = [ "default", "spotify", "terminal", "local", "misc", "dev", "apps", "gtk", "ai" ]
+depends = [ "default", "terminal", "local", "dev", "apps", "gtk", "ai" ]
 
 [x11]
 depends = [ "base", "awesome", "picom", "dunst", "rofi" ]
@@ -39,6 +39,7 @@ depends = [ "base", "hyprland", "niri", "fuzzel", "mako" ]
 [wayland.files]
 # "config/zsh/.zprofile-wayland" = "~/.config/zsh/.zprofile"
 "config/x11/xresources" = {target = "~/.config/x11/xresources", type = "template"}
+
 
 # Shared shell and local files
 
@@ -65,9 +66,6 @@ depends = [ "shell" ]
 [ai]
 depends = [ "codex", "claude", "opencode" ]
 
-[misc]
-depends = [ "torrent", "zathura", "email" ]
-
 [misc.files]
 "config/bat/" = "~/.config/bat/"
 "config/btop/" = "~/.config/btop/"
@@ -75,6 +73,7 @@ depends = [ "torrent", "zathura", "email" ]
 # "config/fastfetch/config.jsonc" = "~/.config/fastfetch/config.jsonc"
 "config/flameshot.ini" = "~/.config/flameshot/flameshot.ini"
 "config/git/" = "~/.config/git/"
+"config/gh-dash/" = "~/.config/gh-dash/"
 "config/gitui/" = "~/.config/gitui/"
 "config/htoprc" = "~/.config/htop/htoprc"
 "config/jj/" = "~/.config/jj/"
@@ -103,11 +102,6 @@ depends = [ "tmux", "zsh", "fish", "yazi" ]
 "config/asm-lsp/" = "~/.config/asm-lsp/"
 "config/containers/" = "~/.config/containers/"
 "config/sqruff/" = "~/.config/sqruff/"
-
-[apps.files]
-"config/obs-studio/" = "~/.config/obs-studio/"
-"config/Vencord/" = "~/.config/Vencord/"
-"config/viu/" = "~/.config/viu/"
 
 [gtk.files]
 "config/gtk-3.0/" = "~/.config/gtk-3.0/"
@@ -196,18 +190,19 @@ depends = [ "misc", "local", "waybar", "ashell", "lock" ]
 
 # Application-specific configs
 
-[spotify.files]
-"config/spotify-tui.yml" = "~/.config/spotify-tui/config.yml"
+[apps]
+depends = [ "misc" ]
 
-[torrent.files]
+[apps.files]
+"config/obs-studio/" = "~/.config/obs-studio/"
+"config/Vencord/" = "~/.config/Vencord/"
+"config/viu/" = "~/.config/viu/"
+"config/wireplumber" = "~/.config/wireplumber/"
+"config/spotify-tui.yml" = "~/.config/spotify-tui/config.yml"
 "config/rustmission.toml" = "~/.config/rustmission/config.toml"
 "config/traxor/" = "~/.config/traxor/"
 # "config/transmission-daemon.json" = "~/.config/transmission-daemon/settings.json"
-
-[zathura.files]
 "config/zathura/zathurarc" = "~/.config/zathura/zathurarc"
-
-[email.files]
 "config/neomutt/" = "~/.config/neomutt/"
 
 # AI tool integration

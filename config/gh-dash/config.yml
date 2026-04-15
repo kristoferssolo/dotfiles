@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://gh-dash.dev/schema.json
+prSections:
+  - title: My Pull Requests
+    filters: is:open
+  - title: Needs My Review
+    filters: is:open review-requested:@me
+  - title: Involved
+    filters: is:open involves:@me -author:@me
+keybindings:
+  universal:
+    - key: g
+      name: lazygit
+      command: >
+        cd {{.RepoPath}} && lazygit
+
+  prs:
+    - key: T
+      command: >-
+        tmux new-window 'gh enhance -R {{.RepoName}} {{.PrNumber}}'
+    - key: C
+      name: code review
+      command: >
+        tmux new-window -c {{.RepoPath}} 'nvim -c ":silent Octo pr edit {{.PrNumber}}"'
+
+pager:
+  diff: "diffnav"
+confirmQuit: false
