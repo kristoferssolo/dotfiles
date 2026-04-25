@@ -2,4 +2,5 @@
 Type=Application
 Name=Image viewer
 # Exec=/usr/bin/nsxiv -aio %f
-Exec=/usr/bin/oculante %f
+# Exec=/usr/bin/oculante %f
+Exec=/usr/bin/feh -Zxd --draw-tinted --tap-zones --start-at %u

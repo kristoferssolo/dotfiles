@@ -25,32 +25,32 @@ hash = "57056b9728006881d580ccabe8154a9c"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "06b1921"
+rev = "442d908"
 hash = "6849444b7c2df08eace83f3f86fb55a3"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "06b1921"
+rev = "442d908"
 hash = "f0c8c378184d5f8abd1b095a443d336d"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "06b1921"
+rev = "442d908"
 hash = "6fa6a05a81c98dd000fbca3cca6e9682"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "06b1921"
+rev = "442d908"
 hash = "77e20b071404f97c09d3f9afdb9482e0"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-filter"
-rev = "06b1921"
+rev = "442d908"
 hash = "c887903a63a2ff520081b6d90a4b3392"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "06b1921"
+rev = "442d908"
 hash = "8b1af6b5a69797ee951f2a80ce570818"
 
 [[plugin.deps]]
@@ -66,12 +66,22 @@ hash = "5805affd3ae8adcb3c72b6997d21c0a6"
 [[plugin.deps]]
 use = "boydaihungst/mediainfo"
 rev = "49f5ab7"
-hash = "3b9ca58d8963d7213532d155340e0244"
+hash = "e9a32b121fac586ee0b5f62e18b89c79"
 
 [[plugin.deps]]
 use = "iynaix/time-travel"
 rev = "aaec6e2"
 hash = "3d52b2b88c91a4ece2f7ed68ff39bb7b"
+
+[[plugin.deps]]
+use = "AleMenon/exiftool"
+rev = "4c35573"
+hash = "44ef03e4d7151fa4094dd6b87a553033"
+
+[[plugin.deps]]
+use = "grappas/wl-clipboard"
+rev = "8cc5524"
+hash = "5c587834c274dca9059092714ece1f18"
 
 [[plugin.deps]]
 use = "imsi32/yatline"

@@ -1,0 +1,8 @@
+spawn-at-startup "AyuGram"
+spawn-at-startup "ashell"
+spawn-at-startup "flatpak" "run" "com.github.wwmm.easyeffects"
+spawn-at-startup "flatpak" "run" "dev.vencord.Vesktop"
+spawn-at-startup "mako"
+spawn-at-startup "spotify-launcher"
+spawn-at-startup "swap-wallpaper"
+spawn-at-startup "{{browser}}"

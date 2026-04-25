@@ -1,0 +1,18 @@
+input {
+    keyboard {
+        xkb {
+            layout "lv"
+            options "caps:escape"
+        }
+        repeat-delay 300
+        repeat-rate 50
+        track-layout "global"
+    }
+    focus-follows-mouse max-scroll-amount="95%"
+
+    mouse {
+        accel-speed -0.6
+        accel-profile "flat"
+    }
+    warp-mouse-to-focus
+}

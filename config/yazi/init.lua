@@ -20,3 +20,4 @@ require("augment-command"):setup({
 	wraparound_file_navigation = false,
 })
 require("git"):setup()
+require("yatline"):setup()

@@ -7,12 +7,12 @@
 light = "rose-pine-dawn"
 
 # Icons
-icon_file = ""
-icon_folder = ""
-icon_command = ""
-icon_info = ""
-icon_warn = ""
-icon_error = ""
+# icon_file = ""
+# icon_folder = ""
+# icon_command = ""
+# icon_info = ""
+# icon_warn = ""
+# icon_error = ""
 
 [icon]
 globs = [  ]

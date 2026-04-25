@@ -38,8 +38,8 @@ set -gx BROWSER "floorp"
 set -gx EDITOR "nvim"
 set -gx VISUAL "$EDITOR"
 set -gx IMAGE "oculante"
-set -gx READER "zathura"
-set -gx TERMINAL "alacritty"
+set -gx READER "sioyak"
+set -gx TERMINAL "{{terminal}}"
 set -gx VIDEO "mpv"
 
 set -gx GTK_THEME rose-pine-gtk
@@ -95,6 +95,7 @@ set -gx WAKATIME_HOME "$XDG_CONFIG_HOME/wakatime"
 set -gx PSQL_HISTORY "$XDG_DATA_HOME/psql_history"
 set -gx STACK_ROOT "$XDG_DATA_HOME/stack"
 set -gx STACK_XDG 1
+set -gx LIBVIRT_DEFAULT_URI "qemu:///system"
 
 # Other program settings
 set -gx AWT_TOOLKIT "MToolkit wmname LG3D"

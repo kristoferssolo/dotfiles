@@ -55,6 +55,7 @@ depends = [ "shell" ]
 
 [fish.files]
 "config/fish/" = "~/.config/fish/"
+"config/fish/conf.d/00-profile.fish" = {target = "~/.config/fish/conf.d/00-profile.fish", type = "template"}
 
 [local.files]
 "local/bin/" = "~/.local/bin/"
@@ -64,7 +65,7 @@ depends = [ "shell" ]
 # Shared feature bundles
 
 [ai]
-depends = [ "codex", "claude", "opencode" ]
+depends = [ "codex", "opencode" ]
 
 [misc.files]
 "config/bat/" = "~/.config/bat/"
@@ -81,6 +82,7 @@ depends = [ "codex", "claude", "opencode" ]
 "config/lf/" = "~/.config/lf/"
 "config/mpv/" = "~/.config/mpv/"
 "config/nsxiv/" = "~/.config/nsxiv/"
+"config/feh/" = "~/.config/feh/"
 "config/paru.conf" = "~/.config/paru/paru.conf"
 "config/rsftch.json" = "~/.config/rsftch/info.json"
 "config/satty/" = "~/.config/satty/"
@@ -139,8 +141,14 @@ depends = [ "misc", "local", "eww", "lock" ]
 [niri]
 depends = [ "misc", "local", "waybar", "ashell", "lock" ]
 
-# [niri.files]
-# "config/niri/" = "~/.config/niri/"
+[niri.files]
+"config/niri/includes" = "~/.config/niri/includes/"
+"config/niri/includes/common/binds.kdl" = {target = "~/.config/niri/includes/common/binds.kdl", type = "template"}
+"config/niri/includes/desktop/binds.kdl" = {target = "~/.config/niri/includes/desktop/binds.kdl", type = "template"}
+"config/niri/includes/laptop/binds.kdl" = {target = "~/.config/niri/includes/laptop/binds.kdl", type = "template"}
+"config/niri/includes/common/startup.kdl" = {target = "~/.config/niri/includes/common/startup.kdl", type = "template"}
+"config/niri/includes/desktop/startup.kdl" = {target = "~/.config/niri/includes/desktop/startup.kdl", type = "template"}
+"config/niri/includes/laptop/startup.kdl" = {target = "~/.config/niri/includes/laptop/startup.kdl", type = "template"}
 
 [fuzzel.files]
 "config/fuzzel/" = "~/.config/fuzzel/"
@@ -203,15 +211,13 @@ depends = [ "misc" ]
 "config/traxor/" = "~/.config/traxor/"
 # "config/transmission-daemon.json" = "~/.config/transmission-daemon/settings.json"
 "config/zathura/zathurarc" = "~/.config/zathura/zathurarc"
+"config/sioyek/" = "~/.config/sioyek/"
 "config/neomutt/" = "~/.config/neomutt/"
 
 # AI tool integration
 
 [codex.files]
 "config/AGENTS.md" = "~/.codex/AGENTS.md"
-
-[claude.files]
-"config/AGENTS-CLAUDE.md" = "~/.claude/AGENTS.md"
 
 [opencode.files]
 "config/opencode/" = "~/.config/opencode/"

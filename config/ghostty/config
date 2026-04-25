@@ -20,6 +20,7 @@ window-padding-balance = true
 resize-overlay = never
 confirm-close-surface = false
 copy-on-select = clipboard
+mouse-scroll-multiplier = 1
 
 working-directory = home
 window-inherit-working-directory = false

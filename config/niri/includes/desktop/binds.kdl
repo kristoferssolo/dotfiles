@@ -1,0 +1,86 @@
+binds {
+    Mod+Return hotkey-overlay-title="Open Terminal: {{terminal}}" {
+        spawn "{{terminal}}"
+    }
+    XF86AudioRaiseVolume allow-when-locked=true {
+        spawn-sh "wpctl set-volume $(get-spotify-id) 0.02+"
+    }
+    XF86AudioLowerVolume allow-when-locked=true {
+        spawn-sh "wpctl set-volume $(get-spotify-id) 0.02-"
+    }
+    XF86AudioMute allow-when-locked=true {
+        spawn "sp" "play"
+    }
+    Page_Down allow-when-locked=true {
+        spawn "sp" "next"
+    }
+    Page_Up allow-when-locked=true {
+        spawn "sp" "prev"
+    }
+    Mod+1 {
+        focus-workspace "browser"
+    }
+    Mod+2 {
+        focus-workspace "terminal"
+    }
+    Mod+3 {
+        focus-workspace 3
+    }
+    Mod+4 {
+        focus-workspace 4
+    }
+    Mod+5 {
+        focus-workspace 5
+    }
+    Mod+6 {
+        focus-workspace 6
+    }
+    Mod+7 {
+        focus-workspace 7
+    }
+    Mod+8 {
+        focus-workspace "chat"
+    }
+    Mod+9 {
+        focus-workspace "music"
+    }
+    Mod+Shift+1 {
+        move-column-to-workspace "browser"
+    }
+    Mod+Shift+2 {
+        move-column-to-workspace "terminal"
+    }
+    Mod+Shift+3 {
+        move-column-to-workspace 3
+    }
+    Mod+Shift+4 {
+        move-column-to-workspace 4
+    }
+    Mod+Shift+5 {
+        move-column-to-workspace 5
+    }
+    Mod+Shift+6 {
+        move-column-to-workspace 6
+    }
+    Mod+Shift+7 {
+        move-column-to-workspace 7
+    }
+    Mod+Shift+8 {
+        move-column-to-workspace "chat"
+    }
+    Mod+Shift+9 {
+        move-column-to-workspace "music"
+    }
+    Mod+Delete hotkey-overlay-title="Screenshot (region)" {
+        spawn "dot-screenshot" "region"
+    }
+    Mod+Shift+Delete hotkey-overlay-title="Screenshot (monitor: focused)" {
+        spawn "dot-screenshot" "monitor-focused"
+    }
+    Mod+Alt+Delete hotkey-overlay-title="Screenshot (window)" {
+        spawn "dot-screenshot" "window"
+    }
+    Mod+Ctrl+Shift+Delete hotkey-overlay-title="Screenshot (monitor: all)" {
+        spawn "dot-screenshot" "monitor-all"
+    }
+}

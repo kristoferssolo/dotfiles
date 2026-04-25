@@ -1,0 +1,16 @@
+window-rule {
+    match at-startup=true app-id="floorp"
+    open-maximized true
+    open-on-workspace "1"
+}
+
+window-rule {
+    match at-startup=true app-id="^org\\.telegram\\.desktop$"
+    match at-startup=true app-id="^com\\.ayugram\\.desktop$"
+    match at-startup=true app-id="^org\\.gnome\\.Fractal$"
+    match at-startup=true app-id="discord"
+    match at-startup=true app-id="vesktop"
+    exclude app-id="^com\\.ayugram\\.desktop$" title="^Media viewer$"
+    exclude app-id="^org\\.telegram\\.desktop$" title="^Media viewer$"
+    open-on-workspace "8"
+}

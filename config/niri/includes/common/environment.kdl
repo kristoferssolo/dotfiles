@@ -1,0 +1,10 @@
+environment {
+    QT_QPA_PLATFORM "wayland"
+    XDG_SESSION_TYPE "wayland"
+    XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_DESKTOP "niri"
+    WM "niri"
+    DISPLAY ":0"
+    XDG_DATA_DIRS "/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:/usr/local/share:/usr/share"
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+}

@@ -1,0 +1,26 @@
+window-rule {
+    match at-startup=true app-id="floorp-default"
+    match at-startup=true app-id="floorp"
+    open-on-workspace "browser"
+    open-maximized true
+}
+
+window-rule {
+    match at-startup=true app-id="^org\\.telegram\\.desktop$"
+    match at-startup=true app-id="^com\\.ayugram\\.desktop$"
+    match at-startup=true app-id="^org\\.gnome\\.Fractal$"
+    match at-startup=true app-id="discord"
+    match at-startup=true app-id="vesktop"
+    match at-startup=true app-id="Element"
+    match at-startup=true app-id="^dev\\.vencord\\.Vesktop$"
+    exclude app-id="^com\\.ayugram\\.desktop$" title="^Media viewer$"
+    exclude app-id="^org\\.telegram\\.desktop$" title="^Media viewer$"
+    open-on-workspace "chat"
+}
+
+window-rule {
+    match at-startup=true app-id="spotify"
+    match at-startup=true app-id="^com\\.github\\.wwmm\\.easyeffects$"
+    open-maximized true
+    open-on-workspace "music"
+}

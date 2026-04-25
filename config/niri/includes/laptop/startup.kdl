@@ -1,0 +1,6 @@
+spawn-at-startup "ashell"
+spawn-at-startup "flatpak" "run" "com.ayugram.desktop"
+spawn-at-startup "mako"
+spawn-at-startup "swap-wallpaper"
+spawn-at-startup "vesktop"
+spawn-at-startup "{{browser}}"

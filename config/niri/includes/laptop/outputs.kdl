@@ -1,0 +1,16 @@
+output "eDP-1" {
+    mode "2880x1800@120.000"
+    scale 1.5
+    transform "normal"
+    position x=0 y=0
+    variable-refresh-rate on-demand=true
+    focus-at-startup
+    background-color "#000"
+    backdrop-color "#191724"
+}
+
+output "HDMI-A-1" {
+    mode "4096x2160@120.000"
+    scale 1
+    position x=0 y=0
+}

@@ -1,0 +1,8 @@
+spawn-at-startup "pipewire"
+spawn-at-startup "pipewire-pulse"
+spawn-at-startup "wireplumber"
+spawn-at-startup "gnome-keyring-daemon" "--daemonize" "--components=secrets"
+spawn-at-startup "nextcloud"
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-at-startup "xrdb" "~/.config/x11/xresources"
+spawn-at-startup "transmission-daemon"
