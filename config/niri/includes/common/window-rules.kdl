@@ -16,6 +16,14 @@ window-rule {
 }
 
 window-rule {
+    match app-id="^org\\.kde\\.kcalc" title="KCalc"
+    open-floating true
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+    min-width 730
+    min-height 300
+}
+
+window-rule {
     match app-id="^com\\.gabm\\.satty$"
     open-floating true
     min-width 730

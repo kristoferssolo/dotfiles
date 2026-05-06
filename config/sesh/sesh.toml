@@ -1,23 +1,23 @@
 #:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
 [default_session]
-startup_command = "tmux new-window && tmux select-window -t 1 && clear"
+startup_command = "tmux new-window; tmux select-window -t 1; clear"
 preview_command = "eza -a --icons --git --group-directories-first --color=always {}"
 
 [[session]]
 name = "dotfiles"
 path = "~/Nextcloud/repos/dotfiles/"
-startup_command = "tmux new-window && tmux select-window -t 1 && nvim ."
+startup_command = "tmux new-window; tmux select-window -t 1; nvim ."
 
 [[session]]
 name = "SoloVim"
 path = "~/Nextcloud/repos/SoloVim/"
 startup_command = "tmux new-window && tmux select-window -t 1 && nvim ."
 
-[[wildcard]]
-pattern = "~/repos/**"
+# [[wildcard]]
+# pattern = "~/repos/**"
 
-[[wildcard]]
-pattern = "~/Nextcloud/repos/**"
+# [[wildcard]]
+# pattern = "~/Nextcloud/repos/**"
 
 [[wildcard]]
 pattern = "~/Nextcloud/Documents/Typst/*"
@@ -40,4 +40,8 @@ startup_command = "gh-dash"
 
 [[window]]
 name = "typst"
-startup_command = "mkdir -p target && typst watch main.typ target/main.pdf"
+startup_command = "mkdir -p target; typst watch main.typ target/main.pdf"
+
+[[window]]
+name = "dotter"
+startup_command = "dotter watch -f"

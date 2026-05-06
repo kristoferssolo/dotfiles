@@ -2,8 +2,11 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal: {{terminal}}" {
         spawn "{{terminal}}"
     }
-    Mod+P hotkey-overlay-title="Run an Application: fuzzel" {
-        spawn "fuzzel"
+    // Mod+P repeat=false hotkey-overlay-title="Run an Application: fuzzel" {
+    //     spawn "fuzzel"
+    // }
+    Mod+P repeat=false {
+        spawn "vicinae" "toggle"
     }
     XF86AudioMicMute allow-when-locked=true {
         spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"

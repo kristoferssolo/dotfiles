@@ -1,7 +1,4 @@
 binds {
-    Mod+Return hotkey-overlay-title="Open Terminal: {{terminal}}" {
-        spawn "{{terminal}}"
-    }
     XF86AudioRaiseVolume allow-when-locked=true {
         spawn-sh "wpctl set-volume $(get-spotify-id) 0.02+"
     }

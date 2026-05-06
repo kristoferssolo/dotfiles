@@ -12,5 +12,5 @@ output "eDP-1" {
 output "HDMI-A-1" {
     mode "4096x2160@120.000"
     scale 1
-    position x=0 y=0
+    // position x=0 y=0
 }

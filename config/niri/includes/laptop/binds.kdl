@@ -1,7 +1,4 @@
 binds {
-    Mod+Return hotkey-overlay-title="Open a Terminal: {{terminal}}" {
-        spawn "{{terminal}}"
-    }
     Super+Space allow-when-locked=true hotkey-overlay-title="Lock the Screen: swaylock" {
         spawn-sh "playerctl --all-players pause & swaylock"
     }

@@ -34,7 +34,7 @@ depends = [ "base", "awesome_laptop", "picom", "dunst", "rofi" ]
 "config/x11/xresources" = {target = "~/.config/x11/xresources", type = "template"}
 
 [wayland]
-depends = [ "base", "hyprland", "niri", "fuzzel", "mako" ]
+depends = [ "base", "hyprland", "niri" ]
 
 [wayland.files]
 # "config/zsh/.zprofile-wayland" = "~/.config/zsh/.zprofile"
@@ -150,12 +150,6 @@ depends = [ "misc", "local", "waybar", "ashell", "lock" ]
 "config/niri/includes/desktop/startup.kdl" = {target = "~/.config/niri/includes/desktop/startup.kdl", type = "template"}
 "config/niri/includes/laptop/startup.kdl" = {target = "~/.config/niri/includes/laptop/startup.kdl", type = "template"}
 
-[fuzzel.files]
-"config/fuzzel/" = "~/.config/fuzzel/"
-
-[mako.files]
-"config/mako/" = "~/.config/mako/"
-
 [wofi.files]
 "config/wofi/" = "~/.config/wofi/"
 
@@ -213,6 +207,9 @@ depends = [ "misc" ]
 "config/zathura/zathurarc" = "~/.config/zathura/zathurarc"
 "config/sioyek/" = "~/.config/sioyek/"
 "config/neomutt/" = "~/.config/neomutt/"
+"config/fuzzel/" = "~/.config/fuzzel/"
+"config/vicinae/" = "~/.config/vincenzo/"
+"config/mako/" = "~/.config/mako/"
 
 # AI tool integration
 
