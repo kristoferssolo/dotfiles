@@ -7,3 +7,5 @@ config/transmission-daemon.json
 .dotter/cache
 spicetify/
 fish_variables*
+local/share/dict/
+local/share/nvim/site/spell/
