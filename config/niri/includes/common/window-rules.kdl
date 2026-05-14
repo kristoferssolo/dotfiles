@@ -49,6 +49,7 @@ window-rule {
 
 window-rule {
     match app-id="feh"
+    match app-id="Nsxiv"
     open-floating true
 }
 

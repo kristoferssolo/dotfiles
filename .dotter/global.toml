@@ -208,7 +208,7 @@ depends = [ "misc" ]
 "config/sioyek/" = "~/.config/sioyek/"
 "config/neomutt/" = "~/.config/neomutt/"
 "config/fuzzel/" = "~/.config/fuzzel/"
-"config/vicinae/" = "~/.config/vincenzo/"
+"config/vicinae/" = "~/.config/vicinae/"
 "config/mako/" = "~/.config/mako/"
 
 # AI tool integration
