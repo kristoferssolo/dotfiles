@@ -111,3 +111,8 @@
 
 [include] # TODO: include only for my repos
     path = ~/.config/git/key
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
