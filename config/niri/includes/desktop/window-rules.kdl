@@ -23,17 +23,19 @@ window-rule {
     open-on-workspace "music"
 }
 window-rule {
-    match app-id="^scalpel$"
- // open-floating true
-    // open-focused false
- // default-floating-position x=24 y=24 relative-to="top-left"
-    // default-column-width {
-    //     fixed 560
-    // }
-    // default-window-height {
-    //     proportion 0.9
-    // }
-    // clip-to-geometry true
-    // draw-border-with-background false
+    match app-id="(?i)^scalpel$"
+    open-floating true
+    open-focused true
+    // default-floating-position x=0 y=0 relative-to="top-left"
+    focus-ring {
+        off
+    }
+    border {
+        off
+    }
+    shadow {
+        off
+    }
+ // draw-border-with-background false
 }
 

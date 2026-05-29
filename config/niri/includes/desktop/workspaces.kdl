@@ -6,10 +6,10 @@ workspace "terminal" {
     open-on-output "DP-1"
 }
 
-workspace "chat" {
+workspace "music" {
     open-on-output "DP-2"
 }
 
-workspace "music" {
+workspace "chat" {
     open-on-output "DP-2"
 }

@@ -9,23 +9,12 @@ set -gx XDG_PICTURES_DIR "$HOME/Pictures/screenshots/"
 
 # Java
 set -gx JAVA_HOME "/usr/lib/jvm/java-21-openjdk"
-# Bun
-set -gx BUN_INSTALL "$XDG_DATA_HOME/bun"
 
 # PATH (fish_add_path dedupes; --move puts them first)
 fish_add_path --move "$HOME/.local/bin"
 fish_add_path --move "$HOME/.spicetify"
-fish_add_path --move "$XDG_DATA_HOME/bun/bin"
-fish_add_path --move "$BUN_INSTALL/bin"
 fish_add_path --move "$HOME/.lmstudio/bin"
 fish_add_path --move "$JAVA_HOME/bin"
-
-# Cargo / Deno (avoid sourcing bash scripts)
-set -gx CARGO_HOME "$XDG_DATA_HOME/cargo"
-test -d "$CARGO_HOME/bin"; and fish_add_path --move "$CARGO_HOME/bin"
-
-set -gx DENO_INSTALL "$XDG_DATA_HOME/deno"
-test -d "$DENO_INSTALL/bin"; and fish_add_path --move "$DENO_INSTALL/bin"
 
 # Disable files
 set -gx LESSHISTFILE -
