@@ -17,7 +17,7 @@ require("augment-command"):setup({
 	must_have_hovered_item = true,
 	skip_single_subdirectory_on_enter = false,
 	skip_single_subdirectory_on_leave = false,
-	wraparound_file_navigation = false,
+	wraparound_file_navigation = true,
 })
 require("git"):setup()
 require("yatline"):setup()

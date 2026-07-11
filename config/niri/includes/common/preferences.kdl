@@ -1,2 +1,4 @@
 prefer-no-csd
-screenshot-path null
+// screenshot-path null
+screenshot-path "~/Pictures/screenshots/%Y-%m-%d_%H-%M-%S.png"
+

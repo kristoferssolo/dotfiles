@@ -1,3 +1,4 @@
 #!/bin/sh
 
-wpctl status | rg -o '^\s*\d+\.\s*audio-src' | awk 'NR==1 {print $1}' | tr -d '.'
+# wpctl status | rg -o '^\s*\d+\.\s*Spotify' | awk 'NR==1 {print $1}' | tr -d '.'
+wpctl status | sed -n '/Streams:/,/^[^ ]/p' | rg -o '^\s+(\d+)\.\s+Spotify' -r '$1' | head -1

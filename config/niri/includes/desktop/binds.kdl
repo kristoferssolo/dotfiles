@@ -69,13 +69,16 @@ binds {
         move-column-to-workspace "music"
     }
     Mod+Delete hotkey-overlay-title="Screenshot (region)" {
-        spawn "dot-screenshot" "region"
+        // spawn "dot-screenshot" "region"
+        screenshot
     }
     Mod+Shift+Delete hotkey-overlay-title="Screenshot (monitor: focused)" {
-        spawn "dot-screenshot" "monitor-focused"
+        // spawn "dot-screenshot" "monitor-focused"
+        screenshot-screen
     }
     Mod+Alt+Delete hotkey-overlay-title="Screenshot (window)" {
-        spawn "dot-screenshot" "window"
+        // spawn "dot-screenshot" "window"
+        screenshot-window
     }
     Mod+Ctrl+Shift+Delete hotkey-overlay-title="Screenshot (monitor: all)" {
         spawn "dot-screenshot" "monitor-all"
