@@ -1,0 +1,21 @@
+# See the full configuration reference: https://rioterm.com/docs/config
+confirm-before-quit = false
+theme = "rose-pine.toml"    # or rose-pine-moon.toml or rose-pine-dawn.toml
+
+[fonts]
+size = {{font_size}}
+features = [ "-calt", "-liga", "-dlig", "cv01=2" ]
+family = "JetBrainsMono NF"
+
+[navigation]
+use-split = false
+
+[cursor]
+shape = "beam"
+
+[renderer]
+backend = "vulkan"
+target-fps = 180
+
+[window]
+opacity = 0.95

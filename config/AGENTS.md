@@ -1,4 +1,4 @@
-# Personal Preferences
+# Personal Preferences and Coding Style
 
 ## Python
 
@@ -6,10 +6,76 @@
 
 ## Rust
 
-- Write as if Clippy nursery and pedantic are enabled.
-- Import the types from namespaces at the top of the file with `use`.
-- The code must be Rust idiomatic – use built in traits, generics, lifetimes, etc.
-- Prefer using custom error types for all internal and external Result errors, except for the binary entry point (`main.rs`).
+- Write code as if Clippy's `nursery` and `pedantic` lints are enabled.
+- Write idiomatic Rust. Prefer built-in traits, generics, lifetimes, iterator
+  adapters, and standard-library facilities where appropriate.
+- Prefer custom error types for all internal and external `Result` errors.
+  The binary entry point (`main.rs`) is the exception.
+
+### Imports and Module Paths
+
+- Import types from namespaces at the top of the file with `use`.
+- Prefer imported types over fully qualified module paths when practical.
+  Prefer:
+
+```rust
+use crate::protocol::Response;
+use color_eyre::eyre;
+
+fn parse(input: &[u8]) -> eyre::Result<Option<Response>>;
+```
+
+over:
+
+```rust
+fn parse(input: &[u8]) -> color_eyre::Result<Option<Response>>;
+```
+
+- This rule may be relaxed for common or clarifying module namespaces, such as
+  `error`, and custom `Result` packages, such as `color-eyre` or `miette`.
+- When the same imports from a library are used repeatedly, create and use a
+  library-specific prelude where appropriate.
+
+### Tests
+
+- In module-level tests, import the parent module with:
+
+```rust
+use super::*;
+```
+
+- Do not selectively import individual items from the parent module unless
+  necessary.
+- Use the `claims` crate for expressive assertions involving `Result` and
+  `Option` values.
+
+  Prefer:
+
+```rust
+assert_ok_eq!(parse(&input), Some(Response::Success(value)));
+```
+
+over:
+
+```rust
+assert_eq!(parse(&input), Ok(Some(Response::Success(value))));
+```
+
+- Use the assertion macro that best matches the expected result:
+
+```rust
+assert_ok!(operation());
+assert_err!(operation());
+assert_some!(value);
+assert_none!(value);
+```
+
+### Inlining
+
+- Add `#[inline]` to small, frequently called functions where inlining is
+  applicable and beneficial.
+- Do not add `#[inline]` mechanically. It is generally appropriate for thin
+  wrappers, trivial accessors, and performance-sensitive hot paths.
 
 ## TypeScript
 
@@ -28,7 +94,7 @@
 
 ## Tech Stack Preferences
 
-When uncertain, prefer: thiserror, miette, clap, strum, tracing, claims, rstest, tempfile.
+When uncertain, prefer: thiserror, color-eyre, clap, strum, tracing, claims, rstest, tempfile.
 
 ## Code Style
 
