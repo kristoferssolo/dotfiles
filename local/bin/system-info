@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+show_cpu=false
+show_ram=false
+copy_to_clipboard=true
+
+usage() {
+    cat <<'EOF'
+Usage: system-info [OPTIONS]
+
+Options:
+  -c, --cpu      Include CPU information
+  -r, --ram      Include RAM information
+  -n, --no-copy  Do not copy output to the Wayland clipboard
+  -h, --help     Show this help message
+EOF
+}
+
+while (($#)); do
+    case "$1" in
+    -c | --cpu)
+        show_cpu=true
+        ;;
+    -r | --ram)
+        show_ram=true
+        ;;
+    -n | --no-copy)
+        copy_to_clipboard=false
+        ;;
+    -h | --help)
+        usage
+        exit 0
+        ;;
+    *)
+        echo "Error: unknown option: $1" >&2
+        usage >&2
+        exit 1
+        ;;
+    esac
+    shift
+done
+
+if "$copy_to_clipboard" && ! command -v wl-copy >/dev/null 2>&1; then
+    echo "Error: wl-copy is required unless --no-copy is used." >&2
+    exit 1
+fi
+
+os_name="$(
+    if [[ -r /etc/os-release ]]; then
+        . /etc/os-release
+        printf '%s' "${PRETTY_NAME:-unknown}"
+    else
+        printf 'unknown'
+    fi
+)"
+
+desktop="${XDG_CURRENT_DESKTOP:-${XDG_SESSION_DESKTOP:-unknown}}"
+session_type="${XDG_SESSION_TYPE:-unknown}"
+
+output=(
+    "OS: $os_name ($(uname -m))"
+    "Kernel: $(uname -r)"
+    "Desktop: $desktop"
+    "Session type: $session_type"
+)
+
+if "$show_cpu"; then
+    cpu="$(
+        lscpu 2>/dev/null |
+            awk -F: '/Model name:/ {
+                sub(/^[^:]*:[[:space:]]*/, "")
+                print
+                exit
+            }'
+    )"
+
+    [[ -n "$cpu" ]] && output+=("CPU: $cpu")
+fi
+
+if "$show_ram"; then
+    ram="$(free -h 2>/dev/null | awk '/^Mem:/ { print $2; exit }')"
+
+    [[ -n "$ram" ]] && output+=("RAM: $ram")
+fi
+
+printf '%s\n' "${output[@]}"
+
+if "$copy_to_clipboard"; then
+    printf '%s\n' "${output[@]}" | wl-copy
+fi

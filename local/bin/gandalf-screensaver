@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+set -u
+
+VIDEO="$HOME/Videos/gandalf.mp4"
+STATE_DIR="${XDG_RUNTIME_DIR:-/tmp}/gandalf-screensaver"
+PIDFILE="$STATE_DIR/mpvpaper.pid"
+
+start() {
+    if [ -f "$PIDFILE" ]; then
+        pid="$(cat "$PIDFILE")"
+        if kill -0 "$pid" 2>/dev/null; then
+            exit 0
+        fi
+        rm -f "$PIDFILE"
+    fi
+
+    command -v mpvpaper >/dev/null 2>&1 || {
+        echo "mpvpaper is not installed" >&2
+        exit 1
+    }
+
+    [ -f "$VIDEO" ] || {
+        echo "Video not found: $VIDEO" >&2
+        exit 1
+    }
+
+    mkdir -p "$STATE_DIR"
+
+    mpvpaper \
+        --layer overlay \
+        --mpv-options "loop-file=inf stop-screensaver=no panscan=1.0 --speed=1" \
+        ALL \
+        "$VIDEO" &
+
+    echo "$!" >"$PIDFILE"
+}
+
+stop() {
+    [ -f "$PIDFILE" ] || return 0
+
+    pid="$(cat "$PIDFILE")"
+    kill "$pid" 2>/dev/null || true
+    rm -f "$PIDFILE"
+}
+
+case "${1:-}" in
+start) start ;;
+stop) stop ;;
+*)
+    echo "usage: $0 {start|stop}" >&2
+    exit 1
+    ;;
+esac

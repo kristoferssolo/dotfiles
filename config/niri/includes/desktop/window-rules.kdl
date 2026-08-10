@@ -24,6 +24,7 @@ window-rule {
 }
 window-rule {
     match app-id="(?i)^scalpel$"
+    match app-id="(?i)^Scalpel Nightly$"
     open-floating true
     open-focused true
     // default-floating-position x=0 y=0 relative-to="top-left"
