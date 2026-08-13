@@ -192,6 +192,7 @@ prepend_keymap = [
   {on = [ "z", "e" ], run = "plugin time-travel --args=exit", desc = "Exit browsing snapshots"},
   # wl-clipboard
   {on = "<C-y>", run = [ "plugin wl-clipboard" ]},
+  {on = [ "g", "r" ], run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"', desc = "Go to current Git repository"},
 ]
 
 [tasks]

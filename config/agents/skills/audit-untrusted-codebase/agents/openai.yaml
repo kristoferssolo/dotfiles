@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audit Untrusted Codebase"
+  short_description: "Assess cloned repositories for malicious behavior"
+  default_prompt: "Use $audit-untrusted-codebase to perform a read-only malware and supply-chain audit of this cloned repository."

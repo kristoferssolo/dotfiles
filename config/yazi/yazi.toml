@@ -115,7 +115,7 @@ previewers = [
 ]
 prepend_previewers = [
   {mime = "text/*", run = "code"},
-  {mime = "text/csv", run = "miller"},
+  {mime = "text/csv", run = "duckdb"},
   # Replace magick, image, video with mediainfo
   {mime = "{audio,video,image}/*", run = "mediainfo"},
   {mime = "application/subrip", run = "mediainfo"},

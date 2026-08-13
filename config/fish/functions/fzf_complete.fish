@@ -14,7 +14,7 @@ function fzf_complete --description "fzf-tab style completion for fish"
     # If only one completion, insert it directly
     if test (count $completions) -eq 1
         set -l comp (string split \t -- $completions[1])[1]
-        __insert_unquoted_path $comp
+        __insert_quoted_path $comp
         commandline -f repaint
         return
     end
@@ -52,7 +52,7 @@ function fzf_complete --description "fzf-tab style completion for fish"
     if test -n "$selected"
         # Extract the actual completion (first field before tab)
         set -l comp (string split \t -- $selected)[1]
-        __insert_unquoted_path $comp
+        __insert_quoted_path $comp
     end
 
     commandline -f repaint

@@ -61,11 +61,12 @@ depends = [ "shell" ]
 "local/bin/" = "~/.local/bin/"
 "local/bin/terminal" = {target = "~/.local/bin/terminal", type = "template"}
 "local/share/" = "~/.local/share/"
+"local/sv/" = "~/.local/sv/"
 
 # Shared feature bundles
 
 [ai]
-depends = [ "codex", "opencode" ]
+depends = [ "codex" ]
 
 [misc.files]
 "config/bat/" = "~/.config/bat/"
@@ -101,6 +102,7 @@ depends = [ "tmux", "zsh", "fish", "yazi" ]
 "config/rio/config.toml" = {target = "~/.config/rio/config.toml", type = "template"}
 "config/starship.toml" = "~/.config/starship/starship.toml"
 "config/xdg-desktop-portal-termfilechooser/" = "~/.config/xdg-desktop-portal-termfilechooser/"
+"config/xdg-desktop-portal/" = "~/.config/xdg-desktop-portal/"
 
 [dev.files]
 "config/asm-lsp/" = "~/.config/asm-lsp/"
@@ -216,7 +218,4 @@ depends = [ "misc" ]
 # AI tool integration
 
 [codex.files]
-"config/AGENTS.md" = "~/.codex/AGENTS.md"
-
-[opencode.files]
-"config/opencode/" = "~/.config/opencode/"
+"config/agents/AGENTS.md" = "~/.codex/AGENTS.md"
