@@ -2,9 +2,9 @@
 // "/-" comments out the following node.
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
-xwayland-satellite {
-    path "/home/kristofers/Projects/xwayland-satellite/target/release/xwayland-satellite"
-}
+// xwayland-satellite {
+//     path "/home/kristofers/Projects/xwayland-satellite/target/release/xwayland-satellite"
+// }
 include "includes/common/animations.kdl"
 include "includes/common/binds.kdl"
 include "includes/common/cursor.kdl"

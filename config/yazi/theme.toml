@@ -29,6 +29,7 @@ dirs = [
   {name = "Music", text = ""},
   {name = "Pictures", text = ""},
   {name = "Public", text = ""},
+  {name = "Projects", text = ""},
   {name = "Videos", text = ""},
 ]
 files = [
@@ -382,6 +383,7 @@ exts = [
   {name = "haml", text = "", fg = "#e0def4"},
   {name = "hbs", text = "", fg = "#f6c177"},
   {name = "heex", text = "", fg = "#c4a7e7"},
+  {name = "heic", text = "", fg = "#c4a7e7"},
   {name = "hex", text = "", fg = "#eb6f92"},
   {name = "hh", text = "", fg = "#c4a7e7"},
   {name = "hpp", text = "", fg = "#c4a7e7"},

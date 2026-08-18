@@ -61,12 +61,12 @@ depends = [ "shell" ]
 "local/bin/" = "~/.local/bin/"
 "local/bin/terminal" = {target = "~/.local/bin/terminal", type = "template"}
 "local/share/" = "~/.local/share/"
-"local/sv/" = "~/.local/sv/"
+# "local/sv/" = "~/.local/sv/"
 
 # Shared feature bundles
 
 [ai]
-depends = [ "codex" ]
+depends = [ "codex", "claude", "claude" ]
 
 [misc.files]
 "config/bat/" = "~/.config/bat/"
@@ -219,3 +219,7 @@ depends = [ "misc" ]
 
 [codex.files]
 "config/agents/AGENTS.md" = "~/.codex/AGENTS.md"
+
+[claude.files]
+# "config/agents/AGENTS.md" = "~/.claude/CLAUDE.md"
+"config/agents/skills/" = "~/.claude/skills/"
