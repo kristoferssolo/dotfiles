@@ -66,18 +66,15 @@ binds {
         move-column-to-workspace "9"
     }
     Print hotkey-overlay-title="Screenshot (region)" {
-        // spawn "dot-screenshot" "region"
-        screenshot
+        spawn "dot-screenshot" "region"
     }
     Ctrl+Print hotkey-overlay-title="Screenshot (monitor: focused)" {
-        // spawn "dot-screenshot" "monitor-focused"
-        screenshot-screen
+        spawn "dot-screenshot" "monitor-focused"
     }
     Alt+Print hotkey-overlay-title="Screenshot (window)" {
-        // spawn "dot-screenshot" "window"
-        screenshot-window
+        spawn "dot-screenshot" "window"
     }
-    // Ctrl+Alt+Print hotkey-overlay-title="Screenshot (monitor: all)" {
-    //     spawn "dot-screenshot" "monitor-all"
-    // }
+    Ctrl+Alt+Print hotkey-overlay-title="Screenshot (monitor: all)" {
+        spawn "dot-screenshot" "monitor-all"
+    }
 }

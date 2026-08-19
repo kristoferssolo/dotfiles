@@ -15,7 +15,7 @@ LICENSE = ""
 # Top-level bundles
 
 [base]
-depends = [ "default", "terminal", "local", "dev", "apps", "gtk", "ai" ]
+depends = [ "default", "terminal", "local", "dev", "apps", "gtk" ]
 
 [x11]
 depends = [ "base", "awesome", "picom", "dunst", "rofi" ]
@@ -64,9 +64,6 @@ depends = [ "shell" ]
 # "local/sv/" = "~/.local/sv/"
 
 # Shared feature bundles
-
-[ai]
-depends = [ "codex", "claude", "claude" ]
 
 [misc.files]
 "config/bat/" = "~/.config/bat/"
@@ -205,6 +202,7 @@ depends = [ "misc" ]
 "config/viu/" = "~/.config/viu/"
 "config/wireplumber" = "~/.config/wireplumber/"
 "config/spotify-tui.yml" = "~/.config/spotify-tui/config.yml"
+"config/cliamp/" = "~/.config/cliamp/"
 "config/rustmission.toml" = "~/.config/rustmission/config.toml"
 "config/traxor/" = "~/.config/traxor/"
 # "config/transmission-daemon.json" = "~/.config/transmission-daemon/settings.json"
@@ -214,12 +212,3 @@ depends = [ "misc" ]
 "config/fuzzel/" = "~/.config/fuzzel/"
 "config/vicinae/" = "~/.config/vicinae/"
 "config/mako/" = "~/.config/mako/"
-
-# AI tool integration
-
-[codex.files]
-"config/agents/AGENTS.md" = "~/.codex/AGENTS.md"
-
-[claude.files]
-# "config/agents/AGENTS.md" = "~/.claude/CLAUDE.md"
-"config/agents/skills/" = "~/.claude/skills/"

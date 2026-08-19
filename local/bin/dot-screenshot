@@ -1,30 +1,58 @@
 #!/usr/bin/env bash
-# Take a screenshot in a number of different ways. Any of the case statement
-# options can be passed in as a value.
+# Take a screenshot in a number of different ways, then hand it to satty for
+# annotation. Any of the case statement options can be passed in as a value.
+#
+# Every capture is saved: the raw screenshot always lands on disk, and satty
+# saves an additional annotated copy whenever you save from it. Nothing is
+# lost if you cancel satty.
+#
+# The region/window/monitor-focused modes drive niri's built-in screenshotter
+# (nice frozen-screen selector with window/output snapping). niri writes the
+# capture to `screenshot-path` asynchronously and returns immediately, so we
+# use inotifywait to block until that file lands, then open it in satty.
+#
+# Requires: inotify-tools (inotifywait), niri, grim, satty.
 
 set -o errexit
 set -o pipefail
 set -o nounset
 
 MODE="${1:-region}"
+DIR="${XDG_PICTURES_DIR%/}"
+OUTPUT="${DIR}/%Y-%m-%d_%H-%M-%S.png"
+
+# Trigger niri's built-in screenshotter, wait for the raw file it saves, then
+# open it in satty. The raw capture is kept; satty saves the annotated copy.
+niri_capture() {
+    niri msg action "$1"
+    local raw
+    if ! raw="$(inotifywait --quiet --event close_write --format '%w%f' \
+        --timeout 120 "${DIR}")"; then
+        echo "no screenshot captured (cancelled or timed out)" >&2
+        exit 1
+    fi
+    satty --filename "${raw}" --output-filename "${OUTPUT}"
+}
 
 case "${MODE}" in
 region)
-    grim -g "$(slurp -d)" -
+    niri_capture screenshot
     ;;
 window)
-    niri msg action screenshot-window
-    sleep 0.5
-    wl-paste --type image/png
+    niri_capture screenshot-window
     ;;
 monitor-focused)
-    grim -o "$(niri msg --json focused-output | jq --raw-output .name)" -
+    niri_capture screenshot-screen
     ;;
 monitor-all)
-    grim -
+    # niri has no all-outputs action, so use grim. Save the raw first (to match
+    # the niri modes), then annotate it.
+    raw="$(date +"${DIR}/%Y-%m-%d_%H-%M-%S.png")"
+    grim "${raw}"
+    satty --filename "${raw}" --output-filename "${OUTPUT}"
     ;;
 *)
     echo "'${MODE}' is not a supported, aborting!" >&2
     exit 1
     ;;
-esac | satty --filename - --output-filename "${XDG_PICTURES_DIR}/%Y-%m-%d_%H-%M-%S.png"
+esac
