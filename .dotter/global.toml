@@ -53,10 +53,6 @@ depends = [ "shell" ]
 "config/shell/env" = {target = "~/.zshenv", type = "template"}
 "config/zsh/" = "~/.config/zsh/"
 
-[fish.files]
-"config/fish/" = "~/.config/fish/"
-"config/fish/conf.d/00-profile.fish" = {target = "~/.config/fish/conf.d/00-profile.fish", type = "template"}
-
 [local.files]
 "local/bin/" = "~/.local/bin/"
 "local/bin/terminal" = {target = "~/.local/bin/terminal", type = "template"}
@@ -88,7 +84,7 @@ depends = [ "shell" ]
 "config/wgetrc" = "~/.config/wget/wgetrc"
 
 [terminal]
-depends = [ "tmux", "zsh", "fish", "yazi" ]
+depends = [ "tmux", "zsh", "yazi" ]
 
 [terminal.files]
 "config/alacritty/" = "~/.config/alacritty/"
