@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-awk '/Mem:/ {printf "%.0f\n", ($3/$2)*100}' <(free -m)

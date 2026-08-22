@@ -11,7 +11,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 # export XDG_RUNTIME_DIR="$HOME/.cache/xdgr"
-export XDG_STATE_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 export BUN_INSTALL="$XDG_DATA_HOME/bun"
 
@@ -25,7 +25,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Disable files
 export LESSHISTFILE=-
-export $(dbus-launch)
+# export $(dbus-launch)
 
 export MANPAGER='nvim +Man!'
 
@@ -44,7 +44,6 @@ export VISUAL="$EDITOR"
 export WM="awesome"
 
 export GTK_THEME=rose-pine-gtk
-
 
 export HYPRSHOT_DIR="$HOME/Pictures/screenshots"
 

@@ -133,7 +133,7 @@ depends = [ "tmux", "zsh", "fish", "yazi" ]
 "config/rofi/config.rasi" = {target = "~/.config/rofi/config.rasi", type = "template"}
 
 [hyprland]
-depends = [ "misc", "local", "eww", "lock" ]
+depends = [ "misc", "local", "lock" ]
 
 [hyprland.files]
 "config/hypr/" = "~/.config/hypr/"
@@ -154,12 +154,6 @@ depends = [ "misc", "local", "waybar", "ashell", "lock" ]
 [wofi.files]
 "config/wofi/" = "~/.config/wofi/"
 
-[eww.files]
-"config/eww/" = "~/.config/eww/"
-
-[hypridbar.files]
-"config/Hypridbar/" = "~/.config/HybridBar/"
-
 [waybar.files]
 "config/waybar/" = "~/.config/waybar/"
 "config/waybar/config.jsonc" = {target = "~/.config/waybar/config.jsonc", type = "template"}
@@ -178,18 +172,12 @@ depends = [ "misc", "local", "waybar", "ashell", "lock" ]
 "config/sesh/" = "~/.config/sesh/"
 "config/tmux/" = "~/.config/tmux/"
 
-[xplr.files]
-"config/xplr/" = "~/.config/xplr/"
-
 [yazi.files]
 "config/yazi/init.lua" = "~/.config/yazi/init.lua"
 "config/yazi/keymap.toml" = "~/.config/yazi/keymap.toml"
 "config/yazi/package.toml" = "~/.config/yazi/package.toml"
 "config/yazi/theme.toml" = "~/.config/yazi/theme.toml"
 "config/yazi/yazi.toml" = "~/.config/yazi/yazi.toml"
-
-[typst.files]
-"config/typstfmt.tom" = "~/.config/typstfmt/typstfmt.toml"
 
 # Application-specific configs
 
