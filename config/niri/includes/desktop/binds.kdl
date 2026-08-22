@@ -80,5 +80,7 @@ binds {
     Mod+Ctrl+Shift+Delete hotkey-overlay-title="Screenshot (monitor: all)" {
         spawn "dot-screenshot" "monitor-all"
     }
+    Mod+Space {
+        spawn-sh "handy --toggle-transcription"
+    }
 }
-
