@@ -1,0 +1,37 @@
+[".local/share/fonts/jetbrainsmono"]
+type = "archive"
+url = "https://download.jetbrains.com/fonts/JetBrainsMono-2.304.zip"
+include = [ "fonts/ttf/*.ttf" ]
+stripComponents = 2
+refreshPeriod = "168h"
+
+[".local/share/fonts/brill"]
+type = "archive"
+url = "https://brill.com/fileasset/The_Brill_Typeface_Package_v_4_0.zip"
+include = [ "*.ttf" ]
+stripComponents = 0
+refreshPeriod = "168h"
+
+[".local/share/fonts/meslolgs"]
+type = "archive"
+url = "https://github.com/romkatv/powerlevel10k-media/archive/refs/heads/master.tar.gz"
+include = [ "*/*.ttf" ]
+stripComponents = 1
+refreshPeriod = "168h"
+
+[".local/share/fonts/roboto/Roboto[wdth,wght].ttf"]
+type = "file"
+url = "https://raw.githubusercontent.com/google/fonts/main/ofl/roboto/Roboto%5Bwdth,wght%5D.ttf"
+refreshPeriod = "168h"
+
+[".local/share/fonts/roboto/Roboto-Italic[wdth,wght].ttf"]
+type = "file"
+url = "https://raw.githubusercontent.com/google/fonts/main/ofl/roboto/Roboto-Italic%5Bwdth,wght%5D.ttf"
+refreshPeriod = "168h"
+
+[".local/share/fonts/starwars"]
+type = "archive"
+url = "https://dl.dafont.com/dl/?f=star_jedi"
+include = [ "*/*.{ttf,TTF}" ]
+stripComponents = 1
+refreshPeriod = "168h"
