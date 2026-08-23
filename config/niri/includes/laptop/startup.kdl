@@ -1,8 +1,0 @@
-spawn-at-startup "ashell"
-spawn-at-startup "AyuGram"
-spawn-at-startup "mako"
-spawn-at-startup "swap-wallpaper"
-spawn-at-startup "vesktop"
-spawn-at-startup "{{browser}}"
-spawn-sh-at-startup "vicinae server"
-spawn-sh-at-startup "swayidle timeout 300 '$HOME/.local/bin/gandalf-screensaver start' resume '$HOME/.local/bin/gandalf-screensaver stop'"

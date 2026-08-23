@@ -1,0 +1,5 @@
+{{- if eq .profile "laptop" -}}
+{{ template "niri/config-laptop.kdl" . }}
+{{- else -}}
+{{ template "niri/config-desktop.kdl" . }}
+{{- end -}}

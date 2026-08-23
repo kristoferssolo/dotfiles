@@ -2,9 +2,6 @@ config/awesome/weather
 config/transmission-daemon.json
 .stfolder
 .stversions
-.dotter/local.toml
-.dotter/cache.toml
-.dotter/cache
 spicetify/
 fish_variables*
 local/share/dict/
