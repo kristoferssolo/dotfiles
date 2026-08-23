@@ -1,0 +1,7 @@
+{{- if or (eq .profile "x11") (eq .profile "desktop") }}
+[".config/obs-studio/themes"]
+type = "archive"
+url = "https://github.com/rose-pine/obs/archive/refs/heads/main.tar.gz"
+stripComponents = 2
+refreshPeriod = "168h"
+{{- end }}
