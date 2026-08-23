@@ -1,0 +1,7 @@
+{{- if or (eq .profile "x11") (eq .profile "x11-laptop") }}
+[".config/awesome/awesome-wm-widgets"]
+type = "archive"
+url = "https://github.com/streetturtle/awesome-wm-widgets/archive/refs/heads/master.tar.gz"
+stripComponents = 1
+refreshPeriod = "168h"
+{{- end }}

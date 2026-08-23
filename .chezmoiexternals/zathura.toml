@@ -1,0 +1,15 @@
+[zathura_rose_pine]
+type = "archive"
+url = "https://github.com/edunfelt/zathura/archive/refs/heads/main.tar.gz"
+stripComponents = 1
+include = ["*/rose-pine-*"]
+targetPath = ".config/zathura/themes"
+refreshPeriod = "168h"
+
+[zathura_gruvbox]
+type = "archive"
+url = "https://github.com/eastack/zathura-gruvbox/archive/refs/heads/master.tar.gz"
+stripComponents = 1
+include = ["*/zathura-*"]
+targetPath = ".config/zathura/themes"
+refreshPeriod = "168h"
