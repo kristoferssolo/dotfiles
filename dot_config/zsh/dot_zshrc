@@ -27,9 +27,9 @@ autoload -U select-word-style
 # Themeing
 autoload -U colors && colors
 
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # Colored completion (different colors fr dirs/files/etc)
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # Case sensitive TAB completions
-zstyle ':completion:*' rehash true                          # Automatically find new executables in path
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"   # Colored completion (different colors fr dirs/files/etc)
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # Case sensitive TAB completions
+zstyle ':completion:*' rehash true                        # Automatically find new executables in path
 zstyle ':completion:*' menu no
 # Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
@@ -61,8 +61,8 @@ export KEYTIMEOUT=1
 # Change cursor shape for different vi modes.
 zle-keymap-select() {
     case $KEYMAP in
-        vicmd) echo -ne '\e[1 q' ;;        # block
-        viins | main) echo -ne '\e[5 q' ;; # beam
+    vicmd) echo -ne '\e[1 q' ;;        # block
+    viins | main) echo -ne '\e[5 q' ;; # beam
     esac
 }
 zle -N zle-keymap-select
@@ -98,39 +98,18 @@ function yazicd() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
     yazi "$@" --cwd-file="$tmp"
     if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		z -- "$cwd" && eza -a --icons --group-directories-first
-	fi
-	rm -f -- "$tmp" >/dev/null 2>&1
+        z -- "$cwd" && eza -a --icons --group-directories-first
+    fi
+    rm -f -- "$tmp" >/dev/null 2>&1
 }
 
 function tmux-window-name() {
-	($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
+    ($TMUX_PLUGIN_MANAGER_PATH/tmux-window-name/scripts/rename_session_windows.py &)
 }
 
 function fzf_sesh_connect_widget() {
-  local session
-  session=$(
-    sesh list --icons | fzf-tmux -p 80%,70% \
-      --no-sort --ansi \
-      --border-label ' sesh ' \
-      --prompt '⚡  ' \
-      --header '  ^a all  ^t tmux  ^g configs  ^x zoxide  ^d tmux kill  ^f find' \
-      --bind 'tab:down,btab:up' \
-      --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
-      --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
-      --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
-      --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
-      --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
-      --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
-      --preview-window 'right:55%' \
-      --preview 'sesh preview {}'
-  )
-
-  # if the user picked something, build & run the command
-  if [[ -n $session ]]; then
-    BUFFER="sesh connect \"$session\""
+    BUFFER="sesh-connect"
     zle accept-line
-  fi
 }
 zle -N fzf_sesh_connect_widget
 
@@ -141,7 +120,7 @@ bindkey '^[Od' backward-word
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
 bindkey '^[[3~' delete-char
-bindkey '^[[Z' undo             # SHIFT+TAB undo last action
+bindkey '^[[Z' undo # SHIFT+TAB undo last action
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -199,5 +178,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion

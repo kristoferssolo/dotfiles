@@ -1,0 +1,7 @@
+search_dirs = [
+  "~/repos",
+  "~/Nextcloud/repos/",
+  "~/Obsidian",
+  "~/Nextcloud/Documents/",
+  "~/Documents",
+]

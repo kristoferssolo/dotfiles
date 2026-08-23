@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected="$1"
 else
-    selected=$(project-finder ~/repos/ ~/Nextcloud/ ~/Obsidian/ | sk --height 16)
+    selected=$(projfind | sk --height 16)
 fi
 
 if [[ -z "$selected" ]]; then

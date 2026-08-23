@@ -6,12 +6,12 @@ preview_command = "eza -a --icons --git --group-directories-first --color=always
 [[session]]
 name = "dotfiles"
 path = "~/Nextcloud/repos/dotfiles/"
-startup_command = "tmux new-window && tmux select-window -t 1 && nvim ."
+startup_command = "tmux new-window && tmux select-window -t 1"
 
 [[session]]
 name = "SoloVim"
 path = "~/Nextcloud/repos/SoloVim/"
-startup_command = "tmux new-window && tmux select-window -t 1 && nvim ."
+startup_command = "tmux new-window && tmux select-window -t 1"
 
 # [[wildcard]]
 # pattern = "~/Projects/**"
@@ -40,4 +40,4 @@ startup_command = "gh-dash"
 
 [[window]]
 name = "typst"
-startup_command = "mkdir -p target; typst watch main.typ target/main.pdf"
+startup_command = "mkdir -p target && typst watch main.typ target/main.pdf"
