@@ -19,13 +19,4 @@
 .config/zsh/.zprofile
 {{- end }}
 # These are repository fixtures or configurations that Dotter did not deploy.
-.config/awesome/awesome.yml
-.config/awesome/selene.toml
-.config/fastfetch/examples/**
-.config/fish/**
-.config/sql-language-server/**
-.config/stasis/**
-.config/wofi/**
-.config/yazi/.luarc.json
-.config/zellij/**
-.local/sv/**
+.config/fish/fish_variables
