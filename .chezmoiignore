@@ -20,3 +20,5 @@
 {{- end }}
 # These are repository fixtures or configurations that Dotter did not deploy.
 .config/fish/fish_variables
+.config/yazi/flavors
+.config/yazi/plugins

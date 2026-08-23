@@ -1,0 +1,74 @@
+{{- if or (eq .profile "x11") (eq .profile "x11-laptop") }}
+[".config/awesome/awesome-wm-widgets"]
+type = "archive"
+url = "https://github.com/streetturtle/awesome-wm-widgets/archive/refs/heads/master.tar.gz"
+stripComponents = 1
+refreshPeriod = "168h"
+{{- end }}
+
+[".config/obs-studio/themes"]
+type = "archive"
+url = "https://github.com/rose-pine/obs/archive/refs/heads/main.tar.gz"
+stripComponents = 2
+refreshPeriod = "168h"
+
+[".config/rio/themes"]
+type = "archive"
+url = "https://github.com/rose-pine/rio-terminal/archive/refs/heads/main.tar.gz"
+stripComponents = 1
+refreshPeriod = "168h"
+
+[".config/btop/themes"]
+type = "archive"
+url = "https://github.com/rose-pine/btop/archive/refs/heads/main.tar.gz"
+stripComponents = 1
+refreshPeriod = "168h"
+
+[".config/alacritty"]
+type = "archive"
+url = "https://github.com/rose-pine/alacritty/archive/refs/heads/main.tar.gz"
+stripComponents = 2
+include = ["*/dist/**"]
+refreshPeriod = "168h"
+
+[".config/bat/themes"]
+type = "archive"
+url = "https://github.com/drluckyspin/rose-pine-bat/archive/refs/heads/main.tar.gz"
+stripComponents = 2
+include = ["*/themes/**"]
+refreshPeriod = "168h"
+
+[".config/silicon"]
+type = "archive"
+url = "https://github.com/drluckyspin/rose-pine-bat/archive/refs/heads/main.tar.gz"
+stripComponents = 2
+include = ["*/themes/**"]
+refreshPeriod = "168h"
+
+[".config/Vencord/themes"]
+type = "archive"
+url = "https://github.com/rose-pine/discord/archive/refs/heads/main.tar.gz"
+stripComponents = 2
+include = ["*/dist/**"]
+refreshPeriod = "168h"
+
+[zathura_rose_pine]
+type = "archive"
+url = "https://github.com/edunfelt/zathura/archive/refs/heads/main.tar.gz"
+stripComponents = 1
+include = ["*/rose-pine-*"]
+targetPath = ".config/zathura/themes"
+refreshPeriod = "168h"
+
+[zathura_gruvbox]
+type = "archive"
+url = "https://github.com/eastack/zathura-gruvbox/archive/refs/heads/master.tar.gz"
+stripComponents = 1
+include = ["*/zathura-*"]
+targetPath = ".config/zathura/themes"
+refreshPeriod = "168h"
+
+[".config/hypr/rose-pine.conf"]
+type = "file"
+url = "https://raw.githubusercontent.com/jishnurajendran/hyprland-rosepine/refs/heads/main/rose-pine.conf"
+refreshPeriod = "168h"

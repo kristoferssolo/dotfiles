@@ -4,5 +4,6 @@ config/transmission-daemon.json
 .stversions
 spicetify/
 fish_variables*
+*fish_variables
 local/share/dict/
 local/share/nvim/site/spell/

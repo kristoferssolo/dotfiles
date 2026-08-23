@@ -5,3 +5,7 @@ font_size = "10"
 terminal = "ghostty"
 browser = "floorp"
 waybar_font_size = "12px"
+
+[git]
+autoCommit = true
+autoPush = true
