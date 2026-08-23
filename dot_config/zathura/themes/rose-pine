@@ -1,0 +1,72 @@
+# https://github.com/rose-pine/rose-pine-theme
+# Soho vibes for Zathura: Rosé Pine
+
+set synctex true
+set synctex-editor-command "nvim --remote-silent +%{line} %{input}"
+
+# Basic Settings
+
+set zoom-center "true"
+set selection-clipboard clipboard
+set render-loading "false"
+set window-width 960
+set window-height 1080
+set window-title-basename "true"
+set selection-clipboard "clipboard"
+set adjust-open width
+set recolor true
+
+map <Space> toggle_index
+map p print
+map w recolor
+map k 5k
+map j 5k
+#
+# Usage:
+# Copy contents of this file to ~/.config/zathura/zathurarc
+#
+# Change 'recolor' and 'recolor-keephue' to true to change
+# the document colors for a more uniform viewing experience.
+
+set default-bg                  "#191724"
+set default-fg                  "#e0def4"
+
+set statusbar-fg                "#e0def4"
+set statusbar-bg                "#555169"
+
+set inputbar-bg                 "#6e6a86"
+set inputbar-fg                 "#ebbcba"
+
+set notification-bg             "#e0def4"
+set notification-fg             "#555169"
+
+set notification-error-bg       "#f6c177"
+set notification-error-fg       "#555169"
+
+set notification-warning-bg     "#ebbcba"
+set notification-warning-fg     "#555169"
+
+set highlight-color             "rgba(235, 188, 186, 0.2)" # #ebbcba
+set highlight-active-color      "rgba(235, 111, 146, 0.2)" # #eb6f92
+
+set completion-bg               "#6e6a86"
+set completion-fg               "#ebbcba"
+
+set completion-highlight-fg     "#26233a"
+set completion-highlight-bg     "#ebbcba"
+
+set recolor-lightcolor          "#191724"
+set recolor-darkcolor           "#e0def4"
+
+set recolor                     "true"
+set recolor-keephue             "false"
+
+set default-bg "#191724"
+set default-fg "#e0def4"
+
+set window-title-basename "true"
+set window-width 960
+set window-height 1080
+
+# Force window/canvas background
+set window-bg "#191724"

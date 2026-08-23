@@ -1,0 +1,5 @@
+{{- if eq .profile "x11-laptop" -}}
+{{ template "awesome/rc-laptop.lua" . }}
+{{- else -}}
+{{ template "awesome/rc-desktop.lua" . }}
+{{- end -}}

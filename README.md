@@ -1,11 +1,9 @@
 # Solorice Dotfiles
 
-Personal Linux dotfiles managed with [Dotter](https://github.com/SuperCuber/dotter).
+Personal Linux dotfiles managed with [chezmoi](https://www.chezmoi.io/).
 
-The repository is organized by feature package and machine profile. Application
-configuration lives in `config/`; personal commands and shared assets live in
-`local/`.
-
+The chezmoi source state lives in `home/`. It uses chezmoi's naming convention:
+`dot_config` maps to `~/.config` and `dot_local` maps to `~/.local`.
 Neovim is managed separately in [SoloVim](https://codeberg.org/kristoferssolo/SoloVim):
 
 ```sh
@@ -14,37 +12,40 @@ git clone https://codeberg.org/kristoferssolo/SoloVim ~/.config/nvim
 
 ## Profiles
 
-Package definitions and file mappings live in `.dotter/global.toml`.
+The default profile is `desktop`. Its values live in `home/.chezmoidata.toml`.
+Set a machine-specific profile and overrides in chezmoi's untracked config:
 
-| Package | Use |
+```sh
+mkdir -p ~/.config/chezmoi
+cp chezmoi.toml.example ~/.config/chezmoi/chezmoi.toml
+```
+
+Available profiles are:
+
+| Profile | Use |
 | --- | --- |
-| `x11` | X11 desktop |
-| `x11-laptop` | X11 laptop |
-| `wayland` | Niri and Hyprland Wayland setup |
+| `desktop` | Niri and Hyprland desktop setup |
+| `laptop` | Niri and Hyprland laptop setup |
+| `x11` | Awesome desktop setup |
+| `x11-laptop` | Awesome laptop setup |
 
-Machine profiles select a package and supply template variables such as the
-terminal, browser, DPI, and font size:
-
-- `.dotter/executor.toml` configures a desktop Niri machine.
-- `.dotter/artix-laptop.toml` configures a laptop Niri machine.
+Profile data controls conditional source inclusion through `home/.chezmoiignore`.
+Values in `~/.config/chezmoi/chezmoi.toml` override the shared defaults.
 
 ## Install
 
-Clone the repository, copy the closest profile to the ignored local profile,
-and deploy it:
+Clone the repository and initialize chezmoi using its source directory:
 
 ```sh
 git clone https://codeberg.org/kristoferssolo/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-cp .dotter/executor.toml .dotter/local.toml
-./dotter --local-config .dotter/local.toml
+chezmoi init --source ~/.dotfiles/home
+chezmoi apply --dry-run
+chezmoi apply
 ```
 
-For a laptop, use `.dotter/artix-laptop.toml` instead. Install the applications
-you want to use through your distribution's package manager before deploying.
-
-Yazi plugins and flavors are not stored in this repository. Restore them after
-the first deploy:
+Install the applications you want through your distribution's package manager
+before applying. Yazi plugins and flavors are not stored in this repository;
+restore them after the first apply:
 
 ```sh
 ya pkg install
@@ -52,11 +53,9 @@ ya pkg install
 
 ## Layout
 
-- `config/` — XDG application configuration
-- `local/bin/` — commands linked to `~/.local/bin`
-- `local/share/` — fonts, desktop entries, wallpapers, and other assets
-- `.dotter/global.toml` — package graph and file mappings
-- `.dotter/*.toml` — machine profile examples
-
-The repository includes Dotter binaries for Linux, ARM Linux, and Windows:
-`dotter`, `dotter.arm`, and `dotter.exe`.
+- `home/` — chezmoi source state
+- `home/.chezmoidata.toml` — shared template defaults
+- `home/.chezmoiignore` — profile-specific source exclusions
+- `chezmoi.toml.example` — local machine override example
+- `home/dot_config/` — XDG application configuration
+- `home/dot_local/` — commands, assets, and user-local data

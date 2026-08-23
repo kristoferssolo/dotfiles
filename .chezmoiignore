@@ -1,0 +1,31 @@
+{{- /* Profiles: desktop, laptop, x11, x11-laptop. */ -}}
+{{- if not (or (eq .profile "desktop") (eq .profile "laptop")) }}
+.config/ashell/**
+.config/gtklock/**
+.config/hypr/**
+.config/mako/**
+.config/niri/**
+.config/swaylock/config
+.config/waybar/**
+.config/xdg-desktop-portal/**
+.config/xdg-desktop-portal-termfilechooser/**
+{{- end }}
+{{- if not (or (eq .profile "x11") (eq .profile "x11-laptop")) }}
+.config/awesome/**
+.config/dunst/**
+.config/picom/picom.conf
+.config/rofi/**
+.config/x11/**
+.config/zsh/.zprofile
+{{- end }}
+# These are repository fixtures or configurations that Dotter did not deploy.
+.config/awesome/awesome.yml
+.config/awesome/selene.toml
+.config/fastfetch/examples/**
+.config/fish/**
+.config/sql-language-server/**
+.config/stasis/**
+.config/wofi/**
+.config/yazi/.luarc.json
+.config/zellij/**
+.local/sv/**

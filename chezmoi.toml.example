@@ -1,0 +1,8 @@
+# Copy to ~/.config/chezmoi/chezmoi.toml to override home/.chezmoidata.toml.
+[data]
+# profile = "laptop" # desktop, laptop, x11, or x11-laptop
+# dpi = "96"
+# font_size = "12"
+# terminal = "ghostty"
+# browser = "floorp"
+# waybar_font_size = "14px"
