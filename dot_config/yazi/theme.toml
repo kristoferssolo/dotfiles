@@ -3,8 +3,9 @@
 # vim:fileencoding=utf-8:foldmethod=marker
 
 [flavor]
-dark = "rose-pine" # or "rose-pine-moon"
-# light = "rose-pine-dawn"
+# Use the same flavor when the terminal's light/dark probe is unavailable.
+dark = "rose-pine"  # or "rose-pine-moon"
+light = "rose-pine"
 
 # Icons
 # icon_file = ""
