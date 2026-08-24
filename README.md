@@ -44,11 +44,11 @@ chezmoi apply
 ```
 
 Install the applications you want through your distribution's package manager
-before applying. Yazi plugins and flavors are not stored in this repository;
-restore them after the first apply:
+before applying. Yazi packages and Fish plugins are not stored in this repository. Restore them
+from their manifests after the first apply:
 
 ```sh
-ya pkg install
+just plugins
 ```
 
 ## Layout
