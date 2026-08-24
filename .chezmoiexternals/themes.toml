@@ -37,3 +37,11 @@ url = "https://github.com/rose-pine/discord/archive/refs/heads/main.tar.gz"
 stripComponents = 2
 include = [ "*/dist/**" ]
 refreshPeriod = "168h"
+
+
+[".config/atuin/themes"]
+type = "archive"
+url = "https://github.com/kristoferssolo/rose-pine-atuin/archive/refs/heads/main.tar.gz"
+stripComponents = 2
+include = [ "*/dist/**" ]
+refreshPeriod = "168h"
