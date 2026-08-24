@@ -61,6 +61,6 @@ alias gC="git clone"
 alias gs="git status --short"
 
 # doas for system commands
-for command in mount umount rsv sv pacman updatedb su shutdown poweroff reboot zzz systemctl wg wg-quick
+for command in mount umount rsv pacman updatedb su shutdown poweroff reboot zzz systemctl wg wg-quick
     alias $command="doas $command"
 end
