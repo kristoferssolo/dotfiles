@@ -45,3 +45,17 @@ url = "https://github.com/kristoferssolo/rose-pine-atuin/archive/refs/heads/main
 stripComponents = 2
 include = [ "*/dist/**" ]
 refreshPeriod = "168h"
+
+[".local/share/themes/rose-pine-gtk"]
+type = "archive"
+url = "https://github.com/rose-pine/gtk/releases/download/v2.2.0/gtk3.tar.gz"
+stripComponents = 2
+include = [ "gtk3/rose-pine-gtk/**" ]
+refreshPeriod = "168h"
+
+[".config/gtk-4.0/rose-pine"]
+type = "archive"
+url = "https://github.com/rose-pine/gtk/releases/download/v2.2.0/gtk4.tar.gz"
+stripComponents = 1
+include = [ "gtk4/rose-pine.css" ]
+refreshPeriod = "168h"

@@ -31,7 +31,6 @@ set -gx READER "sioyak"
 set -gx TERMINAL "{{terminal}}"
 set -gx VIDEO "mpv"
 
-set -gx GTK_THEME rose-pine-gtk
 set -gx HYPRSHOT_DIR "$HOME/Pictures/screenshots"
 
 # XDG compliance for various programs
