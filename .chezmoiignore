@@ -18,6 +18,14 @@
 .config/x11/**
 .config/zsh/.zprofile
 {{- end }}
+# Repository metadata and development tooling must not be deployed to $HOME.
+.gitignore
+LICENSE
+README.md
+chezmoi.toml.example
+justfile
+taplo.toml
+
 # These are repository fixtures or configurations that Dotter did not deploy.
 .config/fish/fish_variables
 .config/yazi/flavors
