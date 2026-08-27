@@ -71,6 +71,9 @@ history_filter = [
   # Credentials passed directly on the command line
   "(?:^|\\s)--?(?:password|passwd|token|api[-_]?key|secret)(?:=|\\s)",
   "(?:^|\\s)(?:PASSWORD|TOKEN|API[-_]?KEY|SECRET)=[^\\s]+",
+
+  # Credentials assigned through environment variables, e.g. ANTHROPIC_AUTH_TOKEN
+  "(?:^|\\s)(?:export\\s+)?[A-Z][A-Z0-9_]*(?:PASSWORD|PASSWD|TOKEN|API[-_]?KEY|SECRET)=[^\\s]+",
   "^sshpass(?:\\s|$)",
 ]
 

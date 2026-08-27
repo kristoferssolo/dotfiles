@@ -20,4 +20,6 @@ require("augment-command"):setup({
 	wraparound_file_navigation = true,
 })
 require("git"):setup()
-require("yatline"):setup()
+require("yatline"):setup({
+	theme = require("yatline-rosepine"):setup("rose_pine"), -- "rose_pine" | "moon" | "dawn"
+})

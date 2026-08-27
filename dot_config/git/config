@@ -1,4 +1,4 @@
-#!config
+#!gitconfig
 [user]
 	email = dev@kristofers.xyz
 	name = Kristofers Solo
@@ -18,6 +18,10 @@
 [status]
     branch = true
     showStash = true
+
+[alias]
+    st = status -s
+    lol = log --oneline --graph --all
 
 # https://blog.gitbutler.com/how-git-core-devs-configure-git/
 # clearly makes git better
@@ -109,10 +113,11 @@
     upstream = green
     plain = blue
 
+[filter "lfs"]
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+
 [include] # TODO: include only for my repos
     path = ~/.config/git/key
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true

@@ -1,0 +1,20 @@
+#:schema https://dystroy.org/bacon/.bacon.schema.json
+
+default_job = "watch"
+
+[jobs.watch]
+command = [ "chezmoi", "apply" ]
+need_stdout = true
+allow_warnings = true
+watch = [
+  "dot_config",
+  "dot_local",
+  "dot_cargo",
+  ".chezmoiexternals",
+  ".chezmoitemplates",
+  ".chezmoidata.toml",
+  ".chezmoiignore",
+]
+
+[keybindings]
+w = "job:watch"

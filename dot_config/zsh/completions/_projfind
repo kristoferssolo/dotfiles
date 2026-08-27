@@ -1,0 +1,412 @@
+#compdef projfind
+
+autoload -U is-at-least
+
+_projfind() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" : \
+'-d+[Maximum search depth]:DEPTH:_default' \
+'--depth=[Maximum search depth]:DEPTH:_default' \
+'-n+[Maximum number of results]:MAX_RESULTS:_default' \
+'--max-results=[Maximum number of results]:MAX_RESULTS:_default' \
+'-v[Print search progress]' \
+'--verbose[Print search progress]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+'::paths -- Directories to search:_files' \
+":: :_projfind_commands" \
+"*::: :->projfind" \
+&& ret=0
+    case $state in
+    (projfind)
+        words=($line[2] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:projfind-command-$line[2]:"
+        case $line[2] in
+            (completions)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':shell:(bash elvish fish zsh)' \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':path -- Project directory to record:_files' \
+&& ret=0
+;;
+(history)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_projfind__subcmd__history_commands" \
+"*::: :->history" \
+&& ret=0
+
+    case $state in
+    (history)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:projfind-history-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(show)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':path -- Project directory to inspect:_files' \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':path -- Project directory to change:_files' \
+':score -- New raw score:_default' \
+&& ret=0
+;;
+(adjust)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':path -- Project directory to change:_files' \
+':delta -- Amount to add to the raw score:_default' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':path -- Project directory to remove:_files' \
+&& ret=0
+;;
+(clear)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_projfind__subcmd__history__subcmd__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:projfind-history-help-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(show)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(adjust)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(clear)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_projfind__subcmd__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:projfind-help-command-$line[1]:"
+        case $line[1] in
+            (completions)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(history)
+_arguments "${_arguments_options[@]}" : \
+":: :_projfind__subcmd__help__subcmd__history_commands" \
+"*::: :->history" \
+&& ret=0
+
+    case $state in
+    (history)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:projfind-help-history-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(show)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(adjust)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(clear)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_projfind_commands] )) ||
+_projfind_commands() {
+    local commands; commands=(
+'completions:Generates shell completions' \
+'add:Records a visit to a project directory' \
+'history:Inspects or changes project history' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'projfind commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__add_commands] )) ||
+_projfind__subcmd__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind add commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__completions_commands] )) ||
+_projfind__subcmd__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind completions commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__help_commands] )) ||
+_projfind__subcmd__help_commands() {
+    local commands; commands=(
+'completions:Generates shell completions' \
+'add:Records a visit to a project directory' \
+'history:Inspects or changes project history' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'projfind help commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__help__subcmd__add_commands] )) ||
+_projfind__subcmd__help__subcmd__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind help add commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__help__subcmd__completions_commands] )) ||
+_projfind__subcmd__help__subcmd__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind help completions commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__help__subcmd__help_commands] )) ||
+_projfind__subcmd__help__subcmd__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind help help commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__help__subcmd__history_commands] )) ||
+_projfind__subcmd__help__subcmd__history_commands() {
+    local commands; commands=(
+'list:Lists every recorded project' \
+'show:Shows one recorded project' \
+'set:Sets a project'\''s raw score' \
+'adjust:Adds a positive or negative amount to a project'\''s raw score' \
+'remove:Removes one project from history' \
+'clear:Removes every project from history' \
+    )
+    _describe -t commands 'projfind help history commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__help__subcmd__history__subcmd__adjust_commands] )) ||
+_projfind__subcmd__help__subcmd__history__subcmd__adjust_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind help history adjust commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__help__subcmd__history__subcmd__clear_commands] )) ||
+_projfind__subcmd__help__subcmd__history__subcmd__clear_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind help history clear commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__help__subcmd__history__subcmd__list_commands] )) ||
+_projfind__subcmd__help__subcmd__history__subcmd__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind help history list commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__help__subcmd__history__subcmd__remove_commands] )) ||
+_projfind__subcmd__help__subcmd__history__subcmd__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind help history remove commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__help__subcmd__history__subcmd__set_commands] )) ||
+_projfind__subcmd__help__subcmd__history__subcmd__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind help history set commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__help__subcmd__history__subcmd__show_commands] )) ||
+_projfind__subcmd__help__subcmd__history__subcmd__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind help history show commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history_commands] )) ||
+_projfind__subcmd__history_commands() {
+    local commands; commands=(
+'list:Lists every recorded project' \
+'show:Shows one recorded project' \
+'set:Sets a project'\''s raw score' \
+'adjust:Adds a positive or negative amount to a project'\''s raw score' \
+'remove:Removes one project from history' \
+'clear:Removes every project from history' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'projfind history commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__adjust_commands] )) ||
+_projfind__subcmd__history__subcmd__adjust_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history adjust commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__clear_commands] )) ||
+_projfind__subcmd__history__subcmd__clear_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history clear commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__help_commands] )) ||
+_projfind__subcmd__history__subcmd__help_commands() {
+    local commands; commands=(
+'list:Lists every recorded project' \
+'show:Shows one recorded project' \
+'set:Sets a project'\''s raw score' \
+'adjust:Adds a positive or negative amount to a project'\''s raw score' \
+'remove:Removes one project from history' \
+'clear:Removes every project from history' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'projfind history help commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__help__subcmd__adjust_commands] )) ||
+_projfind__subcmd__history__subcmd__help__subcmd__adjust_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history help adjust commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__help__subcmd__clear_commands] )) ||
+_projfind__subcmd__history__subcmd__help__subcmd__clear_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history help clear commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__help__subcmd__help_commands] )) ||
+_projfind__subcmd__history__subcmd__help__subcmd__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history help help commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__help__subcmd__list_commands] )) ||
+_projfind__subcmd__history__subcmd__help__subcmd__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history help list commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__help__subcmd__remove_commands] )) ||
+_projfind__subcmd__history__subcmd__help__subcmd__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history help remove commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__help__subcmd__set_commands] )) ||
+_projfind__subcmd__history__subcmd__help__subcmd__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history help set commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__help__subcmd__show_commands] )) ||
+_projfind__subcmd__history__subcmd__help__subcmd__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history help show commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__list_commands] )) ||
+_projfind__subcmd__history__subcmd__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history list commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__remove_commands] )) ||
+_projfind__subcmd__history__subcmd__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history remove commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__set_commands] )) ||
+_projfind__subcmd__history__subcmd__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history set commands' commands "$@"
+}
+(( $+functions[_projfind__subcmd__history__subcmd__show_commands] )) ||
+_projfind__subcmd__history__subcmd__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'projfind history show commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_projfind" ]; then
+    _projfind "$@"
+else
+    compdef _projfind projfind
+fi

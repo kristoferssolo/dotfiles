@@ -25,8 +25,10 @@ README.md
 chezmoi.toml.example
 justfile
 taplo.toml
+bacon.toml
 
 # These are repository fixtures or configurations that Dotter did not deploy.
 .config/fish/fish_variables
+.config/fish/themes
 .config/yazi/flavors
 .config/yazi/plugins

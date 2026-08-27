@@ -19,6 +19,9 @@ session="$({
     --preview 'sesh preview {2..}')"
 
 if [[ -n $session ]]; then
-    session="${session#󰉋 }"
+    if [[ $session == "󰉋 "* ]]; then
+        session="${session#󰉋 }"
+        projfind add "$session"
+    fi
     exec sesh connect "$session"
 fi

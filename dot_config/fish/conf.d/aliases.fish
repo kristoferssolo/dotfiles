@@ -33,7 +33,7 @@ alias e="$EDITOR"
 alias fetch="fastfetch"
 alias j="joshutoub"
 alias lf="lfub"
-alias lg="lazygit"
+alias lg='lazygit --use-config-file="$XDG_CONFIG_HOME/lazygit/config.yml,$XDG_CONFIG_HOME/lazygit/themes/rose-pine.yml"'
 alias lock="swaylock"
 alias lzd="lazydocker"
 alias night="redshift -PO 4500"
