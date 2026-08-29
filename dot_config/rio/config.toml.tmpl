@@ -1,4 +1,4 @@
-# See the full configuration reference: https://rioterm.com/docs/config
+# https://rioterm.com/docs/config
 confirm-before-quit = false
 copy-on-select = true
 theme = "rose-pine.toml"    # or rose-pine-moon.toml or rose-pine-dawn.toml
@@ -8,9 +8,9 @@ size = {{ .font_size }}
 features = [ "-calt", "-liga", "-dlig", "cv01=2" ]
 family = "JetBrainsMono NF"
 
-
 [navigation]
 use-split = false
+mode = "Plain"
 
 [cursor]
 shape = "beam"
@@ -21,3 +21,5 @@ target-fps = 180
 
 [window]
 opacity = 0.95
+decorations = "disabled"
+blur = true

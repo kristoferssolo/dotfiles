@@ -13,6 +13,16 @@ name = "SoloVim"
 path = "~/Nextcloud/repos/SoloVim/"
 startup_command = "tmux new-window && tmux select-window -t 1"
 
+[[session]]
+name = "pi"
+path = "~/Nextcloud/repos/solo-pi/"
+startup_command = "tmux new-window && tmux select-window -t 1"
+
+[[session]]
+name = "Agents"
+path = "~/Nextcloud/repos/solo-protocol/"
+startup_command = "tmux new-window && tmux select-window -t 1"
+
 # [[wildcard]]
 # pattern = "~/Projects/**"
 

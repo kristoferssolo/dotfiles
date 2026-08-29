@@ -85,7 +85,6 @@ window-rule {
 window-rule {
     match app-id="^Alacritty$"
     match app-id="^com\\.mitchellh\\.ghostty$"
-    match app-id="^rio$"
     background-effect {
         blur true
     }

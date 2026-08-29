@@ -1,0 +1,470 @@
+#compdef mekle
+
+autoload -U is-at-least
+
+_mekle() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" : \
+'-d+[Maximum search depth]:DEPTH:_default' \
+'--depth=[Maximum search depth]:DEPTH:_default' \
+'-n+[Maximum number of results]:MAX_RESULTS:_default' \
+'--max-results=[Maximum number of results]:MAX_RESULTS:_default' \
+'-v[Print search progress]' \
+'--verbose[Print search progress]' \
+'(-0 --null)--json[Print newline-delimited JSON]' \
+'(--json)-0[Print uncontracted paths separated by NUL bytes]' \
+'(--json)--null[Print uncontracted paths separated by NUL bytes]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+'::paths -- Directories to search:' \
+":: :_mekle_commands" \
+"*::: :->mekle" \
+&& ret=0
+    case $state in
+    (mekle)
+        words=($line[2] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:mekle-command-$line[2]:"
+        case $line[2] in
+            (completions)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':shell:(bash elvish fish zsh)' \
+&& ret=0
+;;
+(init)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':shell:(bash elvish fish zsh)' \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':path -- Project directory to record:_files' \
+&& ret=0
+;;
+(history)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_mekle__subcmd__history_commands" \
+"*::: :->history" \
+&& ret=0
+
+    case $state in
+    (history)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:mekle-history-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(show)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':path -- Project directory to inspect:_files' \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':path -- Project directory to change:_files' \
+':score -- New raw score:_default' \
+&& ret=0
+;;
+(adjust)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':path -- Project directory to change:_files' \
+':delta -- Amount to add to the raw score:_default' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':path -- Project directory to remove:_files' \
+&& ret=0
+;;
+(prune)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(clear)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_mekle__subcmd__history__subcmd__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:mekle-history-help-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(show)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(adjust)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(prune)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(clear)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_mekle__subcmd__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:mekle-help-command-$line[1]:"
+        case $line[1] in
+            (completions)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(init)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(history)
+_arguments "${_arguments_options[@]}" : \
+":: :_mekle__subcmd__help__subcmd__history_commands" \
+"*::: :->history" \
+&& ret=0
+
+    case $state in
+    (history)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:mekle-help-history-command-$line[1]:"
+        case $line[1] in
+            (list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(show)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(adjust)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(prune)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(clear)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_mekle_commands] )) ||
+_mekle_commands() {
+    local commands; commands=(
+'completions:Generates shell completions' \
+'init:Generates a shell integration that defines \`m\`' \
+'add:Records a visit to a project directory' \
+'history:Inspects or changes project history' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'mekle commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__add_commands] )) ||
+_mekle__subcmd__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle add commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__completions_commands] )) ||
+_mekle__subcmd__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle completions commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help_commands] )) ||
+_mekle__subcmd__help_commands() {
+    local commands; commands=(
+'completions:Generates shell completions' \
+'init:Generates a shell integration that defines \`m\`' \
+'add:Records a visit to a project directory' \
+'history:Inspects or changes project history' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'mekle help commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help__subcmd__add_commands] )) ||
+_mekle__subcmd__help__subcmd__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle help add commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help__subcmd__completions_commands] )) ||
+_mekle__subcmd__help__subcmd__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle help completions commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help__subcmd__help_commands] )) ||
+_mekle__subcmd__help__subcmd__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle help help commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help__subcmd__history_commands] )) ||
+_mekle__subcmd__help__subcmd__history_commands() {
+    local commands; commands=(
+'list:Lists every recorded project' \
+'show:Shows one recorded project' \
+'set:Sets a project'\''s raw score' \
+'adjust:Adds a positive or negative amount to a project'\''s raw score' \
+'remove:Removes one project from history' \
+'prune:Removes projects whose paths no longer exist' \
+'clear:Removes every project from history' \
+    )
+    _describe -t commands 'mekle help history commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help__subcmd__history__subcmd__adjust_commands] )) ||
+_mekle__subcmd__help__subcmd__history__subcmd__adjust_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle help history adjust commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help__subcmd__history__subcmd__clear_commands] )) ||
+_mekle__subcmd__help__subcmd__history__subcmd__clear_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle help history clear commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help__subcmd__history__subcmd__list_commands] )) ||
+_mekle__subcmd__help__subcmd__history__subcmd__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle help history list commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help__subcmd__history__subcmd__prune_commands] )) ||
+_mekle__subcmd__help__subcmd__history__subcmd__prune_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle help history prune commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help__subcmd__history__subcmd__remove_commands] )) ||
+_mekle__subcmd__help__subcmd__history__subcmd__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle help history remove commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help__subcmd__history__subcmd__set_commands] )) ||
+_mekle__subcmd__help__subcmd__history__subcmd__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle help history set commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help__subcmd__history__subcmd__show_commands] )) ||
+_mekle__subcmd__help__subcmd__history__subcmd__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle help history show commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__help__subcmd__init_commands] )) ||
+_mekle__subcmd__help__subcmd__init_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle help init commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history_commands] )) ||
+_mekle__subcmd__history_commands() {
+    local commands; commands=(
+'list:Lists every recorded project' \
+'show:Shows one recorded project' \
+'set:Sets a project'\''s raw score' \
+'adjust:Adds a positive or negative amount to a project'\''s raw score' \
+'remove:Removes one project from history' \
+'prune:Removes projects whose paths no longer exist' \
+'clear:Removes every project from history' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'mekle history commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__adjust_commands] )) ||
+_mekle__subcmd__history__subcmd__adjust_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history adjust commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__clear_commands] )) ||
+_mekle__subcmd__history__subcmd__clear_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history clear commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__help_commands] )) ||
+_mekle__subcmd__history__subcmd__help_commands() {
+    local commands; commands=(
+'list:Lists every recorded project' \
+'show:Shows one recorded project' \
+'set:Sets a project'\''s raw score' \
+'adjust:Adds a positive or negative amount to a project'\''s raw score' \
+'remove:Removes one project from history' \
+'prune:Removes projects whose paths no longer exist' \
+'clear:Removes every project from history' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'mekle history help commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__help__subcmd__adjust_commands] )) ||
+_mekle__subcmd__history__subcmd__help__subcmd__adjust_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history help adjust commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__help__subcmd__clear_commands] )) ||
+_mekle__subcmd__history__subcmd__help__subcmd__clear_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history help clear commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__help__subcmd__help_commands] )) ||
+_mekle__subcmd__history__subcmd__help__subcmd__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history help help commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__help__subcmd__list_commands] )) ||
+_mekle__subcmd__history__subcmd__help__subcmd__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history help list commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__help__subcmd__prune_commands] )) ||
+_mekle__subcmd__history__subcmd__help__subcmd__prune_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history help prune commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__help__subcmd__remove_commands] )) ||
+_mekle__subcmd__history__subcmd__help__subcmd__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history help remove commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__help__subcmd__set_commands] )) ||
+_mekle__subcmd__history__subcmd__help__subcmd__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history help set commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__help__subcmd__show_commands] )) ||
+_mekle__subcmd__history__subcmd__help__subcmd__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history help show commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__list_commands] )) ||
+_mekle__subcmd__history__subcmd__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history list commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__prune_commands] )) ||
+_mekle__subcmd__history__subcmd__prune_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history prune commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__remove_commands] )) ||
+_mekle__subcmd__history__subcmd__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history remove commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__set_commands] )) ||
+_mekle__subcmd__history__subcmd__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history set commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__history__subcmd__show_commands] )) ||
+_mekle__subcmd__history__subcmd__show_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle history show commands' commands "$@"
+}
+(( $+functions[_mekle__subcmd__init_commands] )) ||
+_mekle__subcmd__init_commands() {
+    local commands; commands=()
+    _describe -t commands 'mekle init commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_mekle" ]; then
+    _mekle "$@"
+else
+    compdef _mekle mekle
+fi

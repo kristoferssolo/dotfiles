@@ -59,10 +59,3 @@ url = "https://github.com/rose-pine/gtk/releases/download/v2.2.0/gtk4.tar.gz"
 stripComponents = 1
 include = [ "gtk4/rose-pine.css" ]
 refreshPeriod = "168h"
-
-[".config/lazygit/themes"]
-type = "archive"
-url = "https://github.com/rose-pine/lazygit/archive/refs/heads/main.tar.gz"
-stripComponents = 2
-include = [ "*/themes/**" ]
-refreshPeriod = "168h"
