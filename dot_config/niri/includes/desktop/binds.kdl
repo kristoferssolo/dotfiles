@@ -1,9 +1,11 @@
 binds {
     XF86AudioRaiseVolume allow-when-locked=true {
-        spawn-sh "wpctl set-volume $(get-spotify-id) 0.02+ --limit 1.0"
+        // spawn-sh "wpctl set-volume $(get-spotify-id) 0.02+ --limit 1.0"
+        spawn-sh "playerctl -p spotify volume 0.02+"
     }
     XF86AudioLowerVolume allow-when-locked=true {
-        spawn-sh "wpctl set-volume $(get-spotify-id) 0.02-"
+        // spawn-sh "wpctl set-volume $(get-spotify-id) 0.02-"
+        spawn-sh "playerctl -p spotify volume 0.02-"
     }
     XF86AudioMute allow-when-locked=true {
         spawn "sp" "play"

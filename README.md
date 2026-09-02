@@ -2,17 +2,17 @@
 
 Personal Linux dotfiles managed with [chezmoi](https://www.chezmoi.io/).
 
-The chezmoi source state lives in `home/`. It uses chezmoi's naming convention:
+Chezmoi uses chezmoi's naming convention:
 `dot_config` maps to `~/.config` and `dot_local` maps to `~/.local`.
 Neovim is managed separately in [SoloVim](https://codeberg.org/kristoferssolo/SoloVim):
 
 ```sh
-git clone https://codeberg.org/kristoferssolo/SoloVim ~/.config/nvim
+git clone https://github.com/kristoferssolo/SoloVim ~/.config/nvim
 ```
 
 ## Profiles
 
-The default profile is `desktop`. Its values live in `home/.chezmoidata.toml`.
+The default profile is `desktop`. Its values live in `.chezmoidata.toml`.
 Set a machine-specific profile and overrides in chezmoi's untracked config:
 
 ```sh
@@ -29,7 +29,7 @@ Available profiles are:
 | `x11` | Awesome desktop setup |
 | `x11-laptop` | Awesome laptop setup |
 
-Profile data controls conditional source inclusion through `home/.chezmoiignore`.
+Profile data controls conditional source inclusion through `.chezmoiignore`.
 Values in `~/.config/chezmoi/chezmoi.toml` override the shared defaults.
 
 ## Install
@@ -37,7 +37,7 @@ Values in `~/.config/chezmoi/chezmoi.toml` override the shared defaults.
 Clone the repository and initialize chezmoi using its source directory:
 
 ```sh
-git clone https://codeberg.org/kristoferssolo/dotfiles.git ~/.dotfiles
+git clone https://github.com/kristoferssolo/dotfiles.git ~/.dotfiles
 chezmoi init --source ~/.dotfiles/home
 chezmoi apply --dry-run
 chezmoi apply
@@ -53,9 +53,8 @@ just plugins
 
 ## Layout
 
-- `home/` — chezmoi source state
-- `home/.chezmoidata.toml` — shared template defaults
-- `home/.chezmoiignore` — profile-specific source exclusions
-- `chezmoi.toml.example` — local machine override example
-- `home/dot_config/` — XDG application configuration
-- `home/dot_local/` — commands, assets, and user-local data
+- `.chezmoidata.toml` – shared template defaults
+- `.chezmoiignore` – profile-specific source exclusions
+- `chezmoi.toml.example` – local machine override example
+- `dot_config/` – XDG application configuration
+- `dot_local/` – commands, assets, and user-local data
