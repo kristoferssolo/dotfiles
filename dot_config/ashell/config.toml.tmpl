@@ -1,4 +1,3 @@
-log_level = "warn"
 outputs = "All"
 position = "Top"
 app_launcher_cmd = "fuzzel"
@@ -14,11 +13,12 @@ check_cmd = "checkupdates; paru -Qua"
 update_cmd = 'alacritty -e bash -c "paru; echo Done - Press enter to exit; read" &'
 
 [workspaces]
-visibility_mode = "MonitorSpecific"
+visibility_mode = "MonitorSpecificExclusive"
+# indicator_format = "NameAndIcons"
+# group_by_monitor = true
+# enable_workspace_filling = true
 workspace_names = [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" ]
 # workspace_names = [ "一", "二", "三", "四", "五", "六", "七", "八", "九", "十" ]
-# group_by_monitor = true
-# enable_workspace_filling = false
 # disable_special_workspaces = true
 
 [tempo]
@@ -47,29 +47,42 @@ peripheral_indicators = {Specific = [ "Gamepad", "Keyboard" ]}
 indicators = [ "Cpu", "Memory", "Temperature" ]
 
 [system_info.temperature]
-sensor = "k10temp Tctl"
 warn_threshold = 70
 alert_threshold = 85
+
+[animations]
+enabled = false
+
+# ── Appearance ────────────────────────────────────────────────────────────────
 
 [appearance]
 style = "Solid"
 opacity = 0.9
+# font_name = "Sans"
+# scale_factor = 1.0
+blur = "auto"
 
-# Rose Pine (main)
-primary_color = "#c4a7e7"                # iris
-success_color = "#31748f"                # pine
-text_color = "#e0def4"                   # text
-workspace_colors = [ "#31748f" ]
-special_workspace_colors = [ "#31748f" ]
+primary_color = "#c4a7e7"
+success_color = "#9ccfd8"
+warning_color = "#f6c177"
+danger_color = "#eb6f92"
+text_color = "#e0def4"
 
-[appearance.danger_color]
-base = "#eb6f92" # love
-weak = "#f6c177" # gold
+workspace_colors = [ "#c4a7e7", "#9ccfd8", "#ebbcba", "#31748f" ]
+
+[appearance.bar]
+surface = "solid"
 
 [appearance.background_color]
-base = "#191724"   # base
-weak = "#1f1d2e"   # surface
-strong = "#26233a" # overlay
+base = "#191724"
+weak = "#1f1d2e"
+strong = "#26233a"
+weakest = "#21202e"
+weaker = "#21202e"
+neutral = "#26233a"
+stronger = "#403d52"
+strongest = "#524f67"
+text = "#e0def4"
 
-[appearance.secondary_color]
-base = "#26233a" # overlay
+[logging]
+level = "warn"

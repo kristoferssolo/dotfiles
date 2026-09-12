@@ -19,7 +19,7 @@ alias keychain="keychain --dir $XDG_RUNTIME_DIR/keychain"
 
 # Colorize commands
 alias diff="diff --color=auto"
-alias grep="rg --color=auto"
+alias grep="grep --color=auto"
 alias ip="ip -color=auto"
 alias less="moor"
 alias ls="eza -a --icons --group-directories-first"

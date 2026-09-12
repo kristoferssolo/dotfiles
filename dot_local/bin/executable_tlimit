@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Cap transmission-daemon's upload to a % of measured uplink (default 50%)
+# so the router's buffer doesn't bloat. Uses RPC so no settings.json edit needed.
+# Usage: tlimit [percent]
+
+PCT="${1:-50}"
+URL="http://localhost:9091/transmission/rpc"
+
+[ -x /usr/bin/speedtest ] || { echo "speedtest not found" >&2; exit 1; }
+
+up_mbit=$(speedtest --accept-license --accept-gdpr --no-download -f json 2>/dev/null |
+	python3 -c 'import json,sys;print(int(json.load(sys.stdin)["upload"]["bandwidth"]*8/1e6))')
+[ -n "$up_mbit" ] && [ "$up_mbit" -gt 0 ] || { echo "speedtest failed" >&2; exit 1; }
+
+# Mbit/s -> KB/s, apply percentage
+kbps=$(( up_mbit * 1000 / 8 * PCT / 100 ))
+
+transmission-remote "$URL" -u "$kbps" >/dev/null
+notify-send "transmission" "upload capped at ${kbps} KB/s (${PCT}% of ${up_mbit} Mbit/s)"
+echo "upload capped at ${kbps} KB/s (${PCT}% of ${up_mbit} Mbit/s)"
