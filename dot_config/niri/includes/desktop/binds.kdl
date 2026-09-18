@@ -17,10 +17,10 @@ binds {
         spawn "sp" "prev"
     }
     Mod+1 {
-        focus-workspace 1
+        focus-workspace "browser"
     }
     Mod+2 {
-        focus-workspace 2
+        focus-workspace "terminal"
     }
     Mod+3 {
         focus-workspace 3
@@ -38,16 +38,16 @@ binds {
         focus-workspace 7
     }
     Mod+8 {
-        focus-workspace 8
+        focus-workspace "chat"
     }
     Mod+9 {
-        focus-workspace 9
+        focus-workspace "music"
     }
     Mod+Shift+1 {
-        move-column-to-workspace 1
+        move-column-to-workspace "browser"
     }
     Mod+Shift+2 {
-        move-column-to-workspace 2
+        move-column-to-workspace "terminal"
     }
     Mod+Shift+3 {
         move-column-to-workspace 3
@@ -65,10 +65,10 @@ binds {
         move-column-to-workspace 7
     }
     Mod+Shift+8 {
-        move-column-to-workspace 8
+        move-column-to-workspace "chat"
     }
     Mod+Shift+9 {
-        move-column-to-workspace 9
+        move-column-to-workspace "music"
     }
     Mod+Delete hotkey-overlay-title="Screenshot (region)" {
         spawn "dot-screenshot" "region"
