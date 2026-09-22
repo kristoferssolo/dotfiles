@@ -49,7 +49,7 @@ play = [
   {run = "mpv %s", orphan = true, for = "windows"},
   {run = "mediainfo %s1; echo 'Press enter to exit'; read _", block = true, desc = "Show media info", for = "unix"},
 ]
-pdf = [ {run = "sioyek --new-instance %s", orphan = true} ]
+pdf = [ {run = "zathura --fork %s", orphan = true} ]
 
 [open]
 rules = [

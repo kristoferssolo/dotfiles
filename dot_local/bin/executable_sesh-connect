@@ -1,20 +1,45 @@
 #!/usr/bin/env bash
 
-session="$({
-    sesh list -t -c --icons
-    mekle | sed 's|^|󰉋 |'
-} | fzf-tmux -p 80%,70% \
+list_all() {
+    declare -A seen_paths=()
+
+    while IFS= read -r path; do
+        seen_paths["$(realpath -m "${path%/}")"]=1
+    done < <(sesh list -c --json | jq -r '.[].Path')
+
+    sesh list -t -c --hide-duplicates --icons
+
+    while IFS= read -r project; do
+        project_path=$project
+        if [[ $project_path == '~/'* ]]; then
+            project_path="${HOME}/${project_path:2}"
+        fi
+        project_path=$(realpath -m "${project_path%/}")
+
+        if [[ -z ${seen_paths["$project_path"]+seen} ]]; then
+            printf '󰉋 %s\n' "$project"
+            seen_paths["$project_path"]=1
+        fi
+    done < <(mekle)
+}
+
+if [[ ${1:-} == --list-all ]]; then
+    list_all
+    exit
+fi
+
+session="$(list_all | fzf-tmux -p 80%,70% \
     --no-sort --ansi \
     --border-label ' sesh ' \
     --prompt '⚡  ' \
     --header '  ^a all  ^t tmux  ^g configs  ^x projects  ^d tmux kill  ^f find' \
     --bind 'tab:down,btab:up' \
-    --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list -t -c --icons; mekle | sed "s|^|󰉋 |")' \
+    --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh-connect --list-all)' \
     --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
     --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
     --bind 'ctrl-x:change-prompt(󰉋  )+reload(mekle | sed "s|^|󰉋 |")' \
     --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
-    --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list -t -c --icons; mekle | sed "s|^|󰉋 |")' \
+    --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh-connect --list-all)' \
     --preview-window 'right:55%' \
     --preview 'sesh preview {2..}')"
 
