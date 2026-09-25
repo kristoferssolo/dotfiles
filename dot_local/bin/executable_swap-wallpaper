@@ -16,9 +16,9 @@ WALLPAPER_HOME = Path.home() / "Pictures" / "wallpapers"
 # Directories searched for wallpapers. Add a line to pull in another collection.
 BG_DIRS: tuple[Path, ...] = (
     WALLPAPER_HOME / "rose-pine",
-    WALLPAPER_HOME / "nature",
-    WALLPAPER_HOME / "PoE2" / "3880x2160",
-    WALLPAPER_HOME / "Linux-Dynamic-Wallpapers",
+    # WALLPAPER_HOME / "nature",
+    # WALLPAPER_HOME / "PoE2" / "3880x2160",
+    # WALLPAPER_HOME / "Linux-Dynamic-Wallpapers",
 )
 
 # Still-image formats both hyprpaper and swaybg can load.
