@@ -51,6 +51,26 @@ from their manifests after the first apply:
 just plugins
 ```
 
+## MultiViewer
+
+MultiViewer settings and saved setups live in `.chezmoitemplates/multiviewer/`.
+Chezmoi links `config.json`, `setups.config.json`, and `setups.schema.json` from
+`~/.config/MultiViewer/` to those files. Changes saved in MultiViewer update the
+repository files directly. Login data, caches, and downloaded configuration stay
+local to each machine.
+
+Quit MultiViewer before syncing or applying changes. Back up those three files
+on a machine with existing settings, then apply the links:
+
+```sh
+chezmoi apply ~/.config/MultiViewer
+```
+
+The repository is inside Nextcloud on this machine, so these files sync with it.
+For machines using separate Git clones, commit and push changes, then pull them
+on the other machine before reopening MultiViewer. Saved setups include monitor
+positions and sizes, so you may need to adjust them for a different display setup.
+
 ## Layout
 
 - `.chezmoidata.toml` – shared template defaults
