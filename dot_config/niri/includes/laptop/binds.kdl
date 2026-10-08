@@ -11,6 +11,9 @@ binds {
     XF86AudioMute allow-when-locked=true {
         spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"
     }
+    XF86AudioPlay allow-when-locked=true {
+        spawn "playerctl" "--all-players" "play-pause"
+    }
     Mod+1 {
         focus-workspace "1"
     }
