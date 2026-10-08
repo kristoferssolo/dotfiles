@@ -51,6 +51,14 @@ from their manifests after the first apply:
 just plugins
 ```
 
+## PyCharm
+
+`.chezmoitemplates/ideavimrc` provides SoloVim-style editing and workflow keys through IdeaVim.
+Chezmoi links `~/.config/ideavim/ideavimrc` to that file, so edits through either
+path update the repository directly.
+See [the PyCharm setup guide](docs/pycharm.md) for installation on macOS, the
+companion IDE keymap, and differences from Neovim.
+
 ## MultiViewer
 
 MultiViewer settings and saved setups live in `.chezmoitemplates/multiviewer/`.

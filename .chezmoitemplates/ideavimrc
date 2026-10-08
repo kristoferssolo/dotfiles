@@ -1,0 +1,187 @@
+" SoloVim editing keys, with PyCharm providing search, code tools, and debugging.
+" Setup and workflow differences: docs/pycharm.md in the dotfiles repository.
+" Requires a recent IdeaVim; checked against IdeaVim 2.47.3 / PyCharm 2026.2.3.
+
+let mapleader = " "
+nnoremap <Space> <Nop>
+
+set number relativenumber
+set nowrap
+set scrolloff=10 sidescrolloff=10
+set ignorecase smartcase incsearch nohlsearch
+set timeout timeoutlen=250
+set clipboard=unnamedplus
+set ideaput
+set idearefactormode=select
+" Indentation and line length follow the project's PyCharm/EditorConfig settings.
+
+" Built into IdeaVim; these do not need separate Marketplace plugins.
+set commentary
+set surround
+
+" Marketplace plugin: Vim AnyObject replaces the built-in text objects.
+set noargtextobj
+set nofunctextobj
+set noclasstextobj
+" Match SoloVim's conditional/comment keys; collection items move to e.
+" Configure these before enabling the extension so it creates the right maps.
+let g:anyobject_map_anyconditional = 'i'
+let g:anyobject_map_anyitem = 'e'
+let g:anyobject_map_anycomment = 't'
+set anyobject
+
+" Oil-style entry/open/split keys for the Project tree, via built-in NERDTree.
+" Set these before enabling the extension so its tree mappings pick them up.
+let g:NERDTreeMapActivateNode = '<CR>'
+let g:NERDTreeMapJumpParent = '-'
+let g:NERDTreeMapOpenVSplit = '<C-v>'
+let g:NERDTreeMapOpenSplit = '<C-s>'
+let g:NERDTreeQuitOnOpen = 1
+set NERDTree
+
+" mini.surround's main keys. Surround matching follows vim-surround semantics.
+nmap sa <Plug>YSurround
+nmap sd <Plug>DSurround
+nmap sr <Plug>CSurround
+xmap sa <Plug>VSurround
+
+" Editing, scrolling, and macros from lua/config/keymaps.lua.
+nnoremap J mzJ`z
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+nnoremap S :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+nnoremap Q @qj
+xnoremap Q :normal @q<CR>
+xnoremap p "_dP
+xnoremap > >gv
+xnoremap < <gv
+nmap <A-j> <Action>(MoveLineDown)
+nmap <A-k> <Action>(MoveLineUp)
+xmap <A-j> <Action>(MoveLineDown)
+xmap <A-k> <Action>(MoveLineUp)
+
+" Splits. Standard :split, :vsplit, and Ctrl-w commands still work.
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-\> <C-w>p
+
+" Snacks pickers and Oil alternatives.
+nmap <C-n> <Action>(GotoFile)
+nmap <leader>pf <Action>(GotoFile)
+nmap <leader>pg <Action>(GotoFile)
+nmap <leader>ps <Action>(FindInPath)
+nmap <leader>pw viw<Action>(FindInPath)
+xmap <leader>pw <Action>(FindInPath)
+nmap <leader>pb <Action>(Switcher)
+nmap <leader>pr <Action>(RecentFiles)
+nmap <leader>pk <Action>(GotoAction)
+nmap <leader>pt <Action>(ActivateTODOToolWindow)
+nmap - <Action>(SelectInProjectView)
+nmap <leader>b <Action>(FileStructurePopup)
+nmap <leader>cf <Action>(CopyAbsolutePath)
+" Atone/undotree alternatives: recent history in a tool window, file history dialog.
+nmap <leader>u <Action>(RecentChanges)
+nmap <leader>U <Action>(LocalHistory.ShowHistory)
+if $XDG_CONFIG_HOME == ''
+  nmap <leader>oo <Action>(SaveAll):source ~/.config/ideavim/ideavimrc<CR>
+else
+  nmap <leader>oo <Action>(SaveAll):source $XDG_CONFIG_HOME/ideavim/ideavimrc<CR>
+endif
+
+" Marketplace plugin: HarpoonIJ, using SoloVim's file-list keys.
+nmap <leader>a <Action>(AddToHarpoon)
+nmap <C-e> <Action>(ShowHarpoon)
+nmap <A-1> <Action>(GotoHarpoon1)
+nmap <A-2> <Action>(GotoHarpoon2)
+nmap <A-3> <Action>(GotoHarpoon3)
+nmap <A-4> <Action>(GotoHarpoon4)
+
+" LSP / Trouble equivalents.
+nmap gd <Action>(GotoDeclaration)
+nmap gD <Action>(GotoDeclarationOnly)
+nmap gi <Action>(GotoImplementation)
+nmap gr <Action>(FindUsages)
+nmap gR <Action>(ShowUsages)
+" SoloVim Documentation Popup Keys supplies a popup-local second K shortcut.
+nmap K <Action>(SoloVim.QuickDocumentation)
+imap <C-h> <Action>(ParameterInfo)
+nmap <leader>ws <Action>(GotoSymbol)
+nmap <leader>wd <Action>(ShowErrorDescription)
+nmap <leader>lD <Action>(GotoTypeDeclaration)
+nmap <leader>lr <Action>(RenameElement)
+nmap <leader>la <Action>(ShowIntentionActions)
+xmap <leader>la <Action>(ShowIntentionActions)
+nmap <leader>lj <Action>(GotoNextError)
+nmap <leader>lk <Action>(GotoPreviousError)
+nmap ]d <Action>(GotoNextError)
+nmap [d <Action>(GotoPreviousError)
+nmap ]m <Action>(MethodDown)
+nmap [m <Action>(MethodUp)
+nmap <leader>xx <Action>(ActivateProblemsViewToolWindow)
+nmap <leader>xd <Action>(ActivateProblemsViewToolWindow)
+nmap <leader>pD <Action>(ActivateProblemsViewToolWindow)
+nmap <leader>f <Action>(ReformatCode)
+xmap <leader>f <Action>(ReformatCode)
+
+" Git. Run lazygit in the terminal if you prefer its UI.
+nmap <leader>gg <Action>(Vcs.Show.Local.Changes)
+nmap <leader>gl <Action>(ActivateVersionControlToolWindow)
+nmap <leader>gb <Action>(Annotate)
+nmap <leader>gd <Action>(Compare.SameVersion)
+
+" DAP keys. dl starts the selected configuration; dc resumes a paused session.
+nmap <leader>dd <Action>(ToggleLineBreakpoint)
+nmap <leader>dD <Action>(AddConditionalBreakpoint)
+nmap <leader>dl <Action>(Debug)
+nmap <leader>dc <Action>(Resume)
+nmap <leader>di <Action>(StepInto)
+nmap <leader>do <Action>(StepOver)
+nmap <leader>dO <Action>(StepOut)
+nmap <leader>dT <Action>(Stop)
+nmap <leader>dt <Action>(ActivateDebugToolWindow)
+nmap <leader>dh <Action>(QuickEvaluateExpression)
+nmap <leader>dP <Action>(EvaluateExpression)
+nmap <F1> <Action>(Resume)
+nmap <F2> <Action>(StepInto)
+nmap <F3> <Action>(StepOver)
+nmap <F4> <Action>(StepOut)
+nmap <F6> <Action>(Rerun)
+
+" Contextual test/run actions, plus a terminal shortcut.
+nmap <leader>tr <Action>(RunClass)
+nmap <leader>td <Action>(DebugClass)
+nmap <leader>ts <Action>(ActivateRunToolWindow)
+nmap <leader>tl <Action>(Rerun)
+nmap <leader>ot <Action>(ActivateTerminalToolWindow)
+
+" Resolve conflicts per key. Command shortcuts and live templates stay native.
+sethandler <C-h> n-x:vim i:vim s:ide c:vim
+sethandler <C-j> n-x:vim i-s:ide c:vim
+sethandler <C-k> n-x:vim i-s:ide c:vim
+sethandler <C-l> n-x:vim i-s:ide c:vim
+sethandler <C-\> n-x:vim i-s:ide c:vim
+sethandler <C-n> n:vim i-s:ide c:vim
+sethandler <C-e> n:vim i-s:ide c:vim
+sethandler <C-d> n-x:vim i-s:ide c:vim
+sethandler <C-u> n-x:vim i-s:ide c:vim
+sethandler <A-1> n:vim i-s:ide c:vim
+sethandler <A-2> n:vim i-s:ide c:vim
+sethandler <A-3> n:vim i-s:ide c:vim
+sethandler <A-4> n:vim i-s:ide c:vim
+sethandler <A-j> n-x:vim i-s:ide c:vim
+sethandler <A-k> n-x:vim i-s:ide c:vim
+sethandler <F1> n:vim i-s:ide c:vim
+sethandler <F2> n:vim i-s:ide c:vim
+sethandler <F3> n:vim i-s:ide c:vim
+sethandler <F4> n:vim i-s:ide c:vim
+sethandler <F6> n:vim i-s:ide c:vim

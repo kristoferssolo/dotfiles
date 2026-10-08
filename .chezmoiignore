@@ -22,6 +22,7 @@
 .gitignore
 LICENSE
 README.md
+docs/**
 chezmoi.toml.example
 justfile
 taplo.toml

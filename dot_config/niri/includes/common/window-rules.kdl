@@ -1,6 +1,20 @@
 window-rule {
     draw-border-with-background false
 }
+// PyCharm's per-file Local History opens a separate top-level window.
+// The main editor starts at its usual full width before restoring tool panels.
+window-rule {
+    match app-id="^jetbrains-pycharm$" title="^.+ – .+$"
+    default-column-width { proportion 1.0; }
+}
+window-rule {
+    match app-id="^jetbrains-pycharm$" title="^Local History(:|$)"
+    open-floating true
+    open-maximized false
+    open-fullscreen false
+    default-column-width { fixed 1100; }
+    default-window-height { fixed 750; }
+}
 window-rule {
     match app-id="^org\\.wezfurlong\\.wezterm$"
     default-column-width {

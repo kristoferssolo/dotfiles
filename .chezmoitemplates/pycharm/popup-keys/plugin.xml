@@ -1,0 +1,17 @@
+<idea-plugin>
+  <id>solovim.documentation-popup-keys</id>
+  <name>SoloVim Documentation Popup Keys</name>
+  <version>0.1.3</version>
+  <vendor>SoloVim</vendor>
+  <description>Adds K inside Quick Documentation and restores the saved Project width after native Wayland startup sizing.</description>
+  <idea-version since-build="262" until-build="262.*" />
+  <depends>com.intellij.modules.platform</depends>
+  <projectListeners>
+    <listener class="solovim.SoloVimProjectLayoutListener"
+              topic="com.intellij.openapi.wm.ex.ToolWindowManagerListener" />
+  </projectListeners>
+  <actions>
+    <action id="SoloVim.QuickDocumentation" class="solovim.SoloVimDocumentationAction"
+            text="SoloVim: Quick Documentation" />
+  </actions>
+</idea-plugin>

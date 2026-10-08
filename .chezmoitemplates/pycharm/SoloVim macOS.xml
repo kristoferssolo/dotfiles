@@ -1,0 +1,53 @@
+<keymap version="1" name="SoloVim macOS" parent="Mac OS X 10.5+">
+  <!-- Global counterparts to IdeaVim's editor mappings. -->
+  <action id="GotoHarpoon1">
+    <keyboard-shortcut first-keystroke="alt 1" />
+  </action>
+  <action id="GotoHarpoon2">
+    <keyboard-shortcut first-keystroke="alt 2" />
+  </action>
+  <action id="GotoHarpoon3">
+    <keyboard-shortcut first-keystroke="alt 3" />
+  </action>
+  <action id="GotoHarpoon4">
+    <keyboard-shortcut first-keystroke="alt 4" />
+  </action>
+  <action id="Resume">
+    <keyboard-shortcut first-keystroke="F1" />
+  </action>
+  <action id="StepInto">
+    <keyboard-shortcut first-keystroke="F2" />
+  </action>
+  <action id="StepOver">
+    <keyboard-shortcut first-keystroke="F3" />
+  </action>
+  <action id="StepOut">
+    <keyboard-shortcut first-keystroke="F4" />
+  </action>
+  <action id="Rerun">
+    <keyboard-shortcut first-keystroke="F6" />
+  </action>
+  <!-- Remove inherited bindings that otherwise share the shortcuts above. -->
+  <action id="QuickJavaDoc">
+    <keyboard-shortcut first-keystroke="control J" />
+  </action>
+  <action id="Move" />
+  <action id="GotoNextError" />
+  <action id="EditSource">
+    <keyboard-shortcut first-keystroke="meta DOWN" />
+  </action>
+  <action id="XDebugger.SetValue" />
+  <action id="ToggleBookmark" />
+  <action id="ShelvedChanges.Rename">
+    <keyboard-shortcut first-keystroke="shift F6" />
+  </action>
+  <action id="Git.Reword.Commit">
+    <keyboard-shortcut first-keystroke="shift F6" />
+  </action>
+  <action id="Git.Rename.Local.Branch">
+    <keyboard-shortcut first-keystroke="shift F6" />
+  </action>
+  <action id="ChangesView.Rename">
+    <keyboard-shortcut first-keystroke="shift F6" />
+  </action>
+</keymap>
