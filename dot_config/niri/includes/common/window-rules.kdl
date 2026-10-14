@@ -5,15 +5,21 @@ window-rule {
 // The main editor starts at its usual full width before restoring tool panels.
 window-rule {
     match app-id="^jetbrains-pycharm$" title="^.+ – .+$"
-    default-column-width { proportion 1.0; }
+    default-column-width {
+        proportion 1.0
+    }
 }
 window-rule {
     match app-id="^jetbrains-pycharm$" title="^Local History(:|$)"
     open-floating true
     open-maximized false
     open-fullscreen false
-    default-column-width { fixed 1100; }
-    default-window-height { fixed 750; }
+    default-column-width {
+        fixed 1100
+    }
+    default-window-height {
+        fixed 750
+    }
 }
 window-rule {
     match app-id="^org\\.wezfurlong\\.wezterm$"
@@ -38,8 +44,9 @@ window-rule {
 window-rule {
     match app-id="^com\\.gabm\\.satty$"
     open-floating true
-    min-width 730
-    min-height 300
+    match app-id="^tvert$"
+    min-width 1080
+    min-height 720
 }
 window-rule {
     match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
@@ -55,7 +62,6 @@ window-rule {
     match app-id="^org\\.telegram\\.desktop$" title="^Media viewer$"
     match app-id="feh"
     match app-id="Nsxiv"
-    match app-id="^tvert$"
     open-floating true
 }
 window-rule {

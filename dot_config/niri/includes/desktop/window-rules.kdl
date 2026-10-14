@@ -39,4 +39,16 @@ window-rule {
     }
  // draw-border-with-background false
 }
-
+window-rule {
+    match app-id="^multiviewer$" title="^Track Map [–—-] MultiViewer$"
+    open-floating true
+    open-maximized false
+    open-fullscreen false
+    default-column-width {
+        fixed 379
+    }
+    default-window-height {
+        fixed 231
+    }
+    default-floating-position x=24 y=173 relative-to="top-right"
+}

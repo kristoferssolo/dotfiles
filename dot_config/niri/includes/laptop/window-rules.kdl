@@ -1,9 +1,22 @@
+// Keep MultiViewer's Track Map in a predictable overlay position on the laptop.
+window-rule {
+    match app-id="^multiviewer$" title="^Track Map [–—-] MultiViewer$"
+    open-floating true
+    open-maximized false
+    open-fullscreen false
+    default-column-width {
+        fixed 379
+    }
+    default-window-height {
+        fixed 231
+    }
+    default-floating-position x=24 y=173 relative-to="top-right"
+}
 window-rule {
     match at-startup=true app-id="floorp"
     open-maximized true
     open-on-workspace "1"
 }
-
 window-rule {
     match at-startup=true app-id="^org\\.telegram\\.desktop$"
     match at-startup=true app-id="^com\\.ayugram\\.desktop$"

@@ -11,7 +11,6 @@ output "DP-1" {
     background-color "#000"
     backdrop-color "#000"
 }
-
 output "DP-2" {
     mode "1920x1080@74.973"
     scale 1
@@ -28,7 +27,6 @@ output "DP-2" {
         }
     }
 }
-
 output "HDMI-A-1" {
     mode "1920x1080@60"
     scale 1
