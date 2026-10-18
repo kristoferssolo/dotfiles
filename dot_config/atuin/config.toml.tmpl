@@ -1,3 +1,13 @@
+{{- $sync := and .atuin_sync (ne .profile "mac") -}}
+# Work machines keep history local, even if atuin_sync is enabled in local data.
+auto_sync = {{ $sync }}
+update_check = {{ $sync }}
+{{ if $sync -}}
+sync_address = "https://atuin.kristofers.xyz"
+{{ else -}}
+# Prevent manual sync/login commands from contacting a remote server by default.
+sync_address = "http://127.0.0.1:0"
+{{ end }}
 ## how often to sync history. note that this is only triggered when a command
 ## is ran, so sync intervals may well be longer
 ## set it to 0 to sync after every command
@@ -76,8 +86,6 @@ history_filter = [
   "(?:^|\\s)(?:export\\s+)?[A-Z][A-Z0-9_]*(?:PASSWORD|PASSWD|TOKEN|API[-_]?KEY|SECRET)=[^\\s]+",
   "^sshpass(?:\\s|$)",
 ]
-
-sync_address = "https://atuin.kristofers.xyz"
 
 ## This specifies the keymap on the startup of `atuin search`. If this is set
 ## to "auto", the startup keymap mode in the Atuin search is automatically

@@ -1,8 +1,11 @@
-# Copy to ~/.config/chezmoi/chezmoi.toml to override home/.chezmoidata.toml.
+# Copy to ~/.config/chezmoi/chezmoi.toml to override .chezmoidata.toml.
+sourceDir = "~/.dotfiles"
+
 [data]
-# profile = "laptop" # desktop, laptop, x11, or x11-laptop
+# profile = "laptop" # desktop, laptop, x11, x11-laptop, or mac
 # dpi = "96"
 # font_size = "12"
 # terminal = "ghostty"
 # browser = "floorp"
 # waybar_font_size = "14px"
+# atuin_sync = false # Local-only history on any profile; always false for mac.

@@ -1,4 +1,30 @@
-{{- /* Profiles: desktop, laptop, x11, x11-laptop. */ -}}
+{{- /* Profiles: desktop, laptop, x11, x11-laptop, mac. */ -}}
+{{- if eq .profile "mac" }}
+# Only deploy the selected shell, terminal, and editor configs on a work Mac.
+**
+!.config
+{{ range list "atuin" "bat" "rio" "ideavim" "lazygit" "starship" -}}
+!.config/{{ . }}
+!.config/{{ . }}/**
+{{ end -}}
+!.config/fish
+!.config/fish/config.fish
+!.config/fish/fish_plugins
+!.config/fish/startup.fish
+!.config/fish/completions
+{{ range list "atuin" "bat" "chezmoi" -}}
+!.config/fish/completions/{{ . }}.fish
+{{ end -}}
+!.config/fish/functions
+!.config/fish/functions/**
+!.config/fish/conf.d
+# Only portable Fish snippets, plus the work environment.
+{{ range list "00-mac" "10-cursor" "auto-venv" "colors" "fnm" "fzf" "no-greeting" "thefuck" -}}
+!.config/fish/conf.d/{{ . }}.fish
+{{ end -}}
+{{- else }}
+.config/fish/conf.d/00-mac.fish
+{{- end }}
 {{- if not (or (eq .profile "desktop") (eq .profile "laptop")) }}
 .config/ashell/**
 .config/gtklock/**

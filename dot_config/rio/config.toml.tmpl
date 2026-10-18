@@ -3,6 +3,16 @@ confirm-before-quit = false
 copy-on-select = true
 theme = "rose-pine.toml"    # or rose-pine-moon.toml or rose-pine-dawn.toml
 
+{{ if eq .profile "mac" -}}
+# Run Homebrew Fish without changing the macOS account's login shell.
+[shell]
+{{ if eq .chezmoi.arch "arm64" -}}
+program = "/opt/homebrew/bin/fish"
+{{ else -}}
+program = "/usr/local/bin/fish"
+{{ end -}}
+args = ["--login"]
+{{ end }}
 [fonts]
 size = {{ .font_size }}
 features = [ "-calt", "-liga", "-dlig", "cv01=2" ]
@@ -16,7 +26,11 @@ mode = "Plain"
 shape = "beam"
 
 [renderer]
+{{ if eq .chezmoi.os "darwin" -}}
+backend = "metal"
+{{ else -}}
 backend = "vulkan"
+{{ end -}}
 target-fps = 180
 
 [window]
