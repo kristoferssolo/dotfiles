@@ -1,0 +1,14 @@
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+[default_session]
+startup_command = "tmux new-window -c '#{session_path}' && tmux select-window -t 1 && clear"
+preview_command = "eza -a --icons --git --group-directories-first --color=always {}"
+
+[[session]]
+name = "dotfiles"
+path = "~/repos/dotfiles/"
+startup_command = "tmux new-window -c '#{session_path}' && tmux select-window -t 1 && clear"
+
+[[session]]
+name = "SoloVim"
+path = "~/repos/SoloVim/"
+startup_command = "tmux new-window -c '#{session_path}' && tmux select-window -t 1 && clear"

@@ -1,0 +1,5 @@
+{{- if eq .chezmoi.os "darwin" -}}
+{{ template "sesh/sesh-macos.toml" . }}
+{{- else -}}
+{{ template "sesh/sesh-linux.toml" . }}
+{{- end -}}

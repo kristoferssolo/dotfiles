@@ -10,12 +10,26 @@
 
 {
    "$schema": "https://vicinae.com/schemas/config.json",
+{{ if eq .chezmoi.os "darwin" -}}
+   "global_shortcuts": {
+      "toggle": "alt+p"
+   },
+{{ end -}}
    "theme": {
       "dark": {
          "name": "rose-pine"
       }
    },
    "providers": {
+{{ if eq .chezmoi.os "darwin" -}}
+      "scripts": {
+         "entrypoints": {
+            "close-focused-window.sh": {
+               "shortcut": "alt+shift+q"
+            }
+         }
+      },
+{{ end -}}
       "@fuksman/store.raycast.calendar": {
          "preferences": {
             "showWeeks": true,

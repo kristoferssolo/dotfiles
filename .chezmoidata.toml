@@ -6,6 +6,12 @@ terminal = "rio"
 browser = "floorp"
 waybar_font_size = "12px"
 atuin_sync = true
+mekle_search_dirs = [
+  "~/repos/",
+  "~/Nextcloud/repos/",
+  "~/Nextcloud/Documents/",
+  "~/Documents/",
+]
 
 [git]
 autoCommit = true

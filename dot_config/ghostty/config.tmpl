@@ -2,11 +2,13 @@ theme = Rose Pine
 
 {{ if eq .chezmoi.os "darwin" -}}
 # Run Homebrew Fish without changing the macOS account's login shell.
+# Drop color suppression inherited from automation before starting Fish.
 {{ if eq .chezmoi.arch "arm64" -}}
-command = /opt/homebrew/bin/fish --login
+command = /usr/bin/env -u NO_COLOR /opt/homebrew/bin/fish --login
 {{ else -}}
-command = /usr/local/bin/fish --login
+command = /usr/bin/env -u NO_COLOR /usr/local/bin/fish --login
 {{ end -}}
+shell-integration = fish
 {{ end }}
 # ── Font ─────────────────────────────────────────────────────────────
 font-family = JetBrainsMono NF
@@ -22,6 +24,7 @@ title = "Ghostty"
 class = "ghostty"
 {{ end -}}
 window-decoration = false
+macos-titlebar-style = hidden
 window-theme = dark
 background-opacity = 0.95
 window-padding-x = 0
@@ -36,6 +39,13 @@ working-directory = home
 window-inherit-working-directory = false
 
 # Keybinds
+{{ if eq .chezmoi.os "darwin" -}}
+# Open a new Ghostty window from any app while Ghostty is running.
+keybind = global:alt+enter=new_window
+# Send Alt+Shift+H/L to reuse tmux's previous/next window bindings.
+keybind = super+shift+KeyH=esc:H
+keybind = super+shift+KeyL=esc:L
+{{ end -}}
 keybind = alt+f4=ignore
 keybind = alt+one=unbind
 keybind = alt+two=unbind

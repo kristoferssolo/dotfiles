@@ -10,3 +10,4 @@ sourceDir = "~/.dotfiles"
 # browser = "floorp"
 # waybar_font_size = "14px"
 # atuin_sync = false # Local-only history on any profile; always false for mac.
+# mekle_search_dirs = ["~/repos/"] # Linux only; mekle config stays local on macOS.

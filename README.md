@@ -12,7 +12,7 @@ git clone https://github.com/kristoferssolo/SoloVim ~/.config/nvim
 
 ## Apps
 
-### Work Mac
+### Mac
 
 - Window manager: OmniWM. Import the Mac's existing settings as described below.
 - Terminal: Ghostty with Fish.
@@ -200,6 +200,29 @@ That creates `dot_config/omniwm/settings.toml` in the source checkout. Commit an
 push it to share the settings; Linux machines will ignore it. OmniWM documents
 the settings path and live reload behavior in its
 [configuration guide](https://omniwm.app/config/configuration/).
+
+The macOS Vicinae config binds Option+Shift+Q to the Close Focused Window script.
+Keep Vicinae running, enable IPC in OmniWM, and leave OmniWM's own Close Focused
+Window shortcut unassigned. The script uses Ghostty's AppleScript API for
+borderless Ghostty windows and OmniWM for other apps. Allow Vicinae to control
+Ghostty if macOS requests Automation permission.
+
+## Mekle and sesh
+
+Mekle's `~/.config/mekle/config.toml` is managed on Linux only. Override
+`mekle_search_dirs` under `[data]` in `~/.config/chezmoi/chezmoi.toml` to change
+the search paths on a Linux machine. On macOS, edit the local mekle config
+directly; chezmoi leaves it alone, including any existing customizations.
+Mekle's history stays local on every platform.
+
+Sesh has separate plain TOML configs in `.chezmoitemplates/sesh/`:
+
+- `sesh-macos.toml` uses `~/repos/` and the Mac's terminal tools.
+- `sesh-linux.toml` uses `~/Nextcloud/repos/` and includes the Nextcloud/Typst setup.
+
+Edit the appropriate file to change that platform's sessions and windows.
+Chezmoi selects it by OS and writes it to `~/.config/sesh/sesh.toml`.
+The small `mac` profile still excludes sesh; other profiles deploy it on both OSes.
 
 ## Checking platform selection
 

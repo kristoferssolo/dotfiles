@@ -1,10 +1,18 @@
 #!/usr/bin/env bash
 
+# Homebrew prefixes GNU coreutils commands with g on macOS.
+realpath_command=realpath
+if command -v grealpath >/dev/null 2>&1; then
+    realpath_command=grealpath
+fi
+
 list_all() {
     declare -A seen_paths=()
+    local path project project_path
 
     while IFS= read -r path; do
-        seen_paths["$(realpath -m "${path%/}")"]=1
+        path=$("$realpath_command" -m -- "$path") || return
+        seen_paths["$path"]=1
     done < <(sesh list -c --json | jq -r '.[].Path')
 
     sesh list -t -c --hide-duplicates --icons
@@ -14,7 +22,7 @@ list_all() {
         if [[ $project_path == '~/'* ]]; then
             project_path="${HOME}/${project_path:2}"
         fi
-        project_path=$(realpath -m "${project_path%/}")
+        project_path=$("$realpath_command" -m -- "$project_path") || return
 
         if [[ -z ${seen_paths["$project_path"]+seen} ]]; then
             printf '󰉋 %s\n' "$project"

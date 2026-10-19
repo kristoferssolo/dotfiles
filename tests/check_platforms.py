@@ -73,6 +73,13 @@ def check(base, original, os_name, arch, profile):
     assert not {"README.md", "justfile", "chezmoi.toml.example"} & managed, case
     assert (".config/omniwm/settings.toml" in managed) == (os_name == "darwin"), case
     assert (".config/fish/conf.d/00-mac.fish" in managed) == (os_name == "darwin"), case
+    assert (".local/share/vicinae/scripts/close-focused-window.sh" in managed) == (
+        os_name == "darwin" and profile != "mac"
+    ), case
+    assert (".config/mekle/config.toml" in managed) == (
+        os_name == "linux" and profile != "mac"
+    ), case
+    assert (".config/sesh/sesh.toml" in managed) == (profile != "mac"), case
 
     if os_name == "darwin":
         for prefix in (
@@ -108,7 +115,7 @@ def check(base, original, os_name, arch, profile):
     ghostty = state[".config/ghostty/config"]["contents"]
     if os_name == "darwin":
         fish_path = "/opt/homebrew/bin/fish" if arch == "arm64" else "/usr/local/bin/fish"
-        assert f"command = {fish_path} --login" in ghostty, case
+        assert f"command = /usr/bin/env -u NO_COLOR {fish_path} --login" in ghostty, case
         assert "class =" not in ghostty, case
         environment = state[".config/fish/conf.d/00-mac.fish"]["contents"]
         assert "set -gx TERMINAL ghostty" in environment, case
@@ -119,6 +126,14 @@ def check(base, original, os_name, arch, profile):
             assert rio["renderer"]["backend"] == "vulkan", case
 
     if profile != "mac":
+        sesh = tomllib.loads(state[".config/sesh/sesh.toml"]["contents"])
+        repos = "~/repos/" if os_name == "darwin" else "~/Nextcloud/repos/"
+        assert all(session["path"].startswith(repos) for session in sesh["session"]), case
+        assert any(window["name"] == "typst" for window in sesh["window"]) == (os_name == "linux"), case
+        assert bool(sesh.get("wildcard")) == (os_name == "linux"), case
+        if os_name == "linux":
+            mekle = tomllib.loads(state[".config/mekle/config.toml"]["contents"])
+            assert isinstance(mekle["search_dirs"], list) and mekle["search_dirs"], case
         keymap = state[".config/yazi/keymap.toml"]["contents"]
         rules = tomllib.loads(keymap)["mgr"]["prepend_keymap"]
         platform = "macos" if os_name == "darwin" else "linux"

@@ -36,6 +36,12 @@
 .config/omniwm
 .config/omniwm/**
 .config/fish/conf.d/00-mac.fish
+.local/share/vicinae/scripts/close-focused-window.sh
+{{ end }}
+{{ if eq .chezmoi.os "darwin" }}
+# Mekle search paths are configured locally on each Mac.
+.config/mekle
+.config/mekle/**
 {{ end }}
 {{ if ne .chezmoi.os "linux" }}
 # Desktop integration and Linux-specific application settings.

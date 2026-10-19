@@ -1,27 +1,27 @@
 #:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
 [default_session]
-startup_command = "tmux new-window && tmux select-window -t 1 && clear"
+startup_command = "tmux new-window -c '#{session_path}' && tmux select-window -t 1 && clear"
 preview_command = "eza -a --icons --git --group-directories-first --color=always {}"
 
 [[session]]
 name = "dotfiles"
 path = "~/Nextcloud/repos/dotfiles/"
-startup_command = "tmux new-window && tmux select-window -t 1"
+startup_command = "tmux new-window -c '#{session_path}' && tmux select-window -t 1 && clear"
 
 [[session]]
 name = "SoloVim"
 path = "~/Nextcloud/repos/SoloVim/"
-startup_command = "tmux new-window && tmux select-window -t 1"
+startup_command = "tmux new-window -c '#{session_path}' && tmux select-window -t 1 && clear"
 
 [[session]]
 name = "pi"
 path = "~/Nextcloud/repos/solo-pi/"
-startup_command = "tmux new-window && tmux select-window -t 1"
+startup_command = "tmux new-window -c '#{session_path}' && tmux select-window -t 1 && clear"
 
 [[session]]
 name = "Agents"
 path = "~/Nextcloud/repos/solo-protocol/"
-startup_command = "tmux new-window && tmux select-window -t 1"
+startup_command = "tmux new-window -c '#{session_path}' && tmux select-window -t 1 && clear"
 
 # [[wildcard]]
 # pattern = "~/Projects/**"
