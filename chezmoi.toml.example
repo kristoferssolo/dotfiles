@@ -2,6 +2,7 @@
 sourceDir = "~/.dotfiles"
 
 [data]
+# The OS is detected automatically. Use mac for the small work application set.
 # profile = "laptop" # desktop, laptop, x11, x11-laptop, or mac
 # dpi = "96"
 # font_size = "12"

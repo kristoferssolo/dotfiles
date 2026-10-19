@@ -11,38 +11,28 @@ alias cp="cp -vi"
 alias df="df -h"
 alias mkdir="mkdir -pv"
 alias mv="mv -iv"
-alias nsxiv="nsxiv -a"
-alias img="oculante"
-alias rm="rm -vI"
 alias wget="wget --hsts-file=$XDG_DATA_HOME/wget-hsts"
-alias keychain="keychain --dir $XDG_RUNTIME_DIR/keychain"
 
 # Colorize commands
-alias diff="diff --color=auto"
-alias grep="grep --color=auto"
-alias ip="ip -color=auto"
-alias less="moor"
-alias ls="eza -a --icons --group-directories-first"
+if command -q moor
+    alias less="moor"
+end
+if command -q eza
+    alias ls="eza -a --icons --group-directories-first"
+end
 
 # Common command abbreviations
-alias battery="acpi"
 alias code="vscodium"
-alias day="redshift -PO 6500"
-alias dv="doasedit"
-alias e="$EDITOR"
+if set -q EDITOR; and test -n "$EDITOR"
+    alias e="$EDITOR"
+    alias v="$EDITOR"
+end
 alias fetch="fastfetch"
 alias j="joshutoub"
-alias lf="lfub"
 alias lg="lazygit"
-alias lock="swaylock"
 alias lzd="lazydocker"
-alias night="redshift -PO 4500"
 alias py="python"
-alias sv="rsv"
-alias v="$EDITOR"
 alias weather="curl wttr.in/"
-alias wg-down="wg-quick down wg0"
-alias wg-up="wg-quick up wg0"
 alias ww="$EDITOR ~/neorg/"
 alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
 alias va="source .venv/bin/activate.fish"
@@ -59,8 +49,3 @@ alias gl="git log --all --graph --pretty=format:'%C(magenta)%h %C(white) %an  %a
 alias gp="git pull"
 alias gC="git clone"
 alias gs="git status --short"
-
-# doas for system commands
-for command in mount umount rsv pacman updatedb su shutdown poweroff reboot zzz systemctl wg wg-quick
-    alias $command="doas $command"
-end

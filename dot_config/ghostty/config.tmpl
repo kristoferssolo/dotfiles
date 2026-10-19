@@ -1,5 +1,13 @@
 theme = Rose Pine
 
+{{ if eq .chezmoi.os "darwin" -}}
+# Run Homebrew Fish without changing the macOS account's login shell.
+{{ if eq .chezmoi.arch "arm64" -}}
+command = /opt/homebrew/bin/fish --login
+{{ else -}}
+command = /usr/local/bin/fish --login
+{{ end -}}
+{{ end }}
 # ── Font ─────────────────────────────────────────────────────────────
 font-family = JetBrainsMono NF
 font-feature = "-calt, -liga, -dlig"
@@ -10,7 +18,9 @@ cursor-style = bar
 
 # ── Window ───────────────────────────────────────────────────────────
 title = "Ghostty"
+{{ if eq .chezmoi.os "linux" -}}
 class = "ghostty"
+{{ end -}}
 window-decoration = false
 window-theme = dark
 background-opacity = 0.95

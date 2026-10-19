@@ -2,3 +2,7 @@
 plugins:
     ya pkg update
     fisher update
+
+# Check both operating systems without applying to the current home directory.
+check-platforms:
+    python3 tests/check_platforms.py

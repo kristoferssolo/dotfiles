@@ -18,3 +18,10 @@ test -d "$DENO_INSTALL/bin"; and fish_add_path --move "$DENO_INSTALL/bin"
 # pnpm
 set -gx PNPM_INSTALL "$XDG_DATA_HOME/pnpm"
 test -d "$PNPM_INSTALL/bin"; and fish_add_path --move "$PNPM_INSTALL/bin"
+
+# pnpm
+set -gx PNPM_HOME "$XDG_DATA_HOME/pnpm"
+if not string match -q -- "$PNPM_HOME/bin" $PATH
+  set -gx PATH "$PNPM_HOME/bin" $PATH
+end
+# pnpm end

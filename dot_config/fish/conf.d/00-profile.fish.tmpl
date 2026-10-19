@@ -23,12 +23,12 @@ set -gx MANPAGER 'nvim +Man!'
 set -gx LIBSEAT_BACKEND logind
 
 # Default Apps
-set -gx BROWSER "floorp"
+set -gx BROWSER {{ .browser | quote }}
 set -gx EDITOR "nvim"
 set -gx VISUAL "$EDITOR"
 set -gx IMAGE "oculante"
 set -gx READER "sioyak"
-set -gx TERMINAL "{{terminal}}"
+set -gx TERMINAL {{ .terminal | quote }}
 set -gx VIDEO "mpv"
 
 set -gx HYPRSHOT_DIR "$HOME/Pictures/screenshots"

@@ -1,6 +1,6 @@
 # Solorice Dotfiles
 
-Personal Linux dotfiles and a small work macOS profile managed with [chezmoi](https://www.chezmoi.io/).
+Personal Linux and macOS dotfiles managed with [chezmoi](https://www.chezmoi.io/).
 
 Chezmoi uses chezmoi's naming convention:
 `dot_config` maps to `~/.config` and `dot_local` maps to `~/.local`.
@@ -9,6 +9,39 @@ Neovim is managed separately in [SoloVim](https://codeberg.org/kristoferssolo/So
 ```sh
 git clone https://github.com/kristoferssolo/SoloVim ~/.config/nvim
 ```
+
+## Apps
+
+### Work Mac
+
+- Window manager: OmniWM. Import the Mac's existing settings as described below.
+- Terminal: Ghostty with Fish.
+- Editor and IDE: Neovim with SoloVim, and PyCharm with IdeaVim and the SoloVim keymap.
+- Shell tools: Starship, Atuin with local-only history, zoxide, fzf, eza, and bat.
+- Git interface: lazygit. Git identity and signing settings stay local to the Mac.
+
+### Linux
+
+- Window manager: Niri for the desktop and laptop profiles. Hyprland configs are
+  also included; the X11 profiles use AwesomeWM.
+- Terminals: Rio by default, with Ghostty and Alacritty configs also available.
+- Desktop shell and notifications: ashell and Mako, with Waybar and Dunst configs
+  available for other setups.
+- App launcher: Vicinae, with Fuzzel, Rofi, and Wofi configs also included.
+- Browser: Floorp by default, configurable through local chezmoi data.
+- Shell: Fish with Starship, Atuin, zoxide, and mekle. Legacy Zsh configs are
+  also included.
+- File managers: Yazi and lf.
+- Terminal sessions: tmux, Zellij, and sesh.
+- Version control: Git and jj, with lazygit, gitui, and gh-dash configs.
+- Documents: Sioyek, Zathura, and Glow.
+- Media and chat: mpv, Spotify, Vesktop with Vencord settings, and AyuGram.
+- Sync and torrents: Nextcloud and Transmission daemon.
+- System tools: btop, htop, Fastfetch, and paru.
+
+MultiViewer settings are also tracked; see the section below for syncing them.
+The work Mac profile deploys the smaller selection listed above. Having an app's
+config in this repository does not install the app or enable it in every profile.
 
 ## Profiles
 
@@ -28,9 +61,21 @@ Available profiles are:
 | `laptop` | Niri and Hyprland laptop setup |
 | `x11` | Awesome desktop setup |
 | `x11-laptop` | Awesome laptop setup |
-| `mac` | Fish, local-only Atuin, Rio, Starship, bat, lazygit, and IdeaVim |
+| `mac` | Small work setup with Fish, local-only Atuin, Ghostty, Starship, bat, lazygit, IdeaVim, and OmniWM settings when added |
 
-Profile data controls conditional source inclusion through `.chezmoiignore`.
+The operating system and profile control different choices. Chezmoi detects the
+OS automatically through `.chezmoi.os`. Linux desktop configs, Transmission daemon
+settings, Linux-specific shell files, and scripts that require Linux tools are
+excluded on macOS regardless of profile. OmniWM and the Homebrew Fish environment
+are excluded on Linux. External fonts and GTK, Awesome, and Zathura downloads
+follow the same OS selection.
+
+Profiles select Linux desktop variants or the smaller work application set.
+The default remains `desktop`; select `mac` explicitly on the work Mac to keep
+personal applications and identities excluded. No `os` setting is needed in the
+local config. See [chezmoi's machine differences guide](https://www.chezmoi.io/user-guide/manage-machine-to-machine-differences/)
+for the template and ignore mechanisms.
+
 Values in `~/.config/chezmoi/chezmoi.toml` override the shared defaults.
 
 ## Install
@@ -67,7 +112,7 @@ in the Mac's existing shell:
 
 ```sh
 brew install chezmoi fish atuin starship zoxide fzf eza bat lazygit neovim
-brew install --cask rio font-jetbrains-mono-nerd-font
+brew install --cask ghostty font-jetbrains-mono-nerd-font
 git clone https://github.com/kristoferssolo/dotfiles.git ~/.dotfiles
 mkdir -p ~/.config/chezmoi
 ```
@@ -98,9 +143,11 @@ chezmoi apply
 bat cache --build
 ```
 
-Rio starts Homebrew Fish on Apple Silicon or Intel without changing your
-account's login shell. Its config uses the Metal renderer on macOS. Other terminals
-can run `fish` directly. Optional Fish
+Ghostty is the only terminal configured on macOS. It starts Homebrew Fish on
+Apple Silicon or Intel without changing your account's login shell, using its
+[`command` setting](https://ghostty.org/docs/config/reference#command).
+Fish sets `TERMINAL=ghostty` on macOS. Rio and Alacritty configs and their theme
+downloads are Linux-only. Optional Fish
 integrations start only when installed. Yazi and sesh keybindings need their
 respective tools, which this profile does not install or configure. Follow the
 [PyCharm guide](docs/pycharm.md) to enable IdeaVim and install its companion keymap.
@@ -125,6 +172,43 @@ loads `~/.config/fish/config.local.fish` last for private work paths and environ
 settings. Chezmoi does not manage that file. The work environment uses Homebrew's
 [Fish shell setup](https://docs.brew.sh/Manpage#shellenv-shell-), and leaves native
 credential and language-tool locations alone.
+
+## Adding platform-specific files
+
+Keep application files in the existing chezmoi layout, such as
+`dot_config/omniwm/` and `dot_local/bin/executable_name`. Add their destination
+paths to the appropriate OS section in `.chezmoiignore`. Use `.tmpl` conditions
+for small differences within shared files. Fish's shared aliases live in
+`aliases.fish`; Linux commands and GNU-specific flags live in `linux-aliases.fish`.
+The existing Zsh and legacy shell setup remains Linux-only; macOS uses Fish.
+
+The `mac` profile also has an explicit application allowlist at the top of
+`.chezmoiignore`. Add shared applications there when you want them on the work
+machine. Guard platform-specific allowlist entries with `.chezmoi.os` too, since
+negated ignore patterns override exclusions. Git and jj remain
+excluded from this profile, so work identity and signing configuration stay local.
+
+OmniWM is already allowed for macOS, including the work profile. Its settings
+aren't in this repository yet. On the Mac, import your existing configuration:
+
+```sh
+chezmoi add ~/.config/omniwm/settings.toml
+chezmoi diff
+```
+
+That creates `dot_config/omniwm/settings.toml` in the source checkout. Commit and
+push it to share the settings; Linux machines will ignore it. OmniWM documents
+the settings path and live reload behavior in its
+[configuration guide](https://omniwm.app/config/configuration/).
+
+## Checking platform selection
+
+Run `just check-platforms` with Python 3.11+, chezmoi, and Fish installed. It checks
+the managed files, renders templates for Linux and macOS across all profiles,
+and checks Fish startup files and functions for syntax errors. External download
+targets use local fixtures, so the
+check does not download themes or change your home directory. macOS application
+behavior still needs checking on a Mac.
 
 ## PyCharm
 
@@ -157,7 +241,7 @@ positions and sizes, so you may need to adjust them for a different display setu
 ## Layout
 
 - `.chezmoidata.toml` – shared template defaults
-- `.chezmoiignore` – profile-specific source exclusions
+- `.chezmoiignore` – OS and profile-specific source exclusions
 - `chezmoi.toml.example` – local machine override example
 - `dot_config/` – XDG application configuration
 - `dot_local/` – commands, assets, and user-local data

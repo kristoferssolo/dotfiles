@@ -1,1 +1,1 @@
-fish_add_path /home/kristofers/.opencode/bin
+test -d "$HOME/.opencode/bin"; and fish_add_path "$HOME/.opencode/bin"

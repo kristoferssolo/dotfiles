@@ -150,9 +150,10 @@ keymap = [
 ]
 prepend_keymap = [
   # Custom
-  {on = [ "y" ], run = [ 'shell -- echo "$@" | wl-copy', "yank" ], desc = "Yank the selected files"},
-  {on = [ "y" ], run = [ 'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list', "yank" ], desc = "Yank the selected files"},
-  {on = [ "b", "g" ], run = [ ''' shell 'setbg "$1"' --confirm ''' ], desc = "Set the background image"},
+  {on = [ "y" ], run = [ 'shell -- printf "%s\n" "$@" | pbcopy', "yank" ], desc = "Yank the selected files", for = "macos"},
+  {on = [ "y" ], run = [ 'shell -- echo "$@" | wl-copy', "yank" ], desc = "Yank the selected files", for = "linux"},
+  {on = [ "y" ], run = [ 'shell -- for path in "$@"; do echo "file://$path"; done | wl-copy -t text/uri-list', "yank" ], desc = "Yank the selected files", for = "linux"},
+  {on = [ "b", "g" ], run = [ ''' shell 'setbg "$1"' --confirm ''' ], desc = "Set the background image", for = "linux"},
   # chmod
   {on = [ "c", "m" ], run = "plugin chmod", desc = "Chmod on selected files"},
   # Archive

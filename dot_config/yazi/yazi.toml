@@ -25,7 +25,7 @@ ueberzug_offset = [ 0, 0, 0, 0 ]
 
 [opener]
 edit = [
-  {run = "/usr/bin/nvim %s", desc = "$EDITOR", block = true, for = "unix"},
+  {run = "nvim %s", desc = "$EDITOR", block = true, for = "unix"},
   {run = "code %s", orphan = true, desc = "code", for = "windows"},
   {run = "code -w %s", block = true, desc = "code (block)", for = "windows"},
 ]
@@ -49,7 +49,10 @@ play = [
   {run = "mpv %s", orphan = true, for = "windows"},
   {run = "mediainfo %s1; echo 'Press enter to exit'; read _", block = true, desc = "Show media info", for = "unix"},
 ]
-pdf = [ {run = "zathura --fork %s", orphan = true} ]
+pdf = [
+  {run = "zathura --fork %s", orphan = true, for = "linux"},
+  {run = "open %s", orphan = true, for = "macos"},
+]
 
 [open]
 rules = [

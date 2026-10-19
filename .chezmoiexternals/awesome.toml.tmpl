@@ -1,4 +1,4 @@
-{{- if or (eq .profile "x11") (eq .profile "x11-laptop") }}
+{{- if and (eq .chezmoi.os "linux") (or (eq .profile "x11") (eq .profile "x11-laptop")) }}
 [".config/awesome/awesome-wm-widgets"]
 type = "archive"
 url = "https://github.com/streetturtle/awesome-wm-widgets/archive/refs/heads/master.tar.gz"

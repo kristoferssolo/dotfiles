@@ -3,9 +3,13 @@
 # Only deploy the selected shell, terminal, and editor configs on a work Mac.
 **
 !.config
-{{ range list "atuin" "bat" "rio" "ideavim" "lazygit" "starship" -}}
+{{ range list "atuin" "bat" "ghostty" "ideavim" "lazygit" "starship" -}}
 !.config/{{ . }}
 !.config/{{ . }}/**
+{{ end -}}
+{{ if eq .chezmoi.os "darwin" -}}
+!.config/omniwm
+!.config/omniwm/**
 {{ end -}}
 !.config/fish
 !.config/fish/config.fish
@@ -19,13 +23,103 @@
 !.config/fish/functions/**
 !.config/fish/conf.d
 # Only portable Fish snippets, plus the work environment.
-{{ range list "00-mac" "10-cursor" "auto-venv" "colors" "fnm" "fzf" "no-greeting" "thefuck" -}}
+{{ range list "10-cursor" "aliases" "auto-venv" "colors" "fnm" "fzf" "no-greeting" "thefuck" -}}
 !.config/fish/conf.d/{{ . }}.fish
 {{ end -}}
-{{- else }}
-.config/fish/conf.d/00-mac.fish
+{{ if eq .chezmoi.os "darwin" -}}
+!.config/fish/conf.d/00-mac.fish
+{{ end -}}
 {{- end }}
-{{- if not (or (eq .profile "desktop") (eq .profile "laptop")) }}
+
+# Platform selection. Negated entries in the work allowlist also need OS guards.
+{{ if ne .chezmoi.os "darwin" }}
+.config/omniwm
+.config/omniwm/**
+.config/fish/conf.d/00-mac.fish
+{{ end }}
+{{ if ne .chezmoi.os "linux" }}
+# Desktop integration and Linux-specific application settings.
+.config/alacritty
+.config/ashell
+.config/awesome
+.config/dunst
+.config/feh
+.config/flameshot
+.config/fuzzel
+.config/gtk-2.0
+.config/gtk-3.0
+.config/gtk-4.0
+.config/gtklock
+.config/hypr
+.config/lf
+.config/mako
+.config/niri
+.config/nsxiv
+.config/nwg-look
+.config/paru
+.config/picom
+.config/rofi
+.config/rio
+.config/rustmission
+.config/satty
+.config/shell
+.config/stasis
+.config/swaylock
+.config/transmission-daemon
+.config/vicinae
+.config/waybar
+.config/wireplumber
+.config/wofi
+.config/x11
+.config/xdg-desktop-portal
+.config/xdg-desktop-portal-termfilechooser
+.config/zathura
+.config/zsh
+.config/user-dirs.dirs
+.config/fish/conf.d/00-profile.fish
+.config/fish/conf.d/linux-aliases.fish
+.config/fish/conf.d/env.fish
+.config/fish/conf.d/login.fish
+.local/share/applications
+.local/share/fonts
+.local/share/themes
+
+# These scripts use Linux desktop tools, devices, or GNU-only command options.
+.local/bin/any2av1mkv
+.local/bin/compiler
+.local/bin/dmenupass
+.local/bin/dot-screenshot
+.local/bin/gandalf-screensaver
+.local/bin/getcomproot
+.local/bin/ifinstalled
+.local/bin/imv-open
+.local/bin/lfrun
+.local/bin/lfub
+.local/bin/linkhandler
+.local/bin/lock
+.local/bin/maimpick
+.local/bin/mounter
+.local/bin/opout
+.local/bin/podman-cleanup
+.local/bin/remaps
+.local/bin/sesh-connect
+.local/bin/set-animated-bg
+.local/bin/setbg
+.local/bin/song-change
+.local/bin/swap-wallpaper
+.local/bin/system-info
+.local/bin/td-toggle
+.local/bin/texclear
+.local/bin/tlimit
+.local/bin/tordone
+.local/bin/torwrap
+.local/bin/transadd
+.local/bin/typst-port
+.local/bin/unmounter
+{{ end }}
+
+# Linux desktop variants retain their existing profile selection.
+{{ if not (and (eq .chezmoi.os "linux") (or (eq .profile "desktop") (eq .profile "laptop"))) }}
 .config/ashell/**
 .config/gtklock/**
 .config/hypr/**
@@ -36,7 +130,7 @@
 .config/xdg-desktop-portal/**
 .config/xdg-desktop-portal-termfilechooser/**
 {{- end }}
-{{- if not (or (eq .profile "x11") (eq .profile "x11-laptop")) }}
+{{- if not (and (eq .chezmoi.os "linux") (or (eq .profile "x11") (eq .profile "x11-laptop"))) }}
 .config/awesome/**
 .config/dunst/**
 .config/picom/picom.conf
@@ -49,6 +143,7 @@
 LICENSE
 README.md
 docs/**
+tests
 chezmoi.toml.example
 justfile
 taplo.toml
@@ -59,3 +154,4 @@ bacon.toml
 .config/fish/themes
 .config/yazi/flavors
 .config/yazi/plugins
+.config/fish/config.local.fish
