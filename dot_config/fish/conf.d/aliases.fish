@@ -34,7 +34,6 @@ alias lzd="lazydocker"
 alias py="python"
 alias weather="curl wttr.in/"
 alias ww="$EDITOR ~/neorg/"
-alias yarn="yarn --use-yarnrc $XDG_CONFIG_HOME/yarn/config"
 alias va="source .venv/bin/activate.fish"
 alias yy="yazi"
 

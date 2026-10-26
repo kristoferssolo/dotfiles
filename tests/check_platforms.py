@@ -129,7 +129,7 @@ def check(base, original, os_name, arch, profile):
         sesh = tomllib.loads(state[".config/sesh/sesh.toml"]["contents"])
         repos = "~/repos/" if os_name == "darwin" else "~/Nextcloud/repos/"
         assert all(session["path"].startswith(repos) for session in sesh["session"]), case
-        assert any(window["name"] == "typst" for window in sesh["window"]) == (os_name == "linux"), case
+        assert any(window["name"] == "typst" for window in sesh.get("window", [])) == (os_name == "linux"), case
         assert bool(sesh.get("wildcard")) == (os_name == "linux"), case
         if os_name == "linux":
             mekle = tomllib.loads(state[".config/mekle/config.toml"]["contents"])

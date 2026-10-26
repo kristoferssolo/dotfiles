@@ -40,11 +40,20 @@ window-inherit-working-directory = false
 
 # Keybinds
 {{ if eq .chezmoi.os "darwin" -}}
-# Open a new Ghostty window from any app while Ghostty is running.
+# Open a new Ghostty window from any app while Ghostty is running
 keybind = global:alt+enter=new_window
-# Send Alt+Shift+H/L to reuse tmux's previous/next window bindings.
+# Send Alt+Shift+H/L to reuse tmux's previous/next window bindings
 keybind = super+shift+KeyH=esc:H
 keybind = super+shift+KeyL=esc:L
+# Harpoon: send Alt+number so Cmd+number works through tmux
+keybind = super+1=esc:1
+keybind = super+digit_1=esc:1
+keybind = super+2=esc:2
+keybind = super+digit_2=esc:2
+keybind = super+3=esc:3
+keybind = super+digit_3=esc:3
+keybind = super+4=esc:4
+keybind = super+digit_4=esc:4
 {{ end -}}
 keybind = alt+f4=ignore
 keybind = alt+one=unbind
@@ -105,3 +114,11 @@ keybind = super+ctrl+shift+equal=ignore
 keybind = super+ctrl+shift+left=ignore
 keybind = super+ctrl+shift+right=ignore
 keybind = super+ctrl+shift+up=ignore
+
+# Command + arrows → Neovim's existing Ctrl + arrow resize mappings
+keybind = cmd+up=csi:1;5A
+keybind = cmd+down=csi:1;5B
+keybind = cmd+right=csi:1;5C
+keybind = cmd+left=csi:1;5D
+
+

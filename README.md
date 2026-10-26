@@ -153,6 +153,21 @@ respective tools, which this profile does not install or configure. Follow the
 [PyCharm guide](docs/pycharm.md) to enable IdeaVim and install its companion keymap.
 Neovim's config is still installed separately as described above.
 
+For Finder and `open file.py`, install the Neovim launcher after installing
+Homebrew Fish and Neovim:
+
+```sh
+python3 docs/macos/install-neovim.py
+```
+
+This creates `~/Applications/Neovim.app` and makes it the default for common text,
+configuration, and source files. Each open starts Neovim in a new Ghostty window,
+using the file's directory and your login Fish environment. Multiple files open
+in one Neovim instance. The installer saves previous associations under
+`~/.local/state/neovim-launcher/`. Run it again to rebuild the launcher after
+changing its source. Git and terminal editor commands continue to use `nvim`
+directly. Images, PDFs, browser associations, and media files retain their defaults.
+
 Atuin keeps its normal local database on the Mac. The work profile forces
 `auto_sync = false` and `update_check = false`, keeps the daemon disabled, and
 replaces the personal server address with an unused loopback endpoint. Automatic

@@ -1,5 +1,10 @@
 #!/usr/bin/env fish
 
+# Ignored startup files can remain installed after moving to another platform.
+if test (uname -s) != Linux
+    return
+end
+
 # XDG Base Directory
 set -gx XDG_CACHE_HOME "$HOME/.cache"
 set -gx XDG_CONFIG_HOME "$HOME/.config"

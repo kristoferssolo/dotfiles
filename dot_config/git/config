@@ -22,6 +22,7 @@
 [alias]
     st = status -s
     lol = log --oneline --graph --all
+	uncommit = reset --soft HEAD^
 
 # https://blog.gitbutler.com/how-git-core-devs-configure-git/
 # clearly makes git better
@@ -121,3 +122,5 @@
 
 [include] # TODO: include only for my repos
     path = ~/.config/git/key
+[includeIf "gitdir:~/repos/equilia/"]
+	path = ~/.config/git/work-user
