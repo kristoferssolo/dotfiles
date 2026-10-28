@@ -43,10 +43,9 @@ window-rule {
 }
 window-rule {
     match app-id="^com\\.gabm\\.satty$"
-    open-floating true
     match app-id="^tvert$"
-    min-width 1080
-    min-height 720
+    open-floating true
+    open-focused true
 }
 window-rule {
     match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
@@ -82,6 +81,7 @@ window-rule {
     match app-id="^org\\.gnome\\.Fractal$"
     match app-id="discord"
     match app-id="vesktop"
+    match app-id="legcord"
     match app-id="spotify"
     match app-id="Element"
     exclude app-id="^com\\.ayugram\\.desktop$" title="^Media viewer$"

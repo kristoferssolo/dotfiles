@@ -10,6 +10,7 @@ window-rule {
     match at-startup=true app-id="^org\\.gnome\\.Fractal$"
     match at-startup=true app-id="discord"
     match at-startup=true app-id="vesktop"
+    match at-startup=true app-id="legcord"
     match at-startup=true app-id="Element"
     match at-startup=true app-id="^dev\\.vencord\\.Vesktop$"
     exclude app-id="^com\\.ayugram\\.desktop$" title="^Media viewer$"

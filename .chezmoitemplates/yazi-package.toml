@@ -59,11 +59,6 @@ rev = "02597c4"
 hash = "33982a6e2d6df07619a2a0fc163a0950"
 
 [[plugin.deps]]
-use = "macydnah/office"
-rev = "41ebef8"
-hash = "5805affd3ae8adcb3c72b6997d21c0a6"
-
-[[plugin.deps]]
 use = "boydaihungst/mediainfo"
 rev = "f1cec0b"
 hash = "fd9312e974c63438b1f8737711462d52"
