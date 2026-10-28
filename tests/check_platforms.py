@@ -3,6 +3,7 @@
 
 import json
 from pathlib import Path
+import plistlib
 import shutil
 import subprocess
 import tempfile
@@ -11,6 +12,11 @@ import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILES = ("desktop", "laptop", "x11", "x11-laptop", "mac")
+LINUX_APPLICATIONS = (
+    "MultiViewer", "asm-lsp", "cliamp", "neomutt", "spotify-tui",
+    "sql-language-server", "sqruff", "viu", "zellij",
+)
+SOLO_LAYOUT = "Library/Keyboard Layouts/SoloLayout.bundle/Contents"
 
 
 def run(*args, **kwargs):
@@ -72,6 +78,26 @@ def check(base, original, os_name, arch, profile):
     assert not any(p.startswith(("tests/", "docs/")) for p in managed), case
     assert not {"README.md", "justfile", "chezmoi.toml.example"} & managed, case
     assert (".config/omniwm/settings.toml" in managed) == (os_name == "darwin"), case
+    for path in (
+        ".config/karabiner/karabiner.json",
+        ".config/karabiner/assets/complex_modifications/solo-layout.json",
+        ".config/karabiner/assets/complex_modifications/1792582317.json",
+        ".config/karabiner/solo-layout/build-layout.swift",
+        f"{SOLO_LAYOUT}/Info.plist",
+        f"{SOLO_LAYOUT}/Resources/Solo Layout.keylayout",
+    ):
+        assert (path in managed) == (os_name == "darwin"), (case, path)
+    assert not any(p.startswith((".config/karabiner/backups/", ".config/karabiner/automatic_backups/")) for p in managed), case
+    assert ".config/btop/btop.conf" in managed, case
+    for app in LINUX_APPLICATIONS:
+        assert any(p.startswith(f".config/{app}/") for p in managed) == (
+            os_name == "linux" and profile != "mac"
+        ), (case, app)
+    if os_name == "darwin":
+        tomllib.loads(state[".config/omniwm/settings.toml"]["contents"])
+        json.loads(state[".config/karabiner/karabiner.json"]["contents"])
+        info = plistlib.loads(state[f"{SOLO_LAYOUT}/Info.plist"]["contents"].encode())
+        assert info["CFBundleIdentifier"] == "com.kristians.keyboardlayout.SoloLayout", case
     assert (".config/fish/conf.d/00-mac.fish" in managed) == (os_name == "darwin"), case
     assert (".local/share/vicinae/scripts/close-focused-window.sh" in managed) == (
         os_name == "darwin" and profile != "mac"
@@ -104,8 +130,12 @@ def check(base, original, os_name, arch, profile):
         assert (".config/awesome/rc.lua" in managed) == (profile in ("x11", "x11-laptop")), case
 
     if profile == "mac":
-        allowed = {"fish", "atuin", "bat", "ghostty", "ideavim", "lazygit", "omniwm", "starship"}
-        assert all(p.startswith(".config/") and p.split("/")[1] in allowed for p in managed), case
+        allowed = {"fish", "atuin", "bat", "btop", "ghostty", "ideavim", "karabiner", "lazygit", "omniwm", "starship"}
+        assert all(
+            (p.startswith(".config/") and p.split("/")[1] in allowed)
+            or (os_name == "darwin" and p.startswith(f"{SOLO_LAYOUT}/"))
+            for p in managed
+        ), case
         assert ".config/bat/themes/external-fixture" in managed, case
         assert not any(p.startswith((".config/git/", ".config/jj/", ".local/")) for p in managed), case
         atuin = tomllib.loads(state[".config/atuin/config.toml"]["contents"])
@@ -164,9 +194,10 @@ def main():
             target = original / name
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / name, target)
-        # Model the Mac's existing settings without inventing a real OmniWM config.
-        for name in ("dot_config/omniwm/settings.toml", "dot_local/bin/executable_dmenupass",
-                     "dot_config/fish/config.local.fish"):
+        # Ensure local-only files stay excluded, even if accidentally added.
+        for name in ("dot_local/bin/executable_dmenupass", "dot_config/fish/config.local.fish",
+                     "dot_config/private_karabiner/backups/karabiner.json",
+                     "dot_config/private_karabiner/automatic_backups/karabiner.json"):
             fixture = original / name
             fixture.parent.mkdir(parents=True, exist_ok=True)
             fixture.write_text("# platform fixture\n")

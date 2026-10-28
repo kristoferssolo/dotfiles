@@ -1,15 +1,26 @@
 {{- /* Profiles: desktop, laptop, x11, x11-laptop, mac. */ -}}
 {{- if eq .profile "mac" }}
-# Only deploy the selected shell, terminal, and editor configs on a work Mac.
+# Only deploy the selected applications and keyboard layout on a work Mac.
 **
 !.config
-{{ range list "atuin" "bat" "ghostty" "ideavim" "lazygit" "starship" -}}
+{{ range list "atuin" "bat" "btop" "ghostty" "ideavim" "lazygit" "starship" -}}
 !.config/{{ . }}
 !.config/{{ . }}/**
 {{ end -}}
 {{ if eq .chezmoi.os "darwin" -}}
 !.config/omniwm
 !.config/omniwm/**
+!.config/karabiner
+!.config/karabiner/karabiner.json
+!.config/karabiner/assets
+!.config/karabiner/assets/complex_modifications
+!.config/karabiner/assets/complex_modifications/**
+!.config/karabiner/solo-layout
+!.config/karabiner/solo-layout/**
+!Library
+!Library/Keyboard Layouts
+!Library/Keyboard Layouts/SoloLayout.bundle
+!Library/Keyboard Layouts/SoloLayout.bundle/**
 {{ end -}}
 !.config/fish
 !.config/fish/config.fish
@@ -33,16 +44,31 @@
 
 # Platform selection. Negated entries in the work allowlist also need OS guards.
 {{ if ne .chezmoi.os "darwin" }}
+.config/karabiner
+.config/karabiner/**
 .config/omniwm
 .config/omniwm/**
+Library/Keyboard Layouts/SoloLayout.bundle
+Library/Keyboard Layouts/SoloLayout.bundle/**
 .config/fish/conf.d/00-mac.fish
 .local/share/vicinae/scripts/close-focused-window.sh
 {{ end }}
 {{ if eq .chezmoi.os "darwin" }}
+# These application configs are only synced to Linux machines.
+{{ range list "MultiViewer" "asm-lsp" "cliamp" "neomutt" "spotify-tui" "sql-language-server" "sqruff" "viu" "zellij" -}}
+.config/{{ . }}
+.config/{{ . }}/**
+{{ end }}
 # Mekle search paths are configured locally on each Mac.
 .config/mekle
 .config/mekle/**
 {{ end }}
+
+# Karabiner keeps generated backups local to each Mac.
+.config/karabiner/automatic_backups
+.config/karabiner/automatic_backups/**
+.config/karabiner/backups
+.config/karabiner/backups/**
 {{ if ne .chezmoi.os "linux" }}
 # Desktop integration and Linux-specific application settings.
 .config/alacritty

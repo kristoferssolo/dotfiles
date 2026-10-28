@@ -14,11 +14,13 @@ git clone https://github.com/kristoferssolo/SoloVim ~/.config/nvim
 
 ### Mac
 
-- Window manager: OmniWM. Import the Mac's existing settings as described below.
+- Window manager: OmniWM with the saved shortcuts, window rules, and display routing.
+- Keyboard: Karabiner-Elements with Solo Layout rules and the native Solo Layout bundle.
 - Terminal: Ghostty with Fish.
 - Editor and IDE: Neovim with SoloVim, and PyCharm with IdeaVim and the SoloVim keymap.
 - Shell tools: Starship, Atuin with local-only history, zoxide, fzf, eza, and bat.
 - Git interface: lazygit. Git identity and signing settings stay local to the Mac.
+- System monitor: btop.
 
 ### Linux
 
@@ -61,13 +63,15 @@ Available profiles are:
 | `laptop` | Niri and Hyprland laptop setup |
 | `x11` | Awesome desktop setup |
 | `x11-laptop` | Awesome laptop setup |
-| `mac` | Small work setup with Fish, local-only Atuin, Ghostty, Starship, bat, lazygit, IdeaVim, and OmniWM settings when added |
+| `mac` | Small work setup with Fish, local-only Atuin, Ghostty, Starship, bat, btop, lazygit, IdeaVim, Karabiner, Solo Layout, and OmniWM |
 
 The operating system and profile control different choices. Chezmoi detects the
 OS automatically through `.chezmoi.os`. Linux desktop configs, Transmission daemon
 settings, Linux-specific shell files, and scripts that require Linux tools are
-excluded on macOS regardless of profile. OmniWM and the Homebrew Fish environment
-are excluded on Linux. External fonts and GTK, Awesome, and Zathura downloads
+excluded on macOS regardless of profile. MultiViewer, asm-lsp, cliamp, neomutt,
+spotify-tui, sql-language-server, sqruff, viu, and Zellij configs are also excluded
+on macOS. btop stays shared. OmniWM, Karabiner, Solo Layout, and the Homebrew Fish
+environment are excluded on Linux. External fonts and GTK, Awesome, and Zathura downloads
 follow the same OS selection.
 
 Profiles select Linux desktop variants or the smaller work application set.
@@ -111,8 +115,8 @@ With [Homebrew](https://docs.brew.sh/Installation) installed, run these commands
 in the Mac's existing shell:
 
 ```sh
-brew install chezmoi fish atuin starship zoxide fzf eza bat lazygit neovim
-brew install --cask ghostty font-jetbrains-mono-nerd-font
+brew install chezmoi fish atuin starship zoxide fzf eza bat btop lazygit neovim
+brew install --cask ghostty karabiner-elements font-jetbrains-mono-nerd-font
 git clone https://github.com/kristoferssolo/dotfiles.git ~/.dotfiles
 mkdir -p ~/.config/chezmoi
 ```
@@ -203,18 +207,28 @@ machine. Guard platform-specific allowlist entries with `.chezmoi.os` too, since
 negated ignore patterns override exclusions. Git and jj remain
 excluded from this profile, so work identity and signing configuration stay local.
 
-OmniWM is already allowed for macOS, including the work profile. Its settings
-aren't in this repository yet. On the Mac, import your existing configuration:
+OmniWM and Karabiner settings are tracked for macOS, including the work profile.
+OmniWM's settings include monitor identifiers and routing, so review those when
+setting up a different Mac or display arrangement. Karabiner's main config,
+complex-modification assets, and Solo Layout builder are tracked; its backup
+directories stay local. After changing settings in either app, import the updates:
 
 ```sh
 chezmoi add ~/.config/omniwm/settings.toml
+chezmoi add ~/.config/karabiner/karabiner.json ~/.config/karabiner/assets/complex_modifications
 chezmoi diff
 ```
 
-That creates `dot_config/omniwm/settings.toml` in the source checkout. Commit and
-push it to share the settings; Linux machines will ignore it. OmniWM documents
-the settings path and live reload behavior in its
+Commit and push the source changes to share them; Linux machines ignore these
+files. OmniWM documents the settings path and live reload behavior in its
 [configuration guide](https://omniwm.app/config/configuration/).
+
+The native keyboard layout deploys to `~/Library/Keyboard Layouts/SoloLayout.bundle`.
+On a new Mac, select
+Solo Layout in System Settings > Keyboard > Text Input after applying. macOS may
+need a logout and login before the layout appears. Karabiner's right Option
+rules depend on this layout. The Swift builder in `~/.config/karabiner/solo-layout/`
+is preserved as source; chezmoi deploys the saved bundle without running it.
 
 The macOS Vicinae config binds Option+Shift+Q to the Close Focused Window script.
 Keep Vicinae running, enable IPC in OmniWM, and leave OmniWM's own Close Focused
@@ -259,6 +273,7 @@ companion IDE keymap, and differences from Neovim.
 ## MultiViewer
 
 MultiViewer settings and saved setups live in `.chezmoitemplates/multiviewer/`.
+They deploy only on Linux; macOS keeps its own local settings.
 Chezmoi links `config.json`, `setups.config.json`, and `setups.schema.json` from
 `~/.config/MultiViewer/` to those files. Changes saved in MultiViewer update the
 repository files directly. Login data, caches, and downloaded configuration stay
