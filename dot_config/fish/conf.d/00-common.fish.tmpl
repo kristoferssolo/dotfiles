@@ -1,0 +1,53 @@
+# Shared environment. Fish loads this before 00-mac and 00-profile.
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+set -gx XDG_CACHE_HOME "$HOME/.cache"
+set -gx XDG_DATA_HOME "$HOME/.local/share"
+{{ if eq .chezmoi.os "linux" -}}
+# Preserve the existing Linux state location.
+set -gx XDG_STATE_HOME "$XDG_DATA_HOME"
+{{ else -}}
+set -gx XDG_STATE_HOME "$HOME/.local/state"
+{{ end -}}
+set -gx XDG_PICTURES_DIR "$HOME/Pictures/screenshots/"
+
+# Application config, data, and cache paths.
+set -gx ANDROID_USER_HOME "$XDG_DATA_HOME/android"
+set -gx CARGO_HOME "$XDG_DATA_HOME/cargo"
+set -gx ELECTRUMDIR "$XDG_DATA_HOME/electrum"
+set -gx GNUPGHOME "$XDG_DATA_HOME/gnupg"
+set -gx GOPATH "$XDG_DATA_HOME/go"
+set -gx GRADLE_USER_HOME "$XDG_DATA_HOME/gradle"
+set -gx IPYTHONDIR "$XDG_CONFIG_HOME/ipython"
+set -gx JUPYTER_CONFIG_DIR "$XDG_CONFIG_HOME/jupyter"
+set -gx KERAS_HOME "$XDG_DATA_HOME/keras"
+set -gx KODI_DATA "$XDG_DATA_HOME/kodi"
+set -gx MYPY_CACHE_DIR "$XDG_CACHE_HOME/mypy"
+set -gx MYSQL_HISTFILE "$XDG_DATA_HOME/mysql_history"
+set -gx NODE_REPL_HISTORY "$XDG_DATA_HOME/node_repl_history"
+{{ if eq .chezmoi.os "linux" -}}
+# Existing Linux npm settings live in the cache directory.
+set -gx NPM_CONFIG_USERCONFIG "$XDG_CACHE_HOME/npm/npmrc"
+{{ else -}}
+set -gx NPM_CONFIG_USERCONFIG "$XDG_CONFIG_HOME/npm/npmrc"
+{{ end -}}
+set -gx PARALLEL_HOME "$XDG_CONFIG_HOME/parallel"
+set -gx PASSWORD_STORE_DIR "$XDG_DATA_HOME/password-store"
+set -gx PNPM_HOME "$XDG_DATA_HOME/pnpm"
+set -gx PSQL_HISTORY "$XDG_DATA_HOME/psql_history"
+set -gx PYENV_ROOT "$XDG_DATA_HOME/pyenv"
+set -gx REDISCLI_HISTFILE "$XDG_DATA_HOME/redis/rediscli_history"
+set -gx RUSTUP_HOME "$XDG_DATA_HOME/rustup"
+set -gx RYE_HOME "$XDG_DATA_HOME/rye"
+set -gx STACK_ROOT "$XDG_DATA_HOME/stack"
+set -gx STACK_XDG 1
+set -gx STARSHIP_CONFIG "$XDG_CONFIG_HOME/starship/starship.toml"
+set -gx TEXMFVAR "$XDG_CACHE_HOME/texlive/texmf-var"
+set -gx UNISON "$XDG_DATA_HOME/unison"
+set -gx W3M_DIR "$XDG_DATA_HOME/w3m"
+set -gx WAKATIME_HOME "$XDG_CONFIG_HOME/wakatime"
+set -gx WEECHAT_HOME "$XDG_CONFIG_HOME/weechat"
+set -gx WINEPREFIX "$XDG_DATA_HOME/wineprefixes/default"
+set -gx ZDOTDIR "$XDG_CONFIG_HOME/zsh"
+
+set -gx LESSHISTFILE -
+set -gx MANPAGER 'nvim +Man!'

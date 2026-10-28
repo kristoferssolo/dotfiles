@@ -1,3 +1,7 @@
+# Starship initializes later in config.fish. Keep virtualenv from saving the
+# default prompt at startup and restoring it over Starship on deactivation.
+set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
+
 function __auto_vent --on-variable PWD
     if test -f "$PWD/.venv/bin/activate.fish"
         source "$PWD/.venv/bin/activate.fish"

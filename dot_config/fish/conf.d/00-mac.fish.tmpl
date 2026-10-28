@@ -1,14 +1,8 @@
-# Keep work credentials and tool installations in their native locations.
 # Discard the Linux password helper inherited from an older shell or tmux server.
 if test "$SUDO_ASKPASS" = "$HOME/.local/bin/dmenupass"
     set --erase --global SUDO_ASKPASS
 end
 
-set -gx XDG_CONFIG_HOME "$HOME/.config"
-set -gx XDG_CACHE_HOME "$HOME/.cache"
-set -gx XDG_DATA_HOME "$HOME/.local/share"
-set -gx XDG_STATE_HOME "$HOME/.local/state"
-set -gx STARSHIP_CONFIG "$XDG_CONFIG_HOME/starship/starship.toml"
 set -gx TERMINAL ghostty
 # Use the managed config even when newer Atuin versions prefer ~/.atuin.
 set -gx ATUIN_CONFIG_DIR "$XDG_CONFIG_HOME/atuin"

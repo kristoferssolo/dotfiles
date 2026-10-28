@@ -34,7 +34,7 @@
 !.config/fish/functions/**
 !.config/fish/conf.d
 # Only portable Fish snippets, plus the work environment.
-{{ range list "10-cursor" "aliases" "auto-venv" "colors" "fnm" "fzf" "no-greeting" "thefuck" -}}
+{{ range list "00-common" "10-cursor" "aliases" "auto-venv" "colors" "fnm" "fzf" "no-greeting" "thefuck" -}}
 !.config/fish/conf.d/{{ . }}.fish
 {{ end -}}
 {{ if eq .chezmoi.os "darwin" -}}

@@ -4,7 +4,6 @@ if not contains "$HOME/.local/share/../bin" $PATH
 end
 
 # Cargo
-set -gx CARGO_HOME "$XDG_DATA_HOME/cargo"
 test -d "$CARGO_HOME/bin"; and fish_add_path --move "$CARGO_HOME/bin"
 
 # Bun
@@ -20,7 +19,6 @@ set -gx PNPM_INSTALL "$XDG_DATA_HOME/pnpm"
 test -d "$PNPM_INSTALL/bin"; and fish_add_path --move "$PNPM_INSTALL/bin"
 
 # pnpm
-set -gx PNPM_HOME "$XDG_DATA_HOME/pnpm"
 if not string match -q -- "$PNPM_HOME/bin" $PATH
   set -gx PATH "$PNPM_HOME/bin" $PATH
 end
