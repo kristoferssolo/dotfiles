@@ -12,3 +12,13 @@ startup_command = "tmux new-window -c '#{session_path}' && tmux select-window -t
 name = "SoloVim"
 path = "~/repos/SoloVim/"
 startup_command = "tmux new-window -c '#{session_path}' && tmux select-window -t 1 && clear"
+
+[[session]]
+name = "pi"
+path = "~/repos/solo-pi/"
+startup_command = "tmux new-window -c '#{session_path}' && tmux select-window -t 1 && clear"
+
+[[session]]
+name = "Agents"
+path = "~/repos/solo-protocol/"
+startup_command = "tmux new-window -c '#{session_path}' && tmux select-window -t 1 && clear"

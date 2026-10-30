@@ -4,6 +4,61 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Option+Space: lock the screen",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "mandatory": ["option"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "key_code": "q", "modifiers": ["left_control", "left_command"], "repeat": false }]
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Left Option+Shift+Q: close the focused window",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": ["left_option", "shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": ["^com\\.mitchellh\\.ghostty$"]
+                                    }
+                                ],
+                                "to": [{ "key_code": "w", "modifiers": ["left_command", "left_shift"], "repeat": false }]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
+                                        "mandatory": ["left_option", "shift"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_unless",
+                                        "bundle_identifiers": ["^com\\.mitchellh\\.ghostty$"]
+                                    }
+                                ],
+                                "to": [{ "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command close-focused-window" }]
+                            }
+                        ]
+                    },
+                    {
                         "description": "Disable Cmd+H Hide (rev 2)",
                         "manipulators": [
                             {
