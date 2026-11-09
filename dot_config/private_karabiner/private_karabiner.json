@@ -27,6 +27,38 @@
                                 "from": {
                                     "key_code": "q",
                                     "modifiers": {
+                                        "mandatory": [
+                                            "left_option",
+                                            "shift"
+                                        ],
+                                        "optional": [
+                                            "caps_lock"
+                                        ]
+                                    }
+                                },
+                                "conditions": [
+                                    {
+                                        "type": "frontmost_application_if",
+                                        "bundle_identifiers": [
+                                            "^app\\.floorp\\.Floorp$"
+                                        ]
+                                    }
+                                ],
+                                "to": [
+                                    {
+                                        "key_code": "q",
+                                        "modifiers": [
+                                            "left_command"
+                                        ],
+                                        "repeat": false
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "q",
+                                    "modifiers": {
                                         "mandatory": ["left_option", "shift"],
                                         "optional": ["caps_lock"]
                                     }
@@ -51,7 +83,7 @@
                                 "conditions": [
                                     {
                                         "type": "frontmost_application_unless",
-                                        "bundle_identifiers": ["^com\\.mitchellh\\.ghostty$"]
+                                        "bundle_identifiers": ["^com\\.mitchellh\\.ghostty$", "^app\\.floorp\\.Floorp$"]
                                     }
                                 ],
                                 "to": [{ "shell_command": "/Applications/OmniWM.app/Contents/MacOS/omniwmctl command close-focused-window" }]

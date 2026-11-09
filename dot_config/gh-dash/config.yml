@@ -18,9 +18,9 @@ keybindings:
       command: >-
         tmux new-window 'gh enhance -R {{.RepoName}} {{.PrNumber}}'
     - key: C
-      name: code review
+      name: code review (tuicr)
       command: >
-        tmux new-window -c {{.RepoPath}} 'nvim -c ":silent Octo pr edit {{.PrNumber}}"'
+        tmux new-window 'tuicr pr "{{.RepoName}}#{{.PrNumber}}"'
 
 pager:
   diff: "diffnav"
