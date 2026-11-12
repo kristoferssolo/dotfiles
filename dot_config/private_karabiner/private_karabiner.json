@@ -4,22 +4,6 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Option+Space: lock the screen",
-                        "manipulators": [
-                            {
-                                "type": "basic",
-                                "from": {
-                                    "key_code": "spacebar",
-                                    "modifiers": {
-                                        "mandatory": ["option"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [{ "key_code": "q", "modifiers": ["left_control", "left_command"], "repeat": false }]
-                            }
-                        ]
-                    },
-                    {
                         "description": "Left Option+Shift+Q: close the focused window",
                         "manipulators": [
                             {

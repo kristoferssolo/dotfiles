@@ -1,6 +1,6 @@
 require("relative-motions"):setup({ show_numbers = "relative", show_motion = true })
 require("full-border"):setup()
-require("augment-command"):setup({
+require("augment-command.config"):setup({
 	prompt = false,
 	default_item_group_for_prompt = "hovered",
 	smart_enter = true,

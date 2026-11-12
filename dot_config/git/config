@@ -21,7 +21,7 @@
 
 [alias]
     st = status -s
-    lol = log --oneline --graph --all
+    lol = log --oneline --graph --exclude='refs/t3/*' --all
 	uncommit = reset --soft HEAD^
 
 # https://blog.gitbutler.com/how-git-core-devs-configure-git/
